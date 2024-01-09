@@ -109,7 +109,7 @@ const Admin = sequelize.define('admin', {
     allowNull: false,
   },
   image: {
-    type: DataTypes.TEXT,
+    type: DataTypes.TEXT('long'),
   },
 });
 
@@ -291,4 +291,8 @@ JobHasFreelancer.belongsTo(Freelancer, {foreignKey:'freelancerId',allowNull:fals
 //   });
 
 
-module.exports = {Freelancer,JobOwner,Admin,Job,JobCategory,FreelancerCategories,Review,JobHasFreelancer,ContactJobOwner,ContactFreelancer,FreelancerHasCategories,Messages}
+module.exports = {
+  Freelancer,JobOwner,Admin,Job,
+  JobCategory,FreelancerCategories,
+  Review,JobHasFreelancer,ContactJobOwner,
+  ContactFreelancer,FreelancerHasCategories,Messages}
