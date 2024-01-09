@@ -1,9 +1,19 @@
-// const router = require('express').Router();
-// const UserController = require('../controllers/adminController');
+const router = require('express').Router();
+const Admin = require('../controllers/adminController');
+
+// GET all admins
+router.get('/admins', Admin.getAllAdmins);
+
+// Create a new admin
+router.post('/admins', Admin.createAdmin);
 
 
-// // GET all users
-// router.get('/admin/countUsers', UserController.countUsers);
+// Update admin by ID
+router.put('/admins/:id', Admin.updateAdmin);
 
+// Delete admin by ID
+router.delete('/admins/:id', Admin.deleteAdmin);
 
 module.exports = router;
+
+

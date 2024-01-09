@@ -8,128 +8,288 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema mydb
 -- -----------------------------------------------------
 -- -----------------------------------------------------
--- Schema ecommerce
+-- Schema jobzen
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema ecommerce
+-- Schema jobzen
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `ecommerce` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
-USE `ecommerce` ;
+CREATE SCHEMA IF NOT EXISTS `jobzen` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `jobzen` ;
 
 -- -----------------------------------------------------
--- Table `ecommerce`.`users`
+-- Table `jobzen`.`admins`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ecommerce`.`users` (
+CREATE TABLE IF NOT EXISTS `jobzen`.`admins` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(255) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
-  `address` VARCHAR(255) NULL DEFAULT NULL,
-  `firstName` VARCHAR(255) NULL DEFAULT NULL,
-  `lastName` VARCHAR(255) NULL DEFAULT NULL,
-  `role` VARCHAR(255) NULL DEFAULT 'user',
-  `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `email` (`email` ASC) VISIBLE)
+  `image` TEXT NULL DEFAULT NULL,
+  `createdAt` DATETIME NOT NULL,
+  `updatedAt` DATETIME NOT NULL,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 6
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `ecommerce`.`products`
+-- Table `jobzen`.`freelancers`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ecommerce`.`products` (
+CREATE TABLE IF NOT EXISTS `jobzen`.`freelancers` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `productName` VARCHAR(255) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
+  `adress` VARCHAR(255) NOT NULL,
+  `phone` INT NULL DEFAULT '0',
+  `image` LONGTEXT NOT NULL,
+  `skills` LONGTEXT NOT NULL,
+  `aboutMe` LONGTEXT NOT NULL,
+  `experience` LONGTEXT NOT NULL,
+  `jobtitle` LONGTEXT NOT NULL,
+  `createdAt` DATETIME NOT NULL,
+  `updatedAt` DATETIME NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `jobzen`.`contact_freelancers`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `jobzen`.`contact_freelancers` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(255) NOT NULL,
+  `subject` VARCHAR(255) NOT NULL,
+  `body` LONGTEXT NOT NULL,
+  `createdAt` DATETIME NOT NULL,
+  `updatedAt` DATETIME NOT NULL,
+  `freelancerId` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `freelancerId` (`freelancerId` ASC) VISIBLE,
+  CONSTRAINT `contact_freelancers_ibfk_1`
+    FOREIGN KEY (`freelancerId`)
+    REFERENCES `jobzen`.`freelancers` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `jobzen`.`jobowners`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `jobzen`.`jobowners` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
+  `adress` VARCHAR(255) NOT NULL,
+  `phone` INT NULL DEFAULT '0',
+  `image` LONGTEXT NOT NULL,
   `rating` FLOAT NULL DEFAULT '0',
-  `price` INT NOT NULL,
-  `description` TEXT NOT NULL,
-  `imageUrl` JSON NOT NULL,
-  `categories` JSON NULL DEFAULT NULL,
-  `size` VARCHAR(50) NULL DEFAULT NULL,
-  `colour` VARCHAR(50) NULL DEFAULT NULL,
-  `sales` INT NULL DEFAULT NULL,
-  `available` VARCHAR(255) NULL DEFAULT NULL,
-  `UserId` INT NOT NULL,
-  `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  INDEX `fk_products_users1_idx` (`UserId` ASC) VISIBLE,
-  CONSTRAINT `fk_products_users1`
-    FOREIGN KEY (`UserId`)
-    REFERENCES `ecommerce`.`users` (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 97
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `ecommerce`.`cart`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ecommerce`.`cart` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `UserId` INT NULL DEFAULT NULL,
-  `ProductId` INT NULL DEFAULT NULL,
-  `total` DECIMAL(10,2) NULL DEFAULT '0.00',
-  `quantity` INT NULL DEFAULT '0',
-  `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  INDEX `UserId` (`UserId` ASC) VISIBLE,
-  INDEX `postId` (`ProductId` ASC) VISIBLE,
-  CONSTRAINT `cart_ibfk_1`
-    FOREIGN KEY (`UserId`)
-    REFERENCES `ecommerce`.`users` (`id`),
-  CONSTRAINT `cart_ibfk_2`
-    FOREIGN KEY (`ProductId`)
-    REFERENCES `ecommerce`.`products` (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 9
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `ecommerce`.`coupon`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ecommerce`.`coupon` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `code` VARCHAR(255) NOT NULL,
-  `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `code` (`code` ASC) VISIBLE)
+  `description` LONGTEXT NOT NULL,
+  `createdAt` DATETIME NOT NULL,
+  `updatedAt` DATETIME NOT NULL,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `ecommerce`.`wishlists`
+-- Table `jobzen`.`contact_jobowners`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ecommerce`.`wishlists` (
+CREATE TABLE IF NOT EXISTS `jobzen`.`contact_jobowners` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `UserId` INT NOT NULL,
-  `ProductId` INT NOT NULL,
-  `createdAt` DATETIME NULL DEFAULT NULL,
-  `updatedAt` DATETIME NULL DEFAULT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `subject` VARCHAR(255) NOT NULL,
+  `body` LONGTEXT NOT NULL,
+  `createdAt` DATETIME NOT NULL,
+  `updatedAt` DATETIME NOT NULL,
+  `jobownerId` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  INDEX `UserId` (`UserId` ASC) VISIBLE,
-  INDEX `wishlists_ibfk_2` (`ProductId` ASC) VISIBLE,
-  CONSTRAINT `wishlists_ibfk_1`
-    FOREIGN KEY (`UserId`)
-    REFERENCES `ecommerce`.`users` (`id`)
+  INDEX `jobownerId` (`jobownerId` ASC) VISIBLE,
+  CONSTRAINT `contact_jobowners_ibfk_1`
+    FOREIGN KEY (`jobownerId`)
+    REFERENCES `jobzen`.`jobowners` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `jobzen`.`freelacercategories`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `jobzen`.`freelacercategories` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `category` VARCHAR(255) NOT NULL,
+  `image` LONGTEXT NULL DEFAULT NULL,
+  `createdAt` DATETIME NOT NULL,
+  `updatedAt` DATETIME NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `jobzen`.`freelancer_has_manycategories`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `jobzen`.`freelancer_has_manycategories` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `createdAt` DATETIME NOT NULL,
+  `updatedAt` DATETIME NOT NULL,
+  `FreeLancerId` INT NULL DEFAULT NULL,
+  `FreeLancerCategoriesId` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `FreeLancerId` (`FreeLancerId` ASC) VISIBLE,
+  INDEX `FreeLancerCategoriesId` (`FreeLancerCategoriesId` ASC) VISIBLE,
+  CONSTRAINT `freelancer_has_manycategories_ibfk_1`
+    FOREIGN KEY (`FreeLancerId`)
+    REFERENCES `jobzen`.`freelancers` (`id`)
+    ON DELETE SET NULL
     ON UPDATE CASCADE,
-  CONSTRAINT `wishlists_ibfk_2`
-    FOREIGN KEY (`ProductId`)
-    REFERENCES `ecommerce`.`products` (`id`))
+  CONSTRAINT `freelancer_has_manycategories_ibfk_2`
+    FOREIGN KEY (`FreeLancerCategoriesId`)
+    REFERENCES `jobzen`.`freelacercategories` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 9
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `jobzen`.`jobcategories`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `jobzen`.`jobcategories` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `category` VARCHAR(255) NOT NULL,
+  `image` LONGTEXT NULL DEFAULT NULL,
+  `createdAt` DATETIME NOT NULL,
+  `updatedAt` DATETIME NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `jobzen`.`jobs`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `jobzen`.`jobs` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `jobtitle` VARCHAR(255) NOT NULL,
+  `location` VARCHAR(255) NOT NULL,
+  `budget` INT NOT NULL DEFAULT '0',
+  `image` LONGTEXT NULL DEFAULT NULL,
+  `role` LONGTEXT NULL DEFAULT NULL,
+  `description` LONGTEXT NULL DEFAULT NULL,
+  `qualification` LONGTEXT NULL DEFAULT NULL,
+  `createdAt` DATETIME NOT NULL,
+  `updatedAt` DATETIME NOT NULL,
+  `jobOwnerId` INT NULL DEFAULT NULL,
+  `jobCategoryId` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `jobOwnerId` (`jobOwnerId` ASC) VISIBLE,
+  INDEX `jobCategoryId` (`jobCategoryId` ASC) VISIBLE,
+  CONSTRAINT `jobs_ibfk_1`
+    FOREIGN KEY (`jobOwnerId`)
+    REFERENCES `jobzen`.`jobowners` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE,
+  CONSTRAINT `jobs_ibfk_2`
+    FOREIGN KEY (`jobCategoryId`)
+    REFERENCES `jobzen`.`jobcategories` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `jobzen`.`job_has_freelancers`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `jobzen`.`job_has_freelancers` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `states` TINYINT(1) NULL DEFAULT '0',
+  `completed` TINYINT(1) NULL DEFAULT '0',
+  `createdAt` DATETIME NOT NULL,
+  `updatedAt` DATETIME NOT NULL,
+  `jobId` INT NULL DEFAULT NULL,
+  `freelancerId` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `jobId` (`jobId` ASC) VISIBLE,
+  INDEX `freelancerId` (`freelancerId` ASC) VISIBLE,
+  CONSTRAINT `job_has_freelancers_ibfk_1`
+    FOREIGN KEY (`jobId`)
+    REFERENCES `jobzen`.`jobs` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE,
+  CONSTRAINT `job_has_freelancers_ibfk_2`
+    FOREIGN KEY (`freelancerId`)
+    REFERENCES `jobzen`.`freelancers` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `jobzen`.`messages`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `jobzen`.`messages` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `body` LONGTEXT NOT NULL,
+  `createdAt` DATETIME NOT NULL,
+  `updatedAt` DATETIME NOT NULL,
+  `freelancerId` INT NULL DEFAULT NULL,
+  `jobOwnerId` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `freelancerId` (`freelancerId` ASC) VISIBLE,
+  INDEX `jobOwnerId` (`jobOwnerId` ASC) VISIBLE,
+  CONSTRAINT `messages_ibfk_1`
+    FOREIGN KEY (`freelancerId`)
+    REFERENCES `jobzen`.`freelancers` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE,
+  CONSTRAINT `messages_ibfk_2`
+    FOREIGN KEY (`jobOwnerId`)
+    REFERENCES `jobzen`.`jobowners` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `jobzen`.`reviews`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `jobzen`.`reviews` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `description` LONGTEXT NULL DEFAULT NULL,
+  `createdAt` DATETIME NOT NULL,
+  `updatedAt` DATETIME NOT NULL,
+  `jobHasFreelancerId` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `jobHasFreelancerId` (`jobHasFreelancerId` ASC) VISIBLE,
+  CONSTRAINT `reviews_ibfk_1`
+    FOREIGN KEY (`jobHasFreelancerId`)
+    REFERENCES `jobzen`.`job_has_freelancers` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
