@@ -1,4 +1,4 @@
-// const Users = require('../database/User.js');
+ // const Users = require('../database/User.js');
 
 // async function countUsers(req, res) {
 //   try {
