@@ -1,5 +1,5 @@
-const express = require('express');
-const router = express.Router();
+
+const router = require('express').Router();
 const JobOwner = require('../controllers/jobOwnerController');
 
 // GET all job owners

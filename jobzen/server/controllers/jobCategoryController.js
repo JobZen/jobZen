@@ -1,4 +1,4 @@
-import { JobCategory } from '../database/index.js';
+const{ JobCategory }=require('../database/index.js');
 
 // Get All job categories
 async function getAllJobCategories(req, res) {

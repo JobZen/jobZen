@@ -1,6 +1,5 @@
-const express = require('express');
-const router = express.Router();
-const JobFreelancer = require('../controllers/jobFreelancerController');
+const router = require('express').Router();
+const JobFreelancer = require('../controllers/jobHasFreelancerController');
 
 // GET all job-freelancer associations
 router.get('/job-freelancer', JobFreelancer.getAllJobFreelancerAssociations);

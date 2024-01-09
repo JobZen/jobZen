@@ -1,4 +1,4 @@
-import {Job} from '../database/index.js';
+const{Job}=require('../database/index.js');
 
 // Get All jobs
 async function getAllJobs(req, res) {

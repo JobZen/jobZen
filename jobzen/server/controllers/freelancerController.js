@@ -1,4 +1,4 @@
-import { Freelancer } from '../database/index.js';
+const{ Freelancer }=require('../database/index.js');
 
 // Get All freelancers
 async function getAllFreelancers(req, res) {
