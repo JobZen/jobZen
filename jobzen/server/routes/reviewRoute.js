@@ -1,5 +1,4 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 const Review = require('../controllers/reviewController');
 
 // GET all reviews

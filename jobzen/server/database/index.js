@@ -275,20 +275,20 @@ ContactJobOwner.belongsTo(JobOwner)
 JobHasFreelancer.belongsTo(Job, {foreignKey:'jobId',allowNull:false})
 JobHasFreelancer.belongsTo(Freelancer, {foreignKey:'freelancerId',allowNull:false})
 
-sequelize.authenticate() 
-  .then(() => {
-    console.log('Database connection has been established successfully.');
-  })
-  .catch((err) => {
-    console.error('Unable to connect to the database:', err);
-  });
-  sequelize.sync()
-  .then(() => {
-    console.log('Database and tables synchronized.');
-  })
-  .catch((error) => {
-    console.error('Error synchronizing the database:', error);
-  });
+// sequelize.authenticate() 
+//   .then(() => {
+//     console.log('Database connection has been established successfully.');
+//   })
+//   .catch((err) => {
+//     console.error('Unable to connect to the database:', err);
+//   });
+//   sequelize.sync()
+//   .then(() => {
+//     console.log('Database and tables synchronized.');
+//   })
+//   .catch((error) => {
+//     console.error('Error synchronizing the database:', error);
+//   });
 
 
 module.exports = {

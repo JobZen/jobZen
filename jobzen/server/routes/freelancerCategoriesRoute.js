@@ -1,5 +1,4 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 const FreelancerCategory = require('../controllers/freelancerCategories');
 
 // GET all freelancer categories

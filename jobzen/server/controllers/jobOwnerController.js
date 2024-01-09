@@ -1,4 +1,4 @@
-import { JobOwner } from '../database/index.js';
+const{ JobOwner }=require('../database/index.js');
 
 // Get All job owners
 async function getAllJobOwners(req, res) {

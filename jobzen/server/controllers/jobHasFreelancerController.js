@@ -1,4 +1,4 @@
-import {Freelancer, JobHasFreelancer, Job, Freelancer} from '../database/index.js';
+const{Freelancer, JobHasFreelancer, Job}=require('../database/index.js');
 
 //Get All Job-Freelancer Associations:
 async function getAllJobFreelancerAssociations(req, res) {

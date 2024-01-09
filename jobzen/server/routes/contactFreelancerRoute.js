@@ -1,6 +1,5 @@
-const express = require('express');
-const router = express.Router();
-const ContactFreelancer = require('../controllers/contactFreelancer');
+const router = require('express').Router();
+const ContactFreelancer = require('../controllers/contactFreelancerController.js');
 
 // GET all contact messages to freelancers with details
 router.get('/contact-freelancer', ContactFreelancer.getAllContactsWithFreelancerDetails);
@@ -9,7 +8,7 @@ router.get('/contact-freelancer', ContactFreelancer.getAllContactsWithFreelancer
 router.post('/contact-freelancer', ContactFreelancer.createContactToFreelancerWithForeignKey);
 
 // Get contact message to freelancer by ID with details
-router.get('/contact-freelancer/:id', ContactFreelancer.getContactToFreelancerByIdWithDetails);
+router.get('/contact-freelancer/:id', ContactFreelancer.getAllContactsWithFreelancerDetails);
 
 // Delete contact message to freelancer by ID
 router.delete('/contact-freelancer/:id', ContactFreelancer.deleteContactToFreelancerById);
