@@ -1,4 +1,4 @@
-import {Review,JobHasFreelancer} from '../database/index.js';
+const{Review,JobHasFreelancer}=require('../database/index.js');
 
 //Get All reviews:
 async function getAllReviews(req, res) {
@@ -131,7 +131,7 @@ try {
 }
   
 module.exports = {
-  getAllReviews,createReview,
+  getAllReviews,createReview,getReviewById,
   updateReview,deleteReview,
   getAllReviewsWithDetails,
   getReviewsByJobFreelancer,

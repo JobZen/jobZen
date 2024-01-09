@@ -1,8 +1,7 @@
 const express = require('express')
-const db = require('./database/index.js')
-const PORT = 3000
-const app = express()
 const cors = require('cors')
+const db = require('./database/index.js')
+const app = express()
 
 //routes:
 const admin = require('./routes/adminRoute.js');
@@ -21,11 +20,13 @@ const jobCategory = require('./routes/jobCategoryRoute.js');
 const jobHasFreelancer = require('./routes/jobHasFreelancerRoute.js');
 const review = require('./routes/reviewRoute.js')
 
-
+const PORT = 3000
 app.use(cors())
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(__dirname + '/../client/dist'))
+
 
 //use route:
 app.use('/admin', admin);

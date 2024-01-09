@@ -1,4 +1,4 @@
-import { Messages, Freelancer, JobOwner } from '../database/index.js';
+const{ Messages, Freelancer, JobOwner }=require('../database/index.js');
 
 // CRUD operations
 async function getAllMessages(req, res) {

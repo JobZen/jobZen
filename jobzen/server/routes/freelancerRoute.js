@@ -1,9 +1,8 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 const Freelancer = require('../controllers/freelancerController');
 
 // GET all freelancers
-router.get('/freelancer', Freelancer.getAllfreelancer);
+router.get('/freelancer', Freelancer.getAllFreelancers);
 
 // Create a new freelancer
 router.post('/freelancer', Freelancer.createFreelancer);

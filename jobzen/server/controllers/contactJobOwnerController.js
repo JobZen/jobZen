@@ -1,4 +1,4 @@
-import {ContactJobOwner,JobOwner} from '../database/index.js';
+const{ContactJobOwner,JobOwner}=require('../database/index.js');
 
 //CRUD:
 async function getAllContactsToJobOwners(req, res) {

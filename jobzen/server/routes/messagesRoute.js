@@ -1,5 +1,4 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 const Messages = require('../controllers/messagesController');
 
 // GET all messages
@@ -15,7 +14,7 @@ router.get('/message/:id', Messages.getMessageById);
 router.delete('/message/:id', Messages.deleteMessageById);
 
 // GET all messages with details (including Freelancer and JobOwner)
-router.get('/message/details', MessagesController.getAllMessagesWithDetails);
+router.get('/message/details', Messages.getAllMessagesWithDetails);
 
 // Create a message with foreign key references
 router.post('/message/FK', Messages.createMessageWithForeignKey);
