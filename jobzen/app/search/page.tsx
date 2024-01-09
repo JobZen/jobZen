@@ -9,13 +9,13 @@ const Search = () => {
           <input
             type="text"
             placeholder="Search for the tool you like"
-            className="text-black w-40 md:w-40 px-10 h-8 rounded-full border-0 focus:outline-none"
+            className="text-black w-40 md:w-40 px-10 h-10 rounded-full border-0 focus:outline-none"
           />
           <select
             id="searchingType"
             name="searchingType"
             title="Search..."
-            className="h-6 border-0 focus:outline-none text-[#267296] rounded-full font-bold px-2 md:px-3 py-0 md:py-1 tracking-wider bg-white"
+            className="h-10 border-0 focus:outline-none text-[#267296] rounded-full font-bold px-2 md:px-3 py-0 md:py-1 tracking-wider bg-white"
           >
             <option value="job">Job</option>
             <option value="skill">Skill</option>
