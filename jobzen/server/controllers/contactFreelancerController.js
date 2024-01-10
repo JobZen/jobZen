@@ -1,5 +1,4 @@
 const{ ContactFreelancer, Freelancer }=require('../database/index.js');
-
 // CRUD operations
 async function getAllContactsToFreelancers(req, res) {
   try {
