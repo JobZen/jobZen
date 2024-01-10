@@ -32,12 +32,12 @@ const getOneJobOwner = async (req, res) => {
 // Create a new job owner
 async function createJobOwner(req, res) {
 try {
-    const { name, email, password, address, phone, image, rating, description } = req.body;
+    const { name, email, password, adress, phone, image, rating, description } = req.body;
     const newJobOwner = await JobOwner.create({
     name,
     email,
     password,
-    address,
+    adress,
     phone,
     image,
     rating,
