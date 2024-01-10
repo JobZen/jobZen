@@ -40,7 +40,7 @@ const Contact = () => {
               />
             </div>
             <div className="sm:col-span-2">
-              <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">
+              <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600">
                 Your message
               </label>
               <textarea

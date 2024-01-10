@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "../navBar/page";
-import Footer from "../footer/page";
+import Navbar from "../../navBar/page";
+import Footer from "../../footer/page";
 
 const EditJobOwnerProfile = (): JSX.Element => {
   return (

@@ -1,4 +1,3 @@
- // const Users = require('../database/User.js');
 const { Admin }=require('../database/index.js') ;
 
 // Get All admins
