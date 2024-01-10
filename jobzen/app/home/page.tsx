@@ -3,7 +3,7 @@ import Footer from "../footer/page";
 
 const Home =()=>{
     return(
-        <div className='bg-white'>
+        <div className="bg-white flex flex-col min-h-screen">
             <Navbar />
             <Footer/>
             </div>
