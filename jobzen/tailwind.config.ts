@@ -32,6 +32,7 @@ const config: Config = {
         'jockey-one':['Jockey One'],
         'lato':['Lato']
       },
+      
     },
   },
   plugins: [],
