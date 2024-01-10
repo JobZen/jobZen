@@ -27,10 +27,12 @@ const config: Config = {
         'blueghamek':'#267296'
       },
       fontFamily: {
-        'jura': ["Jura"],
-        'lato':['Lato'],
-        'jockey-one':['Jockey One']
-      }
+        'jolly-lodger': ['Jolly Lodger'],
+        'jura':['Jura'],
+        'jockey-one':['Jockey One'],
+        'lato':['Lato']
+      },
+      
     },
   },
   plugins: [],
