@@ -29,11 +29,10 @@ const config: Config = {
       fontFamily: {
         'jolly-lodger': ['Jolly Lodger'],
         'jura':['Jura'],
-        'jockey-one':['Jockey One']
+        'jockey-one':['Jockey One'],
+        'lato':['Lato']
       },
-      fontFamily:{
-      'lato':['Lato']
-      },
+      
     },
   },
   plugins: [],
