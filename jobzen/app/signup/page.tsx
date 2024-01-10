@@ -1,8 +1,13 @@
+"use client"
 import { FunctionComponent } from "react";
+import { useState } from "react";
+const Signup: FunctionComponent = () => {
 
-const SignIn: FunctionComponent = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   return (
-    <div className="relative bg-white w-full h-[1020px] overflow-hidden text-left text-11xl text-white font-jura">
+    <div className="relative bg-[#267296] w-full h-[1020px] overflow-hidden text-left text-11xl text-white font-jura">
       <section className="absolute top-[0px] left-[0px] bg-steelblue w-[1422px] h-[1020px]" />
       <div className="absolute top-[219px] left-[121px] w-[460px] h-[582px] overflow-hidden text-smi-8 text-black font-zen-kaku-gothic-antique">
         <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] bg-gray-100" />
@@ -75,17 +80,17 @@ const SignIn: FunctionComponent = () => {
           </b>
         </div>
       </div>
-      <b className="absolute top-[51px] left-[98px] leading-[40%] inline-block w-[98px] h-[13px]">
+      <b className="absolute font-Jura text-2xl top-[51px] left-[98px] leading-[40%] inline-block w-[98px] h-[13px]">
         HOME
       </b>
-      <b className="absolute top-[50px] left-[257px] leading-[40%] inline-block w-[163px] h-[11px]">
+      <b className="absolute font-Jura text-2xl top-[50px] left-[257px] leading-[40%] inline-block w-[163px] h-[11px]">
         ABOUT US
       </b>
-      <b className="absolute top-[53px] left-[482px] leading-[40%] inline-block w-[197px] h-[11px]">
+      <b className="absolute font-Jura text-2xl top-[53px] left-[482px] leading-[40%] inline-block w-[197px] h-[11px]">
         CONTACT
       </b>
       <img
-        className="absolute top-[0px] left-[647px] rounded-tl-481xl rounded-tr-none rounded-br-none rounded-bl-481xl w-[757px] h-[1020px] object-cover"
+  className="absolute top-0  right-0 bottom-0 rounded-tl-2xl rounded-tr-none rounded-br-none rounded-bl-2xlw- w-[782px] h-[1020px] object-cover"
         alt=""
         src="/image-4@2x.png"
       />
@@ -93,4 +98,4 @@ const SignIn: FunctionComponent = () => {
   );
 };
 
-export default SignIn;
+export default Signup;

@@ -1,16 +1,27 @@
+
+"use client"
+import { useState } from "react";
 import { FunctionComponent } from "react";
 
 const Login: FunctionComponent = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = () => {
+    console.log("Email:", email);
+    console.log("Password:", password);
+  };
+
   return (
-    <div className="relative bg-white w-full h-[1020px] overflow-hidden text-left text-11xl text-white font-jura">
+    <div className="relative bg-[#267296] w-full h-[1020px] overflow-hidden text-left text-11xl text-white font-jura">
       <div className="absolute top-[0px] left-[0px] bg-steelblue w-[1422px] h-[1020px]" />
       <b className="absolute top-[64px] left-[795px] leading-[40%] inline-block w-[98px] h-[13px]">
         HOME
       </b>
-      <b className="absolute top-[63px] left-[954px] leading-[40%] inline-block w-[163px] h-[11px]">
+      <b className=" font-Jura absolute top-[63px] left-[954px] leading-[40%] inline-block w-[163px] h-[11px]">
         ABOUT US
       </b>
-      <b className="absolute top-[66px] left-[1179px] leading-[40%] inline-block w-[197px] h-[11px]">
+      <b className="font-Jura absolute top-[66px] left-[1179px] leading-[40%] inline-block w-[197px] h-[11px]   ">
         CONTACT
       </b>
       <div className="absolute top-[252px] left-[818px] w-[460px] h-[516px] overflow-hidden text-smi-8 text-black font-zen-kaku-gothic-antique">
@@ -30,7 +41,13 @@ const Login: FunctionComponent = () => {
             <div className="absolute h-[43.37%] w-[99.87%] top-[0%] right-[0%] bottom-[56.63%] left-[0.13%]">
               <div className="absolute h-[85.07%] w-[100.26%] top-[15.67%] right-[-0.13%] bottom-[-0.75%] left-[-0.13%] rounded-lg box-border border-[1px] border-solid border-darkslategray" />
               <div className="absolute w-[45.79%] top-[37.31%] left-[4.21%] leading-[28.16px] inline-block">
-                malekaloui@gmail.com
+                <input
+                  type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="w-full h-full bg-transparent border-none focus:outline-none"
+                />
               </div>
               <div className="absolute h-[34.33%] w-[14.21%] top-[0%] right-[82.85%] bottom-[65.67%] left-[2.94%] overflow-hidden text-center text-smi-8">
                 <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] bg-gray-100" />
@@ -47,7 +64,13 @@ const Login: FunctionComponent = () => {
                 src="/exiconeye@2x.png"
               />
               <div className="absolute w-[45.79%] top-[37.31%] left-[4.21%] leading-[28.16px] inline-block">
-                ***************
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your password"
+                  className="w-full h-full bg-transparent border-none focus:outline-none"
+                />
               </div>
               <div className="absolute h-[34.33%] w-[17.63%] top-[0%] right-[79.43%] bottom-[65.67%] left-[2.94%] overflow-hidden text-center text-smi-8 text-silver-100">
                 <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] bg-gray-100" />
@@ -76,10 +99,14 @@ const Login: FunctionComponent = () => {
             </div>
           </div>
           <div className="relative w-[380px] h-14 text-center text-white">
-            <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-lg bg-steelblue" />
-            <b className="absolute h-3/4 w-9/12 top-[12.5%] left-[12.5%] leading-[22.53px] flex items-center justify-center">
-              CONTINUE
-            </b>
+            <div
+              className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-lg bg-steelblue"
+              onClick={handleLogin}
+            >
+              <b className="  bg-[#267296] absolute h-3/4 w-9/12 top-[12.5%] left-[12.5%] leading-[22.53px] flex items-center justify-center">
+                CONTINUE
+              </b>
+            </div>
           </div>
         </div>
         <div className="absolute h-[2.47%] w-[32.17%] top-[84.99%] left-[34.02%] text-gray-300 text-center inline-block">
