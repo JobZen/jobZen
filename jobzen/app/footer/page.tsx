@@ -7,12 +7,12 @@ const socialMediaLinks = {
 
 export default function Footer () {
   return (
-      <div className='mt-40 h-85 w-full bg-[#D3E8F8] pb-8'>
+      <div className='mt-40 h-full w-full bg-[#D3E8F8] pb-8'>
           <div className='grid grid-cols-5  text-black ml-20 mt-20 md-4 gap-12'>
               <div>
               <div className="Jobzen text-neutral-800 text-2xl font-medium font-poppins mt-12 mb-4">JOBZEN</div>
               <div className="PowerfulFreelanceMarketplaceSystemWithAbilityToChangeTheUsersFreelancersClients w-80 text-neutral-800 text-lg font-normal font-poppins">Powerful Freelance Marketplace System with ability to change the Users (Freelancers & Clients)
-              <div className= "ml-10 space-x-2" style={{ display: 'flex', alignItems: 'center' }} >
+              <div className= "ml-10 space-x-1 flex items-center" >
               <svg height="60px" width="60px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"><g>
                 <path d="M256,227.5c-15.7,0-28.5,12.8-28.5,28.5s12.8,28.5,28.5,28.5s28.5-12.8,28.5-28.5S271.7,227.5,256,227.5z" fill="#231F20"/>
                 <path d="M322.2,154.8H189.8c-19.3,0-35,15.7-35,35v132.5c0,19.3,15.7,35,35,35h132.5c19.3,0,35-15.7,35-35V189.8C357.2,170.5,341.5,154.8,322.2,154.8z M256,314.5c-32.2,0-58.5-26.2-58.5-58.5s26.2-58.5,58.5-58.5s58.5,26.2,58.5,58.5S288.2,314.5,256,314.5z M335.9,190.6c0,8-6.5,14.5-14.5,14.5h0c-8,0-14.5-6.5-14.5-14.5v0c0-8,6.5-14.5,14.5-14.5h0C329.4,176.1,335.9,182.6,335.9,190.6L335.9,190.6z" fill="#231F20"/>
