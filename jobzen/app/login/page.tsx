@@ -47,7 +47,7 @@ const Login: FunctionComponent = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
                   className="w-full h-full bg-transparent border-none focus:outline-none"
-                />
+                /> 
               </div>
               <div className="absolute h-[34.33%] w-[14.21%] top-[0%] right-[82.85%] bottom-[65.67%] left-[2.94%] overflow-hidden text-center text-smi-8">
                 <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] bg-gray-100" />
