@@ -182,6 +182,13 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
                 clip-rule="evenodd"
               />
             </svg>
+            <Link href='/jobDetails/createJobDetails'>
+                <button className="flex w-[176px] h-[56px] items-center justify-center mr-0 py-[8px] relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid">
+                  <div className="relative w-fit [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap">
+                    Post a job offer
+                  </div>
+                </button>
+                </Link>
           </div>
         </div>
       </div>
