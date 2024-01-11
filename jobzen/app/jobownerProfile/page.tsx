@@ -10,7 +10,6 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
       <div className="bg-white flex flex-row justify-center w-full">
         <div className="bg-white overflow-hidden w-[1440px] h-[800px] relative">
           <div className="absolute w-[1549px] h-[836px] top-[188px] left-[-109px]">
-            
             <div className="absolute w-[1549px] h-[835px] top-0 left-0">
               <div className="absolute w-[272px] h-[562px] top-0 left-[160px] bg-[#a1e1fd4a] rounded-[42px] shadow-[0px_4px_4px_#00000040]" />
               <svg
@@ -93,7 +92,7 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
                   Edit Profile
                 </button>
               </Link>
-              
+
               <div className="absolute w-[239px] h-[152px] top-[388px] left-[174px] bg-[#384d6c] rounded-[15px]" />
               <img
                 className="absolute w-[220px] h-[137px] top-[395px] left-[184px] object-cover"
@@ -118,7 +117,7 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
             <div className="absolute w-[531px] top-[378px] left-[525px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] tracking-[0] leading-[normal]">
               +216-71-717-777
             </div>
-            
+
             <div className="w-[172px] h-[20px] top-[68px] left-[503px] [font-family:'Jockey_One-Regular',Helvetica] font-normal text-black text-[20px] text-center leading-[20px] whitespace-nowrap absolute tracking-[0]">
               Company Name
             </div>
@@ -182,13 +181,13 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
                 clip-rule="evenodd"
               />
             </svg>
-            <Link href='/jobDetails/createJobDetails'>
-                <button className="flex w-[176px] h-[56px] items-center justify-center mr-0 py-[8px] relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid">
-                  <div className="relative w-fit [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap">
-                    Post a job offer
-                  </div>
-                </button>
-                </Link>
+            <Link href="/jobDetails/createJobDetails">
+              <button className="flex w-[176px] h-[56px] items-center justify-center mr-0 py-[8px] relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid">
+                <div className="relative w-fit [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap">
+                  Post a job offer
+                </div>
+              </button>
+            </Link>
           </div>
         </div>
       </div>
