@@ -52,7 +52,7 @@ const EditJobOwnerProfile = (): JSX.Element => {
                     />
                   </svg>
                   <input
-                    type="number"
+                    type="tel"
                     className="focus:outline-none appearance-none bg-transparent w-full h-full px-10"
                     placeholder="Enter Phone Number"
                   />
