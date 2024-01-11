@@ -1,7 +1,7 @@
-"use client";
 import React from "react";
 import Navbar from "../navBar/page";
 import Footer from "../footer/page";
+import Link from "next/link";
 
 const JobOwnerProfile: React.FC = (): JSX.Element => {
   return (
@@ -10,13 +10,14 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
       <div className="bg-white flex flex-row justify-center w-full">
         <div className="bg-white overflow-hidden w-[1440px] h-[800px] relative">
           <div className="absolute w-[1549px] h-[836px] top-[188px] left-[-109px]">
+            
             <div className="absolute w-[1549px] h-[835px] top-0 left-0">
               <div className="absolute w-[272px] h-[562px] top-0 left-[160px] bg-[#a1e1fd4a] rounded-[42px] shadow-[0px_4px_4px_#00000040]" />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
-                className="w-10 h-10 absolute w-[12px] h-[16px] mr-8 top-[357px] left-[206px]"
+                className="absolute w-[17px] h-[17px] mr-8 top-[356px] left-[215px]"
               >
                 <path
                   fill-rule="evenodd"
@@ -29,7 +30,54 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
                 Company Adress:
               </div>
               <div className="absolute w-[114px] top-[290px] left-[237px] [font-family:'Lato-Medium',Helvetica] font-medium text-[#384d6c] text-[14px] tracking-[0] leading-[normal]">
-                5.9 (70 reviews)
+                {/* add .map method here */}
+                <div className="flex items-center">
+                  <svg
+                    className="w-4 h-4 text-yellow-300 me-1"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 22 20"
+                  >
+                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                  </svg>
+                  <svg
+                    className="w-4 h-4 text-yellow-300 me-1"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 22 20"
+                  >
+                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                  </svg>
+                  <svg
+                    className="w-4 h-4 text-yellow-300 me-1"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 22 20"
+                  >
+                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                  </svg>
+                  <svg
+                    className="w-4 h-4 text-yellow-300 me-1"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 22 20"
+                  >
+                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                  </svg>
+                  <svg
+                    className="w-4 h-4 text-gray-300 me-1 dark:text-gray-500"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 22 20"
+                  >
+                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                  </svg>
+                </div>
               </div>
               <div className="absolute w-[61px] top-[260px] left-[261px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] tracking-[0] leading-[normal]">
                 Review:
@@ -40,9 +88,12 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
                 src="https://icon-library.com/images/node-js-icon/node-js-icon-2.jpg"
               />
               <div className="absolute w-[133px] h-[40px] top-[203px] left-[226px] bg-[#267296] rounded-[15px] shadow-[0px_4px_4px_#00000040]" />
-              <button className="absolute w-[120px] top-[210px] left-[236px] [font-family:'Jockey_One-Regular',Helvetica] font-normal text-white text-[24px] text-center tracking-[0] leading-[normal]">
-                Edit Profile
-              </button>
+              <Link href={"/jobownerProfile/editjobownerProfile"}>
+                <button className="absolute w-[120px] top-[210px] left-[236px] [font-family:'Jockey_One-Regular',Helvetica] font-normal text-white text-[24px] text-center tracking-[0] leading-[normal]">
+                  Edit Profile
+                </button>
+              </Link>
+              
               <div className="absolute w-[239px] h-[152px] top-[388px] left-[174px] bg-[#384d6c] rounded-[15px]" />
               <img
                 className="absolute w-[220px] h-[137px] top-[395px] left-[184px] object-cover"
@@ -67,6 +118,7 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
             <div className="absolute w-[531px] top-[378px] left-[525px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] tracking-[0] leading-[normal]">
               +216-71-717-777
             </div>
+            
             <div className="w-[172px] h-[20px] top-[68px] left-[503px] [font-family:'Jockey_One-Regular',Helvetica] font-normal text-black text-[20px] text-center leading-[20px] whitespace-nowrap absolute tracking-[0]">
               Company Name
             </div>
@@ -97,21 +149,26 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
                 alt="Vector"
                 src="vector-76.svg"
               />
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="w-10 h-10 absolute w-[21px] h-[23px] top-[0px] left-[30px]"
-              >
-                <path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
-                <path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
-              </svg>
+              <Link href={"/jobDetails/messageJobDetails"}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="absolute w-[21px] h-[23px] top-[0px] left-[30px]"
+                >
+                  <path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
+                  <path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
+                </svg>
+              </Link>
             </div>
-            <img
-              className="absolute w-[21px] h-[19px] top-[0px] left-[60px]"
-              alt="Shutdown"
-              src="https://www.svgrepo.com/show/75291/shut-down.svg"
-            />
+            <Link href={"/login"}>
+              <img
+                className="absolute w-[21px] h-[19px] top-[0px] left-[60px]"
+                alt="Shutdown"
+                aria-label="log out"
+                src="https://www.svgrepo.com/show/75291/shut-down.svg"
+              />
+            </Link>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"

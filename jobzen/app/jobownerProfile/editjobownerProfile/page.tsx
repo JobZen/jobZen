@@ -1,6 +1,8 @@
 import React from "react";
 import Navbar from "../../navBar/page";
 import Footer from "../../footer/page";
+import Link from "next/link";
+
 
 const EditJobOwnerProfile = (): JSX.Element => {
   return (
@@ -100,11 +102,13 @@ const EditJobOwnerProfile = (): JSX.Element => {
                     <input type="file" id="uploadPhoto" className="hidden" />
                   </label>
                 </div>
+                <Link href='/jobownerProfile'>
                 <button className="flex w-[176px] h-[56px] items-center justify-center px-0 py-[8px] relative bg-[#ffffff] rounded-[8px] overflow-hidden border border-solid border-[#267296]">
                   <div className="relative w-fit [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#267296] text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap">
-                    Delete
+                    Save Update
                   </div>
                 </button>
+                </Link>
               </div>
             </div>
           
@@ -143,7 +147,7 @@ const EditJobOwnerProfile = (): JSX.Element => {
       <input
         type="text"
         className="focus:outline-none appearance-none bg-transparent w-full h-full px-6"
-        placeholder="Enter Introduction"
+        placeholder="Enter Description"
       />
     </p>
   </div>

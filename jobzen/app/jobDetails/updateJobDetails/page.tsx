@@ -75,7 +75,7 @@ const handleCheckboxChange = () => {
                       <p className="font-jura text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">View Company's Profile</p>
                     </Link>
                     <div className="mt-6 flex flex-wrap gap-4 justify-center">
-                      <Link href={'/'}>
+                      <Link href={'/jobDetails'}>
                         <button className="text-white hover:font-bold bg-[#267296] border-white shadow-2xl py-2 px-4 rounded">save Update</button>
                       </Link>
                     </div>

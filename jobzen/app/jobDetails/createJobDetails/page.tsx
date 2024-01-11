@@ -15,7 +15,7 @@ const handleCheckboxChange = () => {
     <div className='bg-white '>
       <Navbar />
       <div className='bg-white flex flex-col justify-center items-center h-screen'>
-        <div className="container mx-auto pt-16 pb-0 items-center mr-6 ">
+        <div className="container mx-auto py-16 pt-[5rem] pb-0 items-center mr-6 ">
           <div className="grid grid-cols-1 sm:grid-cols-2 px-12 ">
             <div className="bg-white">
                     <br/>
@@ -75,7 +75,7 @@ const handleCheckboxChange = () => {
                       <p className="font-jura text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">View Company's Profile</p>
                     </Link>
                     <div className="mt-6 flex flex-wrap gap-4 justify-center">
-                      <Link href={'/'}>
+                      <Link href={'/jobDetails'}>
                         <button className="text-white hover:font-bold bg-[#267296] border-white shadow-2xl py-2 px-4 rounded">Create</button>
                       </Link>
                     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Search from '../search/page';
+import Search from '../search1/page';
 
 interface TabPage {
   name: string;
