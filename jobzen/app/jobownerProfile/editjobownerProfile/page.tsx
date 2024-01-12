@@ -1,11 +1,13 @@
 import React from "react";
 import Navbar from "../../navBar/page";
-
+import Footer from "../../footer/page"
+import Link from "next/link";
 
 const EditJobOwnerProfile = (): JSX.Element => {
   return (
     <div className="bg-white flex flex-col min-h-screen">
       <Navbar />
+      
       <div className="bg-[#ffffff] flex flex-row justify-center w-full">
         <div className="bg-[#ffffff] overflow-hidden w-[1440px] h-[1024px] relative">
           <div className="absolute w-[1578px] h-[449px] top-[577px] left-[-69px]">
@@ -100,15 +102,15 @@ const EditJobOwnerProfile = (): JSX.Element => {
                     <input type="file" id="uploadPhoto" className="hidden" />
                   </label>
                 </div>
+                <Link href='/jobownerProfile'>
                 <button className="flex w-[176px] h-[56px] items-center justify-center px-0 py-[8px] relative bg-[#ffffff] rounded-[8px] overflow-hidden border border-solid border-[#267296]">
                   <div className="relative w-fit [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#267296] text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap">
-                    Delete
+                    Save Update
                   </div>
                 </button>
+                </Link>
               </div>
             </div>
-          
-
           </div>
           <div className="absolute w-[1052px] h-[192px] top-[333px] left-[272px]">
   <div className="absolute w-[154px] top-0 left-[2px] [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#384d6c] text-[16px] tracking-[0] leading-[normal]">
@@ -162,7 +164,7 @@ const EditJobOwnerProfile = (): JSX.Element => {
 </div>
         </div>
       </div>
-   
+      <Footer/>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import Search1 from '../search1/page';
 
 
 
+
 const Navbar = () => {
   return (
     <div className='bg-white'>
@@ -16,34 +17,40 @@ const Navbar = () => {
             <div className="font-jolly-lodger text-8xl tracking-widest animate-pulse ml-[5%]">AWAITS !</div>
           </div>
           <div className="flex justify-center">
-            <div className="w-full px-8 bg-white rounded-[100px] flex items-center justify-between" style={{ maxWidth: '1400px' }}>
+          <div className="w-full px-8 bg-white rounded-full flex items-center justify-between max-w-[35cm]">
               <div className="flex w-full flex-wrap items-center justify-between h-[100px] ">
                 <div className='flex items-center space-x-12'>
                   <Link href={'/'}>
                     <img
                       src="https://i.ibb.co/nQqdJ89/logo-transparent.png"
                       className="w-20 h-20"
-                      alt="JobZen Logo"
                     />
                   </Link>
                   <Search1 />
                 </div>
-                
-                  <div className="mr-4">
+                <div className="relative flex items-center space-x-10 ">
+                    <div  className="relative flex items-center space-x-10 mr-[4cm] ">
                     <Link href={"/home"}>
                       <span className="font-jura text-xl text-[#267296]">HOME</span>
                     </Link>
-                  </div>
-               
-                <div className="relative flex items-center space-x-4 ">
+                 
+                    <Link href={"/contact"}>
+                      <span className="font-jura text-xl text-[#267296]">CONTACT</span>
+                    </Link>
+                
+                    <Link href={"/about"}>
+                      <span className="font-jura text-xl text-[#267296]">ABOUT</span>
+                    </Link>
+                    </div>
+
                   <Link href={'/login'}>
-                    <p className="font-jura text-xl text-[#267296]">Login</p>
+                    <p className="font-jura text-xl text-[#267296]">LOGIN</p>
                   </Link>
                   <Link href={'/landingPage'}>
                     <button
                       type="submit"
                       className="py-1 px-3 text-xl font-jura text-center text-white rounded-3xl bg-[#267296] sm:w-fit hover:bg-[#275469]  hover:text-white hover:focus:ring-4 focus:outline dark:focus:ring-primary-300 dark:bg-primary-600">
-                      Sign up
+                      SIGN UP 
                     </button>
                   </Link>
                 </div>
