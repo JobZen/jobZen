@@ -3,6 +3,7 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+
 interface JobCategory{
     category:string,
     image:string
@@ -84,7 +85,7 @@ function page() {
       console.log(err);
     });
     } 
-    const StarRating = ({ rating }) => {
+    const StarRating: React.FC<{ rating: number }> = ({ rating }) => {
         const fullStars = Math.floor(rating);
         const halfStar = rating % 1 !== 0;
         const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
