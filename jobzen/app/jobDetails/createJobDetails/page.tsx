@@ -72,7 +72,7 @@ const handleCheckboxChange = () => {
                     <img src="https://cdn.dribbble.com/userupload/12278466/file/original-22c066a12054d052be813aed19ab83fd.com?resize=96x96" className="w-32 h-32 rounded-full mb-4 shrink-0" alt="CompanyProfile" />
                     <h1 className="text-xl font-bold">Flux Outdoor</h1>
                     <Link href={'/login'}>
-                      <p className="font-jura text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">View Company's Profile</p>
+                      <p className="font-jura text-[#267296] hover:text-base-[#267296] hover:font-semibold hover:underline">View Company's Profile</p>
                     </Link>
                     <div className="mt-6 flex flex-wrap gap-4 justify-center">
                       <Link href={'/'}>
