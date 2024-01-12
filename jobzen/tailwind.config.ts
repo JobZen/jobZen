@@ -20,10 +20,7 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
           "malek":'url("https://scontent.ftun9-1.fna.fbcdn.net/v/t39.30808-6/417432355_226741377179458_8472291631417033461_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=3635dc&_nc_ohc=636Rpc99NrIAX-Ko4_C&_nc_ht=scontent.ftun9-1.fna&oh=00_AfCGFWJzej-Qm9h0b0WlTWFKUmACAljhuHXqRR8QPV_yAg&oe=65A2B2B3")'
 
-
       },
-      
-
       colors:{
         'grisss':'#737373',
         'bluefateh':'#91C7EF',

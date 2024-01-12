@@ -28,7 +28,7 @@ const Freelancer = sequelize.define('freelancer', {
   },
   adress: {
     type: DataTypes.STRING,
-     allowNull : false,
+     allowNull : true,
   },
   phone: {
     type: DataTypes.INTEGER,
@@ -36,23 +36,23 @@ const Freelancer = sequelize.define('freelancer', {
   },
   image: {
     type: DataTypes.TEXT('long'),
-     allowNull : false,
+     allowNull : true,
   },
   skills: {
     type: DataTypes.TEXT('long'),
-     allowNull : false,
+     allowNull : true,
   },
   aboutMe: {
     type: DataTypes.TEXT('long'),
-     allowNull : false,
+     allowNull : true,
   },
   experience: {
     type: DataTypes.TEXT('long'),
-     allowNull : false,
+     allowNull : true,
   },
   jobtitle: {
     type: DataTypes.TEXT('long'),
-     allowNull : false,
+     allowNull : true,
   }
 });
 
@@ -73,7 +73,7 @@ const JobOwner = sequelize.define('jobowner', {
   },
   adress: {
     type: DataTypes.STRING,
-     allowNull : false,
+     allowNull : true,
   },
   phone: {
     type: DataTypes.INTEGER,
@@ -85,11 +85,12 @@ const JobOwner = sequelize.define('jobowner', {
   },
   rating: {
     type: DataTypes.FLOAT,
-    defaultValue:0,
+    defaultValue: 2.5,
   },
   description: {
     type: DataTypes.TEXT('long'),
-     allowNull : false,
+    allowNull : true,
+     
   },
 });
 
@@ -286,12 +287,9 @@ JobHasFreelancer.belongsTo(Freelancer, {foreignKey:'freelancerId',allowNull:fals
 //   .then(() => {
 //     console.log('Database and tables synchronized.');
 //   })
-//   .catch((error) => {
+//   .catch((error) => { 
 //     console.error('Error synchronizing the database:', error);
-
-//   }); 
 //   });
-
 
 
 module.exports = {
