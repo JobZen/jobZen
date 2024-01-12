@@ -53,9 +53,9 @@ try {
 async function updateJobOwner(req, res) {
 try {
     const { id } = req.params;
-    const { name, email, password, address, phone, image, rating, description } = req.body;
+    const { name, email, password, adress, phone, image, rating, description } = req.body;
     await JobOwner.update(
-    { name, email, password, address, phone, image, rating, description },
+    { name, email, password, adress, phone, image, rating, description },
     { where: { id } }
     );
     res.status(200).json({ message: 'Job owner updated successfully' });
