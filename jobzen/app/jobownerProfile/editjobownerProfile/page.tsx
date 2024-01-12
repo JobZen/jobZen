@@ -7,6 +7,7 @@ const EditJobOwnerProfile = (): JSX.Element => {
   return (
     <div className="bg-white flex flex-col min-h-screen">
       <Navbar />
+      
       <div className="bg-[#ffffff] flex flex-row justify-center w-full">
         <div className="bg-[#ffffff] overflow-hidden w-[1440px] h-[1024px] relative">
           <div className="absolute w-[1578px] h-[449px] top-[577px] left-[-69px]">
@@ -162,7 +163,7 @@ const EditJobOwnerProfile = (): JSX.Element => {
           </div>
         </div>
       </div>
-      <Footer />
+      <Footer/>
     </div>
   );
 };

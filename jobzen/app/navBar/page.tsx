@@ -8,7 +8,7 @@ interface TabPage {
 }
 
 const tabPages: TabPage[] = [
-  { name: 'Home', href: '/' },
+  { name: 'Home', href: '/home' },
   { name: 'About us', href: '/about' },
   { name: 'Contact', href: '/contact' }
 ];
@@ -33,14 +33,14 @@ const Navbar = () => {
           {tabPages.map((tabPage) => (
             <div className="mr-4 space-x-1" key={tabPage.name}>
               <Link href={tabPage.href}>
-                <span className="font-jura text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">{tabPage.name}</span>
+                <span className=" text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">{tabPage.name}</span>
               </Link>
             </div>
           ))}
           <div className="relative flex items-center space-x-4 ">
             
             <Link href={'/login '}>
-              <p className="font-jura text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">Login</p>
+              <p className=" text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">Login</p>
                </Link>
                <Link href={'/signup'}>
                <button

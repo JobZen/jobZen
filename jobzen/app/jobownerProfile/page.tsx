@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../navBar/page";
+import Link from 'next/link';
 import Footer from "../footer/page";
-import Link from "next/link";
 
 const JobOwnerProfile: React.FC = (): JSX.Element => {
   return (
@@ -10,6 +10,18 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
       <div className="bg-white flex flex-row justify-center w-full">
         <div className="bg-white overflow-hidden w-[1440px] h-[800px] relative">
           <div className="absolute w-[1549px] h-[836px] top-[188px] left-[-109px]">
+          <div className="absolute w-[133px] h-[40px] top-[203px] left-[226px] bg-[#267296] rounded-[15px] shadow-[0px_4px_4px_#00000040]" />
+              <Link href={'/jobownerProfile/editjobownerProfile'}>
+              <button className="absolute w-[120px] top-[210px] left-[236px] [font-family:'Jockey_One-Regular',Helvetica] font-normal text-white text-[24px] text-center tracking-[0] leading-[normal]">
+                Edit Profile
+              </button>
+              </Link>
+              <div className="absolute w-[239px] h-[152px] top-[388px] left-[174px] bg-[#384d6c] rounded-[15px]" />
+              <img
+                className="absolute w-[220px] h-[137px] top-[395px] left-[184px] object-cover"
+                alt="Map"
+                src="map-1.png"
+              />
             <div className="absolute w-[1549px] h-[835px] top-0 left-0">
               <div className="absolute w-[272px] h-[562px] top-0 left-[160px] bg-[#a1e1fd4a] rounded-[42px] shadow-[0px_4px_4px_#00000040]" />
               <svg
@@ -24,7 +36,6 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
                   clip-rule="evenodd"
                 />
               </svg>
-
               <div className="w-[164px] top-[356px] left-[236px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] leading-[normal] absolute tracking-[0]">
                 Company Adress:
               </div>
@@ -81,10 +92,10 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
               <div className="absolute w-[61px] top-[260px] left-[261px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] tracking-[0] leading-[normal]">
                 Review:
               </div>
-
               <img
                 className="absolute w-[127px] h-[134px] top-[30px] left-[229px] bg-[url(/sdfsdfsdffsdfsdfdsfdsfsdfsdfds-1.png)] bg-cover bg-[50%_50%]"
                 src="https://icon-library.com/images/node-js-icon/node-js-icon-2.jpg"
+                alt="Company photo or profile"
               />
               <div className="absolute w-[133px] h-[40px] top-[203px] left-[226px] bg-[#267296] rounded-[15px] shadow-[0px_4px_4px_#00000040]" />
               <Link href={"/jobownerProfile/editjobownerProfile"}>
@@ -143,11 +154,13 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
           </p>
           <div className="absolute w-[105px] h-[28px] top-[140px] left-[1226px]">
             <div className="absolute w-[105px] h-[28px] top-0 left-0">
+            <Link href={'/jobDetails/messageJobDetails'}>
               <img
                 className="w-[105px] top-[26px] left-0 absolute h-px object-cover"
                 alt="Vector"
                 src="vector-76.svg"
               />
+              </Link>
               <Link href={"/jobDetails/messageJobDetails"}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -191,7 +204,7 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
           </div>
         </div>
       </div>
-      <Footer />
+      <Footer/>
     </div>
   );
 };
