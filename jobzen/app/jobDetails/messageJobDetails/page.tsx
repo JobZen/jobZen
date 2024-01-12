@@ -2,7 +2,7 @@
 import React,{useState} from 'react';
 import Link from 'next/link';
 import Navbar from '../../navBar/page';
-import Footer from '../../footer/page';
+
 
 const MessageJobDetails = () => {
   return (
@@ -59,7 +59,7 @@ const MessageJobDetails = () => {
         </div>
       </div>
     </div>
-    <Footer/>
+ 
  </div>
   );
 };

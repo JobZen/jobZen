@@ -2,16 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Search1 from '../search1/page';
 
-interface TabPage {
-  name: string;
-  href: string;
-}
 
-const tabPages: TabPage[] = [
-  { name: 'Home', href: '/' },
-  { name: 'About us', href: '/about' },
-  { name: 'Contact', href: '/contact' }
-];
 
 const Navbar = () => {
   return (
@@ -37,18 +28,18 @@ const Navbar = () => {
                   </Link>
                   <Search1 />
                 </div>
-                {tabPages.map((tabPage) => (
-                  <div className="mr-4 " key={tabPage.name}>
-                    <Link href={tabPage.href}>
-                      <span className="font-jura text-xl text-[#267296]">{tabPage.name}</span>
+                
+                  <div className="mr-4">
+                    <Link href={"/home"}>
+                      <span className="font-jura text-xl text-[#267296]">HOME</span>
                     </Link>
                   </div>
-                ))}
+               
                 <div className="relative flex items-center space-x-4 ">
-                  <Link href={'/login '}>
+                  <Link href={'/login'}>
                     <p className="font-jura text-xl text-[#267296]">Login</p>
                   </Link>
-                  <Link href={'/signup'}>
+                  <Link href={'/landingPage'}>
                     <button
                       type="submit"
                       className="py-1 px-3 text-xl font-jura text-center text-white rounded-3xl bg-[#267296] sm:w-fit hover:bg-[#275469]  hover:text-white hover:focus:ring-4 focus:outline dark:focus:ring-primary-300 dark:bg-primary-600">

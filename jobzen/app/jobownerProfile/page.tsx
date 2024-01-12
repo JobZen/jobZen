@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Navbar from "../navBar/page";
-import Footer from "../footer/page";
+
 
 const JobOwnerProfile: React.FC = (): JSX.Element => {
   return (
@@ -128,7 +128,7 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
           </div>
         </div>
       </div>
-      <Footer />
+      
     </div>
   );
 };
