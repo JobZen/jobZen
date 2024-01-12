@@ -8,7 +8,7 @@ interface TabPage {
 
 const tabPages: TabPage[] = [
   { name: 'Home', href: '/' },
-  { name: 'About us', href: '/AboutUs' },
+  { name: 'About us', href: '/about' },
   { name: 'Contact', href: '/contact' }
 ];
 
