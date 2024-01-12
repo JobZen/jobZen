@@ -50,9 +50,7 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
   });
 
   useEffect(() => {
-    // Retrieve the selected JobOwner id from localStor
-
-    // Fetch JobOwner data based on the id
+    
     var currentUrl = window.location.href;
     var ind=currentUrl.split("/")
     var index=ind[ind.length-1]

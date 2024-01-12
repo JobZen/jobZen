@@ -9,7 +9,7 @@ interface JobCategory {
 }
 
 interface JobOwner {
-  id: number; // Assuming 'id' is the identifier property
+  id: number;
   name: string;
   email: string;
   password: string;
@@ -21,6 +21,7 @@ interface JobOwner {
 }
 
 interface Job {
+  id:number,
   jobtitle: string;
   location: string;
   budget: number;
