@@ -18,7 +18,7 @@ const handleCheckboxChange = () => {
       <div className='bg-white flex flex-col justify-center items-center h-screen'>
         <div className="container mx-auto pt-16 pb-0 items-center mr-6 ">
           <div className="grid grid-cols-1 sm:grid-cols-2 px-12 ">
-            <div className="bg-white">
+            <div className="bg-white mt-[20px] ">
                     <br/>
               <p className='text-Mona text-xl mt-6 mb-4'>Update Job Details</p>
               <hr className="my-2 mr-80 border-r-2 border-gray-900" />
@@ -73,7 +73,7 @@ const handleCheckboxChange = () => {
                     <img src="https://shorturl.at/bkuJT" className="w-32 h-32 rounded-full mb-4 shrink-0" alt="CompanyProfile" />
                     <h1 className="text-xl font-bold">Flux Outdoor</h1>
                     <Link href={'/jobownerProfile'}>
-                      <p className="text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">View Company's Profile</p>
+                      <p className="font-jura text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">View Company's Profile</p>
                     </Link>
                     <div className="mt-6 flex flex-wrap gap-4 justify-center">
                       <Link href={'/jobDetails'}>
