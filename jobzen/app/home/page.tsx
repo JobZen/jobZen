@@ -6,9 +6,11 @@ const Home =()=>{
     return(
         <div className='bg-white '>
             <Navbar1/>
-            <div className="mt-[7cm]"><Main/></div>
-            <Footer/>
+            <div className="mt-[7cm]">
+                <Main/>
             </div>
+            <Footer/>
+        </div>
     )
 }
 export default Home;

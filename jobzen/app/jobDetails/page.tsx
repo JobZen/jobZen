@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Navbar from '../navBar/page';
-import Footer from '../footer/page';
 import Update from './updateJobDetails/page';
 import Message from './messageJobDetails/page'
 
@@ -11,9 +10,9 @@ const JobDetails = () => {
     <div className='bg-white '>
       <Navbar />
       <div className='bg-white flex flex-col justify-center items-center h-screen'>
-        <div className="container mx-auto py-12 items-center mr-6">
+        <div className="container mx-auto py-16 pt-[5rem] items-center mr-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 px-4 ">
-            <div className="bg-white p-12">
+            <div className="bg-white">
                     <br/>
               <p className='text-Mona'>Job Details</p>
               <h2 className="text-4xl font-lato font-semibold mb-4">Illustrator (Full-Time/Part-Time)</h2>
@@ -45,11 +44,11 @@ const JobDetails = () => {
                   <div className="flex flex-col items-center">
                     <img src="https://cdn.dribbble.com/userupload/12278466/file/original-22c066a12054d052be813aed19ab83fd.com?resize=96x96" className="w-32 h-32 rounded-full mb-4 shrink-0" alt="CompanyProfile" />
                     <h1 className="text-xl font-bold">Flux Outdoor</h1>
-                    <Link href={'/'}>
-                      <p className="font-jura text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">View Company's Profile</p>
+                    <Link href={'/jobownerProfile'}>
+                      <p className="mt-6 text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">View Company's Profile</p>
                     </Link>
                     <div className="mt-6 flex gap-4">
-                      <Link href={'/jobDetails/messagesJobDetails'}>
+                      <Link href={'/jobDetails/messageJobDetails'}>
                         <button className="bg-[#267296] hover:bg-[#195571] text-white py-2 px-4 rounded">Message</button>
                       </Link>
                       <Link href={'/jobDetails/updateJobDetails'}>
@@ -57,6 +56,11 @@ const JobDetails = () => {
                           Update details
                           </button>
                           </Link>
+                    </div>
+                    <div className='mt-6 '>
+                    <Link href={'/jobDetails/review'}>
+                      <p className="font-jura text-[#267296] hover:text-base-[#267296] hover:font-semibold hover:underline">View Company's Review</p>
+                    </Link>
                     </div>
                   </div>
                   <hr className="my-6 border-t border-[#267296]" />
@@ -83,7 +87,7 @@ const JobDetails = () => {
           </div>
         </div>
       </div>
-      <Footer />
+     
     </div>
   );
 };

@@ -289,7 +289,7 @@ JobHasFreelancer.belongsTo(Freelancer, {foreignKey:'freelancerId',allowNull:fals
 //   })
 //   .catch((error) => { 
 //     console.error('Error synchronizing the database:', error);
-//   }); 
+//   });
 
 
 module.exports = {
