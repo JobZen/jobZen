@@ -2,7 +2,7 @@
 import React , {useState} from 'react';
 import Link from 'next/link';
 import Navbar from '../../navBar/page';
-import Footer from '../../footer/page';
+
 
 const CreateJobDetails = () => {
 const [availabe, setAvailable] = useState(false)
@@ -169,7 +169,7 @@ const handleCheckboxChange = () => {
         </span>
       </label>
       </div>
-      <Footer />
+      
     </div>
   );
 };

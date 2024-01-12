@@ -33,7 +33,10 @@ const config: Config = {
         'jolly-lodger': ['Jolly Lodger'],
         'jura':['Jura'],
         'jockey-one':['Jockey One'],
-        'lato':['Lato']
+        'lato':['Lato'],
+        'josefin':['Josefin Sans'],
+        'bruno':['Bruno Ace SC'],
+        
       },
       
     },

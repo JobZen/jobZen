@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Navbar from '../navBar/page';
-import Footer from '../footer/page';
 import Update from './updateJobDetails/page';
 import Message from './messageJobDetails/page'
 
@@ -83,7 +82,7 @@ const JobDetails = () => {
           </div>
         </div>
       </div>
-      <Footer />
+     
     </div>
   );
 };
