@@ -2,6 +2,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Link from 'next/link';
 
 interface JobCategory{
     category:string,
@@ -20,6 +21,7 @@ interface JobOwner{
 }
 
 interface Job{
+    id:number,
     jobtitle:string,
     location:string,
     budget:number,
@@ -127,7 +129,9 @@ function page() {
         <h1 className='text-black text-xl'>{element.budget} TND /hr</h1>
       </div>
       <div className='flex items-center justify-center mb-[16px] mt-[16px]'>
+        <Link href={`/jobDetails/${element.id}`}>
         <button className='bg-blueghamek text-white font-bold py-2 px-4 rounded'>Apply</button>
+        </Link>
       </div>
       <div className=''>
         <h1 className='text-grisss'>posted at:{(element.createdAt).split('T')[0]}</h1>
