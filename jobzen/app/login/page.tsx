@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { FunctionComponent } from "react";
 
-const Login: FunctionComponent = () => {
+const Login: FunctionComponent  = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
