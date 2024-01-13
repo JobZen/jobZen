@@ -114,6 +114,7 @@ async function getJobsByCategory(req, res) {
       res.status(500).json({ error: error.message });
     }
   }
+
 //Get one Job by Job Category:
 async function getOneJobByCategory(req, res) {
 try {

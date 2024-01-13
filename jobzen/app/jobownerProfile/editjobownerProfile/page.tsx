@@ -87,7 +87,7 @@ const EditJobOwnerProfile = (): JSX.Element => {
                   </div>
                 </div>
                 <img
-                  className="absolute w-[127px] h-[134px] top-[-5px] left-[27px] bg-[url(/sdfsdfsdffsdfsdfdsfdsfsdfsdfds-1.png)] bg-cover bg-[50%_50%]"
+                  className="absolute w-[127px] h-[134px] top-[-5px] left-[27px] bg-[url(/sdfsdfsdffsdfsdfdsfdsfsdfsdfds-1.png)] bg-cover bg-[50%_50%]" alt=""
                   src="https://icon-library.com/images/node-js-icon/node-js-icon-2.jpg"
                 />
               </div>

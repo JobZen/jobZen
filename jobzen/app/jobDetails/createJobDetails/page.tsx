@@ -1,12 +1,74 @@
 'use client'
-import React , {useState} from 'react';
+import React , {useState,useEffect} from 'react';
 import Link from 'next/link';
 import Navbar from '../../navBar/page';
 import Footer from '../../footer/page';
+import axios from 'axios';
+
+interface JobOwner{
+  id:number,
+  name:string,
+  image:string
+}
+
+interface Job{
+  id:number,
+  jobtitle: string,
+  location: string,
+  budget: number,
+  image: string,
+  role: string,
+  description: string,
+  qualification: string,
+  createdAt: string, 
+  jobOwnerId: number,
+  jobCategoryId: number,
+  jobOwner:JobOwner
+}
 
 const CreateJobDetails = () => {
-const [availabe, setAvailable] = useState(false)
+const [availabe, setAvailable] = useState<boolean>(false)
+const [job,setJob]=useState<Job>({
+  id: 0,
+  jobtitle: '',
+  location: '',
+  budget: 0,
+  image: '',
+  role: '',
+  description: '',
+  qualification: '',
+  createdAt: '',
+  jobOwner: {
+    id: 0,
+    name: '',
+    image: '',
+  },
+  jobOwnerId: 0,
+  jobCategoryId: 0,
+})
+
+useEffect(()=>{
+  const createJob = async () => {
+    try {
+      const newJob = {
+        jobtitle: job.jobtitle,
+        location: job.location,
+        budget: job.budget,
+        image: job.image,
+        role: job.role,
+        description: job.description,
+        qualification: job.qualification,
+      };
   
+      const response = await axios.post("http://localhost:3000/job/job", newJob);
+      setJob(response.data);
+    } catch (error) {
+      console.error('Error creating job:', error);
+    }
+  };
+  createJob();
+}, []);
+
 const handleCheckboxChange = () => {
   setAvailable(!availabe);
 };
@@ -29,7 +91,10 @@ const handleCheckboxChange = () => {
                     <input
                     type="text"
                     id="default-input"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "/>
+                    placeholder="Enter job title here"
+                    value={job.jobtitle}
+                    onChange={(e) => setJob({ ...job, jobtitle: e.target.value })}
+                    className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500"/>
                     </div>   
                     <div className="mb-6">
                 <label htmlFor="default-input" className="text-xl font-lato font-semibold mb-4">
@@ -38,6 +103,8 @@ const handleCheckboxChange = () => {
                     <input
                     type="text"
                     id="default-input"
+                    placeholder='Enter the proposed salary here'
+                    onChange={(e) => setJob({ ...job, budget: parseInt(e.target.value) })}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "/>
                     </div>    
                     <div className="mb-6">
@@ -46,7 +113,10 @@ const handleCheckboxChange = () => {
                     </label>
                     <textarea
                     id="default-input"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "></textarea>
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                    placeholder='describe the mission for Freelancer'
+                    onChange={(e) => setJob({ ...job, description: e.target.value })}
+                    ></textarea>
                     </div>  
                     <div className="mb-6">
                 <label htmlFor="default-input" className="text-xl font-lato font-semibold mb-4">
@@ -54,7 +124,9 @@ const handleCheckboxChange = () => {
                     </label>
                     <textarea
                     id="default-input"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "></textarea>
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                    placeholder='describe specific role here'
+                    onChange={(e) => setJob({ ...job, role: e.target.value })}></textarea>
                     </div>  
                     <div className="mb-6">
                 <label htmlFor="default-input" className="text-xl font-lato font-semibold mb-4">
@@ -62,15 +134,17 @@ const handleCheckboxChange = () => {
                     </label>
                     <textarea
                     id="default-input"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "></textarea>
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                    placeholder='describe the needed qualification for this job'
+                    onChange={(e) => setJob({ ...job, qualification: e.target.value })}></textarea>
                     </div>  
             </div>
             <div className="ml-1 flex items-center p-8">
               <div className="flex p-12 ">
                 <div className="bg-[#D3E8F8] shadow rounded-lg p-6">
                   <div className="flex flex-col items-center">
-                    <img src="https://cdn.dribbble.com/userupload/12278466/file/original-22c066a12054d052be813aed19ab83fd.com?resize=96x96" className="w-32 h-32 rounded-full mb-4 shrink-0" alt="CompanyProfile" />
-                    <h1 className="text-xl font-bold">Flux Outdoor</h1>
+                    <img src={job.jobOwner?.image} className="w-32 h-32 rounded-full mb-4 shrink-0" alt="CompanyProfile" />
+                    <h1 className="text-xl font-bold">{job.jobOwner?.name}</h1>
                     <Link href={'/jobownerProfile'}>
                       <p className="font-jura text-[#267296] hover:text-base-[#267296] hover:font-semibold hover:underline">View Company's Profile</p>
                     </Link>
@@ -173,5 +247,4 @@ const handleCheckboxChange = () => {
     </div>
   );
 };
-
 export default CreateJobDetails;

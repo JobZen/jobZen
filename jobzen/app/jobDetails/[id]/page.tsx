@@ -23,7 +23,7 @@ interface Job{
   description:string,
   qualification:string,
   createdAt:string,
-  JobOwner:JobOwner
+  jobOwner:JobOwner
 }
 
 const JobDetails = () => {
@@ -37,7 +37,7 @@ const JobDetails = () => {
     description: '',
     qualification: '',
     createdAt: '',
-    JobOwner: {
+    jobOwner: {
       id: 0,
       name: '',
       image: '',
@@ -90,10 +90,10 @@ useEffect(()=>{
               <div className="flex p-12 ">
                 <div className="bg-[#D3E8F8] shadow rounded-lg p-6">
                   <div className="flex flex-col items-center">
-                    {job.JobOwner && job.JobOwner.id !== 0 && (
+                    {job.jobOwner && job.jobOwner.id !== 0 && (
                       <>
-                    <img src={job.JobOwner.image} className="w-32 h-32 rounded-full mb-4 shrink-0"alt="CompanyProfile"/>
-                    <h1 className="text-xl font-bold">{job.JobOwner.name}</h1>
+                    <img src={job.jobOwner.image} className="w-32 h-32 rounded-full mb-4 shrink-0"alt="CompanyProfile"/>
+                    <h1 className="text-xl font-bold">{job.jobOwner.name}</h1>
                     </>
                     )}
                     <Link href={'/jobownerProfile'}>
