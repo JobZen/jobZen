@@ -14,7 +14,6 @@ const Register = async (req, res) => {
 
     const newUser = {
       name,
-      password,
       email,
       image:'https://cdn-icons-png.flaticon.com/512/149/149071.png',
       password: hashedPassword}
@@ -31,8 +30,7 @@ const Login = async(req, res) => {
     try {
          const result= await Freelancer.findOne({ where :{email:email}})
          if(result ===null) res.send("email not found")
-         else {
-      
+         else {      
           const verif=result.dataValues.password
           const passwordMatch = await bcrypt.compare(password,verif)
           
