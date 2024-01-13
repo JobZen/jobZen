@@ -17,9 +17,9 @@ const Search1 = () => {
             title="Search..."
             className="h-10 border-0 focus:outline-none text-[#267296] rounded-full font-bold px-2 md:px-3 py-0 md:py-1 tracking-wider bg-white"
           >
-            <option value="job">Job</option>
-            <option value="skill">Skill</option>
-            <option value="rating">Rating</option>
+            <option value="job">JOB</option>
+            <option value="skill">COMPANY</option>
+          
           </select>
         </div>
         <button
