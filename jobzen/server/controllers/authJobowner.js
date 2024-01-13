@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const { createFreelancer} = require('./freelancerController.js');
-const {Freelancer}=require('../database/index.js')
+const { createJobOwner} = require('./jobOwnerController.js');
+const {JobOwner}=require('../database/index.js')
 const { generateToken } = require ('../services/TokenServices.js')
 
 
@@ -19,7 +19,7 @@ const Register = async (req, res) => {
       image:'https://cdn-icons-png.flaticon.com/512/149/149071.png',
       password: hashedPassword}
      
-      createFreelancer({ body: newUser }, res);
+      createJobOwner({ body: newUser }, res);
   } catch (error) {
     res.status(500).json({ error: 'Error' });
   }
@@ -29,7 +29,7 @@ const Register = async (req, res) => {
 const Login = async(req, res) => {
     const{email,password}=req.body;
     try {
-         const result= await Freelancer.findOne({ where :{email:email}})
+         const result= await JobOwner.findOne({ where :{email:email}})
          if(result ===null) res.send("email not found")
          else {
       
