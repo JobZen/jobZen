@@ -1,9 +1,10 @@
 const jwt = require('jsonwebtoken');
-const secretKey = 'choko'; // Replace with your secret key
+const secretKey = 'choko'; 
 
 function generateToken(userId,userName) {
-  const expiresIn = 60 * 60 * 24; // Token expiration time (e.g., 24 hours)
-  return jwt.sign({ userId ,role ,userName}, secretKey, { expiresIn });
+  const expiresIn = 60 * 60 * 24; 
+  const token = jwt.sign({ userId  ,userName}, secretKey, { expiresIn })
+  return token;
 }
 
 module.exports = { generateToken };
