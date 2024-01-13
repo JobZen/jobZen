@@ -1,16 +1,78 @@
 'use client'
-import React , {useState} from 'react';
+import React , {useState,useEffect} from 'react';
 import Link from 'next/link';
 import Navbar from '../../navBar/page';
 import Footer from '../../footer/page';
 import ReviewFreelancer from '../review/page';
+import axios from 'axios';
+
+interface JobOwner{
+  id:number,
+  name:string,
+  image:string
+}
+
+interface Job{
+  id:number,
+  jobtitle: string,
+  location: string,
+  budget: number,
+  image: string,
+  role: string,
+  description: string,
+  qualification: string,
+  createdAt: string, 
+  jobOwnerId: number,
+  jobCategoryId: number,
+  jobOwner:JobOwner
+}
 
 const UpdateJobDetails = () => {
-const [availabe, setAvailable] = useState(false)
-  
+const [availabe, setAvailable] = useState<boolean>(false)
+const [update,setUpdate]=useState<Job>({
+  id: 0,
+  jobtitle: '',
+  location: '',
+  budget: 0,
+  image: '',
+  role: '',
+  description: '',
+  qualification: '',
+  createdAt: '',
+  jobOwner: {
+    id: 0,
+    name: '',
+    image: '',
+  },
+  jobOwnerId: 0,
+  jobCategoryId: 0,
+})
+
 const handleCheckboxChange = () => {
   setAvailable(!availabe);
 };
+
+useEffect(()=>{
+  const createJob = async () => {
+    try {
+      const updateJob = {
+        jobtitle: update.jobtitle,
+        location: update.location,
+        budget: update.budget,
+        image: update.image,
+        role: update.role,
+        description: update.description,
+        qualification: update.qualification,
+      };
+  
+      const response = await axios.put("http://localhost:3000/job/job", updateJob);
+      setUpdate(response.data);
+    } catch (error) {
+      console.error('Error creating job:', error);
+    }
+  };
+  createJob();
+}, []);
 
   return (
     <div className='bg-white '>
@@ -30,6 +92,7 @@ const handleCheckboxChange = () => {
                     <input
                     type="text"
                     id="default-input"
+                    value={update.jobtitle}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "/>
                     </div>   
                     <div className="mb-6">
@@ -39,6 +102,7 @@ const handleCheckboxChange = () => {
                     <input
                     type="text"
                     id="default-input"
+                    value={update.budget}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "/>
                     </div>    
                     <div className="mb-6">
@@ -47,6 +111,7 @@ const handleCheckboxChange = () => {
                     </label>
                     <textarea
                     id="default-input"
+                    value={update.description}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "></textarea>
                     </div>  
                     <div className="mb-6">
@@ -55,6 +120,7 @@ const handleCheckboxChange = () => {
                     </label>
                     <textarea
                     id="default-input"
+                    value={update.role}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "></textarea>
                     </div>  
                     <div className="mb-6">
@@ -63,6 +129,7 @@ const handleCheckboxChange = () => {
                     </label>
                     <textarea
                     id="default-input"
+                    value={update.qualification}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "></textarea>
                     </div>  
             </div>
@@ -70,8 +137,8 @@ const handleCheckboxChange = () => {
               <div className="flex p-12 ">
                 <div className="bg-[#D3E8F8] shadow rounded-lg p-6">
                   <div className="flex flex-col items-center">
-                    <img src="https://shorturl.at/bkuJT" className="w-32 h-32 rounded-full mb-4 shrink-0" alt="CompanyProfile" />
-                    <h1 className="text-xl font-bold">Flux Outdoor</h1>
+                    <img src={update.jobOwner.image} className="w-32 h-32 rounded-full mb-4 shrink-0" alt="CompanyProfile" />
+                    <h1 className="text-xl font-bold">{update.jobOwner.name}</h1>
                     <Link href={'/jobownerProfile'}>
                       <p className="font-jura text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">View Company's Profile</p>
                     </Link>
@@ -117,6 +184,7 @@ const handleCheckboxChange = () => {
                       <label htmlFor="small-input" className="block mb-2 text-sm font-medium text-gray-900"></label>
                       <input
                       type="text" id="small-input" placeholder="Enter job title here"
+                      value={update.jobtitle}
                       className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500"/></li></ul>
                     <br/>
                     <p className="font-jura text-[#267296] ">Location:</p>
@@ -125,6 +193,7 @@ const handleCheckboxChange = () => {
                       <label htmlFor="small-input" className="block mb-2 text-sm font-medium text-gray-900"></label>
                       <input
                       type="text" id="small-input" placeholder="Enter working location here"
+                      value={update.location}
                       className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500"/></li></ul>
                     <br/>
                     <p className="font-jura text-[#267296] ">Date posted:</p>
@@ -133,6 +202,7 @@ const handleCheckboxChange = () => {
                       <label htmlFor="small-input" className="block mb-2 text-sm font-medium text-gray-900"></label>
                       <input
                       type="text" id="small-input" placeholder="job posting date here"
+                      value={update.createdAt}
                       className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500"/></li></ul>
                     <Link href={'/jobDetails/review'}>
                       <p className="mt-4 md-1 text-[#267296] hover:text-base-[#267296] text-l hover:font-semibold font-jura hover:underline">Proceed to payement</p>
