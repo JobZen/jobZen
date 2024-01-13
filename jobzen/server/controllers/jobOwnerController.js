@@ -37,11 +37,8 @@ try {
     name,
     email,
     password,
-    adress,
-    phone,
     image,
-    rating,
-    description
+   
     });
     res.status(201).json(newJobOwner);
 } catch (error) {

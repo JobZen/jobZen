@@ -19,6 +19,7 @@ const job= require('./routes/jobRoute.js');
 const jobCategory = require('./routes/jobCategoryRoute.js');
 const jobHasFreelancer = require('./routes/jobHasFreelancerRoute.js');
 const review = require('./routes/reviewRoute.js')
+const authenticated = require('./routes/auth.js')
 
 const PORT = 3000
 app.use(cors())
@@ -44,6 +45,7 @@ app.use('/job', job);
 app.use('/jobCategory', jobCategory);
 app.use('/jobHasFreelancer', jobHasFreelancer);
 app.use('/review', review);
+app.use('/auth', authenticated);
 
 
 app.listen(PORT, () => {
