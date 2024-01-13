@@ -36,7 +36,7 @@ const Freelancer = sequelize.define('freelancer', {
   },
   image: {
     type: DataTypes.TEXT('long'),
-     allowNull : false, 
+     allowNull : true,
   },
   skills: {
     type: DataTypes.TEXT('long'),

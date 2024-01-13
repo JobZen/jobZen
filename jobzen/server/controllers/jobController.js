@@ -1,4 +1,4 @@
-const{Job}=require('../database/index.js');
+const{Job,JobOwner}=require('../database/index.js');
 
 // Get All jobs
 async function getAllJobs(req, res) {
@@ -8,6 +8,20 @@ try {
 } catch (error) {
     res.status(500).json({ error: error.message });
 }
+}
+//Get One Job including JobOwner
+async function getOneJob(req, res) {
+  const { id } = req.params;
+  try {
+    const job = await Job.findOne({include:JobOwner,where:{id:id}});
+    if (!job) {
+      return res.status(404).json('Job post is not found');
+    }
+    res.status(200).json(job);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err);
+  }
 }
 
 // Create a new job
@@ -125,6 +139,7 @@ module.exports = {
   getAllJobsWithDetails,
   getJobByIdWithDetails,
   getJobsByCategory,
-  getOneJobByCategory};
+  getOneJobByCategory,
+  getOneJob};
 
   
