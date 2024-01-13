@@ -2,21 +2,26 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Navbar from '../Navbar1/page';
+import Footer from '../footer/page';
 
-interface JobCategory{
+interface FreelancerCategory{
     category:string,
     image:string
 }
 
-interface JobOwner{
-    name:string,
-    email:string,
-    password:string,
-    adress:string,
-    phone:number,
-    image:string,
-    rating:number,
-    description:string
+interface Freelancer{
+    id: Number,
+    name: string,
+    email: string,
+    password: string,
+    adress: string,
+    phone: Number,
+    image: Number,
+    skills: string,
+    aboutMe: string,
+    experience: string,
+    jobtitle: string,
 }
 
 interface Job{
@@ -33,8 +38,8 @@ interface Job{
 }
 
 function page() {
-    const [jobcategory, setJobcategory] = useState<JobCategory[]>([]);
-    const [jobowner,setJobowner]=useState<JobOwner[]>([])
+    const [freelancercategory, setFreelancercategory] = useState<FreelancerCategory[]>([]);
+    const [freelancer,setFreelancer]=useState<Freelancer[]>([])
     const [job,setJob]=useState<Job[]>([])
     const [initialJobCount, setInitialJobCount] = useState(3);
     const [jobsForToday, setJobsForToday] = useState<Job[]>([]);
@@ -44,24 +49,24 @@ function page() {
 
     useEffect(() => {
         axios
-          .get('http://localhost:3000/jobCategory/jobCategory')
+          .get('http://localhost:3000/freelancerCategories/freelancer-category')
           .then((res) => {
-            const JobCategory: JobCategory[] = res.data;
-            setJobcategory(JobCategory);
+            const freelancercategory: FreelancerCategory[] = res.data;
+            setFreelancercategory(freelancercategory);
           })
           .catch((err) => {
             console.log(err);
           });
-          getAllJobOwner()
+          getAllFreelancer()
           getAllJob()
       }, []);
 
-    const getAllJobOwner=()=>{
+    const getAllFreelancer=()=>{
         axios
-          .get('http://localhost:3000/jobOwner/job-owner')
+          .get('http://localhost:3000/freelancer/')
           .then((res) => {
-            const JobOwner: JobOwner[] = res.data;
-            setJobowner(JobOwner);
+            const Freelancer: Freelancer[] = res.data;
+            setFreelancer(Freelancer);
           })
           .catch((err) => {
             console.log(err);
@@ -74,8 +79,6 @@ function page() {
     .then((res) => {
       const allJobs: Job[] = res.data;
       setJob(allJobs);
-
-     
       const today = new Date().toISOString().split('T')[0];
       const jobsToday = allJobs.filter((job) => job.createdAt.split('T')[0] === today);
       setJobsForToday(jobsToday);
@@ -107,7 +110,8 @@ function page() {
     return (
 
      <div>
-        <div className='flex space-x-2 text-8xl ml-[5%] mb-[3cm] mt-[3cm]'>
+        <Navbar/>
+        <div className='flex space-x-2 text-8xl ml-[5%] mb-[3cm] mt-[10cm]'>
         <h1 className='font-jockey-one text-bluefateh'>LATEST </h1>
         <h1 className='font-jockey-one text-blueghamek'>JOB OFFER</h1>
         </div>
@@ -192,11 +196,11 @@ function page() {
 
 
         <div className='flex space-x-2 text-8xl ml-[5%] mb-[3cm] mt-[3cm]'>
-        <h1 className='font-jockey-one text-bluefateh'>FIND A WORK BY </h1>
-        <h1 className='font-jockey-one text-blueghamek'>CATEGORY</h1>
+        <h1 className='font-jockey-one text-bluefateh'>FIND TALENT BY </h1>
+        <h1 className='font-jockey-one text-blueghamek'>SKILLS</h1>
         </div>
         <div className="flex justify-between ml-[10%] mr-[10%]">
-        {jobcategory.map((el, i) => (
+        {freelancercategory.map((el, i) => (
           <div key={i} className="relative text-center ">
             <h1
               className="text-4xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white z-10 hover:scale-125 "
@@ -216,9 +220,9 @@ function page() {
         <h1 className='font-jockey-one text-blueghamek'>COMPANY</h1>
         </div>
     <div className='flex justify-between ml-[10%] mr-[10%]'>
-      {jobowner.map((ele,i)=>{
+      {freelancer.map((ele,i)=>{
 return(
-      ele.rating>=3 &&(
+    
        <div >
         
         <div className="relative flex w-80 flex-col rounded-xl bg-white text-gray-700 shadow-2xl hover:scale-110">
@@ -231,9 +235,9 @@ return(
     <h5 className="mb-2 block font-sans text-4xl font-semibold leading-snug tracking-normal text-blueghamek antialiased">
      {ele.name}
     </h5>
-    <div ><StarRating rating={ele.rating} /></div>
+    <div >{ele.jobtitle}</div>
     <div className='flex items-center justify-center mr-[1.5cm]'>
-    <img className='w-[20px] h-[20] ' src="https://th.bing.com/th/id/OIP.RJwgX7x98VNnkH02LQ0L-AHaHa?rs=1&pid=ImgDetMain" alt="" />
+    
     <p className="block font-sans text-xl font-light leading-relaxed text-inherit antialiased">
     {ele.adress}
     </p>
@@ -247,7 +251,7 @@ return(
   </div>
         </div>
 
-       </div>))}
+       </div>)}
       )}
       </div>
       
@@ -298,6 +302,7 @@ return(
 	
     <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
 </div>
+<Footer/>
       </div>
       
   )

@@ -13,22 +13,36 @@ res.status(500).json({ error: 'Unable to fetch freelancers' });
 // Create a new freelancer
 async function createFreelancer(req, res) {
 try {
-const { name, email, password, address, phone, image, skills, aboutMe, experience, jobtitle } = req.body;
-const newFreelancer = await Freelancer.create({
-    name,
-    email,
-    password,
-    address,
+const { name, email, password , adress,
     phone,
     image,
+    reting,
+    description,
     skills,
     aboutMe,
     experience,
     jobtitle
+    } = req.body;
+const newFreelancer = await Freelancer.create({
+    name,
+    email,
+    password,
+    adress,
+    phone,
+    image,
+    reting,
+    description,
+    skills,
+    aboutMe,
+    experience,
+    jobtitle
+    
+  
+
 });
 res.status(201).json(newFreelancer);
 } catch (error) {
-res.status(500).json({ error: 'Unable to create freelancer' });
+res.status(500).json({error: error.message });
 }
 }
 
@@ -36,7 +50,7 @@ res.status(500).json({ error: 'Unable to create freelancer' });
 async function updateFreelancer(req, res) {
 try {
 const { id } = req.params;
-const { name, email, password, address, phone, image, skills, aboutMe, experience, jobtitle } = req.body;
+const { name, email, password } = req.body;
 
 const freelancerToUpdate = await Freelancer.findByPk(id);
 if (!freelancerToUpdate) {
@@ -44,7 +58,7 @@ if (!freelancerToUpdate) {
 }
 
 await Freelancer.update(
-    { name, email, password, address, phone, image, skills, aboutMe, experience, jobtitle },
+    { name, email, password},
     { where: { id } }
 );
 res.status(200).json({ message: 'Freelancer updated successfully' });
