@@ -3,9 +3,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import Link from 'next/link';
 import Navbar from '../../navBar/page';
-import Update from './../updateJobDetails/page';
-import Message from './../messageJobDetails/page'
-
 
 interface JobOwner{
   id:number,
@@ -26,6 +23,7 @@ interface Job{
   jobOwner:JobOwner
 }
 
+
 const JobDetails = () => {
   const [job, setJob] = useState<Job>({
     id: 0,
@@ -45,10 +43,11 @@ const JobDetails = () => {
   });
 
 useEffect(()=>{
+  var currentUrl = window.location.href;
+  var ind=currentUrl.split("/")
+  var index=ind[ind.length-1]
+
   const getOneJob = async () => {
-    var currentUrl = window.location.href;
-    var ind=currentUrl.split("/")
-    var index=ind[ind.length-1]
       try {
         const response = await axios.get(`http://localhost:3000/job/job/${index}`);
         setJob(response.data);
@@ -58,6 +57,8 @@ useEffect(()=>{
     };
     getOneJob()
   },[])
+
+ 
 
   return (
     <div className='bg-white '>
@@ -75,7 +76,7 @@ useEffect(()=>{
               <p className="text-gray-700">{job.description}</p>
               <h2 className="text-xl font-bold mt-6 mb-4">Your Role</h2>
               <div className="mb-6">
-                <p className="mt-2">We're looking for someone who can capture the essence of the 'wojak' aesthetic vibe, adding a unique twist that aligns with our project's vision. Your illustrations will not only tell the story of Borpa but also captivate and engage our growing community.</p>
+                <p className="mt-2">{job.role}</p>
               </div>
               <h2 className="text-xl font-bold mt-6 mb-4">Skills & Qualifications:</h2>
               <div className="mb-6 pl-6">
@@ -90,12 +91,12 @@ useEffect(()=>{
               <div className="flex p-12 ">
                 <div className="bg-[#D3E8F8] shadow rounded-lg p-6">
                   <div className="flex flex-col items-center">
-                    {job.jobOwner && job.jobOwner.id !== 0 && (
+                    {/* {job.jobOwner && job.jobOwner.id !== 0 && (
                       <>
                     <img src={job.jobOwner.image} className="w-32 h-32 rounded-full mb-4 shrink-0"alt="CompanyProfile"/>
                     <h1 className="text-xl font-bold">{job.jobOwner.name}</h1>
                     </>
-                    )}
+                    )} */}
                     <Link href={'/jobownerProfile'}>
                       <p className="mt-6 text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">View Company's Profile</p>
                     </Link>
@@ -103,8 +104,8 @@ useEffect(()=>{
                       <Link href={'/jobDetails/messageJobDetails'}>
                         <button className="bg-[#267296] hover:bg-[#195571] text-white py-2 px-4 rounded">Message</button>
                       </Link>
-                      <Link href={'/jobDetails/updateJobDetails'}>
-                        <button className="text-[#267296] hover:font-bold bg-white border-[#267296] py-2 px-4 rounded">
+                      <Link href={`/jobDetails/${job.id}/updateJobDetails/`}>
+                        <button className="text-[#267296] hover:font-bold bg-white border-[#267296] py-2 px-4 rounded" >
                           Update details
                           </button>
                           </Link>

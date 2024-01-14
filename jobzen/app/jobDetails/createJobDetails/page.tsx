@@ -28,46 +28,41 @@ interface Job{
 
 const CreateJobDetails = () => {
 const [availabe, setAvailable] = useState<boolean>(false)
-const [job,setJob]=useState<Job>({
-  id: 0,
-  jobtitle: '',
-  location: '',
-  budget: 0,
-  image: '',
-  role: '',
-  description: '',
-  qualification: '',
-  createdAt: '',
-  jobOwner: {
-    id: 0,
-    name: '',
-    image: '',
-  },
-  jobOwnerId: 0,
-  jobCategoryId: 0,
-})
+const [jobId,setJobId]=useState<number>()
+const [jobtitle,setJobtitle]=useState<string>("")
+const [location,setLocation]=useState<string>("")
+const [budget,setBudget]=useState<number>()
+const [role,setRole]=useState<string>("")
+const [description,setDescription]=useState<string>("")
+const [qualification,setQualification]=useState<string>("")
+const [createdAt,setCreatedAt]=useState<string>("")
+const [JobOwnerName,setJobOwnerName]=useState<string>("")
+const [JobOwnerImage,setJobOwnerImage]=useState<string>("")
+const [JobOwnerId,setJobOwnerId]=useState<number>()
+const [JobCategoryId,setJobCategoryId]=useState<string>("")
 
-useEffect(()=>{
-  const createJob = async () => {
+const handleCreateJob = async (event:any) => {
+  event.preventDefault()
+  const createJob:any = {
+    jobtitle: jobtitle,
+    location: location,
+    budget: budget,
+    role: role,
+    description: description,
+    qualification: qualification,
+    createdAt:createdAt,
+    name:JobOwnerName,
+    image:JobOwnerImage
+  };
     try {
-      const newJob = {
-        jobtitle: job.jobtitle,
-        location: job.location,
-        budget: job.budget,
-        image: job.image,
-        role: job.role,
-        description: job.description,
-        qualification: job.qualification,
-      };
-  
-      const response = await axios.post("http://localhost:3000/job/job", newJob);
-      setJob(response.data);
+      const create = await axios.post("http://localhost:3000/job/job", createJob);
+      console.log("Job Post created successfully", create.data)
+      alert("Job Post created successfully");
     } catch (error) {
-      console.error('Error creating job:', error);
+      console.error('Error creating job post:', error);
+      alert("Please try again.")
     }
   };
-  createJob();
-}, []);
 
 const handleCheckboxChange = () => {
   setAvailable(!availabe);
@@ -85,72 +80,71 @@ const handleCheckboxChange = () => {
               <hr className="my-2 mr-80 border-r-2 border-gray-900" />
                     <br/>
               <div className="mb-6">
-                <label htmlFor="default-input" className="text-xl font-lato font-semibold mb-4">
+                <label htmlFor="jobtitle" className="text-xl font-lato font-semibold mb-4">
                     Job Title
                     </label>
                     <input
                     type="text"
-                    id="default-input"
+                    id="jobtitle"
                     placeholder="Enter job title here"
-                    value={job.jobtitle}
-                    onChange={(e) => setJob({ ...job, jobtitle: e.target.value })}
+                    onChange={(e)=> setJobtitle(e.target.value)}
                     className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500"/>
                     </div>   
                     <div className="mb-6">
-                <label htmlFor="default-input" className="text-xl font-lato font-semibold mb-4">
-                    Rate
+                <label htmlFor="budget" className="text-xl font-lato font-semibold mb-4">
+                    Payement
                     </label>
                     <input
                     type="text"
-                    id="default-input"
+                    id="budget"
                     placeholder='Enter the proposed salary here'
-                    onChange={(e) => setJob({ ...job, budget: parseInt(e.target.value) })}
+                    onChange={(e)=> setBudget(parseInt(e.target.value))}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "/>
                     </div>    
                     <div className="mb-6">
-                <label htmlFor="default-input" className="text-xl font-lato font-semibold mb-4">
+                <label htmlFor="description" className="text-xl font-lato font-semibold mb-4">
                     Describe the project
                     </label>
                     <textarea
-                    id="default-input"
+                    id="description"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                     placeholder='describe the mission for Freelancer'
-                    onChange={(e) => setJob({ ...job, description: e.target.value })}
+                    onChange={(e)=> setDescription(e.target.value)}
                     ></textarea>
                     </div>  
                     <div className="mb-6">
-                <label htmlFor="default-input" className="text-xl font-lato font-semibold mb-4">
+                <label htmlFor="role" className="text-xl font-lato font-semibold mb-4">
                     Describe Freelancer role in this requested job
                     </label>
                     <textarea
-                    id="default-input"
+                    id="role"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                     placeholder='describe specific role here'
-                    onChange={(e) => setJob({ ...job, role: e.target.value })}></textarea>
+                    onChange={(e)=> setRole(e.target.value)}></textarea>
                     </div>  
                     <div className="mb-6">
-                <label htmlFor="default-input" className="text-xl font-lato font-semibold mb-4">
+                <label htmlFor="qualification" className="text-xl font-lato font-semibold mb-4">
                     Describe Freelancer Skills & Qualification for this requested job
                     </label>
                     <textarea
-                    id="default-input"
+                    id="qualification"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                     placeholder='describe the needed qualification for this job'
-                    onChange={(e) => setJob({ ...job, qualification: e.target.value })}></textarea>
+                    onChange={(e)=> setQualification(e.target.value)}></textarea>
                     </div>  
             </div>
             <div className="ml-1 flex items-center p-8">
               <div className="flex p-12 ">
                 <div className="bg-[#D3E8F8] shadow rounded-lg p-6">
                   <div className="flex flex-col items-center">
-                    <img src={job.jobOwner?.image} className="w-32 h-32 rounded-full mb-4 shrink-0" alt="CompanyProfile" />
-                    <h1 className="text-xl font-bold">{job.jobOwner?.name}</h1>
+                    {/* <img src={JobOwnerImage} className="w-32 h-32 rounded-full mb-4 shrink-0" alt="CompanyProfile"/>
+                    <h1 className="text-xl font-bold">{JobOwnerName}</h1> */}
                     <Link href={'/jobownerProfile'}>
                       <p className="font-jura text-[#267296] hover:text-base-[#267296] hover:font-semibold hover:underline">View Company's Profile</p>
                     </Link>
                     <div className="mt-6 flex flex-wrap gap-4 justify-center">
                       <Link href={'/'}>
-                        <button className="text-white hover:font-bold bg-[#267296] border-white shadow-2xl py-2 px-4 rounded">Create</button>
+                        <button className="text-white hover:font-bold bg-[#267296] border-white shadow-2xl py-2 px-4 rounded" onClick={(e)=>handleCreateJob(e)}>Create</button>
                       </Link>
                     </div>
                     <br/>
@@ -187,26 +181,29 @@ const handleCheckboxChange = () => {
                   <p className="font-jura text-[#267296]">Job title:</p>
                   <ul>
                     <li className="mb-4">
-                      <label htmlFor="small-input" className="block mb-2 text-sm font-medium text-gray-900"></label>
+                      <label htmlFor="jobtitle" className="block mb-2 text-sm font-medium text-gray-900"></label>
                       <input
-                      type="text" id="small-input" placeholder="Enter job title here"
-                      className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500"/></li></ul>
+                      type="text" id="jobtitle" placeholder="Enter job title here"
+                      className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500"
+                      onChange={(e)=> setJobtitle(e.target.value)}/></li></ul>
                     <br/>
                     <p className="font-jura text-[#267296] ">Location:</p>
                     <ul>
                     <li className="mb-4">
-                      <label htmlFor="small-input" className="block mb-2 text-sm font-medium text-gray-900"></label>
+                      <label htmlFor="location" className="block mb-2 text-sm font-medium text-gray-900"></label>
                       <input
-                      type="text" id="small-input" placeholder="Enter working location here"
-                      className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500"/></li></ul>
+                      type="text" id="location" placeholder="Enter working location here"
+                      className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500"
+                      onChange={(e)=> setLocation(e.target.value)}/></li></ul>
                     <br/>
                     <p className="font-jura text-[#267296] ">Date posted:</p>
                     <ul>
                     <li className="mb-4">
-                      <label htmlFor="small-input" className="block mb-2 text-sm font-medium text-gray-900"></label>
+                      <label htmlFor="createdAt" className="block mb-2 text-sm font-medium text-gray-900"></label>
                       <input
-                      type="text" id="small-input" placeholder="job posting date here"
-                      className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500"/></li></ul>
+                      type="text" id="createdAt" placeholder="job posting date here"
+                      className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500"
+                      onChange={(e)=> setCreatedAt(e.target.value)}/></li></ul>
                     <br/>
                     <br/>
                   </div>

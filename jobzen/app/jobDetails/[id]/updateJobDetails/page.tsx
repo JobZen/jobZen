@@ -1,10 +1,12 @@
 'use client'
 import React , {useState,useEffect} from 'react';
 import Link from 'next/link';
-import Navbar from '../../navBar/page';
-import Footer from '../../footer/page';
-import ReviewFreelancer from '../review/page';
-import axios from 'axios';
+import Navbar from '../../../navBar/page';
+import Footer from '../../../footer/page';
+import ReviewFreelancer from '../../review/page';
+// import axios from 'axios';
+import axios, { AxiosError } from 'axios'; // Import AxiosError here
+
 
 interface JobOwner{
   id:number,
@@ -27,52 +29,98 @@ interface Job{
   jobOwner:JobOwner
 }
 
-const UpdateJobDetails = () => {
-const [availabe, setAvailable] = useState<boolean>(false)
-const [update,setUpdate]=useState<Job>({
-  id: 0,
-  jobtitle: '',
-  location: '',
-  budget: 0,
-  image: '',
-  role: '',
-  description: '',
-  qualification: '',
-  createdAt: '',
-  jobOwner: {
-    id: 0,
-    name: '',
-    image: '',
-  },
-  jobOwnerId: 0,
-  jobCategoryId: 0,
-})
+interface JobDetails {
+  job: Job;
+}
 
-const handleCheckboxChange = () => {
-  setAvailable(!availabe);
+const UpdateJobDetails = () => {
+  const [availabe, setAvailable] = useState<boolean>(false)
+  const [jobDetails, setJobDetails] = useState<JobDetails | null>(null);
+  const [jobId,setJobId]=useState<number>()
+  const [jobtitle,setJobtitle]=useState<string>("")
+  const [location,setLocation]=useState<string>("")
+  const [budget,setBudget]=useState<number>()
+  const [role,setRole]=useState<string>("")
+  const [description,setDescription]=useState<string>("")
+  const [qualification,setQualification]=useState<string>("")
+  const [createdAt,setCreatedAt]=useState<string>("")
+  const [JobOwnerName,setJobOwnerName]=useState<string>("")
+  const [JobOwnerImage,setJobOwnerImage]=useState<string>("")
+  const [JobOwnerId,setJobOwnerId]=useState<number>()
+  const [JobCategoryId, setJobCategoryId] = useState<number>();
+
+  useEffect(() => {
+    if (jobId === undefined || jobId === null) {
+      console.error('Invalid jobId:', jobId);
+      return;
+    }
+  
+    fetch(`http://localhost:3000/job/job/${jobId}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data && data.length > 0) {
+          const firstJob = data[0];
+          const { location, budget, role, description, qualification, createdAt } = firstJob;
+  
+          setJobDetails({ job: firstJob });
+          setLocation(location);
+          setBudget(budget);
+          setRole(role);
+          setDescription(description);
+          setQualification(qualification);
+          setCreatedAt(createdAt);
+        } else {
+          console.error('No job found with jobId:', jobId);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching job details:', error);
+      });
+  }, [jobId]);
+  
+
+const handleUpdatedJob = async (event:any) => {
+  event.preventDefault()
+  const updateJob:any = {
+    id:jobId,
+    jobtitle: jobtitle,
+    location: location,
+    budget: budget,
+    role: role,
+    description: description,
+    qualification: qualification,
+    createdAt:createdAt,
+    jobCategoryId: JobCategoryId,
+    name:JobOwnerName,
+    image:JobOwnerImage
+  };
+
+  try {
+    const update = await fetch(`http://localhost:3000/job/job/${jobId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updateJob),
+    });
+    const data = await update.json();
+    console.log('Profile updated successfully', data);
+    alert('Post updated successfully');
+  } catch (error) {
+    console.error('Error updating existing job:', error);
+    alert('Please try again.');
+  }
 };
 
-useEffect(()=>{
-  const createJob = async () => {
-    try {
-      const updateJob = {
-        jobtitle: update.jobtitle,
-        location: update.location,
-        budget: update.budget,
-        image: update.image,
-        role: update.role,
-        description: update.description,
-        qualification: update.qualification,
-      };
-  
-      const response = await axios.put("http://localhost:3000/job/job", updateJob);
-      setUpdate(response.data);
-    } catch (error) {
-      console.error('Error creating job:', error);
-    }
+  const handleCheckboxChange = () => {
+    setAvailable(!availabe);
   };
-  createJob();
-}, []);
+
 
   return (
     <div className='bg-white '>
@@ -86,50 +134,50 @@ useEffect(()=>{
               <hr className="my-2 mr-80 border-r-2 border-gray-900" />
                     <br/>
               <div className="mb-6">
-                <label htmlFor="default-input" className="text-xl font-lato font-semibold mb-4">
+                <label htmlFor="jobtitle" className="text-xl font-lato font-semibold mb-4">
                     Job Title
                     </label>
                     <input
                     type="text"
-                    id="default-input"
-                    value={update.jobtitle}
+                    id="jobtitle"
+                    onChange={(e)=> setJobtitle(e.target.value)}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "/>
                     </div>   
                     <div className="mb-6">
-                <label htmlFor="default-input" className="text-xl font-lato font-semibold mb-4">
-                    Rate
+                <label htmlFor="budget" className="text-xl font-lato font-semibold mb-4">
+                    Payement
                     </label>
                     <input
                     type="text"
-                    id="default-input"
-                    value={update.budget}
+                    id="budget"
+                    onChange={(e)=> setBudget(parseInt(e.target.value))}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "/>
                     </div>    
                     <div className="mb-6">
-                <label htmlFor="default-input" className="text-xl font-lato font-semibold mb-4">
+                <label htmlFor="description" className="text-xl font-lato font-semibold mb-4">
                     Describe the project
                     </label>
                     <textarea
-                    id="default-input"
-                    value={update.description}
+                    id="description"
+                    onChange={(e)=> setDescription(e.target.value)}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "></textarea>
                     </div>  
                     <div className="mb-6">
-                <label htmlFor="default-input" className="text-xl font-lato font-semibold mb-4">
+                <label htmlFor="role" className="text-xl font-lato font-semibold mb-4">
                     Describe Freelancer role in this requested job
                     </label>
                     <textarea
-                    id="default-input"
-                    value={update.role}
+                    id="role"
+                    onChange={(e)=> setRole(e.target.value)}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "></textarea>
                     </div>  
                     <div className="mb-6">
-                <label htmlFor="default-input" className="text-xl font-lato font-semibold mb-4">
+                <label htmlFor="qualification" className="text-xl font-lato font-semibold mb-4">
                     Describe Freelancer Skills & Qualification for this requested job
                     </label>
                     <textarea
-                    id="default-input"
-                    value={update.qualification}
+                    id="qualification"
+                    onChange={(e)=> setQualification(e.target.value)}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "></textarea>
                     </div>  
             </div>
@@ -137,15 +185,15 @@ useEffect(()=>{
               <div className="flex p-12 ">
                 <div className="bg-[#D3E8F8] shadow rounded-lg p-6">
                   <div className="flex flex-col items-center">
-                    <img src={update.jobOwner.image} className="w-32 h-32 rounded-full mb-4 shrink-0" alt="CompanyProfile" />
-                    <h1 className="text-xl font-bold">{update.jobOwner.name}</h1>
+                  {/* <img src={JobOwnerImage} className="w-32 h-32 rounded-full mb-4 shrink-0" alt="CompanyProfile" />
+                  <h1 className="text-xl font-bold">{JobOwnerName}</h1> */}
                     <Link href={'/jobownerProfile'}>
-                      <p className="font-jura text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">View Company's Profile</p>
+                      <p className="text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">View Company's Profile</p>
                     </Link>
                     <div className="mt-6 flex flex-wrap gap-4 justify-center">
-                      <Link href={'/jobDetails'}>
-                        <button className="text-white hover:font-bold bg-[#267296] border-white shadow-2xl py-2 px-4 rounded">save Update</button>
-                      </Link>
+                     
+                        <button onClick={(e)=>handleUpdatedJob(e)} className="text-white hover:font-bold bg-[#267296] border-white shadow-2xl py-2 px-4 rounded">save Update</button>
+                      
                     </div>
                     <br/>
                     <div className="flex items-center gap-2">
@@ -181,28 +229,28 @@ useEffect(()=>{
                   <p className="font-jura text-[#267296]">Job title:</p>
                   <ul>
                     <li className="mb-4">
-                      <label htmlFor="small-input" className="block mb-2 text-sm font-medium text-gray-900"></label>
+                      <label htmlFor="jobtitle" className="block mb-2 text-sm font-medium text-gray-900"></label>
                       <input
-                      type="text" id="small-input" placeholder="Enter job title here"
-                      value={update.jobtitle}
+                      type="text" id="jobtitle" placeholder="Enter job title here"
+                      onChange={(e)=> setJobtitle(e.target.value)}
                       className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500"/></li></ul>
                     <br/>
                     <p className="font-jura text-[#267296] ">Location:</p>
                     <ul>
                     <li className="mb-4">
-                      <label htmlFor="small-input" className="block mb-2 text-sm font-medium text-gray-900"></label>
+                      <label htmlFor="location" className="block mb-2 text-sm font-medium text-gray-900"></label>
                       <input
-                      type="text" id="small-input" placeholder="Enter working location here"
-                      value={update.location}
+                      type="text" id="location" placeholder="Enter working location here"
+                      onChange={(e)=> setLocation(e.target.value)}
                       className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500"/></li></ul>
                     <br/>
                     <p className="font-jura text-[#267296] ">Date posted:</p>
                     <ul>
                     <li className="mb-4">
-                      <label htmlFor="small-input" className="block mb-2 text-sm font-medium text-gray-900"></label>
+                      <label htmlFor="createdAt" className="block mb-2 text-sm font-medium text-gray-900"></label>
                       <input
-                      type="text" id="small-input" placeholder="job posting date here"
-                      value={update.createdAt}
+                      type="text" id="createdAt" placeholder="job posting date here"
+                      onChange={(e)=> setCreatedAt(e.target.value)}  
                       className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500"/></li></ul>
                     <Link href={'/jobDetails/review'}>
                       <p className="mt-4 md-1 text-[#267296] hover:text-base-[#267296] text-l hover:font-semibold font-jura hover:underline">Proceed to payement</p>
