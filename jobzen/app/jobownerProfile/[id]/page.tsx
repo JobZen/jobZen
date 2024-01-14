@@ -77,25 +77,33 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
         
           <div  className="bg-white overflow-hidden w-[1440px] h-[800px] relative">
             <div className="absolute w-[1549px] h-[836px] top-[188px] left-[-109px]">
-            <img
-                className="rounded-lg absolute w-[127px] h-[134px] top-[30px] left-[229px] bg-[url(/sdfsdfsdffsdfsdfdsfdsfsdfsdfds-1.png)] bg-cover bg-[50%_50%]"
+           
+              <div className="absolute w-[239px] h-[152px] top-[388px] left-[174px] bg-[#384d6c] rounded-[15px]" />
+            
+              <div className="absolute w-[1549px] h-[835px] top-0 left-0">
+                <div className="absolute w-[272px] h-[562px] top-0 left-[160px] bg-[#a1e1fd4a] rounded-[42px] shadow-[0px_4px_4px_#00000040]" />
+                <img
+                className="rounded-3xl absolute w-[127px] h-[134px] top-[30px] left-[230px] bg-[url(/sdfsdfsdffsdfsdfdsfdsfsdfsdfds-1.png)] bg-cover bg-[50%_50%]"
                 src={jobOwnerData.image}
                 alt="Company photo or profile"
               />
-              <div className="absolute w-[133px] h-[40px] top-[203px] left-[226px] bg-[#267296] rounded-[15px] shadow-[0px_4px_4px_#00000040]" />
-              <Link href={`/jobownerProfile/editjobownerProfile`}>
-                <button className="absolute w-[120px] top-[210px] left-[236px] [font-family:'Jockey_One-Regular',Helvetica] font-normal text-[white] text-[24px] text-center tracking-[0] leading-[normal]">
-                  Edit Profile
-                </button>
-              </Link>
-              <div className="absolute w-[239px] h-[152px] top-[388px] left-[174px] bg-[#384d6c] rounded-[15px]" />
-              <img
+                <img
                 className="absolute w-[220px] h-[137px] top-[395px] left-[184px] object-cover"
                 alt="Map"
                 src="map-1.png"
               />
-              <div className="absolute w-[1549px] h-[835px] top-0 left-0">
-                <div className="absolute w-[272px] h-[562px] top-0 left-[160px] bg-[#a1e1fd4a] rounded-[42px] shadow-[0px_4px_4px_#00000040]" />
+                <div className="absolute w-[114px] top-[290px] left-[260px]">
+                  <div className="flex items-center">
+                    <StarRating rating={jobOwnerData.rating} />
+                  </div>
+                </div>
+                <Link href={`/jobownerProfile/${jobOwnerData.id}/editjobownerProfile`}>
+              <button className="flex w-[176px] h-[56px] rounded-full left-[207px] top-[200px] items-center justify-center mr-0 py-[8px] relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid">
+                    <div className="relative w-fit [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap">
+                      Edit Profile
+                    </div>
+                  </button>
+              </Link>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -111,39 +119,35 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
                 <div className="w-[164px] top-[356px] left-[236px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] leading-[normal] absolute tracking-[0]">
                   Company Adress:
                 </div>
-                <div className="absolute w-[114px] top-[290px] left-[237px] [font-family:'Lato-Medium',Helvetica] font-medium text-[#384d6c] text-[14px] tracking-[0] leading-[normal]">
-                  <div className="flex items-center">
-                    <StarRating rating={jobOwnerData.rating} />
-                  </div>
-                </div>
-                <div className="absolute w-[61px] top-[120px] left-[522px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] tracking-[0] leading-[normal]">
+              
+                <div className="absolute w-[61px] top-[107px] left-[524px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] tracking-[0] leading-[normal]">
                   {jobOwnerData.name}
                 </div>
                 <a
-                  className="absolute w-[275px] top-[320px] left-[529px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] tracking-[0] leading-[normal] underline"
+                  className="absolute w-[275px] top-[342px] left-[528px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] tracking-[0] leading-[normal] underline"
                   href={`mailto:${jobOwnerData.email}`}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
                   {jobOwnerData.email}
                 </a>
-                <p className="absolute w-[531px] top-[196px] left-[525px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] tracking-[0] leading-[normal]">
+                <p className="absolute w-[531px] top-[196px] left-[526px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] tracking-[0] leading-[normal]">
                   {jobOwnerData.description}
                 </p>
-                <div className="absolute w-[530px] top-[413px] left-[530px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] tracking-[0] leading-[normal]">
+                <div className="absolute w-[530px] top-[434px] left-[527px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] tracking-[0] leading-[normal]">
                   {jobOwnerData.phone}
                 </div>
-                <div className="absolute w-[172px] h-[20px] top-[77px] left-[507px] [font-family:'Jockey_One-Regular',Helvetica] font-normal  text-[#91c6ef] text-[20px] text-center leading-[20px] whitespace-nowrap absolute tracking-[0]">
-                  Company Name
+                <div className="absolute w-[172px] h-[20px] top-[60px] left-[510px] [font-family:'Jockey_One-Regular',Helvetica] font-normal  text-[#91c6ef] text-[20px] text-center leading-[20px] whitespace-nowrap absolute tracking-[0]">
+                  Company Name:
                 </div>
-                <div className="absolute w-[172px] h-[20px] top-[280px] left-[529px] [font-family:'Jockey_One-Regular',Helvetica] font-normal text-[#91c6ef] text-[20px] tracking-[0] leading-[20px] whitespace-nowrap">
-                  Email
+                <div className="absolute w-[172px] h-[20px] top-[298px] left-[526px] [font-family:'Jockey_One-Regular',Helvetica] font-normal text-[#91c6ef] text-[20px] tracking-[0] leading-[20px] whitespace-nowrap">
+                  Email:
                 </div>
-                <div className="absolute w-[172px] h-[20px] top-[367px] left-[529px] [font-family:'Jockey_One-Regular',Helvetica] font-normal text-[#91c6ef] text-[20px] tracking-[0] leading-[20px] whitespace-nowrap">
+                <div className="absolute w-[172px] h-[20px] top-[386px] left-[527px] [font-family:'Jockey_One-Regular',Helvetica] font-normal text-[#91c6ef] text-[20px] tracking-[0] leading-[20px] whitespace-nowrap">
                   Phone Number:
                 </div>
-                <div className="absolute w-[172px] h-[20px] top-[158px] left-[524px] [font-family:'Jockey_One-Regular',Helvetica] font-normal text-[#91c6ef] text-[20px] tracking-[0] leading-[20px] whitespace-nowrap">
-                  Description
+                <div className="absolute w-[172px] h-[20px] top-[151px] left-[524px] [font-family:'Jockey_One-Regular',Helvetica] font-normal text-[#91c6ef] text-[20px] tracking-[0] leading-[20px] whitespace-nowrap">
+                  Description:
                 </div>
                 <img
                   className="w-[146px] top-0 left-[519px] absolute h-px object-cover"
