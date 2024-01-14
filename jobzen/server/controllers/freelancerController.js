@@ -18,8 +18,6 @@ const newFreelancer = await Freelancer.create({
     name,
     email,
     password,
-    adress,
-    phone,
     image,
 });
 res.status(201).json(newFreelancer);
