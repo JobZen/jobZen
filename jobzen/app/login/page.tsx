@@ -2,6 +2,7 @@
 "use client"
 import { useState } from "react";
 import { FunctionComponent } from "react";
+import axios from "axios";
 
 const Login: FunctionComponent  = () => {
   const [email, setEmail] = useState("");
@@ -10,7 +11,11 @@ const Login: FunctionComponent  = () => {
   const handleLogin = () => {
     console.log("Email:", email);
     console.log("Password:", password);
-  };
+    axios.post("http://localhost:3000/auth/freelancer/login", { email: email, password:password})
+    .then(() => console.log("noice"))
+    .catch((error) => console.log("error:", error))
+  }
+
 
   return (
     <div className="relative bg-[#267296] w-full h-[1020px] overflow-hidden text-left text-11xl text-white font-jura">
@@ -45,7 +50,9 @@ const Login: FunctionComponent  = () => {
                 alt=""
                 src="/exiconeye@2x.png"
               />
-              <input className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] bg-gray-100" />
+              <input className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] bg-gray-100"
+                 onChange={(e)=>setEmail(e.target.value)}
+              />
                 
              
               <div className="absolute h-[34.33%] w-[17.63%] top-[0%] right-[79.43%] bottom-[65.67%] left-[2.94%] overflow-hidden text-center text-smi-8">
@@ -58,7 +65,9 @@ const Login: FunctionComponent  = () => {
             <div className="absolute h-[43.37%] w-[99.87%] top-[56.63%] right-[0.13%] bottom-[0%] left-[0%] text-darkslategray">
             <div className="absolute h-[85.07%] w-[100.26%] top-[15.67%] right-[-0.13%] bottom-[-0.75%] left-[-0.13%] rounded-lg box-border border-[1px] border-solid border-silver" />
          
-              <input className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] bg-gray-100" />
+              <input className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] bg-gray-100" 
+              onChange={(e)=>setPassword(e.target.value)}
+              />
                 
              
               <div className="absolute h-[34.33%] w-[17.63%] top-[0%] right-[79.43%] bottom-[65.67%] left-[2.94%]  text-center text-smi-8">
