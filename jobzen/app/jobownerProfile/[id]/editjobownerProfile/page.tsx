@@ -1,9 +1,94 @@
-import React from "react";
+"use client"
+import React,{useState,useEffect} from "react";
 import Navbar from "../../../navBar/page";
+import axios from "axios";
+import {useRouter} from "next/navigation"
 import Footer from "../../../footer/page";
 import Link from "next/link";
 
+interface JobOwner {
+  id:number;
+  name: string;
+  email: string;
+  password: string;
+  adress: string;
+  phone: number;
+  image: string;
+  rating: number;
+  description: string;
+}
+
 const EditJobOwnerProfile = (): JSX.Element => {
+ 
+
+   
+    const [email, setEmail] = useState('');
+    const[id,setId]=useState(0)
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [companyName, setCompanyName] = useState('');
+    const [adress, setAdress] = useState('');
+    const [description, setDescription] = useState('');
+    const [password, setPassword] = useState('');
+    const [jobOwnerData, setJobOwnerData] = useState<JobOwner>({
+      id: 0,
+      name: "",
+      email: "",
+      password: "",
+      adress: "",
+      phone: 0,
+      image: "",
+      rating: 0,
+      description: ""
+    });
+  console.log(jobOwnerData);
+  
+    const router= useRouter();
+    
+    useEffect(() => {
+      var currentUrl = window.location.href;
+      var ind=currentUrl.split("/")
+      console.log(ind);
+      
+      var index= parseInt(ind[ind.length-2])
+      setId(index)
+      const fetchJobOwnerData = async () => {
+        try {
+          const response = await fetch(`http://localhost:3000/jobOwner/job-owner/${index}`);
+          const data = await response.json();
+          console.log(data);
+          
+          setJobOwnerData(data);
+        } catch (error) {
+          console.error('Error fetching job owner data:', error);
+          
+        }
+      };
+  
+      fetchJobOwnerData();
+    }, []); 
+  
+    const handleUpdate = async () => {
+      try {
+        const response=await axios.put(`http://localhost:3000/jobOwner/job-owner/${id}`,
+        {
+          email:email,
+          phone: parseInt( phoneNumber),
+          name: companyName,
+          adress: adress,
+          description:description,
+          password:password
+        })
+        
+  console.log(response);
+  
+          router.push(`/jobownerProfile/${jobOwnerData.id}`);
+       
+      } catch (error) {
+        console.error(error);
+       
+      }
+    };
+
   return (
     <div className="bg-white flex flex-col min-h-screen">
       <Navbar />
@@ -30,6 +115,9 @@ const EditJobOwnerProfile = (): JSX.Element => {
                     type="email"
                     className="focus:outline-none appearance-none bg-transparent w-full h-full px-10 "
                     placeholder="Enter Email Address "
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
                   />
                 </div>
               </div>
@@ -55,6 +143,9 @@ const EditJobOwnerProfile = (): JSX.Element => {
                     type="tel"
                     className="focus:outline-none appearance-none bg-transparent w-full h-full px-10"
                     placeholder="Enter Phone Number"
+                    onChange={(e) => {
+                      setPhoneNumber(e.target.value);
+                    }}
                   />
                 </div>
               </div>
@@ -79,16 +170,16 @@ const EditJobOwnerProfile = (): JSX.Element => {
                     Company Name
                   </div>
                   <div className="absolute w-[214px] top-[47px] left-[170px] [font-family:'Montserrat-Regular',Helvetica] font-normal text-[#384d6c] text-[20px] tracking-[0] leading-[normal]">
-                    slogan/introduction
+                    {jobOwnerData.name}
                   </div>
 
                   <div className="absolute w-[344px] top-[82px] left-[170px] [font-family:'Montserrat-Regular',Helvetica] font-normal text-gray-500 text-[16px] tracking-[0] leading-[normal]">
-                    Address (Map)
+                    {jobOwnerData.adress}
                   </div>
                 </div>
                 <img
-                  className="absolute w-[127px] h-[134px] top-[-5px] left-[27px] bg-[url(/sdfsdfsdffsdfsdfdsfdsfsdfsdfds-1.png)] bg-cover bg-[50%_50%]"
-                  src="https://icon-library.com/images/node-js-icon/node-js-icon-2.jpg"
+                  className="absolute rounded-3xl w-[127px] h-[134px] top-[-5px] left-[27px] bg-[url(/sdfsdfsdffsdfsdfdsfdsfsdfsdfds-1.png)] bg-cover bg-[50%_50%]"
+                  src={jobOwnerData.image}
                 />
               </div>
               <div className="flex w-[408px] h-[66px] items-center gap-[56px] absolute top-[103px] left-[601px]">
@@ -101,8 +192,10 @@ const EditJobOwnerProfile = (): JSX.Element => {
                     <input type="file" id="uploadPhoto" className="hidden" />
                   </label>
                 </div>
-                <Link href="/jobownerProfile">
-                  <button className="flex w-[176px] h-[56px] items-center justify-center px-0 py-[8px] relative bg-[#ffffff] rounded-[8px] overflow-hidden border border-solid border-[#267296]">
+                <Link href={`/jobownerProfile/${jobOwnerData.id}`}>
+                  <button className="flex w-[176px] h-[56px] items-center justify-center px-0 py-[8px] relative bg-[#ffffff] rounded-[8px] overflow-hidden border border-solid border-[#267296]"
+                    onClick={handleUpdate} 
+                  >
                     <div className="relative w-fit [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#267296] text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap">
                       Save Update
                     </div>
@@ -121,6 +214,9 @@ const EditJobOwnerProfile = (): JSX.Element => {
                   type="text"
                   className="focus:outline-none appearance-none bg-transparent w-full h-full px-6"
                   placeholder="Enter Company Name"
+                  onChange={(e) => {
+                    setCompanyName(e.target.value);
+                  }}
                 />
               </div>
             </div>
@@ -133,6 +229,9 @@ const EditJobOwnerProfile = (): JSX.Element => {
                   type="text"
                   className="focus:outline-none appearance-none bg-transparent w-full h-full px-6"
                   placeholder="Enter Address"
+                  onChange={(e) => {
+                    setAdress(e.target.value);
+                  }}
                 />
               </div>
             </div>
@@ -145,6 +244,9 @@ const EditJobOwnerProfile = (): JSX.Element => {
                   type="text"
                   className="focus:outline-none appearance-none bg-transparent w-full h-full px-6"
                   placeholder="Enter Description"
+                  onChange={(e) => {
+                    setDescription(e.target.value);
+                  }}
                 />
               </p>
             </div>
@@ -157,6 +259,9 @@ const EditJobOwnerProfile = (): JSX.Element => {
                   type="password"
                   className="focus:outline-none appearance-none bg-transparent w-full h-full px-6"
                   placeholder="Enter Password"
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                 />
               </div>
             </div>

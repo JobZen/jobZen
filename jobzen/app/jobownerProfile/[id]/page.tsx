@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import{useRouter} from "next/navigation"
 import Navbar from "../../navBar/page"
 import Footer from '../../footer/page';
 
@@ -67,7 +68,13 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
     }
   , []);
 
+  const router = useRouter();
 
+  // Function to handle edit button click
+  const handleEditButtonClick = () => {
+    // Redirect to the edit page with the job owner's id
+    router.push(`/jobownerProfile/${jobOwnerData.id}/editjobownerProfile`);
+  };
   
 
   return (
@@ -98,7 +105,9 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
                   </div>
                 </div>
                 <Link href={`/jobownerProfile/${jobOwnerData.id}/editjobownerProfile`}>
-              <button className="flex w-[176px] h-[56px] rounded-full left-[207px] top-[200px] items-center justify-center mr-0 py-[8px] relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid">
+              <button className="flex w-[176px] h-[56px] rounded-full left-[207px] top-[200px] items-center justify-center mr-0 py-[8px] relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid"
+              onClick={handleEditButtonClick}
+              >
                     <div className="relative w-fit [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap">
                       Edit Profile
                     </div>
