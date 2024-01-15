@@ -3,11 +3,7 @@ import React , {useState,useEffect} from 'react';
 import Link from 'next/link';
 import Navbar from '../../../navBar/page';
 import Footer from '../../../footer/page';
-import ReviewFreelancer from '../../review/page';
-// import axios from 'axios';
-import axios, { AxiosError } from 'axios'; // Import AxiosError here
-
-
+import axios from 'axios';
 interface JobOwner{
   id:number,
   name:string,
@@ -26,16 +22,12 @@ interface Job{
   createdAt: string, 
   jobOwnerId: number,
   jobCategoryId: number,
-  jobOwner:JobOwner
-}
-
-interface JobDetails {
-  job: Job;
+  jobowner:JobOwner
 }
 
 const UpdateJobDetails = () => {
   const [availabe, setAvailable] = useState<boolean>(false)
-  const [jobDetails, setJobDetails] = useState<JobDetails | null>(null);
+  const [jobDetails, setJobDetails] = useState<Job | null>(null);
   const [jobId,setJobId]=useState<number>()
   const [jobtitle,setJobtitle]=useState<string>("")
   const [location,setLocation]=useState<string>("")
@@ -48,74 +40,80 @@ const UpdateJobDetails = () => {
   const [JobOwnerImage,setJobOwnerImage]=useState<string>("")
   const [JobOwnerId,setJobOwnerId]=useState<number>()
   const [JobCategoryId, setJobCategoryId] = useState<number>();
-
-  useEffect(() => {
-    if (jobId === undefined || jobId === null) {
-      console.error('Invalid jobId:', jobId);
-      return;
-    }
+  useEffect(()=>{
+    var currentUrl = window.location.href;
+    var ind=currentUrl.split("/")
+    var index=ind[ind.length-2]
   
-    fetch(`http://localhost:3000/job/job/${jobId}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+    const getOneJob = async () => {
+        try {
+          const response = await axios.get(`http://localhost:3000/job/job/${index}`);
+          setJobDetails(response.data);
+          console.log(response.data);
+          
+        } catch (error) {
+          console.error('Error fetching job details:', error);
         }
-        return response.json();
-      })
-      .then((data) => {
-        if (data && data.length > 0) {
-          const firstJob = data[0];
-          const { location, budget, role, description, qualification, createdAt } = firstJob;
+      };
+      getOneJob()
+    },[])
   
-          setJobDetails({ job: firstJob });
-          setLocation(location);
-          setBudget(budget);
-          setRole(role);
-          setDescription(description);
-          setQualification(qualification);
-          setCreatedAt(createdAt);
-        } else {
-          console.error('No job found with jobId:', jobId);
-        }
-      })
-      .catch((error) => {
-        console.error('Error fetching job details:', error);
-      });
-  }, [jobId]);
-  
-
-const handleUpdatedJob = async (event:any) => {
-  event.preventDefault()
-  const updateJob:any = {
-    id:jobId,
-    jobtitle: jobtitle,
-    location: location,
-    budget: budget,
-    role: role,
-    description: description,
-    qualification: qualification,
-    createdAt:createdAt,
-    jobCategoryId: JobCategoryId,
-    name:JobOwnerName,
-    image:JobOwnerImage
-  };
-
-  try {
-    const update = await fetch(`http://localhost:3000/job/job/${jobId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updateJob),
-    });
-    const data = await update.json();
-    console.log('Profile updated successfully', data);
-    alert('Post updated successfully');
-  } catch (error) {
-    console.error('Error updating existing job:', error);
-    alert('Please try again.');
+useEffect(() => {
+  if (jobId === undefined || jobId === null) {
+    console.error('Invalid jobId:', jobId);
+    return;
   }
-};
+
+  axios.get(`http://localhost:3000/job/job/${jobId}`)
+    .then((response) => {
+      const data = response.data;
+      if (data && data.length > 0) {
+        const firstJob = data[0];
+        const { location, budget, role, description, qualification, createdAt } = firstJob;
+        setJobDetails(firstJob );
+        setLocation(location);
+        setBudget(budget);
+        setRole(role);
+        setDescription(description);
+        setQualification(qualification);
+        setCreatedAt(createdAt);
+      } else {
+        console.error('No job found with jobId:', jobId);
+      }
+    })
+    .catch((error) => {
+      console.error('Error fetching job details:', error);
+    });
+}, [jobId]);
+
+
+  const handleUpdatedJob = async (event: any) => {
+    event.preventDefault()
+    const updateJob: any = {
+      id: jobId,
+      jobtitle: jobtitle,
+      location: location,
+      budget: budget,
+      role: role,
+      description: description,
+      qualification: qualification,
+      createdAt: createdAt,
+      jobCategoryId: JobCategoryId,
+      name: JobOwnerName,
+      image: JobOwnerImage
+    };
+
+    try {
+      const update = await axios.put(`http://localhost:3000/job/job/${jobId}`, updateJob, {
+      });// put ${jobId} instead of 12
+      const data = update.data;
+      console.log('Profile updated successfully', data);
+      alert('Post updated successfully');
+    } catch (error) {
+      console.error('Error updating existing job:', error);
+      alert('Please try again.');
+    }
+  };
 
   const handleCheckboxChange = () => {
     setAvailable(!availabe);
@@ -185,8 +183,8 @@ const handleUpdatedJob = async (event:any) => {
               <div className="flex p-12 ">
                 <div className="bg-[#D3E8F8] shadow rounded-lg p-6">
                   <div className="flex flex-col items-center">
-                  {/* <img src={JobOwnerImage} className="w-32 h-32 rounded-full mb-4 shrink-0" alt="CompanyProfile" />
-                  <h1 className="text-xl font-bold">{JobOwnerName}</h1> */}
+                  <img src={jobDetails?.jobowner.image} className="w-32 h-32 rounded-full mb-4 shrink-0" alt="CompanyProfile" />
+                  <h1 className="text-xl font-bold">{jobDetails?.jobowner.name}</h1>
                     <Link href={'/jobownerProfile'}>
                       <p className="text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">View Company's Profile</p>
                     </Link>
