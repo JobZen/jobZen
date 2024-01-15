@@ -4,7 +4,7 @@ const Job = require('../controllers/jobController');
 // GET all jobs
 router.get('/job', Job.getAllJobs);
 
-//Get One Job
+// GET one job
 router.get('/job/:id', Job.getOneJob);
 
 // Create a new job
