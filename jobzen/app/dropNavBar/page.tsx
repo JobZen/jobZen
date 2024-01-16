@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 
 const settings = [
   { name: 'Account', href: '/' },
-  { name: 'Messages', href: '/' },
-  { name: 'Logout', href: '/signup' },
+  { name: 'Messages', href: '/jobDetails/messageJobDetails' },
+  { name: 'Logout', href: '/landingPage' },
 ];
 
 const DropNavbar = () => {
@@ -35,14 +35,14 @@ const DropNavbar = () => {
   initial={{ opacity: 0, scaleY: 0 }}
   animate={{ opacity: isDropdownOpen ? 1 : 0, scaleY: isDropdownOpen ? 1 : 0 }}
   transition={{ duration: 0.3 }}
-  className="absolute origin-top-right z-10 w-[160px] h-[120px] left-[-77px] mt-[203px] -mr-[80px] bg-gradient-to-br from-[#275469] to-[#267296] divide-y divide-gray-200 rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hover:bg-transparent active:scale-95 transition-all duration-150 ease-linear"
+  className="absolute origin-top-right z-10 w-[160px] h-[120px] left-[-77px] mt-[203px] -mr-[80px] bg-gradient-to-br from-[#267296] to-[#267296] divide-y divide-gray-200 rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hover:bg-transparent active:scale-95 transition-all duration-150 ease-linear"
   aria-labelledby="options-menu"
 >
   {settings.map((setting, index) => (
     <Link href={setting.href} key={setting.name}>
       <motion.a
         className="block pl-6 pr-4 py-2 flex items-center text-white text-base font-medium hover:bg-transparent focus:outline-none"
-        whileHover={{ scale: 1.05, color: "#91c6EF", transition: { duration: 0.5 }}}
+        whileHover={{ scale: 1.07, color: "#91c6EF", transition: { duration: 0.3 }}}
       >
         {index === 0 && (
          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
