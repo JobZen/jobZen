@@ -13,7 +13,7 @@ res.status(500).json({ error: 'Unable to fetch freelancers' });
 // Create a new freelancer
 async function createFreelancer(req, res) {
 try {
-const { name, email, password } = req.body;
+const { name, email, password ,image} = req.body;
 const newFreelancer = await Freelancer.create({
     name,
     email,

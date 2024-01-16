@@ -12,7 +12,7 @@ const Login: FunctionComponent  = () => {
   const handleLogin = () => {
     console.log("Email:", email);
     console.log("Password:", password);
-    axios.post("http://localhost:3000/auth/freelancer/login", { email: email, password:password})
+    axios.post("http://localhost:3000/auth/jobowner/login", { email: email, password:password})
     .then((response) => console.log(response.data))
     .catch((error) => console.log("error:", error))
   }
