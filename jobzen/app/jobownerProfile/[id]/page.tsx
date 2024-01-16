@@ -126,7 +126,7 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
                   />
                 </svg>
                 <div className="w-[164px] top-[356px] left-[236px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] leading-[normal] absolute tracking-[0]">
-                  Company Adress:
+                  Address: {jobOwnerData.adress}
                 </div>
               
                 <div className="absolute w-[61px] top-[107px] left-[524px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] tracking-[0] leading-[normal]">
