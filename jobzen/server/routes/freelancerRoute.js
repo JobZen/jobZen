@@ -4,6 +4,9 @@ const Freelancer = require('../controllers/freelancerController');
 // GET all freelancers
 router.get('/', Freelancer.getAllFreelancers);
 
+//getOne
+router.get('/:id', Freelancer.getFreelancerById);
+
 // Create a new freelancer
 router.post('/', Freelancer.createFreelancer);
 
