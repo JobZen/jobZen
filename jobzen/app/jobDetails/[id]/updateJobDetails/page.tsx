@@ -40,6 +40,7 @@ const UpdateJobDetails = () => {
   const [JobOwnerImage,setJobOwnerImage]=useState<string>("")
   const [JobOwnerId,setJobOwnerId]=useState<number>()
   const [JobCategoryId, setJobCategoryId] = useState<number>();
+  
   useEffect(()=>{
     var currentUrl = window.location.href;
     var ind=currentUrl.split("/")
