@@ -3,12 +3,15 @@ import { FunctionComponent } from "react";
 import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+
 const Signup: FunctionComponent = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
+
+  
 const handleSignup = () => {
  console.log("email", email);
  console.log("password", password);

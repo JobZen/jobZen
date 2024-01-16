@@ -4,10 +4,13 @@ import { useState } from "react";
 import { FunctionComponent } from "react";
 import axios from "axios";
 import Link from "next/link";
+import Cookies from 'js-cookie';
+
 
 const Login: FunctionComponent  = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
 
   const handleLogin = () => {
     console.log("Email:", email);
