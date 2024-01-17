@@ -104,16 +104,18 @@ async function getJobByIdWithDetails(req, res) {
 
 //Get Jobs by Job Category
 async function getJobsByCategory(req, res) {
-    try {
-      const { categoryId } = req.params;
-      const jobs = await Job.findAll({
-        where: { jobCategoryId: categoryId }
-      });
-      res.json(jobs);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
+  try {
+   
+    const { jobCategoryId } = req.params;
+    const jobs = await Job.findAll({
+      where: { jobCategoryId: jobCategoryId }
+    });
+    res.json(jobs);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
+}
+
 
 //Get one Job by Job Category:
 async function getOneJobByCategory(req, res) {
