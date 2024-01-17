@@ -3,6 +3,8 @@ const jobCategory = require('../controllers/jobCategoryController');
 
 // GET all job categories
 router.get('/jobCategory', jobCategory.getAllJobCategories);
+//getOne
+router.get('/:id', jobCategory.getOneJobCategories);
 
 // Create a new job category
 router.post('/jobCategory', jobCategory.createJobCategory);

@@ -18,7 +18,7 @@ const Search = () => {
             className="h-10 border-0 focus:outline-none text-[#267296] rounded-full font-bold px-2 md:px-3 py-0 md:py-1 tracking-wider bg-white"
           >
             <option value="job">Job</option>
-            <option value="skill">Skill</option>
+            <option value="skill">category</option>
             <option value="rating">Rating</option>
           </select>
         </div>
