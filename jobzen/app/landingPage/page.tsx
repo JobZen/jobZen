@@ -38,7 +38,7 @@ function LandinPage() {
 
       
     </div>
-    <div className="flex flex-col items-center justify-center h-full text-center  mb-[10cm]">
+    <div className="flex flex-col items-center justify-center h-full text-center  mb-[10cm] animate-pulse">
       <p className='font-bruno text-white text-9xl text-opacity-40 '>JOB ZEN</p>
       <p className='font-jolly-lodger text-white text-6xl text-opacity-40'>GATEWAY TO SUCCESS AWAITS!</p>
     </div>
