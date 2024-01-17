@@ -4,11 +4,12 @@ import Main from "../main/page"
 
 const Home =()=>{
     return(
-        <div className='bg-white '>
+        <div >
+            
             <Navbar1/>
-            <div className="mt-[7cm]">
+           
                 <Main/>
-            </div>
+         
             <Footer/>
         </div>
     )

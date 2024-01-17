@@ -117,7 +117,7 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="absolute w-[17px] h-[17px] mr-8 top-[356px] left-[215px]"
+                  className="absolute w-[17px] h-[17px] mr-8 top-[350px] left-[215px]"
                 >
                   <path
                     fillRule="evenodd"
@@ -125,8 +125,8 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
                     clipRule="evenodd"
                   />
                 </svg>
-                <div className="w-[164px] top-[356px] left-[236px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] leading-[normal] absolute tracking-[0]">
-                  Company Adress:
+                <div className="w-[164px] top-[350px] left-[236px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] leading-[normal] absolute tracking-[0]">
+                  Address: {jobOwnerData.adress}
                 </div>
               
                 <div className="absolute w-[61px] top-[107px] left-[524px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] tracking-[0] leading-[normal]">

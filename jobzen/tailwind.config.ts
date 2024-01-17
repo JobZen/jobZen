@@ -33,6 +33,7 @@ const config: Config = {
         'lato':['Lato'],
         'josefin':['Josefin Sans'],
         'bruno':['Bruno Ace SC'],
+        "BlackOps":['Black Ops One']
         
       },
       

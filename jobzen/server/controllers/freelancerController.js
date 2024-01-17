@@ -10,6 +10,27 @@ res.status(500).json({ error: 'Unable to fetch freelancers' });
 }
 }
 
+// get One
+
+async function getFreelancerById(req, res) {
+    const freelancerId = req.params.id; // Assuming the ID is passed as a route parameter
+  console.log(freelancerId);
+    try {
+      const freelancer = await Freelancer.findByPk(freelancerId); // Assuming "findByPk" is the method to find by primary key
+      console.log(freelancer);
+      if (!freelancer) {
+        return res.status(404).json({ error: 'Freelancer not found' });
+        
+      }
+      res.json(freelancer);
+    } catch (error) {
+      res.status(500).json({ error: 'Unable to fetch the freelancer' });
+    
+    }
+    
+  }
+
+
 // Create a new freelancer
 async function createFreelancer(req, res) {
 try {
@@ -67,5 +88,6 @@ module.exports = {
   getAllFreelancers,
   createFreelancer,
   updateFreelancer,
-  deleteFreelancer
+  deleteFreelancer,
+  getFreelancerById
 };
