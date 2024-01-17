@@ -34,32 +34,12 @@ async function getFreelancerById(req, res) {
 // Create a new freelancer
 async function createFreelancer(req, res) {
 try {
-const { name, email, password , adress,
-    phone,
-    image,
-    reting,
-    description,
-    skills,
-    aboutMe,
-    experience,
-    jobtitle
-    } = req.body;
+const { name, email, password ,image} = req.body;
 const newFreelancer = await Freelancer.create({
     name,
     email,
     password,
-    adress,
-    phone,
     image,
-    reting,
-    description,
-    skills,
-    aboutMe,
-    experience,
-    jobtitle
-    
-  
-
 });
 res.status(201).json(newFreelancer);
 } catch (error) {

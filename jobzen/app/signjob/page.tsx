@@ -3,17 +3,20 @@ import { FunctionComponent } from "react";
 import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+
 const Signup: FunctionComponent = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
+
+  
 const handleSignup = () => {
  console.log("email", email);
  console.log("password", password);
  console.log("name", name);
- axios.post("http://localhost:3000/auth/freelancer/register", { email: email, password:password , name: name})
+ axios.post("http://localhost:3000/auth/jobowner/register", { email: email, password:password , name: name})
  .then((response) => console.log(response.data))
  .catch((error) => console.log("error:", error))
 };
