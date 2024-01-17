@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Search from '../search1/page';
+import DropNavbar from '../dropNavBar/page';
 
 interface TabPage {
   name: string;
@@ -18,7 +19,7 @@ const Navbar = () => {
     <div className='top-0'>
       <nav className="bg-[#267296] w-full px-8 py-4">
       <div className="flex justify-center">
-      <div className="w-full px-8 bg-white rounded-3xl flex items-center justify-between" style={{ maxWidth: '1400px' }}>
+      <div className="w-full px-8 bg-white rounded-3xl flex items-center justify-between" style={{ maxWidth: '1600px' }}>
         <div className="flex w-full flex-wrap items-center justify-between h-[80px]">
           <div className='flex items-center space-x-12'>
             <Link href={'/'}>
@@ -49,6 +50,9 @@ const Navbar = () => {
               Sign up
             </button>
              </Link>
+          </div>
+          <div className="relative flex items-center space-x-4 ">
+          <DropNavbar/>
           </div>
         </div>
         </div>

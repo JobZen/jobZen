@@ -1,4 +1,4 @@
-const{Job,JobOwner}=require('../database/index.js');
+const{Job, JobOwner}=require('../database/index.js');
 
 // Get All jobs
 async function getAllJobs(req, res) {
@@ -9,7 +9,8 @@ try {
     res.status(500).json({ error: error.message });
 }
 }
-//Get One Job including JobOwner
+
+//Get one Job:
 async function getOneJob(req, res) {
   const { id } = req.params;
   try {
@@ -140,9 +141,9 @@ module.exports = {
   getAllJobs,createJob,
   updateJob,deleteJob,
   getAllJobsWithDetails,
+  getOneJob,
   getJobByIdWithDetails,
   getJobsByCategory,
-  getOneJobByCategory,
-  getOneJob};
+  getOneJobByCategory};
 
   
