@@ -16,7 +16,9 @@ const Login: FunctionComponent  = () => {
     console.log("Email:", email);
     console.log("Password:", password);
     axios.post("http://localhost:3000/auth/jobowner/login", { email: email, password:password})
-    .then((response) => console.log(response.data))
+    .then((response) =>{
+      response.data.token? (Cookies.set("token",response.data.token) , Cookies.set("id",response.data.id)): console.log(response.data)
+    })
     .catch((error) => console.log("error:", error))
   }
 
