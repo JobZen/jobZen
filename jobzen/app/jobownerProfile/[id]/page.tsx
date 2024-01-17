@@ -5,6 +5,9 @@ import Link from 'next/link';
 import{useRouter} from "next/navigation"
 import Navbar from "../../navBar/page"
 import Footer from '../../footer/page';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import JobLocation from '../../map/page'
 
 interface JobOwner {
   id:number;
@@ -68,6 +71,19 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
     }
   , []);
 
+  useEffect(() => {
+    if (jobOwnerData?.adress) {
+      const mapContainer = document.getElementById("map");
+      if (!mapContainer) return;
+
+      const map = L.map(mapContainer).setView([parseFloat(jobOwnerData.adress.split(",")[0]), parseFloat(jobOwnerData.adress.split(",")[1])], 13);
+
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+    }
+  }, []);
+
   const router = useRouter();
 
   // Function to handle edit button click
@@ -84,9 +100,7 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
         
           <div  className="bg-white overflow-hidden w-[1440px] h-[800px] relative">
             <div className="absolute w-[1549px] h-[836px] top-[188px] left-[-109px]">
-           
-              <div className="absolute w-[239px] h-[152px] top-[388px] left-[174px] bg-[#384d6c] rounded-[15px]" />
-            
+        
               <div className="absolute w-[1549px] h-[835px] top-0 left-0">
                 <div className="absolute w-[272px] h-[562px] top-0 left-[160px] bg-[#a1e1fd4a] rounded-[42px] shadow-[0px_4px_4px_#00000040]" />
                 <img
@@ -94,11 +108,10 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
                 src={jobOwnerData.image}
                 alt="Company photo or profile"
               />
-                <img
-                className="absolute w-[220px] h-[137px] top-[395px] left-[184px] object-cover"
-                alt="Map"
-                src="map-1.png"
-              />
+              <div className="absolute w-[239px] h-[152px] top-[388px] left-[174px] bg-[#267296] rounded-[15px] overflow-hidden">
+              <JobLocation jobOwnerAddress={jobOwnerData.adress} />
+               </div>
+               
                 <div className="absolute w-[114px] top-[290px] left-[260px]">
                   <div className="flex items-center">
                     <StarRating rating={jobOwnerData.rating} />
