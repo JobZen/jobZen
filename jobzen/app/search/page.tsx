@@ -25,7 +25,7 @@ const Search = () => {
         <button
           type="submit"
           aria-label="Go"
-          className="bg-[#267296] text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-[#254b5d]"
+          className="bg-[#267296] text-white rounded-full w-10 h-10 mt-[3px] ml-[3px] flex items-center justify-center hover:bg-[#254b5d]"
         >
           Go
         </button>

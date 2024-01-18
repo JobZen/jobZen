@@ -1,10 +1,35 @@
-'use client'
+
+"use client"
 import React, { useState } from "react";
+import axios from 'axios';  
 import Navbar from "../../navBar/page";
 import Link from 'next/link';
 
-const CreateReview = () => {
+const CreateReview: React.FC = () => {
   const [rating, setRating] = useState<number | null>(null);
+  const [comment, setComment] = useState<string>("");
+  const [name, setName] = useState<string>("");
+
+
+  
+  const saveReview = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/review/review', {
+        // freelancerId: "1",
+        // ownerId: "1",
+        rating,
+        name:name,
+        description: comment,  
+      });
+      console.log(response);
+      
+  
+      console.log("Review saved successfully:", response.data);
+    } catch (error) {
+      console.error("Error saving review:", error);
+    }
+  };
+  
 
   return (
     <div>
@@ -30,6 +55,8 @@ const CreateReview = () => {
                       Data · Media and Streaming · Marketing and Advertising
                     </p>
                     <textarea
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)}
                       placeholder="Write your review on Freelancer works here..."
                       className="mb-6 h-32 p-2 border border-gray-300 rounded-md w-full"
                     />
@@ -53,7 +80,7 @@ const CreateReview = () => {
                       ))}
                     </div>
                     <div className="md:mb-12 lg:mb-0 mt-8 gap-4 space-x-4">
-                      <button className="bg-[#267296] hover:bg-[#195571] text-white py-2 px-4 rounded">
+                      <button onClick={saveReview} className="bg-[#267296] hover:bg-[#195571] text-white py-2 px-4 rounded">
                         Save Review
                       </button>
                       <button className="text-[#267296] hover:font-bold bg-white border border-[#267296] py-2 px-4 rounded">
@@ -72,4 +99,3 @@ const CreateReview = () => {
 };
 
 export default CreateReview;
-
