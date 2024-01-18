@@ -18,14 +18,14 @@ const Search = () => {
             className="h-10 border-0 focus:outline-none text-[#267296] rounded-full font-bold px-2 md:px-3 py-0 md:py-1 tracking-wider bg-white"
           >
             <option value="job">Job</option>
-            <option value="skill">Skill</option>
+            <option value="skill">category</option>
             <option value="rating">Rating</option>
           </select>
         </div>
         <button
           type="submit"
           aria-label="Go"
-          className="bg-[#267296] text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-[#254b5d]"
+          className="bg-[#267296] text-white rounded-full w-10 h-10 mt-[3px] ml-[3px] flex items-center justify-center hover:bg-[#254b5d]"
         >
           Go
         </button>
