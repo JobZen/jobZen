@@ -10,6 +10,9 @@ router.get('/job/:id', Job.getOneJob);
 // GET all jobs by category
 router.get('/jobbycategory/:jobCategoryId',Job.getJobsByCategory)
 
+// GET all jobs with job owner and job category details
+router.get('/jobsWithDetails',Job.getAllJobsWithDetails)
+
 // Create a new job
 router.post('/job', Job.createJob);
 
