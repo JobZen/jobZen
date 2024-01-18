@@ -12,8 +12,7 @@ res.status(500).json({ error: error.message });
 
 async function createMessage(req, res) {
 try {
-const { body } = req.body;
-const newMessage = await Messages.create({ body });
+const newMessage = await Messages.create(req.body);
 res.status(201).json(newMessage);
 } catch (error) {
 res.status(500).json({ error: error.message });
