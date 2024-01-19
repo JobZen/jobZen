@@ -14,9 +14,14 @@ router.get('/:id', Messages.getMessageById);
 router.delete('/:id', Messages.deleteMessageById);
 
 // GET all messages with details (including Freelancer and JobOwner)
-router.get('/details', Messages.getAllMessagesWithDetails);
+router.get('/all/details', Messages.getAllMessagesWithDetails);
 
 // Create a message with foreign key references
 router.post('/message/FK', Messages.createMessageWithForeignKey);
+
+router.get('/msg/:sender/:reciever', Messages.FindMessageBySenderAndRecieverId);
+
+
+
 
 module.exports = router;
