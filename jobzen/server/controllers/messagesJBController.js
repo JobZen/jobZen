@@ -54,9 +54,6 @@ async function FindMessageBySenderAndRecieverId(req, res) {
     const { sender , reciever } = req.params;
     const messages = await JobOwnerMessages.findAll({ where: { sender:sender , reciever:reciever } });
     
-    if (!messages.length) {
-        return res.status(501).json({ message: 'No Messages to be foundt' });
-    }
     
     res.status(200).json(messages);
     } catch (error) {

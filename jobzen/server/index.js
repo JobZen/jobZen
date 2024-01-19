@@ -11,11 +11,14 @@ const admin = require('./routes/adminRoute.js');
 const freelancer= require('./routes/freelancerRoute.js');
 const jobOwner= require('./routes/jobOwnerRoute.js');
 
-const messages = require('./routes/messagesRoute.js')
+const messagesFreelacer = require('./routes/messagesRoute.js')
+const messagesJobOwner = require('./routes/messagesJobRoutes.js')
+
+
 const contactFreelancer = require('./routes/contactFreelancerRoute.js');
 const contactJobOwner = require('./routes/contactJobOwnerRoute.js');
 
-const freelancerCategories = require('./routes/freelancerCategoriesRoute.js');
+const freelancerCategories = require('./routes/freelancerCategoriesRoute.js'); 
 const freelancerHasCategories = require('./routes/freelancerHasCategoriesRoute.js');
 
 const job= require('./routes/jobRoute.js');
@@ -38,7 +41,8 @@ app.use('/admin', admin);
 app.use('/freelancer', freelancer);
 app.use('/jobOwner', jobOwner);
 
-app.use('/freeMS', messages);
+app.use('/freeMS', messagesFreelacer);
+app.use('/jobMS', messagesJobOwner);
 app.use('/contactFreelancer', contactFreelancer);
 app.use('/contactJobOwner', contactJobOwner);
 
@@ -56,12 +60,12 @@ const server =  createServer(app);
 const io = new Server(server, {cors :
   {
  methods: ['GET', 'POST' ] ,
- origin : 'https://localhost:3000'
+ origin : 'https://localhost:3001'
 }});
 
 
  io.on('connection',(socket)=> {
-  console.log(`socket is connected${socket.id}`);
+  console.log(`socket is connected ${socket.id}`);
   socket.on('send',(message)=>{
     console.log(`Recieced message${message}`)
     io.emit('recieved', message)
@@ -69,7 +73,7 @@ const io = new Server(server, {cors :
   
    socket.on('disconnect',(socket)=> {
     console.log(`User disconnected${socket.id}`);
-   });
+   }); 
  });
 
 

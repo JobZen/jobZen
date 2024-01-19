@@ -22,7 +22,8 @@ const Login: FunctionComponent = () => {
       .then((response) => {
         response.data.token
           ? (Cookies.set("token", response.data.token),
-            Cookies.set("id", response.data.id))
+            Cookies.set("id", response.data.id),
+            Cookies.set("role", response.data.role))
           : (setAlertMsg(response.data),setAlert(true)) ;
       })
       .catch((error) => console.log("error:", error));

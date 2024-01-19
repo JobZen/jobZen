@@ -38,7 +38,7 @@ const Login = async(req, res) => {
              const token= generateToken(result.dataValues.id,result.dataValues.name)  
             
              result.dataValues.token=token
-        
+             result.dataValues.role="freelancer"
             res.status(200).json(result.dataValues)
           }
           else{

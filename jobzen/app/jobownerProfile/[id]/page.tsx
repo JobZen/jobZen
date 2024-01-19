@@ -127,7 +127,7 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
                 href={`/jobownerProfile/${jobOwnerData.id}/editjobownerProfile`}
               >
                 <button
-                  className="flex w-[176px] h-[56px] rounded-full left-[207px] top-[200px] items-center justify-center mr-0 py-[8px] relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid"
+                  className="flex w-[176px] h-[56px]  left-[207px] top-[200px] items-center justify-center mr-0 py-[8px] relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid"
                   onClick={handleEditButtonClick}
                 >
                   <div className="relative w-fit [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap">
@@ -168,7 +168,7 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
               <div className="absolute w-[530px] top-[434px] left-[527px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] tracking-[0] leading-[normal]">
                 {jobOwnerData.phone}
               </div>
-              <div className="absolute w-[172px] h-[20px] top-[60px] left-[510px] [font-family:'Jockey_One-Regular',Helvetica] font-normal  text-[#91c6ef] text-[20px] text-center leading-[20px] whitespace-nowrap absolute tracking-[0]">
+              <div className=" w-[172px] h-[20px] top-[60px] left-[510px] [font-family:'Jockey_One-Regular',Helvetica] font-normal  text-[#91c6ef] text-[20px] text-center leading-[20px] whitespace-nowrap absolute tracking-[0]">
                 Company Name:
               </div>
               <div className="absolute w-[172px] h-[20px] top-[298px] left-[526px] [font-family:'Jockey_One-Regular',Helvetica] font-normal text-[#91c6ef] text-[20px] tracking-[0] leading-[20px] whitespace-nowrap">

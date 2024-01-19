@@ -43,7 +43,7 @@ const DropNavbar = () => {
         {settings.map((setting, index) => (
           <Link href={setting.href} key={setting.name}>
             <motion.a
-              className="block pl-6 pr-4 py-2 flex items-center text-white text-base font-medium hover:bg-transparent focus:outline-none"
+              className=" pl-6 pr-4 py-2 flex items-center text-white text-base font-medium hover:bg-transparent focus:outline-none"
               whileHover={{
                 scale: 1.07,
                 color: "#91c6EF",
