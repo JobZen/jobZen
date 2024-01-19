@@ -58,26 +58,36 @@ const UserInfo = () => {
   const router= useRouter();
 
   useEffect(() => {
-  var currentUrl = window.location.href;
-  var ind=currentUrl.split("/")
-  console.log(ind);
-
-  var index=parseInt(ind[ind.length-1])
-  setId(index)
+    var currentUrl = window.location.href;
+    var ind = currentUrl.split("/");
+    console.log(ind);
+  
+    var index = parseInt(ind[ind.length - 1]);
+    setId(index);
+  
     const fetchUser = async () => {
-      axios.all([
-        axios.get(`http://localhost:3000/jobOwner/job-owner/${index}`),
-        axios.get(`http://localhost:3000/freelancer/${index}`),
-      ])
-      .then (axios.spread((freelancerRes,jobownerRes)=>{
-        setUser(freelancerRes.data);
-        setUser(jobownerRes.data)
-      }))
-     .catch((error)=>{
-      console.error(error)
-     })
+      try {
+        if (index && !isNaN(index)) {
+          const freelancerRes = await axios.get(`http://localhost:3000/freelancer/${index}`);
+          
+          if (freelancerRes.data.jobtitle !== undefined) {
+            setUser(freelancerRes.data);
+            return; // Exit early after setting the user
+          }
+        }
+  
+        const jobownerRes = await axios.get(`http://localhost:3000/jobOwner/job-owner/${index}`);
+  
+        if (jobownerRes.data.description !== undefined) {
+          setUser(jobownerRes.data);
+        } else {
+          console.error("Unexpected user type or invalid response");
+        }
+      } catch (error) {
+        console.error(error);
+      }
     };
-
+  
     fetchUser();
   }, []);
 
