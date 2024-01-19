@@ -9,7 +9,7 @@ interface JobOwner {
   name: string;
   email: string;
   password: string;
-  address: string;
+  adress: string;
   phone: number;
   image: string;
   rating: number;
@@ -44,7 +44,7 @@ const Jobowner = () => {
     name:"",
     email:"",
     password:"",
-    address:"",
+    adress:"",
     phone:0,
     image:"",
     rating:0,
@@ -99,7 +99,7 @@ const Jobowner = () => {
                 <ul className="list-disc text-2xl list-inside text-gray-700">
                   <li>Email: {jobowner.email}</li>
                   <li>Phone: {jobowner.phone}</li>
-                  <li>Address: {jobowner.address}</li>
+                  <li>Address: {jobowner.adress}</li>
                 </ul>
               </div>
           </div>

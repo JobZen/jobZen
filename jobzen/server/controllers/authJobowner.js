@@ -7,16 +7,19 @@ const { generateToken } = require ('../services/TokenServices.js')
 
 
 const Register = async (req, res) => {
-  const { name, email, password  } = req.body;
+  const {  name, email, password, adress, phone, image, rating, description } = req.body;
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = {
       name,
-      password,
       email,
-      image:'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+      image,
+      adress,
+      rating,
+      phone,
+      description,
       password: hashedPassword}
      
       createJobOwner({ body: newUser }, res);

@@ -27,6 +27,7 @@
     "socket.io-client": "^4.7.4"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/jsonwebtoken": "^9.0.5",
     "@types/leaflet": "^1.9.8",
     "@types/node": "^20",

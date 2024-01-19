@@ -38,6 +38,10 @@ try {
     email,
     password,
     image,
+    adress,
+    rating,
+    phone,
+    description
    
     });
     res.status(201).json(newJobOwner);
