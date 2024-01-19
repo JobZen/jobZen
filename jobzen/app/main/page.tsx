@@ -112,68 +112,15 @@ function page() {
 
   return (
     <div>
-      <div className='bg-[#172554] h-[22cm]  '>
 
-      <div className='ml-[3cm] '>
-        <h1 className='text-[#172554] font-BlackOps text-3xl mb-[1cm]'>.</h1>
-    <h1 className='text-white font-BlackOps text-8xl mb-[1cm] '>DISCOVER</h1>
-    <h1 className='text-white font-BlackOps text-8xl mb-[1cm]'>MORE THAN</h1>
-    <h1 className='text-bluefateh font-BlackOps text-8xl underline mb-[1cm]'>1000+ JOBS</h1>
-    <div className=' mb-[1cm]'>
-    <h1 className='text-grisss text-2xl leading-snug'>
-        Great platform for the job seeker that searching 
-    </h1>
-    <h1 className='text-grisss text-2xl leading-snug'>
-    for new career heights and passionate about startups.
-    </h1>
-    </div>
-
-</div>
-<div className='ml-[3cm] mb-[2cm]'>
-  
-<div className="w-[13cm] flex items-center p-6 space-x-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500">
-      <div className="flex bg-gray-100 p-4 w-72 space-x-4 rounded-lg">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-        <input className="bg-gray-100 outline-none" type="text" placeholder="Search for job offer" />
-      </div>
-      <div className="bg-gray-800 py-3 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
-        <span>Search</span>
-      </div>
-      </div>
-    
-
-</div>
-
-      <div className='flex justify-center bg-white shadow-xl rounded-[15px] mr-[13%] ml-[13%] '>
-        <div className="flex space-x-3px-4 py-22 bg-white rounded-lg p-4">
-          <div className="text-center w-full l-full ">
-            <img className='mx-auto mb-6 w-[4cm] l-[4cm]' src="https://cdn-icons-png.flaticon.com/512/270/270013.png" alt="" />
-            <h1 className='text-black text-4xl '>Create Account</h1>
-            <h1 className='text-grisss text-2xl'>First, you have to create an account here</h1>
-          </div>
-          <div className="text-center w-full l-full ">
-            <img  className='mx-auto mb-6 w-[4cm] l-[4cm]' src="https://cdn-icons-png.flaticon.com/512/7638/7638027.png" alt="" />
-            <h1 className='text-black text-4xl'>Search work</h1>
-            <h1 className='text-grisss text-2xl'>Search for the best freelance work here</h1>
-          </div>
-          <div className="text-center w-full l-full">
-            <img className='mx-auto mb-6 w-[4cm] l-[4cm]' src="https://th.bing.com/th/id/R.21a357d3ec0ebf0f6e932211850a5120?rik=6Fvi3DuElDHY%2bw&riu=http%3a%2f%2fwww.softcreate.co.jp%2fcms%2fsc%2fimg%2fpower-apps%2fmerit3.png&ehk=snsy0re4p01auZY5khh846awdZ5qQQKpc8IGwK%2f2ZzQ%3d&risl=&pid=ImgRaw&r=0" alt="" />
-            <h1 className='text-black text-4xl '>Save and apply</h1>
-            <h1 className='text-grisss text-2xl'>Apply or save and start your work</h1>
-          </div>
-        </div>
-      </div>
-      </div>
       <div className='mt-[8cm] ml-[1cm]'>
         <h1 className='text-4xl text-grisss mb-[1cm] '>company we helped grow</h1>
-        <div className='flex space-x-10 ml-[3cm]'>
-          <img className='h-[3cm] w-[7cm]' src="https://scontent.ftun9-1.fna.fbcdn.net/v/t39.30808-6/417431759_231763966677199_5653554093549890672_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=3635dc&_nc_ohc=hWnoDcHYd9UAX_VJfXc&_nc_oc=AQkUOzxbQBgBnpJARDCwQdNtU0Z3ipsugP7b1qaIzAXwStB6EBXhuQfkZxVlPdySBDA&_nc_ht=scontent.ftun9-1.fna&oh=00_AfAjZNWlT1oqwCA5LG7dGbHgBXvLf1uMfQgIQBVFPWmVRg&oe=65AB914A" alt="" />
-          <img className='h-[3cm] w-[7cm]' src="https://scontent.ftun9-1.fna.fbcdn.net/v/t39.30808-6/417577798_231765153343747_8611348078106997068_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=3635dc&_nc_ohc=YfA7TelDY_kAX_ya66u&_nc_ht=scontent.ftun9-1.fna&oh=00_AfA4Xq8OQXp8BtfWXFZkDObMtQ0mAXd8UshkpBiNud2cCA&oe=65AB12D0" alt="" />
-          <img className='h-[3cm] w-[7cm]' src="https://scontent.ftun9-1.fna.fbcdn.net/v/t39.30808-6/417444510_231765900010339_274947887996185958_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=3635dc&_nc_ohc=uuvIpkDWusoAX_XxalZ&_nc_ht=scontent.ftun9-1.fna&oh=00_AfCb_R2XK5iNwm0M-1U9iHqVqE9i19KvqP0GF_qBbrm8Iw&oe=65AB1FF2" alt="" />
-          <img className='h-[3cm] w-[7cm]' src="https://scontent.ftun9-1.fna.fbcdn.net/v/t39.30808-6/417368508_231766510010278_5213960803376632728_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=3635dc&_nc_ohc=dXFxqDOPp3IAX_BU-GH&_nc_ht=scontent.ftun9-1.fna&oh=00_AfDzWNhVsZRRq9OpCGHPN-PvlvH3utNqgsfB_dRWAFqIyw&oe=65AC0862" alt="" />
-          <img className='h-[3cm] w-[7cm]' src="https://scontent.ftun9-1.fna.fbcdn.net/v/t39.30808-6/418834089_231767446676851_2312434974819241847_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=3635dc&_nc_ohc=qbk4XetGLo4AX91x1yb&_nc_ht=scontent.ftun9-1.fna&oh=00_AfDjKjUaSc9ORHvRqsPdDWeQqbZ-JvkNAKNdw2e7-UsL7Q&oe=65AA929C" alt="" />
+        <div className='flex space-x-10 ml-[2cm]'>
+          <img className='h-[4cm] w-[8cm]' src="https://scontent.ftun9-1.fna.fbcdn.net/v/t39.30808-6/417431759_231763966677199_5653554093549890672_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=3635dc&_nc_ohc=hWnoDcHYd9UAX_VJfXc&_nc_oc=AQkUOzxbQBgBnpJARDCwQdNtU0Z3ipsugP7b1qaIzAXwStB6EBXhuQfkZxVlPdySBDA&_nc_ht=scontent.ftun9-1.fna&oh=00_AfAjZNWlT1oqwCA5LG7dGbHgBXvLf1uMfQgIQBVFPWmVRg&oe=65AB914A" alt="" />
+          <img className='h-[4cm] w-[8cm]' src="https://scontent.ftun9-1.fna.fbcdn.net/v/t39.30808-6/417577798_231765153343747_8611348078106997068_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=3635dc&_nc_ohc=YfA7TelDY_kAX_ya66u&_nc_ht=scontent.ftun9-1.fna&oh=00_AfA4Xq8OQXp8BtfWXFZkDObMtQ0mAXd8UshkpBiNud2cCA&oe=65AB12D0" alt="" />
+          <img className='h-[4cm] w-[8cm]' src="https://scontent.ftun9-1.fna.fbcdn.net/v/t39.30808-6/417444510_231765900010339_274947887996185958_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=3635dc&_nc_ohc=uuvIpkDWusoAX_XxalZ&_nc_ht=scontent.ftun9-1.fna&oh=00_AfCb_R2XK5iNwm0M-1U9iHqVqE9i19KvqP0GF_qBbrm8Iw&oe=65AB1FF2" alt="" />
+          <img className='h-[4cm] w-[8cm]' src="https://scontent.ftun9-1.fna.fbcdn.net/v/t39.30808-6/417368508_231766510010278_5213960803376632728_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=3635dc&_nc_ohc=dXFxqDOPp3IAX_BU-GH&_nc_ht=scontent.ftun9-1.fna&oh=00_AfDzWNhVsZRRq9OpCGHPN-PvlvH3utNqgsfB_dRWAFqIyw&oe=65AC0862" alt="" />
+          <img className='h-[4cm] w-[8cm]' src="https://scontent.ftun9-1.fna.fbcdn.net/v/t39.30808-6/418834089_231767446676851_2312434974819241847_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=3635dc&_nc_ohc=qbk4XetGLo4AX91x1yb&_nc_ht=scontent.ftun9-1.fna&oh=00_AfDjKjUaSc9ORHvRqsPdDWeQqbZ-JvkNAKNdw2e7-UsL7Q&oe=65AA929C" alt="" />
         </div>
       </div>
 
@@ -211,7 +158,7 @@ function page() {
         {jobsForToday.slice(0, initialJobCount).map((element, i) => (
           <div className="w-[12cm] h-60 flex flex-col justify-center gap-4 bg-neutral-50 rounded-lg shadow p-4 hover:scale-110">
           <div className="flex gap-4">
-            <img className="bg-neutral-500 w-32 h-32 shrink-0 rounded-lg" src={element.image} alt=''/>
+            <img className="bg-neutral-500 w-32 h-32 shrink-0 rounded-lg" src={element.image} />
             <div className="flex flex-col">
               <p className="text-xl font-bold">{element.jobtitle}</p>
               <span className="font-bold text-neutral-700 italic"></span>

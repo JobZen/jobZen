@@ -2,8 +2,9 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Navbar from '../Navbar1/page';
+import Navbar from '../navbarjobowner/page';
 import Footer from '../footer/page';
+import Link from 'next/link';
 
 interface FreelancerCategory{
     category:string,
@@ -24,18 +25,7 @@ interface Freelancer{
     jobtitle: string,
 }
 
-interface Job{
-    jobtitle:string,
-    location:string,
-    budget:number,
-    image:string,
-    role:string,
-    description:string,
-    qualification:string,
-    createdAt:string,
-    jobOwnerId:number,
-    jobCategoryId:number,
-}
+
 
 function page() {
     const [freelancercategory, setFreelancercategory] = useState<FreelancerCategory[]>([]);
@@ -55,75 +45,24 @@ function page() {
           
       }, []);
 
-    const getAllFreelancer=()=>{
+      const getAllFreelancer = () => {
         axios
-          .get('http://localhost:3000/freelancer/')
-          .then((res) => {
-            const Freelancer: Freelancer[] = res.data;
-            setFreelancer(Freelancer);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-    } 
-
+            .get('http://localhost:3000/freelancer/')
+            .then((res) => {
+                const sortedFreelancers = res.data.sort((a, b) => b.id - a.id);
+                const latestFreelancers = sortedFreelancers.slice(0, 4);
+                setFreelancer(latestFreelancers);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
 
     return (
 
      <div>
         <Navbar/>
-        <div className='bg-[#172554] h-[22cm] '>
-      <div className='ml-[3cm] '>
-        <h1 className='text-[#172554] font-BlackOps text-3xl mb-[1cm]'>.</h1>
-    <h1 className='text-white font-BlackOps text-8xl mb-[1cm] '>DISCOVER</h1>
-    <h1 className='text-white font-BlackOps text-8xl mb-[1cm]'>MORE THAN</h1>
-    <h1 className='text-bluefateh font-BlackOps text-8xl underline mb-[1cm]'>10000+ TALENT</h1>
-    <div className=' mb-[1cm]'>
-    <h1 className='text-grisss text-2xl leading-snug'>
-        Great platform for IT companies  searching 
-    </h1>
-    <h1 className='text-grisss text-2xl leading-snug'>
-    for the best talent and to hire freelancer.
-    </h1>
-    </div>
-
-</div>
-<div className='ml-[3cm] mb-[2cm]'>
-  
-<div className="w-[13cm] flex items-center p-6 space-x-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500">
-      <div className="flex bg-gray-100 p-4 w-72 space-x-4 rounded-lg">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-        <input className="bg-gray-100 outline-none" type="text" placeholder="Search for Talent" />
-      </div>
-      <div className="bg-gray-800 py-3 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
-        <span>Search</span>
-      </div>
-      </div>
-
-
-</div>
-      <div className='flex justify-center bg-white shadow-xl rounded-[15px] mr-[13%] ml-[13%] '>
-        <div className="flex space-x-32 bg-white rounded-lg p-4">
-          <div className="text-center w-full l-full ">
-            <img className='mx-auto mb-6 w-[4cm] l-[4cm]' src="https://cdn-icons-png.flaticon.com/512/270/270013.png" alt="" />
-            <h1 className='text-black text-4xl '>Create Account</h1>
-            <h1 className='text-grisss text-2xl'>First, you have to create an account here</h1>
-          </div>
-          <div className="text-center w-full l-full ">
-            <img  className='mx-auto mb-6 w-[4cm] l-[4cm]' src="https://cdn-icons-png.flaticon.com/512/7638/7638027.png" alt="" />
-            <h1 className='text-black text-4xl'>Search work</h1>
-            <h1 className='text-grisss text-2xl'>Search for the best freelance work here</h1>
-          </div>
-          <div className="text-center w-full l-full">
-            <img className='mx-auto mb-6 w-[4cm] l-[4cm]' src="https://th.bing.com/th/id/R.21a357d3ec0ebf0f6e932211850a5120?rik=6Fvi3DuElDHY%2bw&riu=http%3a%2f%2fwww.softcreate.co.jp%2fcms%2fsc%2fimg%2fpower-apps%2fmerit3.png&ehk=snsy0re4p01auZY5khh846awdZ5qQQKpc8IGwK%2f2ZzQ%3d&risl=&pid=ImgRaw&r=0" alt="" />
-            <h1 className='text-black text-4xl '>Save and apply</h1>
-            <h1 className='text-grisss text-2xl'>Apply or save and start your work</h1>
-          </div>
-        </div>
-      </div>
-      </div>
+       
 
       <div className='mt-[8cm] ml-[1cm]'>
         <h1 className='text-4xl text-grisss mb-[1cm] '>company we helped grow</h1>
@@ -142,11 +81,11 @@ function page() {
 
         <div className='flex space-x-2 text-8xl ml-[5%] mb-[3cm] mt-[3cm]'>
         <h1 className='font-jockey-one text-bluefateh'>FIND TALENT BY </h1>
-        <h1 className='font-jockey-one text-blueghamek'>SKILLS</h1>
+        <h1 className='font-jockey-one text-[#172554]'>SKILLS</h1>
         </div>
         <div className="flex justify-between ml-[10%] mr-[10%]">
         {freelancercategory.map((el, i) => (
-          <div key={i} className="relative text-center ">
+          <div key={i} className="relative text-center">
             <h1
               className="text-4xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white z-10 hover:scale-125 "
             >
@@ -172,49 +111,95 @@ function page() {
 
   
   <div className="bg-[#172554] w-1/2 ">
-    <p className="font-jockey-one text-bluefateh text-8xl font-bold mb-[0.5cm] mt-[2cm] ml-[1cm] mr-[1cm]">JOBZEN</p>
-    <p className="font-jockey-one text-white text-8xl font-bold mb-[1cm] mt-[2cm] ml-[1cm] mr-[1cm]">Connecting IT Talent with Tomorrow's Opportunities</p>
-    <p className="font-jockey-one text-bluefateh text-8xl font-bold mb-[1cm] mt-[2cm] ml-[1cm] mr-[1cm]">Join  US Today!</p>
-   
-  </div>
+          <p className="font-jockey-one text-bluefateh text-8xl font-bold mb-[0.5cm] mt-[2cm] ml-[1cm] mr-[1cm]">JOBZEN</p>
+          <p className="font-jockey-one text-white text-8xl font-bold mb-[1cm] mt-[2cm] ml-[1cm] mr-[1cm]">Connecting IT Talent with Tomorrow's Opportunities</p>
+          <div className="flex space-x-16 ml-[7cm]"> 
+          <Link href={'/allfreelancer'}>
+    <button className="bg-white text-[#172554] hover:bg-[#172554] border-solid border-4 border-white hover:text-white text-6xl font-jockey-one transition duration-300 ease-in-out px-6 py-3 rounded-full">
+        ALL<br /> FREELANCER
+    </button>
+         </Link>
+       
+</div>
+
+        </div>
 </div>
       <div className='flex space-x-2 text-8xl ml-[5%] mb-[3cm] mt-[3cm]'>
         <h1 className='font-jockey-one text-bluefateh'>BEST </h1>
-        <h1 className='font-jockey-one text-blueghamek'>TALENT</h1>
+        <h1 className='font-jockey-one text-[#172554]'>TALENT</h1>
         </div>
-    <div className='flex justify-between ml-[10%] mr-[10%]'>
+        <div className='flex justify-between ml-[20%] mr-[10%] mt-[2cm] grid grid-cols-2 gap-[3cm]'>
       {freelancer.map((ele,i)=>{
 return(
     
-       <div >
-        
-        <div className="relative flex w-80 flex-col rounded-xl bg-white text-gray-700 shadow-2xl hover:scale-110">
-  <div >
-  <div className='flex items-center justify-center'>
-    <img className="relative mx-4 -mt-6 h-60 w-60 overflow-hidden rounded-xl border-solid border-2 border-blueghamek  " src={ele.image} alt="" />
-  </div>
-  </div>
-  <div className="p-6">
-    <h5 className="mb-2 block font-sans text-4xl font-semibold leading-snug tracking-normal text-blueghamek antialiased">
-     {ele.name}
-    </h5>
-    <div >{ele.jobtitle}</div>
-    <div className='flex items-center justify-center mr-[1.5cm]'>
+  <div key={i} className="max-w-[400px]">
+  <div className="profile-card w-full rounded-md shadow-xl overflow-hidden z-[100] relative cursor-pointer snap-start shrink-0 bg-white flex flex-col items-center justify-center gap-3 transition-all duration-300 group">
+    <div className="avatar w-full pt-5 flex items-center justify-center flex-col gap-1">
+      
+        <img
+          src={ele.image} 
+          alt="Freelancer Avatar"
+          className="size-46 z-40 border-4 border-white rounded-full group-hover:border-8 group-hover:transition-all group-hover:duration-300 transition-all duration-300"
+        />
     
-    <p className="block font-sans text-xl font-light leading-relaxed text-inherit antialiased">
-    {ele.adress}
-    </p>
     </div>
-    
+    <div className="headings *:text-center *:leading-4">
+      <p className="text-4xl font-serif font-semibold text-[#434955] mb-[15px]">{ele.name}</p>
+      <p className="text-xl font-semibold text-[#434955] mb-[30px]">{ele.jobtitle}</p>
+    </div>
+    <div className="w-full items-center justify-center flex">
+      <ul className="flex flex-col items-start gap-2 has-[:last]:border-b-0 *:inline-flex *:gap-2 *:items-center *:justify-center *:border-b-[1.5px] *:border-b-stone-700 *:border-dotted *:text-xs *:font-semibold *:text-[#434955] pb-3">
+        <li>
+        <svg
+    id="phone"
+    viewBox="0 0 24 24"
+    className="fill-stone-700 group-hover:fill-[#172554]"
+    height="15"
+    width="15"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M0 0h24v24H0V0z" fill="none"></path>
+    <path
+      d="M19.23 15.26l-2.54-.29c-.61-.07-1.21.14-1.64.57l-1.84 1.84c-2.83-1.44-5.15-3.75-6.59-6.59l1.85-1.85c.43-.43.64-1.03.57-1.64l-.29-2.52c-.12-1.01-.97-1.77-1.99-1.77H5.03c-1.13 0-2.07.94-2 2.07.53 8.54 7.36 15.36 15.89 15.89 1.13.07 2.07-.87 2.07-2v-1.73c.01-1.01-.75-1.86-1.76-1.98z"
+    ></path>
+  </svg>
+          <p className='text-xl'>{ele.phone}</p>
+        </li>
+        <li>
+          <svg
+            className="fill-stone-700 group-hover:fill-[#172554]"
+            height="15"
+            width="15"
+            id="mail"
+            viewBox="0 0 32 32"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M16,14.81,28.78,6.6A3,3,0,0,0,27,6H5a3,3,0,0,0-1.78.6Z" fill="#231f20"></path>
+            <path d="M16.54,16.84h0l-.17.08-.08,0A1,1,0,0,1,16,17h0a1,1,0,0,1-.25,0l-.08,0-.17-.08h0L2.1,8.26A3,3,0,0,0,2,9V23a3,3,0,0,0,3,3H27a3,3,0,0,0,3-3V9a3,3,0,0,0-.1-.74Z" fill="#231f20"></path>
+          </svg>
+          <p className='text-xl'>{ele.email}</p>
+        </li>
+        <li>
+          <svg
+            id="map"
+            viewBox="0 0 16 16"
+            className="fill-stone-700 group-hover:fill-[#172554]"
+            height="15"
+            width="15"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M8 0C5.2 0 3 2.2 3 5s4 11 5 11 5-8.2 5-11-2.2-5-5-5zm0 8C6.3 8 5 6.7 5 5s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z" fill="#444"></path>
+          </svg>
+          <p className='text-xl'>{ele.adress}</p>
+        </li>
+      </ul>
+    </div>
+    <hr
+      className="w-full group-hover:h-5 h-3 bg-[#172554] group-hover:transition-all group-hover:duration-300 transition-all duration-300"
+    />
   </div>
-  <div className="p-6 pt-0">
-    <button data-ripple-light="true" type="button" className="select-none rounded-lg bg-blueghamek py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-      Read More
-    </button>
-  </div>
-        </div>
-
-       </div>)}
+</div>
+       )}
       )}
       </div>
       
@@ -228,17 +213,17 @@ return(
             <div className="hidden duration-700 ease-in-out" data-carousel-item>
                 <span className="absolute top-1/2 left-1/2 text-2xl font-semibold text-white -translate-x-1/2 -translate-y-1/2 sm:text-3xl dark:text-gray-800">First Slide</span>
                 <img src="https://fjwp.s3.amazonaws.com/blog/wp-content/uploads/2020/10/02072937/Freelancer-start.png" className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="..."/>
-                <p className='text-white'>malek</p>
+                
             </div>
           
             <div className="hidden duration-700 ease-in-out" data-carousel-item>
                 <img src="https://www.techprevue.com/wp-content/uploads/2015/02/how-to-become-a-freelancer.jpg" className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="..."/>
-                <p>malek</p>
+                
             </div>
            
             <div className="hidden duration-700 ease-in-out" data-carousel-item>
                 <img src="" className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="..."/>
-                <p>malek</p>
+                
             </div>
         </div>
      

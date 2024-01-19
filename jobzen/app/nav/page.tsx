@@ -7,9 +7,9 @@ import Search1 from '../search1/page';
 
 const Navbar = () => {
   return (
-    <div className='bg-white'>
+    <div className='bg-[#172554]  '>
       <div className='top-0'>
-        <nav className="bg-[#172554] bg-cover  px-8 py-4 relative ">
+        <nav className="   px-8 py-4 relative ">
           <div className="flex justify-center">
           <div className="w-full px-8 bg-white rounded-full flex items-center justify-between max-w-[35cm]">
               <div className="flex w-full flex-wrap items-center justify-between h-[100px] ">
@@ -51,6 +51,7 @@ const Navbar = () => {
             </div>
           </div>
         </nav>
+  
       </div>
       
     </div>

@@ -2,7 +2,7 @@
 import React from 'react'
 import { useState ,useEffect} from 'react';
 import axios from 'axios';
-import Navbar from '../Navbar1/page';
+import Nav from '../nav/page';
 import Footer from '../footer/page';
 
 
@@ -49,9 +49,9 @@ const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   );
   return (
     <div>
-        <Navbar/>
+        <Nav/>
         <div className='bg-[#172554] h-[10cm] '>
-      <div className='ml-[3cm] ml-[16cm]'>
+      <div className=' ml-[16cm]'>
         <h1 className='text-8xl text-[#172554]'>.</h1>
         <div className='flex space-x-4 ml-[1cm]'>
         <h1 className='text-white font-BlackOps text-4xl mb-[1cm]'>FIND YOUR DREAM </h1>
