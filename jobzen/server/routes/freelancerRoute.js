@@ -8,7 +8,7 @@ router.get('/', Freelancer.getAllFreelancers);
 router.get('/:id', Freelancer.getFreelancerById);
 
 // Create a new freelancer
-router.post('/', Freelancer.createFreelancer);
+router.post('/freelancer', Freelancer.createFreelancer);
 
 // Update a freelancer by ID
 router.put('/:id', Freelancer.updateFreelancer);

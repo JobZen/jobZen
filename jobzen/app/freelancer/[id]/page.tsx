@@ -67,6 +67,7 @@ const Freelancer = ()=> {
                     <img
                       className="w-32 h-32 rounded-full mb-4"
                       src={free.image}
+                      alt=""
                     />
                     <h1 className="text-xl font-bold">{free.name}</h1>
                     <p className="text-gray-700">{free.jobtitle}</p>
