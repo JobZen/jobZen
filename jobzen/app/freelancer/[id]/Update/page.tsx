@@ -166,7 +166,7 @@ const Update = () => {
                     <input
                       type="text"
                       placeholder="Your Job"
-                      onChange={(e) => setJob(e.target.value)}
+                      onChange={(e) => setJobTitle(e.target.value)}
                     />
                   </p>
                   <div className="mt-6 flex flex-wrap gap-4 justify-center">
@@ -237,38 +237,41 @@ const Update = () => {
                   placeholder="Email"
                   onChange={(e) => setEmail(e.target.value)}
                 />
-
-                <h2 className="text-xl font-bold mt-6 mb-4">Experience</h2>
+                 <h2 className="text-xl font-bold mt-6 mb-4">Address</h2>
+                
+             
                 <div className="mb-6">
-                  <div className="flex justify-between flex-wrap gap-2 w-full">
-                    <span className="text-gray-700 font-bold">Job Title</span>
-                    <input
-                      type="text"
-                      placeholder="Enter your previous title here..."
-                      onChange={(e) => setExperienceDescription(e.target.value)}
-                      style={{ width: "1000px" }}
-                    />
-                  </div>
-                </div>
-                <div className="mb-6">
-                  <div className="flex justify-between flex-wrap gap-2 w-full">
-                    <span className="text-gray-700 font-bold">Period</span>
-                  </div>
+                
                   <input
                     type="text"
-                    placeholder="Enter your working period here..."
-                    onChange={(e) => setExperiencePeriod(e.target.value)}
+                    placeholder="Enter your new Address here..."
+                    onChange={(e) => setAdress(e.target.value)}
                     style={{ width: "1000px" }}
                   />
                 </div>
+
+                <h2 className="text-xl font-bold mt-6 mb-4">Password</h2>
+                
+             
                 <div className="mb-6">
-                  <div className="flex justify-between flex-wrap gap-2 w-full">
-                    <span className="text-gray-700 font-bold">Description</span>
-                  </div>
+                
+                  <input
+                    type="text"
+                    placeholder="Enter your new password here..."
+                    onChange={(e) => setPassword(e.target.value)}
+                    style={{ width: "1000px" }}
+                  />
+                </div>
+
+                <h2 className="text-xl font-bold mt-6 mb-4">Experience</h2>
+                
+             
+                <div className="mb-6">
+                
                   <input
                     type="text"
                     placeholder="Enter your previous experience here..."
-                    onChange={(e) => setExperienceDescription(e.target.value)}
+                    onChange={(e) => setExperienceTitle(e.target.value)}
                     style={{ width: "1000px" }}
                   />
                 </div>
