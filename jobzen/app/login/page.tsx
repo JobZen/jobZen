@@ -3,6 +3,7 @@ import { useState } from "react";
 import { FunctionComponent } from "react";
 import axios from "axios";
 import Link from "next/link";
+import {useRouter}from 'next/navigation'
 import Cookies from "js-cookie";
 
 const Login: FunctionComponent = () => {
@@ -10,7 +11,7 @@ const Login: FunctionComponent = () => {
   const [password, setPassword] = useState("");
   const [alert, setAlert] = useState(false)
   const  [alertMsg, setAlertMsg] = useState("")
-
+const router=useRouter()
   const handleLogin = () => {
     console.log("Email:", email);
     console.log("Password:", password);
@@ -20,10 +21,14 @@ const Login: FunctionComponent = () => {
         password: password,
       })
       .then((response) => {
+        console.log(response.data);
+        
         response.data.token
           ? (Cookies.set("token", response.data.token),
             Cookies.set("id", response.data.id),
-            Cookies.set("role", response.data.role))
+            router.push(`/freelancer/${response.data.id}`)
+            
+            )
           : (setAlertMsg(response.data),setAlert(true)) ;
       })
       .catch((error) => console.log("error:", error));

@@ -1,13 +1,13 @@
-"use client"
-import React,{useState,useEffect} from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import Navbar from "../../../navBar/page";
 import axios from "axios";
-import {useRouter} from "next/navigation"
+import { useRouter } from "next/navigation";
 import Footer from "../../../footer/page";
 import Link from "next/link";
 
 interface JobOwner {
-  id:number;
+  id: number;
   name: string;
   email: string;
   password: string;
@@ -19,80 +19,109 @@ interface JobOwner {
 }
 
 const EditJobOwnerProfile = (): JSX.Element => {
- 
+  const [url, setUrl] = useState<string>("");
+  console.log(url);
 
-   
-    const [email, setEmail] = useState('');
-    const[id,setId]=useState(0)
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [companyName, setCompanyName] = useState('');
-    const [adress, setAdress] = useState('');
-    const [description, setDescription] = useState('');
-    const [password, setPassword] = useState('');
-    const [jobOwnerData, setJobOwnerData] = useState<JobOwner>({
-      id: 0,
-      name: "",
-      email: "",
-      password: "",
-      adress: "",
-      phone: 0,
-      image: "",
-      rating: 0,
-      description: ""
-    });
+  const [email, setEmail] = useState("");
+  const [id, setId] = useState(0);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [adress, setAdress] = useState("");
+  const [description, setDescription] = useState("");
+  const [password, setPassword] = useState("");
+  const [jobOwnerData, setJobOwnerData] = useState<JobOwner>({
+    id: 0,
+    name: "",
+    email: "",
+    password: "",
+    adress: "",
+    phone: 0,
+    image: "",
+    rating: 0,
+    description: "",
+  });
   console.log(jobOwnerData);
-  
-    const router= useRouter();
-    
-    useEffect(() => {
-      var currentUrl = window.location.href;
-      var ind=currentUrl.split("/")
-      console.log(ind);
-      
-      var index= parseInt(ind[ind.length-2])
-      setId(index)
-      const fetchJobOwnerData = async () => {
-        try {
-          const response = await fetch(`http://localhost:3000/jobOwner/job-owner/${index}`);
-          const data = await response.json();
-          console.log(data);
-          
-          setJobOwnerData(data);
-        } catch (error) {
-          console.error('Error fetching job owner data:', error);
-          
-        }
-      };
-  
-      fetchJobOwnerData();
-    }, []); 
-  
-    const handleUpdate = async () => {
+
+  const router = useRouter();
+
+  useEffect(() => {
+    var currentUrl = window.location.href;
+    var ind = currentUrl.split("/");
+    console.log(ind);
+
+    var index = parseInt(ind[ind.length - 2]);
+    setId(index);
+    const fetchJobOwnerData = async () => {
       try {
-        const response=await axios.put(`http://localhost:3000/jobOwner/job-owner/${id}`,
-        {
-          email:email,
-          phone: parseInt( phoneNumber),
-          name: companyName,
-          adress: adress,
-          description:description,
-          password:password
-        })
-        
-  console.log(response);
-  
-          router.push(`/jobownerProfile/${jobOwnerData.id}`);
-       
+        const response = await fetch(
+          `http://localhost:3000/jobOwner/job-owner/${index}`
+        );
+        const data = await response.json();
+        console.log(data);
+
+        setJobOwnerData(data);
+        setUrl(data.image);
       } catch (error) {
-        console.error(error);
-       
+        console.error("Error fetching job owner data:", error);
       }
     };
+
+    fetchJobOwnerData();
+  }, []);
+
+  const handleUpdate = async () => {
+    try {
+      const response = await axios.put(
+        `http://localhost:3000/jobOwner/job-owner/${id}`,
+        {
+          email: email ? email : jobOwnerData.email,
+          phone: phoneNumber ? parseInt(phoneNumber) : jobOwnerData.phone,
+          name: companyName ? companyName : jobOwnerData.name,
+          adress: adress ? adress : jobOwnerData.adress,
+          description: description ? description : jobOwnerData.description,
+          password: password ? password : jobOwnerData.password,
+          image: url,
+        }
+      );
+
+      console.log(response);
+
+      router.push(`/jobownerProfile/${jobOwnerData.id}`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const uploadImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    try {
+      let url = e?.target?.files[0];
+      if (!url) return;
+
+      const formData = new FormData();
+      formData.append("file", url);
+      formData.append("upload_preset", "project");
+      formData.append("cloud_name", "ds3tmq5iw");
+
+      const response = await fetch(
+        "https://api.cloudinary.com/v1_1/ds3tmq5iw/image/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const responseData = await response.json();
+      setUrl(responseData.secure_url);
+      console.log("url", responseData.secure_url);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div className="bg-white flex flex-col min-h-screen">
       <Navbar />
-      
+
       <div className="bg-[#ffffff] flex flex-row justify-center w-full">
         <div className="bg-[#ffffff] overflow-hidden w-[1440px] h-[1024px] relative">
           <div className="absolute w-[1578px] h-[449px] top-[577px] left-[-69px]">
@@ -179,22 +208,32 @@ const EditJobOwnerProfile = (): JSX.Element => {
                 </div>
                 <img
                   className="absolute rounded-3xl w-[127px] h-[134px] top-[-5px] left-[27px] bg-[url(/sdfsdfsdffsdfsdfdsfdsfsdfsdfds-1.png)] bg-cover bg-[50%_50%]"
-                  src={jobOwnerData.image}
+                  src={url}
                 />
               </div>
               <div className="flex w-[408px] h-[66px] items-center gap-[56px] absolute top-[103px] left-[601px]">
-                <div className="flex flex-col w-[176px] h-[56px] items-center justify-center gap-[4px] px-[2px] py-[6px] relative bg-[#267296] rounded-[8px] overflow-hidden">
-                  <label
-                    htmlFor="uploadPhoto"
-                    className="relative w-fit [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap cursor-pointer"
+                <div
+                  className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[#267296] rounded-[8px] overflow-hidden cursor-pointer"
+                  onClick={() => document.getElementById("photoInput")?.click()}
+                >
+                  <button
+                    className="relative w-fit [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap"
+                    onClick={uploadImage}
                   >
                     Upload New Photo
-                    <input type="file" id="uploadPhoto" className="hidden" />
-                  </label>
+                  </button>
+                  <input
+                    id="photoInput"
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => uploadImage(e)}
+                  />
                 </div>
                 <Link href={`/jobownerProfile/${jobOwnerData.id}`}>
-                  <button className="flex w-[176px] h-[56px] items-center justify-center px-0 py-[8px] relative bg-[#ffffff] rounded-[8px] overflow-hidden border border-solid border-[#267296]"
-                    onClick={handleUpdate} 
+                  <button
+                    className="flex w-[176px] h-[56px] items-center justify-center px-0 py-[8px] relative bg-[#ffffff] rounded-[8px] overflow-hidden border border-solid border-[#267296]"
+                    onClick={handleUpdate}
                   >
                     <div className="relative w-fit [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#267296] text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap">
                       Save Update
@@ -268,7 +307,7 @@ const EditJobOwnerProfile = (): JSX.Element => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

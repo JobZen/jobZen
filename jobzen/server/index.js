@@ -25,8 +25,7 @@ const job= require('./routes/jobRoute.js');
 const jobCategory = require('./routes/jobCategoryRoute.js');
 const jobHasFreelancer = require('./routes/jobHasFreelancerRoute.js');
 const review = require('./routes/reviewRoute.js')
-const authenticated = require('./routes/auth.js');
-const { Socket } = require('dgram');
+const authenticated = require('./routes/auth.js')
 
 const PORT = 3000
 app.use(cors())

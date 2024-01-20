@@ -4,13 +4,14 @@ import { FunctionComponent } from "react";
 import axios from "axios";
 import Link from "next/link";
 import Cookies from "js-cookie";
+import {useRouter}from 'next/navigation'
 
 const Login: FunctionComponent = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alert, setAlert] = useState(false)
   const  [alertMsg, setAlertMsg] = useState("")
-
+  const router=useRouter()
   const handleLogin = () => {
     console.log("Email:", email);
     console.log("Password:", password);
@@ -23,7 +24,7 @@ const Login: FunctionComponent = () => {
         response.data.token
           ? (Cookies.set("token", response.data.token),
             Cookies.set("id", response.data.id),
-            Cookies.set("role", response.data.role))
+            router.push('/mainJobOwner'))
           : (setAlertMsg(response.data),setAlert(true)) ;
       })
       .catch((error) => console.log("error:", error));

@@ -151,7 +151,7 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
                 Address: {jobOwnerData.adress}
               </div>
 
-              <div className="absolute w-[61px] top-[107px] left-[524px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] tracking-[0] leading-[normal]">
+              <div className="absolute w-[5000px] top-[107px] left-[524px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] tracking-[0] leading-[normal]">
                 {jobOwnerData.name}
               </div>
               <a

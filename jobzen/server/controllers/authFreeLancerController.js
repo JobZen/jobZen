@@ -7,15 +7,22 @@ const { generateToken } = require ('../services/TokenServices.js')
 
 
 const Register = async (req, res) => {
-  const { name, email, password  } = req.body;
+  const { name, email, password ,image,adress,phone,aboutMe,skills,experience,jobtitle  } = req.body;
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = {
       name,
-      email,
-      image:'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+    email,
+    image,
+    adress,
+    phone,
+    aboutMe,
+    skills,
+    experience,
+    jobtitle,
+      
       password: hashedPassword}
      
       createFreelancer({ body: newUser }, res);
