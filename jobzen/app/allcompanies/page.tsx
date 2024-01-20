@@ -112,7 +112,7 @@ function allcompanies() {
           </div>
         </div>
       </div>
-      <div className="flex justify-between ml-[10%] mr-[10%] mt-[5cm]">
+      <div className='grid grid-cols-3 gap-[3cm] mt-[3cm] mb-[3cm] ml-[15%] mr-[10%]'>
         {filteredCompanies.map((ele, i) => (
           <div key={i}>
             <Link href={`/jobownerProfile/${ele.id}`}>

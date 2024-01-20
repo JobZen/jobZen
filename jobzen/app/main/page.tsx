@@ -2,7 +2,8 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Search1 from '../search1/page';
+import Footer from '../footer/page';
+import Navbar from '../Navbarhome/page';
 
 
 
@@ -112,7 +113,7 @@ function page() {
 
   return (
     <div>
-
+ <Navbar/>
       <div className='mt-[8cm] ml-[1cm]'>
         <h1 className='text-4xl text-grisss mb-[1cm] '>company we helped grow</h1>
         <div className='flex space-x-10 ml-[2cm]'>
@@ -123,6 +124,11 @@ function page() {
           <img className='h-[4cm] w-[8cm]' src="https://scontent.ftun9-1.fna.fbcdn.net/v/t39.30808-6/418834089_231767446676851_2312434974819241847_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=3635dc&_nc_ohc=qbk4XetGLo4AX91x1yb&_nc_ht=scontent.ftun9-1.fna&oh=00_AfDjKjUaSc9ORHvRqsPdDWeQqbZ-JvkNAKNdw2e7-UsL7Q&oe=65AA929C" alt="" />
         </div>
       </div>
+
+
+      <button>
+
+      </button>
 
       <div className='flex space-x-2 text-8xl ml-[5%] mb-[3cm] mt-[3cm]'>
         <h1 className='font-jockey-one text-bluefateh'>EXPLORE</h1>
@@ -158,7 +164,7 @@ function page() {
         {jobsForToday.slice(0, initialJobCount).map((element, i) => (
           <div className="w-[12cm] h-60 flex flex-col justify-center gap-4 bg-neutral-50 rounded-lg shadow p-4 hover:scale-110">
           <div className="flex gap-4">
-            <img className="bg-neutral-500 w-32 h-32 shrink-0 rounded-lg" src={element.image} />
+            <img className="bg-neutral-500 w-32 h-32 shrink-0 rounded-lg" src={element.image} alt=""/>
             <div className="flex flex-col">
               <p className="text-xl font-bold">{element.jobtitle}</p>
               <span className="font-bold text-neutral-700 italic"></span>
@@ -247,7 +253,7 @@ function page() {
                 <div><StarRating rating={ele.rating} /></div>
                 <div className='flex items-center justify-center mr-[1.5cm]'>
                   <img className='w-[20px] h-[20]' src="https://th.bing.com/th/id/OIP.RJwgX7x98VNnkH02LQ0L-AHaHa?rs=1&pid=ImgDetMain" alt="" />
-                  <p className="block font-sans text-xl font-light leading-relaxed text-inherit antialiased">
+                  <p className="  text-xl ">
                     {ele.adress}
                   </p>
                 </div>
@@ -263,8 +269,10 @@ function page() {
       )
     );
   })}
-</div>
 
+  
+</div>
+<Footer/>
     </div>
   );
 }

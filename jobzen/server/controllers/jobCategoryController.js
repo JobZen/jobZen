@@ -9,6 +9,23 @@ res.json(jobCategories);
 res.status(500).json({ error: 'Unable to fetch job categories' });
 }
 }
+// Get one job category by ID
+async function getOneJobCategory(req, res) {
+const categoryId = req.params.id;
+
+try {
+    const jobCategory = await JobCategory.findByPk(categoryId);
+
+    if (jobCategory) {
+    res.json(jobCategory);
+    } else {
+    res.status(404).json({ error: 'Job category not found' });
+    }
+} catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Unable to fetch job category' });
+}
+}
 
 // Create a new job category
 async function createJobCategory(req, res) {
@@ -65,5 +82,6 @@ module.exports = {
   getAllJobCategories,
   createJobCategory,
   updateJobCategory,
-  deleteJobCategory
+  deleteJobCategory,
+  getOneJobCategory
 };

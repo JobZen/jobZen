@@ -2,7 +2,7 @@
 import React from 'react'
 import { useState,useEffect } from 'react';
 import axios from 'axios';
-import Navbar from '@/app/Navbarhome/page';
+import Nav from '@/app/nav/page';
 import Footer from '@/app/footer/page';
 
 interface Job {
@@ -38,7 +38,8 @@ function page() {
       }, [window.location.href]);
   return (
     <div>
-        <Navbar/>
+                <Nav/>
+     
         <div className='grid grid-cols-2 gap-[3cm] mt-[1cm] mb-[1cm] ml-[15%] mr-[10%]'>
         {jobbycateg.map((element, i) => (
           <div className="w-[12cm] h-60 flex flex-col justify-center gap-4 bg-neutral-50 rounded-lg shadow p-4 hover:scale-110">

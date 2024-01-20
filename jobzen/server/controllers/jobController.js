@@ -86,6 +86,7 @@ async function getAllJobsWithDetails(req, res) {
       res.status(500).json({ error: error.message });
     }
   }
+
 //Get Job by ID with Job Owner and Job Category details
 async function getJobByIdWithDetails(req, res) {
     try {

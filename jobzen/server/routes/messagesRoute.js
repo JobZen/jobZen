@@ -2,21 +2,26 @@ const router = require('express').Router();
 const Messages = require('../controllers/messagesController');
 
 // GET all messages
-router.get('/message', Messages.getAllMessages);
+router.get('/', Messages.getAllMessages);
 
 // Create a new message
-router.post('/message', Messages.createMessage);
+router.post('/', Messages.createMessage);
 
 // Get a message by ID
-router.get('/message/:id', Messages.getMessageById);
+router.get('/:id', Messages.getMessageById);
 
 // Delete a message by ID
-router.delete('/message/:id', Messages.deleteMessageById);
+router.delete('/:id', Messages.deleteMessageById);
 
 // GET all messages with details (including Freelancer and JobOwner)
-router.get('/message/details', Messages.getAllMessagesWithDetails);
+router.get('/all/details', Messages.getAllMessagesWithDetails);
 
 // Create a message with foreign key references
 router.post('/message/FK', Messages.createMessageWithForeignKey);
+
+router.get('/msg/:sender/:reciever', Messages.FindMessageBySenderAndRecieverId);
+
+
+
 
 module.exports = router;

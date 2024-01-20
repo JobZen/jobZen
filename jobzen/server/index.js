@@ -2,6 +2,10 @@ const express = require('express')
 const cors = require('cors')
 const db = require('./database/index.js')
 const app = express()
+const { Server } = require('socket.io');
+ const { createServer } = require('http')
+ 
+
 
 //routes:
 const admin = require('./routes/adminRoute.js');
@@ -19,7 +23,8 @@ const job= require('./routes/jobRoute.js');
 const jobCategory = require('./routes/jobCategoryRoute.js');
 const jobHasFreelancer = require('./routes/jobHasFreelancerRoute.js');
 const review = require('./routes/reviewRoute.js')
-const authenticated = require('./routes/auth.js')
+const authenticated = require('./routes/auth.js');
+const { Socket } = require('dgram');
 
 const PORT = 3000
 app.use(cors())
@@ -34,7 +39,7 @@ app.use('/admin', admin);
 app.use('/freelancer', freelancer);
 app.use('/jobOwner', jobOwner);
 
-app.use('/messages', messages);
+app.use('/freeMS', messages);
 app.use('/contactFreelancer', contactFreelancer);
 app.use('/contactJobOwner', contactJobOwner);
 
@@ -48,6 +53,33 @@ app.use('/review', review);
 app.use('/auth', authenticated);
 
 
+const server =  createServer(app);
+const io = new Server(server, {cors :
+  {
+ methods: ['GET', 'POST' ] ,
+ origin : 'https://localhost:3000'
+}});
+
+
+ io.on('connection',(socket)=> {
+  console.log(`socket is connected${socket.id}`);
+  socket.on('send',(message)=>{
+    console.log(`Recieced message${message}`)
+    io.emit('recieved', message)
+   });
+  
+   socket.on('disconnect',(socket)=> {
+    console.log(`User disconnected${socket.id}`);
+   });
+ });
+
+
+
+
+
+server.listen(3004, () => {
+  console.log(`socket listening at http://localhost:3004`)
+})
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`)
 })

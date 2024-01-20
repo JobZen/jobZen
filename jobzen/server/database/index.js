@@ -227,12 +227,18 @@ const FreelancerHasCategories = sequelize.define('freelancer_has_manyCategories'
 });
 
 // Messages  //12
-const Messages = sequelize.define("messages" , {
+const FreelancerMessages = sequelize.define("freelancermessages" , {
  body : {
   type : DataTypes.TEXT("long"),
   allowNull : false
  }
 })
+const JobOwnerMessages = sequelize.define("jobownermessages" , {
+  body : {
+   type : DataTypes.TEXT("long"),
+   allowNull : false
+  }
+ })
 
 FreelancerHasCategories.belongsTo(Freelancer, {
   foreignKey: 'FreeLancerId', 
@@ -259,13 +265,18 @@ Job.belongsTo(JobCategory, {
 
 
 
-Messages.belongsTo(Freelancer , {foreignKey : "freelancerId",
+FreelancerMessages.belongsTo(Freelancer , {foreignKey : "sender",
 allowNull: false})
 
-Messages.belongsTo(JobOwner , {foreignKey : "jobOwnerId",
+FreelancerMessages.belongsTo(JobOwner , {foreignKey : "reciever",
 allowNull: false
 })
-
+////////////////////////////////////////////////////////////////
+JobOwnerMessages.belongsTo(JobOwner , {foreignKey : "sender",
+allowNull: false})
+JobOwnerMessages.belongsTo(Freelancer , {foreignKey : "reciever",
+allowNull: false
+})
 
 
 Review.belongsTo(JobHasFreelancer , {foreignKey : 'jobHasFreelancerId' ,
@@ -298,4 +309,4 @@ module.exports = {
   Freelancer,JobOwner,Admin,Job,
   JobCategory,FreelancerCategories,
   Review,JobHasFreelancer,ContactJobOwner,
-  ContactFreelancer,FreelancerHasCategories,Messages}
+  ContactFreelancer,FreelancerHasCategories,FreelancerMessages,JobOwnerMessages}

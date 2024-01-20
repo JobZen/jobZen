@@ -74,7 +74,12 @@ function page() {
           <img className='h-[4cm] w-[8cm]' src="https://scontent.ftun9-1.fna.fbcdn.net/v/t39.30808-6/418834089_231767446676851_2312434974819241847_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=3635dc&_nc_ohc=qbk4XetGLo4AX91x1yb&_nc_ht=scontent.ftun9-1.fna&oh=00_AfDjKjUaSc9ORHvRqsPdDWeQqbZ-JvkNAKNdw2e7-UsL7Q&oe=65AA929C" alt="" />
         </div>
       </div>
-       
+      <Link href="/createjoboffer">
+      <button className='bg-[#172554] text-white mb-[3cm] mt-[3cm] ml-[40%] hover:bg-bluefateh  font-bold py-10 px-16 rounded-full shadow-md transform transition-transform hover:scale-105 text-xl'>
+  CREATE A JOB OFFER
+</button>
+
+</Link>
  
 
 

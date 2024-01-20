@@ -1,3 +1,4 @@
+const { log } = require('console');
 const{ Freelancer }=require('../database/index.js');
 
 // Get All freelancers
@@ -34,33 +35,20 @@ async function getFreelancerById(req, res) {
 // Create a new freelancer
 async function createFreelancer(req, res) {
 try {
-const { name, email, password , adress,
-    phone,
-    image,
-    reting,
-    description,
-    skills,
-    aboutMe,
-    experience,
-    jobtitle
-    } = req.body;
+const { name, email, password ,image,adress,phone,aboutMe,skills,experience,jobtitle} = req.body;
 const newFreelancer = await Freelancer.create({
     name,
     email,
     password,
+    image,
     adress,
     phone,
-    image,
-    reting,
-    description,
-    skills,
     aboutMe,
+    skills,
     experience,
     jobtitle
-    
-  
-
 });
+console.log(newFreelancer);
 res.status(201).json(newFreelancer);
 } catch (error) {
 res.status(500).json({error: error.message });
