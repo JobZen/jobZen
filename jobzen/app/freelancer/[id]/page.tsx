@@ -56,7 +56,7 @@ const Freelancer = () => {
 
   // Function to handle edit button click
   const handleEditButtonClick = () => {
-    // Redirect to the edit page with the job owner's id
+    // Redirect to the update page with the freelancer's id
     router.push(`/freelancer/${free.id}/Update`);
   };
   return (
@@ -124,6 +124,12 @@ const Freelancer = () => {
                     <span className="text-gray-700 font-bold">Email</span>
                   </div>
                   <p className="mt-2">{free.email}</p>
+                </div>
+                <div className="mb-6">
+                  <div className="flex justify-between flex-wrap gap-2 w-full">
+                    <span className="text-gray-700 font-bold">Address</span>
+                  </div>
+                  <p className="mt-2">{free.adress}</p>
                 </div>
                 <h3 className="font-semibold text-center mt-3 -mb-2 ml-[500px]">
                   Find me on

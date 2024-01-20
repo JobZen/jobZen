@@ -68,7 +68,7 @@ if (!freelancerToUpdate) {
 
 await Freelancer.update(
     {  name, email, password ,image,adress,phone,aboutMe,skills,experience,jobtitle},
-    { where: { id } }
+    { where: { id:id } }
 );
 res.status(200).json({ message: 'Freelancer updated successfully' });
 } catch (error) {
