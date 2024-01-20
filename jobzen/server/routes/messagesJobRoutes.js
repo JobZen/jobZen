@@ -10,6 +10,10 @@ router.get('/all/details', Messages.getAllMessagesWithDetails);
 router.post('/message/FK', Messages.createMessageWithForeignKey);
 router.get('/msg/:sender/:reciever', Messages.FindMessageBySenderAndRecieverId)
 
+router.get('/msg/:sender', Messages.FindJobwnersBySenderId);
+router.get('/msg1/:sender', Messages.FindFreelancerBySenderId);
+
+
 
 
 module.exports = router;
