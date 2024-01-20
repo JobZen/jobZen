@@ -123,18 +123,16 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
                   <StarRating rating={jobOwnerData.rating} />
                 </div>
               </div>
-              <Link
-                href={`/jobownerProfile/${jobOwnerData.id}/editjobownerProfile`}
+
+              <button
+                className="flex w-[176px] h-[56px] rounded-full left-[207px] top-[200px] items-center justify-center mr-0 py-[8px] relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid"
+                onClick={handleEditButtonClick}
               >
-                <button
-                  className="flex w-[176px] h-[56px] rounded-full left-[207px] top-[200px] items-center justify-center mr-0 py-[8px] relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid"
-                  onClick={handleEditButtonClick}
-                >
-                  <div className="relative w-fit [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap">
-                    Edit Profile
-                  </div>
-                </button>
-              </Link>
+                <div className="relative w-fit [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap">
+                  Edit Profile
+                </div>
+              </button>
+
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -180,11 +178,6 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
               <div className="absolute w-[172px] h-[20px] top-[151px] left-[524px] [font-family:'Jockey_One-Regular',Helvetica] font-normal text-[#91c6ef] text-[20px] tracking-[0] leading-[20px] whitespace-nowrap">
                 Description:
               </div>
-              <img
-                className="w-[146px] top-0 left-[519px] absolute h-px object-cover"
-                alt="Vector"
-                src="vector-75.svg"
-              />
             </div>
             <div className="absolute w-[1503px] h-[139px] top-0 left-0"></div>
             <p className="w-[172px] h-[20px] top-[10px] left-[500px] [font-family:'Jockey_One-Regular',Helvetica] font-normal text-transparent text-[24px] text-center leading-[20px] whitespace-nowrap absolute tracking-[0]">
