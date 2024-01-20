@@ -59,7 +59,7 @@ res.status(500).json({error: error.message });
 async function updateFreelancer(req, res) {
 try {
 const { id } = req.params;
-const { name, email, password } = req.body;
+const {  name, email, password ,image,adress,phone,aboutMe,skills,experience,jobtitle } = req.body;
 
 const freelancerToUpdate = await Freelancer.findByPk(id);
 if (!freelancerToUpdate) {
@@ -67,7 +67,7 @@ if (!freelancerToUpdate) {
 }
 
 await Freelancer.update(
-    { name, email, password},
+    {  name, email, password ,image,adress,phone,aboutMe,skills,experience,jobtitle},
     { where: { id } }
 );
 res.status(200).json({ message: 'Freelancer updated successfully' });

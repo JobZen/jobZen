@@ -94,7 +94,8 @@ const EditJobOwnerProfile = (): JSX.Element => {
 
   const uploadImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     try {
-      let url = e?.target?.files[0];
+      if (!e.target.files || !e.target.files[0]) return;
+      let url = e.target.files[0];
       if (!url) return;
 
       const formData = new FormData();
@@ -188,11 +189,7 @@ const EditJobOwnerProfile = (): JSX.Element => {
               <p className="w-[169px] h-[20px] top-[1px] left-[150px] [font-family:'Jockey_One-Regular',Helvetica] font-normal text-transparent text-[24px] text-center leading-[20px] absolute tracking-[0]">
                 <span className="text-[#384d6c]"> Profile</span>
               </p>
-              <img
-                className="absolute w-[143px] h-px top-[33px] left-[15px] object-cover"
-                alt="Vector"
-                src="vector-75.svg"
-              />
+
               <div className="absolute w-[501px] h-[114px] top-[49px] left-[18px]">
                 <div className="absolute w-[501px] h-[105px] top-0 left-0">
                   <div className="w-[179px] top-[15px] left-[170px] [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#384d6c] text-[20px] leading-[normal] absolute tracking-[0]">
@@ -218,7 +215,7 @@ const EditJobOwnerProfile = (): JSX.Element => {
                 >
                   <button
                     className="relative w-fit [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap"
-                    onClick={uploadImage}
+                    onClick={() => uploadImage}
                   >
                     Upload New Photo
                   </button>
@@ -230,16 +227,15 @@ const EditJobOwnerProfile = (): JSX.Element => {
                     onChange={(e) => uploadImage(e)}
                   />
                 </div>
-                <Link href={`/jobownerProfile/${jobOwnerData.id}`}>
-                  <button
-                    className="flex w-[176px] h-[56px] items-center justify-center px-0 py-[8px] relative bg-[#ffffff] rounded-[8px] overflow-hidden border border-solid border-[#267296]"
-                    onClick={handleUpdate}
-                  >
-                    <div className="relative w-fit [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#267296] text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap">
-                      Save Update
-                    </div>
-                  </button>
-                </Link>
+
+                <button
+                  className="flex w-[176px] h-[56px] items-center justify-center px-0 py-[8px] relative bg-[#ffffff] rounded-[8px] overflow-hidden border border-solid border-[#267296]"
+                  onClick={handleUpdate}
+                >
+                  <div className="relative w-fit [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#267296] text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap">
+                    Save Update
+                  </div>
+                </button>
               </div>
             </div>
           </div>
