@@ -1,8 +1,9 @@
 "use client"
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState ,useRef } from 'react';
 import axios from 'axios';
-import Link from 'next/link';
 import SideNavBar from './sideNavBar/page';
+import {MdKeyboardArrowUp} from 'react-icons/md';
+import Search from '../search/page'
 
 interface JobOwner {
   id:number;
@@ -36,6 +37,9 @@ const Dashboard = () => {
   const [jobOwners, setJobOwners] = useState<JobOwner[]>([]);
   const [jobownerCount,setjobownerCount]=useState<number>(0)
   const [userCount,setUserCount]=useState<number>(0)
+  const [rowCount, setRowCount] = useState<number>(0)
+
+  const containerRef = useRef<HTMLTableElement>(null)
 
   useEffect(()=>{
     const fetchData = async () => {
@@ -67,10 +71,19 @@ const Dashboard = () => {
     return (user as JobOwner).description !== undefined && (user as JobOwner).id !== undefined;
   };
   
+  useEffect(() => {
+    if (rowCount === 10 && containerRef.current) {
+      containerRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [rowCount]);
+
+  const handleScrollUp = () => {
+    setRowCount((prevCount) => prevCount + 1);
+  };
 
 return (
     <>
-<div className="p-4 sm:ml-64">
+<div className="p-4 gap-2 sm:ml-64" ref={containerRef}>
 <SideNavBar />
 {/* First row with three columns */}
     <div className="grid grid-cols-3 gap-4 mb-10 mt-10">
@@ -91,40 +104,13 @@ return (
     </div>
 
 {/* drop navigation Action */}
-    <div className="relative overflow-x-auto">
+<div className="relative overflow-x-auto">
       <div className="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 bg-white">
-        <label
-          htmlFor="table-search"
-          className="sr-only"
-        >
+        <label htmlFor="table-search" className="sr-only">
           Search
         </label>
-        <div className="relative">
-          <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-            <svg
-              className="w-4 h-4 text-gray-500"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 20 20"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-              />
-            </svg>
-          </div>
-          <input
-            type="text"
-            id="table-search-users"
-            className="block pt-2 ps-10 text-sm border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Search for users"
-          />
-        </div>
-      </div>
+        <Search/>
+    </div>
 
 {/* table starts here */}
       <table className="w-full text-sm text-left rtl:text-right  border-[#267296] border-b-4 border-4 bg-[#267296]">
@@ -179,8 +165,17 @@ return (
         <tbody>
         {[...freelancers, ...jobOwners].map((user) => (
           <tr key={user.id}
-            className="bg-white border-gray-400 hover:bg-[#91C7EF] group"
-          >
+            className="bg-white border-gray-400 hover:bg-[#91C7EF] group transition duration-200 "
+            onWheel={handleScrollUp}>
+                {rowCount >= 10 && (
+                <div
+                className="fixed bottom-4 right-4 w-8 h-8 border-black hover:border-white hover:bg-white bg-[#267296] active:bg-[#2e667f] rounded-full border-4  text-black flex items-center justify-center transition duration-200"
+                onClick={() => {
+                   setRowCount(0);
+                    containerRef.current?.scrollIntoView({ behavior: 'smooth' });
+                    }}>
+          <MdKeyboardArrowUp className="text-black hover:border-[#267296] hover:bg-white hover:text-[#267296] text-2xl" />
+                    </div>)}
             <td className="w-4 p-4">
               <div className="flex items-center">
                 <input
@@ -228,24 +223,18 @@ return (
             </td>
             <td className="px-6 py-4">
               {/* <!-- Modal toggle --> */}
-              <a
-              href={`/admin/user/${isFreelancer(user) ? user.id : isJobOwner(user) ? user.id : ''}`}
-              type="button"
-              className="font-medium hover:text-bold text-blue-600 hover:underline hover:font-extrabold">
-                Check informations
-                </a>
+            <a
+            href={`/admin/user/${isFreelancer(user) ? user.id : isJobOwner(user) ? user.id : ''}`}
+            className="transition ease-in-out delay-150 text-white bg-blue-500 border border-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 inline-flex items-center font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+            User details</a>
             </td>
             <td className="px-6 py-4">
               {/* <!-- Modal toggle --> */}
               <a
-                href="#"
-                type="button"
-                data-modal-target="editUserModal"
-                data-modal-show="editUserModal"
-                className="font-medium hover:text-bold text-red-600 hover:underline hover:font-extrabold"
-              >
-                Delete user
-              </a>
+              href="#"
+              type="button"
+              className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 inline-flex items-center text-red-700 hover:text-white border border-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+              <span className="ml-2">Delete user</span></a>
             </td>
           </tr>
           ))}
