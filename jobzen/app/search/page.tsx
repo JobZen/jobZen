@@ -19,7 +19,7 @@ const Search = () => {
           >
             <option value="job">Job</option>
             <option value="skill">category</option>
-            <option value="rating">Rating</option>
+            <option value="rating">Name</option>
           </select>
         </div>
         <button

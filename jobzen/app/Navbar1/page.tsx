@@ -15,7 +15,7 @@ const Navbar = () => {
               <div className="flex w-full flex-wrap items-center justify-between h-[100px] ">
                 <div className='flex items-center space-x-12'>
                   <Link href={'/'}>
-                    <img
+                    <img alt=""
                       src="https://i.ibb.co/nQqdJ89/logo-transparent.png"
                       className="w-20 h-20"
                     />
