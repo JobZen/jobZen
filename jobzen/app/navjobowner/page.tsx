@@ -9,9 +9,9 @@ interface TabPage {
 }
 
 const tabPages: TabPage[] = [
-  { name: 'Home', href: '/home' },
-  { name: 'About us', href: '/aboutbeforelogin' },
-  { name: 'Contact', href: '/contactbeforelogin' }
+  { name: 'Home', href: '/mainJobOwner' },
+  { name: 'About us', href: '/aboutafterloginjobowner' },
+  { name: 'Contact', href: '/contactafterloginjobowner' }
 ];
 
 const Navbar = () => {
@@ -40,7 +40,7 @@ const Navbar = () => {
           ))}
           <div className="relative flex items-center space-x-4 ">
             
-        <DropNavbar/>
+            <DropNavbar/>
           </div>
           <div className="relative flex items-center space-x-4 ">
       

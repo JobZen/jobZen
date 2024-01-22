@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import DropNavbar from '../dropNavBarJobowner/page';
+import DropNavbar from '../dropNavBarFreelancer/page';
 
 
 interface TabPage {
@@ -9,9 +9,9 @@ interface TabPage {
 }
 
 const tabPages: TabPage[] = [
-  { name: 'Home', href: '/home' },
-  { name: 'About us', href: '/aboutbeforelogin' },
-  { name: 'Contact', href: '/contactbeforelogin' }
+  { name: 'Home', href: '/mainFreelancer' },
+  { name: 'About us', href: '/aboutafterloginfreelancer' },
+  { name: 'Contact', href: '/contactafterloginfreelancer' }
 ];
 
 const Navbar = () => {
@@ -40,7 +40,7 @@ const Navbar = () => {
           ))}
           <div className="relative flex items-center space-x-4 ">
             
-        <DropNavbar/>
+            <DropNavbar/>
           </div>
           <div className="relative flex items-center space-x-4 ">
       

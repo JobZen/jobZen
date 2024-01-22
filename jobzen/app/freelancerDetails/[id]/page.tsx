@@ -83,12 +83,7 @@ const Freelancer = () => {
                       .
                     </Link>
 
-                    <button
-                      className="border-solid border-2 hover:bg-grey-500 font-bold border-[#267296] text-[#267296] hover:font-bold py-2 px-4 rounded"
-                      onClick={handleEditButtonClick}
-                    >
-                      Update profile
-                    </button>
+                  
                   </div>
                 </div>
                 <hr className="my-6 border-t border-gray-300" />

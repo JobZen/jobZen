@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
-import Nav from '../nav/page';
+import Nav from '../navjobowner/page';
 import Footer from '../footer/page';
 
 interface JobOwner {
@@ -115,7 +115,7 @@ function allcompanies() {
       <div className='grid grid-cols-3 gap-[3cm] mt-[3cm] mb-[3cm] ml-[15%] mr-[10%]'>
         {filteredCompanies.map((ele, i) => (
           <div key={i}>
-            <Link href={`/jobownerProfile/${ele.id}`}>
+            <Link href={`/companydetails/${ele.id}`}>
               <div className="relative flex w-80 flex-col rounded-xl bg-white text-gray-700 shadow-2xl hover:scale-110">
                 <div>
                   <div className="flex items-center justify-center">

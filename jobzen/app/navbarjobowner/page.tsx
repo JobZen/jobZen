@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import DropNavbar from '../dropNavBarJobowner/page';
 
 
 
@@ -21,51 +22,34 @@ const Navbar = () => {
                   </Link>
                 </div>
                 <div className="relative flex items-center space-x-20 ">
-                    <div  className="relative flex items-center space-x-20 mr-[4cm] ">
-                    <Link href={"/home"}>
+                    <div  className="relative flex items-center space-x-20 mr-[8cm] ">
+                    <Link href={"/mainJobOwner"}>
                       <span className="font-jura text-xl text-[#172554]">HOME</span>
                     </Link>
                  
-                    <Link href={"/contact"}>
+                    <Link href={"/contactafterloginjobowner"}>
                       <span className="font-jura text-xl text-[#172554]">CONTACT</span>
                     </Link>
                 
-                    <Link href={"/about"}>
+                    <Link href={"/aboutafterloginjobowner"}>
                       <span className="font-jura text-xl text-[#172554]">ABOUT</span>
                     </Link>
                     </div>
 
-                  <Link href={'/login'}>
-                    <p className="font-jura text-xl text-[#172554]">LOGIN</p>
-                  </Link>
-                  <Link href={'/landingPage'}>
-                    <button
-                      type="submit"
-                      className="py-1 px-3 text-xl font-jura text-center text-white rounded-3xl bg-[#172554] sm:w-fit hover:bg-[#275469]  hover:text-white hover:focus:ring-4 focus:outline dark:focus:ring-primary-300 dark:bg-primary-600">
-                      SIGN UP 
-                    </button>
-                  </Link>
+                  
+                <DropNavbar/>
                 </div>
               </div>
             </div>
           </div>
         </nav>
-        <div className=' h-[17cm]  '>
+        <div className=' h-[15cm]  '>
 
 <div className='ml-[3cm] '>
-  <h1 className='text-[#172554] font-BlackOps text-3xl mb-[1cm]'>.</h1>
+  <h1 className='text-black font-BlackOps text-3xl mb-[1cm]'>.</h1>
 <h1 className='text-white font-BlackOps text-8xl mb-[1cm] '>DISCOVER</h1>
 <h1 className='text-white font-BlackOps text-8xl mb-[1cm]'>MORE THAN</h1>
-<h1 className='text-bluefateh font-BlackOps text-8xl underline mb-[1cm]'>10000+ TALNET</h1>
-<div className=' mb-[1cm]'>
-<h1 className='text-grisss text-2xl leading-snug'>
-  Great platform for the job seeker that searching 
-</h1>
-<h1 className='text-grisss text-2xl leading-snug'>
-for new career heights and passionate about startups.
-</h1>
-</div>
-
+<h1 className='text-bluefateh font-BlackOps text-8xl underline mb-[1cm]'>10000+ TALENT</h1>
 </div>
 
 <div className='flex justify-center bg-white shadow-xl rounded-[15px] mr-[13%] ml-[13%] '>

@@ -4,9 +4,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 const settings = [
-  { name: "Account", href: "/" },
+  { name: "Account", href: "/freelancer/1" },
   { name: "Messages", href: "/jobDetails/messageJobDetails" },
-  { name: "Logout", href: "/landingPage" },
+  { name: "Logout", href: "/home" },
 ];
 
 const DropNavbar = () => {

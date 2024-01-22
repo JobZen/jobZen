@@ -2,7 +2,7 @@
 import React from 'react'
 import { useState,useEffect } from 'react';
 import axios from 'axios';
-import Nav from '@/app/nav/page';
+import Nav from '@/app/navjobowner/page';
 import Footer from '@/app/footer/page';
 
 interface Job {
