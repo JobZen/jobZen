@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
-import Navbar from '../Navbar1/page';
+import Nav from '../navjobowner/page';
 import Footer from '../footer/page';
 
 interface JobOwner {
@@ -65,9 +65,9 @@ function allcompanies() {
 
   return (
     <div>
-        <Navbar/>
+        <Nav/>
       <div className="bg-[#172554] h-[10cm] ">
-        <div className="ml-[3cm] ml-[16cm]">
+        <div className=" ml-[16cm]">
           <h1 className="text-8xl text-[#172554]">.</h1>
           <div className="flex space-x-4">
             <h1 className="text-white font-BlackOps text-4xl mb-[1cm]">
@@ -112,10 +112,10 @@ function allcompanies() {
           </div>
         </div>
       </div>
-      <div className="flex justify-between ml-[10%] mr-[10%] mt-[5cm]">
+      <div className='grid grid-cols-3 gap-[3cm] mt-[3cm] mb-[3cm] ml-[15%] mr-[10%]'>
         {filteredCompanies.map((ele, i) => (
           <div key={i}>
-            <Link href={`/jobownerProfile/${ele.id}`}>
+            <Link href={`/companydetails/${ele.id}`}>
               <div className="relative flex w-80 flex-col rounded-xl bg-white text-gray-700 shadow-2xl hover:scale-110">
                 <div>
                   <div className="flex items-center justify-center">

@@ -14,7 +14,7 @@ router.put('/freelancerHasCategory/:id', FreelancerHasCategory.removeFreelancerF
 router.get('/freelancerHasCategory/:id', FreelancerHasCategory.getFreelancerCategoryById);
 
 // Retrieve all associations with freelancers and categories details
-router.get('/freelancerHasCategory/details', FreelancerHasCategory.getAllFreelancersWithCategories);
+router.get('/freelancerHasCategory/details/:categoryId', FreelancerHasCategory.getFreelancersByCategory)
 
 // Create an association with details (freelancer and category)
 router.post('/freelancerHasCategory/association', FreelancerHasCategory.createAssociationWithDetails);
