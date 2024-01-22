@@ -18,8 +18,8 @@ const config: Config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-          "malek":'url("https://static.vecteezy.com/ti/vetor-gratis/p3/2062629-abstract-background-with-technology-circuit-board-texture-electronic-motherboard-illustration-communication-and-engineering-concept-vector-illustration-vetor.jpg")'
-
+          "malek":'url("https://static.vecteezy.com/ti/vetor-gratis/p3/2062629-abstract-background-with-technology-circuit-board-texture-electronic-motherboard-illustration-communication-and-engineering-concept-vector-illustration-vetor.jpg")',
+          "aloui":'url("https://theriskofyou.com/wp-content/uploads/2022/09/technology-risk-transformation-service-card.jpg")'
       },
       colors:{
         'grisss':'#737373',
