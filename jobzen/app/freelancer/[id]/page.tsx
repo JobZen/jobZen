@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Navbar from "../../navBar/page";
+import Navbar from "../../navFreelancer/page";
 import Footer from "../../footer/page";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

@@ -267,6 +267,8 @@ FreelancerHasCategories.belongsTo(Freelancer, {
   foreignKey: 'FreeLancerId', 
   allowNull: false,
 })
+
+
 FreelancerHasCategories.belongsTo(FreelancerCategories, {
   foreignKey: 'FreeLancerCategoriesId', 
   allowNull: false,

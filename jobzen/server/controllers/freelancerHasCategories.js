@@ -52,16 +52,29 @@ res.status(500).json({ error: error.message });
 }
 
 // CRUD operations with Foreign Keys
-async function getAllFreelancersWithCategories(req, res) {
-try {
-const associations = await FreelancerHasCategories.findAll({
-    include: [{ model: Freelancer }, { model: FreelancerCategories }]
-});
-res.json(associations);
-} catch (error) {
-res.status(500).json({ error: error.message });
-}
-}
+async function getFreelancersByCategory(req, res) {
+    const categoryId = req.params.categoryId; // Assuming categoryId is part of the request parameters
+  
+    try {
+      const freelancers = await FreelancerHasCategories.findAll({
+        include: [
+          {
+            model: Freelancer,
+            where: {}, // You can add additional conditions for the Freelancer model here if needed
+          },
+          {
+            model: FreelancerCategories,
+            where: { id: categoryId }, // Filter by the specific category
+          },
+        ],
+      });
+  
+      res.json(freelancers);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+  
 
 async function createAssociationWithDetails(req, res) {
 try {
@@ -81,6 +94,6 @@ module.exports = {
   addFreelancerToCategory,
   getFreelancerCategoryById,
   removeFreelancerFromCategory,
-  getAllFreelancersWithCategories,
+  getFreelancersByCategory,
   createAssociationWithDetails
 };

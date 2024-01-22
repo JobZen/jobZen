@@ -2,8 +2,9 @@
 import React from 'react'
 import { useState ,useEffect} from 'react';
 import axios from 'axios';
-import Navbar from '../Navbar1/page';
+import Nav from '../navjobowner/page';
 import Footer from '../footer/page';
+import Link from 'next/link';
 
 
 
@@ -49,9 +50,9 @@ const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   );
   return (
     <div>
-        <Navbar/>
+        <Nav/>
         <div className='bg-[#172554] h-[10cm] '>
-      <div className='ml-[3cm] ml-[16cm]'>
+      <div className=' ml-[16cm]'>
         <h1 className='text-8xl text-[#172554]'>.</h1>
         <div className='flex space-x-4 ml-[1cm]'>
         <h1 className='text-white font-BlackOps text-4xl mb-[1cm]'>FIND YOUR DREAM </h1>
@@ -93,9 +94,10 @@ const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       </div>
         <div className='grid grid-cols-2 gap-[3cm] mt-[1cm] mb-[1cm] ml-[15%] mr-[10%]'>
         {filteredJobs.map((element, i) => (
+           <Link href={`/jobDetails/${element.id}`} key={element.id}>
           <div className="w-[12cm] h-60 flex flex-col justify-center gap-4 bg-neutral-50 rounded-lg shadow p-4 hover:scale-110">
           <div className="flex gap-4">
-            <img className="bg-neutral-500 w-32 h-32 shrink-0 rounded-lg" src={element.image} />
+            <img className="bg-neutral-500 w-32 h-32 shrink-0 rounded-lg" alt="" src={element.image} />
             <div className="flex flex-col">
               <p className="text-xl font-bold">{element.jobtitle}</p>
               <span className="font-bold text-neutral-700 italic"></span>
@@ -110,7 +112,8 @@ const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
             APPLY
           </button>
         </div>
-        
+
+        </Link>
         ))}
       </div>
 

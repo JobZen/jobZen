@@ -1,6 +1,6 @@
-import Navbar1 from "../Navbar1/page";
+import Navbar1 from "../Navbarhome/page";
 import Footer from "../footer/page";
-import Main from "../main/page"
+import Firsthomepageblocked from "../firsthomepageblocked/page"
 
 const Home =()=>{
     return(
@@ -8,7 +8,7 @@ const Home =()=>{
             
             <Navbar1/>
            
-                <Main/>
+                <Firsthomepageblocked/>
          
             <Footer/>
         </div>

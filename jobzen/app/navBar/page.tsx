@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import Search from '../search/page';
-import DropNavbar from '../dropNavBar/page';
+import DropNavbar from '../dropNavBarJobowner/page';
+
 
 interface TabPage {
   name: string;
@@ -10,16 +10,16 @@ interface TabPage {
 
 const tabPages: TabPage[] = [
   { name: 'Home', href: '/home' },
-  { name: 'About us', href: '/about' },
-  { name: 'Contact', href: '/contact' }
+  { name: 'About us', href: '/aboutbeforelogin' },
+  { name: 'Contact', href: '/contactbeforelogin' }
 ];
 
 const Navbar = () => {
   return (
     <div className='top-0'>
-      <nav className="bg-[#267296] w-full px-8 py-4">
+      <nav className="bg-[#172554] w-full px-8 py-4">
       <div className="flex justify-center">
-      <div className="w-full px-8 bg-white rounded-3xl flex items-center justify-between" style={{ maxWidth: '1600px' }}>
+      <div className="w-full px-4 bg-white rounded-[50px] flex items-center justify-between" style={{ maxWidth: '1400px' }}>
         <div className="flex w-full flex-wrap items-center justify-between h-[80px]">
           <div className='flex items-center space-x-12'>
             <Link href={'/'}>
@@ -29,30 +29,21 @@ const Navbar = () => {
                 alt="JobZen Logo"
               />
             </Link>
-            <Search />
+           
           </div>
           {tabPages.map((tabPage) => (
             <div className="mr-4 space-x-1" key={tabPage.name}>
               <Link href={tabPage.href}>
-                <span className=" text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">{tabPage.name}</span>
+                <span className=" text-[#172554] hover:text-base-[#172554] hover:font-semibold font-jura hover:underline">{tabPage.name}</span>
               </Link>
             </div>
           ))}
           <div className="relative flex items-center space-x-4 ">
             
-            <Link href={'/login '}>
-              <p className=" text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">Login</p>
-               </Link>
-               <Link href={'/signup'}>
-               <button
-              type="submit"
-              className="py-1 px-3 text-sm font-medium text-center text-white rounded-3xl bg-[#267296] sm:w-fit hover:bg-[#275469]  hover:text-white hover:focus:ring-4 focus:outline dark:focus:ring-primary-300 dark:bg-primary-600">
-              Sign up
-            </button>
-             </Link>
+        <DropNavbar/>
           </div>
           <div className="relative flex items-center space-x-4 ">
-          <DropNavbar/>
+      
           </div>
         </div>
         </div>
