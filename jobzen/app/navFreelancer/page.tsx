@@ -17,14 +17,14 @@ const tabPages: TabPage[] = [
 const Navbar = () => {
   return (
     <div className='top-0'>
-      <nav className="bg-[#172554] w-full px-8 py-4">
+      <nav className="bg-gradient-to-br from-[#172554] to-[#267296] w-full px-8 py-4">
       <div className="flex justify-center">
       <div className="w-full px-4 bg-white rounded-[50px] flex items-center justify-between" style={{ maxWidth: '1400px' }}>
         <div className="flex w-full flex-wrap items-center justify-between h-[80px]">
           <div className='flex items-center space-x-12'>
             <Link href={'/'}>
               <img
-                src="https://i.ibb.co/nQqdJ89/logo-transparent.png"
+                src="https://media.discordapp.net/attachments/1169316305036398694/1198991023255339229/newLogo.png?ex=65c0ea68&is=65ae7568&hm=4a9c3a99a2385fcb4c2333716485d5fce9b7428b2b855bdebe21c0bdce736e31&=&format=webp&quality=lossless&width=454&height=437"
                 className="w-20 h-20"
                 alt="JobZen Logo"
               />

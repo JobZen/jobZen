@@ -6,6 +6,8 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import io from "socket.io-client";
 import {useRouter}from 'next/navigation'
+import Navbar from "../../navFreelancer/page";
+import Footer from "../../footer/page"
 
 interface Freelancer {
   id: number
@@ -273,8 +275,9 @@ const handleUsersSearch = () =>{
 }
  console.log("owner",chatOwner)
   return (
-   
-    <div className="container mx-auto shadow-lg rounded-lg">
+    <div>
+   <Navbar/>
+    <div className="container mx-auto  shadow-lg rounded-lg mt-[3.5cm]">
     
       <div className="px-5 py-5 flex justify-between items-center bg-white border-b-2">
         <div className="font-semibold text-2xl">GoingChat</div>
@@ -402,6 +405,8 @@ const handleUsersSearch = () =>{
           </div>
         </div>
       </div>
+    </div>
+    <Footer/>
     </div>
   );
 };

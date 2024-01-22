@@ -106,7 +106,7 @@ function page() {
   </div>
 
   
-  <div className="bg-[#172554] w-1/2 ">
+  <div className="bg-gradient-to-br from-[#172554] to-[#267296] w-1/2 ">
           <p className="font-jockey-one text-bluefateh text-8xl font-bold mb-[0.5cm] mt-[2cm] ml-[1cm] mr-[1cm]">JOBZEN</p>
           <p className="font-jockey-one text-white text-8xl font-bold mb-[1cm] mt-[2cm] ml-[1cm] mr-[1cm]">Connecting IT Talent with Tomorrow's Opportunities</p>
           <div className="flex space-x-16 ml-[7cm]"> 
