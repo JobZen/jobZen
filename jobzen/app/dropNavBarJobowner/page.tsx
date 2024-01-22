@@ -37,13 +37,13 @@ const DropNavbar = () => {
           scaleY: isDropdownOpen ? 1 : 0,
         }}
         transition={{ duration: 0.3 }}
-        className="absolute origin-top-right z-10 w-[160px] h-[120px] left-[-77px] mt-[203px] -mr-[80px] bg-gradient-to-br from-[#267296] to-[#267296] divide-y divide-gray-200 rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hover:bg-transparent active:scale-95 transition-all duration-150 ease-linear"
+        className="absolute origin-top-right z-10 w-[160px] h-[120px] left-[-77px] mt-[203px] -mr-[80px] bg-gradient-to-br from-[#172554] to-[#267296] divide-y divide-gray-200 rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hover:bg-transparent active:scale-95 transition-all duration-150 ease-linear"
         aria-labelledby="options-menu"
       >
         {settings.map((setting, index) => (
           <Link href={setting.href} key={setting.name}>
             <motion.a
-              className="block pl-6 pr-4 py-2 flex items-center text-white text-base font-medium hover:bg-transparent focus:outline-none"
+              className=" pl-6 pr-4 py-2 flex items-center text-white text-base font-medium hover:bg-transparent focus:outline-none"
               whileHover={{
                 scale: 1.07,
                 color: "#91c6EF",

@@ -11,7 +11,7 @@ const AboutUs = () => {
 
   <section className="mt-6 space-y-10">
 <center>
-    <img src="https://i.ibb.co/nQqdJ89/logo-transparent.png" className=" w-60 h-60 md-10 " alt=""/>
+    <img src="https://media.discordapp.net/attachments/1169316305036398694/1198991023255339229/newLogo.png?ex=65c0ea68&is=65ae7568&hm=4a9c3a99a2385fcb4c2333716485d5fce9b7428b2b855bdebe21c0bdce736e31&=&format=webp&quality=lossless&width=454&height=437" className=" w-60 h-60 md-10 " alt=""/>
 </center>
 <br/>
     <div className="mb-16 flex flex-wrap space-y-5">

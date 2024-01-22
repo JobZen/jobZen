@@ -115,37 +115,12 @@ function page() {
   return (
     <div>
 
-      <div className='flex space-x-2 text-8xl ml-[5%] mb-[3cm] mt-[7cm]'>
-        <h1 className='font-jockey-one text-bluefateh'>EXPLORE</h1>
-        <h1 className='font-jockey-one text-[#172554]'>CATEGORY</h1>
-      </div>
       
-      <div className="flex justify-between ml-[10%] mr-[10%]">
-        {jobcategory.map((el, i) => (
-          
-          <div key={i} className="relative text-center ">
-            <Link href={`/landingPage`}>
-            <h1
-              className="text-4xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white z-10 hover:scale-125 "
-            >
-              {el.category}
-            </h1>
-            </Link>
-            <img
-              src={el.image}
-              alt=""
-              className="w-[8cm] h-[8cm] object-cover brightness-50 rounded-xl"
-            />
-          </div>
-        ))}
-      </div>
-      
-    
-      <div className='flex space-x-2 text-8xl ml-[5%] mb-[3cm] mt-[6cm]'>
+      <div className=' flex space-x-2 text-8xl ml-[5%] mb-[3cm] mt-[6cm]'>
         <h1 className='font-jockey-one text-bluefateh'>LATEST </h1>
         <h1 className='font-jockey-one text-[#172554]'>JOB OFFER</h1>
       </div>
-      <div className='grid grid-cols-2 gap-[3cm] mt-[1cm] mb-[1cm] ml-[15%] mr-[10%]'>
+      <div className='grid  grid-cols-2 gap-[3cm] mt-[1cm] mb-[1cm] ml-[15%] mr-[10%]'>
         {jobsForToday.slice(0, initialJobCount).map((element, i) => (
           <div className="w-[12cm] h-60 flex flex-col justify-center gap-4 bg-neutral-50 rounded-lg shadow p-4 hover:scale-110">
           <div className="flex gap-4">
@@ -188,32 +163,37 @@ function page() {
         </Link>
       </div>
 
-      <div className=" bg-[#172554] flex mb-[3cm] mt-[3cm] ml-[2cm] mr-[2cm]">
-        <div className="w-1/2 flex items-center justify-start">
+
+      
+      <div className='flex space-x-2 text-8xl ml-[5%] mb-[3cm] mt-[7cm]'>
+        <h1 className='font-jockey-one text-bluefateh'>EXPLORE</h1>
+        <h1 className='font-jockey-one text-[#172554]'>CATEGORY</h1>
+      </div>
+      <div className='bg-gradient-to-br from-[#172554] to-[#267296] h-[12cm] '>
+      <div className="flex justify-between ml-[10%] mr-[10%]  ">
+        {jobcategory.map((el, i) => (
+        <div className='border-4 border-white rounded-xl mt-[2cm]'>
+        <div key={i} className="relative text-center ">
+          <Link href={`/landingPage`}>
+            <h1
+              className="text-4xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white z-10 hover:scale-125"
+            >
+              {el.category}
+            </h1>
+          </Link>
           <img
-            src="https://th.bing.com/th/id/R.2a57b1b2b1436476315e0daf72e96025?rik=SRomhRzX4A59Zg&pid=ImgRaw&r=0"
+            src={el.image}
             alt=""
-            className="mx-auto brightness-[75%]"
+            className="w-[8cm] h-[8cm] object-cover brightness-50 rounded-xl"
           />
         </div>
-        <div className="bg-[#172554] w-1/2 ">
-          <p className="font-jockey-one text-bluefateh text-8xl font-bold mb-[0.5cm] mt-[2cm] ml-[1cm] mr-[1cm]">JOBZEN</p>
-          <p className="font-jockey-one text-white text-8xl font-bold mb-[1cm] mt-[2cm] ml-[1cm] mr-[1cm]">Connecting IT Talent with Tomorrow's Opportunities</p>
-          <div className="flex space-x-16 ml-[3cm]"> 
-          <Link href={'/landingPage'}>
-    <button className="bg-white text-[#172554] hover:bg-[#172554] border-solid border-4 border-white hover:text-white text-6xl font-jockey-one transition duration-300 ease-in-out px-6 py-3 rounded-full">
-        ALL<br /> COMPANIES
-    </button>
-         </Link>
-         <Link href={'/landingPage'}>
-    <button className="bg-white text-[#172554] hover:bg-[#172554] border-solid border-4 border-white hover:text-white  text-6xl font-jockey-one transition duration-300 ease-in-out px-6 py-3 rounded-full">
-        ALL<br /> JOBOFFER
-    </button>
-    </Link>
-</div>
-
-        </div>
       </div>
+      
+        ))}
+      </div>
+      </div>
+
+     
       
       <div className='flex space-x-2 text-8xl ml-[5%] mb-[3cm] mt-[3cm]'>
         <h1 className='font-jockey-one text-bluefateh'>BEST </h1>
@@ -255,6 +235,37 @@ function page() {
     );
   })}
 </div>
+
+<div className=" bg-[#172554] flex mb-[3cm] mt-[3cm] ml-[2cm] mr-[2cm]">
+        <div className="w-1/2 flex items-center justify-start">
+          <img
+            src="https://th.bing.com/th/id/R.2a57b1b2b1436476315e0daf72e96025?rik=SRomhRzX4A59Zg&pid=ImgRaw&r=0"
+            alt=""
+            className="mx-auto brightness-[75%]"
+          />
+        </div>
+        <div className="bg-gradient-to-br from-[#172554] to-[#267296] w-1/2 ">
+          <p className="font-jockey-one text-bluefateh text-8xl font-bold mb-[0.5cm] mt-[2cm] ml-[1cm] mr-[1cm]">JOBZEN</p>
+          <p className="font-jockey-one text-white text-8xl font-bold mb-[1cm] mt-[2cm] ml-[1cm] mr-[1cm]">Connecting IT Talent with Tomorrow's Opportunities</p>
+          <div className="flex space-x-[4cm] ml-[3cm]"> 
+          <Link href={'/landingPage'}>
+          <button
+  className="cursor-pointer text-white font-bold relative text-2xl w-[6cm] h-[3cm] text-center bg-gradient-to-r from-violet-500 from-10% via-sky-500 via-30% to-pink-500 to-90% bg-[length:400%] rounded-[30px] z-10 hover:animate-gradient-xy hover:bg-[length:100%] before:content-[''] before:absolute before:-top-[5px] before:-bottom-[5px] before:-left-[5px] before:-right-[5px] before:bg-gradient-to-r before:from-violet-500 before:from-10% before:via-sky-500 before:via-30% before:to-pink-500 before:bg-[length:400%] before:-z-10 before:rounded-[35px] before:hover:blur-xl before:transition-all before:ease-in-out before:duration-[1s] before:hover:bg-[length:10%] active:bg-violet-700 focus:ring-violet-700"
+>
+        ALL<br /> COMPANIES
+    </button>
+         </Link>
+         <Link href={'/landingPage'}>
+         <button
+  className="cursor-pointer text-white font-bold relative text-2xl w-[6cm] h-[3cm] text-center bg-gradient-to-r from-violet-500 from-10% via-sky-500 via-30% to-pink-500 to-90% bg-[length:400%] rounded-[30px] z-10 hover:animate-gradient-xy hover:bg-[length:100%] before:content-[''] before:absolute before:-top-[5px] before:-bottom-[5px] before:-left-[5px] before:-right-[5px] before:bg-gradient-to-r before:from-violet-500 before:from-10% before:via-sky-500 before:via-30% before:to-pink-500 before:bg-[length:400%] before:-z-10 before:rounded-[35px] before:hover:blur-xl before:transition-all before:ease-in-out before:duration-[1s] before:hover:bg-[length:10%] active:bg-violet-700 focus:ring-violet-700"
+>
+        ALL<br /> JOBOFFER
+    </button>
+    </Link>
+</div>
+
+        </div>
+      </div>
 <div className='mt-[5cm] ml-[1cm]'>
         <h1 className='text-4xl text-grisss mb-[1cm] '>company we helped grow</h1>
         <div className='flex space-x-10 ml-[2cm]'>
