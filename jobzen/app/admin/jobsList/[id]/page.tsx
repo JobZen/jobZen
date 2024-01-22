@@ -75,16 +75,15 @@ const JobInfo = () => {
     setId(index)
 
       const fetchJob = async () => {
-        try {
-          const [jobRes, jobcatRes, jobownerRes] = await axios.all([
-            axios.get(`http://localhost:3000/job/job/${index}`),
-            axios.get(`http://localhost:3000/jobCategory/jobCategory/${index}`),
-            axios.get(`http://localhost:3000/jobOwner/job-owner/${index}`)
-          ]);
-      
-          setJobs([jobRes.data]);
-          setJobCategories([jobcatRes.data]);
-          setJobOwners([jobownerRes.data]);
+      try {
+    const jobRes = await axios.get(`http://localhost:3000/job/job/${index}`);
+    setJobs([jobRes.data]);
+
+    const jobcatRes = await axios.get(`http://localhost:3000/jobCategory/jobCategory/${index}`);
+    setJobCategories([jobcatRes.data]);
+
+    const jobownerRes = await axios.get(`http://localhost:3000/jobOwner/job-owner/${index}`);
+    setJobOwners([jobownerRes.data]);
         } catch (error) {
           console.error(error);
         }
@@ -103,7 +102,7 @@ const JobInfo = () => {
         {/* User details*/}
         <div className="font-sans">
           <div className="container mx-auto py-8 px-4">
-            {jobOwners.length > 0 && (
+            {jobOwners.length > 0 && jobs.length > 0 && jobCategories.length > 0 && (
               <div className="bg-white p-6 rounded-lg shadow-lg">
                 <img
                   className="w-30 h-30 rounded-full mb-6"
@@ -112,7 +111,7 @@ const JobInfo = () => {
                 />
                 <h1 className="text-4xl font-bold">{jobOwners[0].name}</h1>
                 <hr className="my-8" />
-                {jobs.length > 0 && (
+                {jobOwners.length > 0 && jobs.length > 0 && jobCategories.length > 0 && (
                   <>
                     <h2 className="text-3xl font-semibold mb-6">Mission:</h2>
                     <p className="text-gray-600 text-2xl">{jobs[0].jobtitle}</p>
@@ -143,7 +142,7 @@ const JobInfo = () => {
                     <hr className="my-8" />
                   </>
                 )}
-                {('description' in jobOwners[0]) &&(
+                {jobOwners.length > 0 && jobs.length > 0 && jobCategories.length > 0 && (
                   <>
                     <h2 className="text-3xl font-semibold mb-6">Company Bio</h2>
                     <p className="text-gray-700 text-2xl">{jobOwners[0].description}</p>
@@ -154,7 +153,7 @@ const JobInfo = () => {
                   </>
                 )}
 
-                {jobCategories.length > 0  && (
+                {jobOwners.length > 0 && jobs.length > 0 && jobCategories.length > 0 && (
                   <>
                   <h2 className="text-3xl font-semibold mb-6">Category information</h2>
                   <div className="flex items-center mb-2 space-x-4">
@@ -168,7 +167,7 @@ const JobInfo = () => {
                 <hr className="my-8" />
                   </>
                 )}
-                {('description' in jobOwners[0]) &&(
+                {jobOwners.length > 0 && jobs.length > 0 && jobCategories.length > 0 && (
                   <>
                 <h2 className="text-3xl font-semibold mt-4 mb-2">Company Contact information</h2>
                 <ul className="list-disc text-2xl list-inside text-gray-700">

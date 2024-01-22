@@ -26,7 +26,7 @@ const router=useRouter()
         response.data.token
           ? (Cookies.set("token", response.data.token),
             Cookies.set("id", response.data.id),
-            router.push(`/freelancer/${response.data.id}`)
+            router.push('/home')
             
             )
           : (setAlertMsg(response.data),setAlert(true)) ;

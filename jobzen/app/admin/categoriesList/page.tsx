@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SideNavBar from '../sideNavBar/page';
+import Search from '../../search/page'
 
 interface Category{
   id:number,
@@ -63,38 +64,18 @@ return (
 
 {/* drop navigation Action */}
     <div className="relative overflow-x-auto">
-      <div className="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 bg-white">
+    <div className="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 bg-white">
         <label
           htmlFor="table-search"
           className="sr-only"
         >
           Search
         </label>
-        <div className="relative">
-          <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-            <svg
-              className="w-4 h-4 text-gray-500"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 20 20"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-              />
-            </svg>
-          </div>
-          <input
-            type="text"
-            id="table-search-users"
-            className="block pt-2 ps-10 text-sm border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Search for users"
-          />
-        </div>
+        <Search/>
+        <button className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:border-white hover:border-solid hover:bg-[#065F46] hover:text-white group flex-shrink-0 w-full md:w-auto min-w-[8rem] flex items-center justify-center rounded-md border-2 border-[#065F46] text-sm leading-6 text-[#065F46] font-medium py-3 px-4">
+        <svg className="group-hover:text-white mb-1 text-[#065F46] font-semibold" width="20" height="20" fill="currentColor" aria-hidden="true">
+        <path d="M10 5a1 1 0 0 1 1 1v3h3a1 1 0 1 1 0 2h-3v3a1 1 0 1 1-2 0v-3H6a1 1 0 1 1 0-2h3V6a1 1 0 0 1 1-1Z" />
+      </svg>New Category</button>
       </div>
 
 {/* table starts here */}
@@ -123,16 +104,16 @@ return (
             </th>
             <th
               scope="col"
-              className="px-6 py-3 bg-grey-500"
+              className="px-6 py-3 bg-grey-500 "
             >
-             Action
+             Actions
             </th>
           </tr>
         </thead>
         <tbody>
         {categories.map((category) => (
           <tr key={category.id} 
-            className="bg-white border-gray-400 hover:bg-[#91C7EF] group"
+            className="bg-white border-gray-400 hover:bg-[#91C7EF] group transition duration-200 "
           >
             <td className="w-4 p-4">
               <div className="flex items-center">
@@ -169,10 +150,12 @@ return (
               <button
                onClick={handleDeleteCategories}
                disabled={selectedCategories.length === 0}
-                className="font-medium hover:text-bold text-red-600 text-xl hover:underline hover:font-extrabold"
-              >
+               className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 inline-flex items-center text-red-700 hover:text-white border border-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
                 Delete Selected Categories
               </button>
+              <a
+            className="transition ease-in-out delay-150 text-white bg-blue-500 border border-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 inline-flex items-center font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+            Update category</a>
             </td>
           </tr>
           ))}

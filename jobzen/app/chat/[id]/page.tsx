@@ -396,7 +396,7 @@ const handleUsersSearch = () =>{
             />
             <div className="font-semibold py-4">Created 22 Jan 2024</div>
             <div className="font-light mb-[20px]">
-           {role==="freelance"? `Welcome ${chatOwner?.name}! We're thrilled to have you join our community of talented freelancers. Here, you'll find a wide range of exciting job opportunities that match your skills and expertise.`:` We're thrilled to have you on board ${chatOwner?.name}! Your journey to finding the perfect freelancers begins here.
+           {role==="freelancer"? `Welcome ${chatOwner?.name}! We're thrilled to have you join our community of talented freelancers. Here, you'll find a wide range of exciting job opportunities that match your skills and expertise.`:` We're thrilled to have you on board ${chatOwner?.name}! Your journey to finding the perfect freelancers begins here.
             Our platform is designed to connect you with skilled professionals who can bring your projects to life.`}
             </div>
           </div>

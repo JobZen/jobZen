@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import SideNavBar from '../sideNavBar/page';
+import Search from '../../search/page'
 
 interface Jobowner {
   id:number;
@@ -48,40 +49,13 @@ return (
     </div>
 
 {/* drop navigation Action */}
-    <div className="relative overflow-x-auto">
+<div className="relative overflow-x-auto">
       <div className="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 bg-white">
-        <label
-          htmlFor="table-search"
-          className="sr-only"
-        >
+        <label htmlFor="table-search" className="sr-only">
           Search
         </label>
-        <div className="relative">
-          <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-            <svg
-              className="w-4 h-4 text-gray-500"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 20 20"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-              />
-            </svg>
-          </div>
-          <input
-            type="text"
-            id="table-search-users"
-            className="block pt-2 ps-10 text-sm border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Search for users"
-          />
-        </div>
-      </div>
+        <Search/>
+    </div>
 
 {/* table starts here */}
       <table className="w-full text-sm text-left rtl:text-right  border-[#267296] border-b-4 border-4 bg-[#267296]">
@@ -142,7 +116,7 @@ return (
         <tbody>
         {jobowners.map((jobowner) => (
           <tr key={jobowner.id} 
-            className="bg-white border-gray-400 hover:bg-[#91C7EF] group"
+            className="bg-white border-gray-400 hover:bg-[#91C7EF] group transition duration-200 "
           >
             <td className="w-4 p-4">
               <div className="flex items-center">
@@ -170,15 +144,19 @@ return (
               />
               <div className="ps-3">
                 <div className="text-base font-semibold hover:text-bold">
-                {jobowner.name}
-                </div>
+                {jobowner.name.length > 10
+              ? `${jobowner.name.slice(0, 10)}...`
+              : jobowner.name}
+              </div>
                 <div className="font-normal text-gray-500 hover:text-bold">
-                {jobowner.email}
+                {jobowner.email.length >15 ?`${jobowner.email.slice(0,15)}...`
+                :jobowner.email}
                 </div>
               </div>
             </th>
             <td className="px-6 py-4 hover:text-bold">
-            {jobowner.description}
+            {jobowner.description.length>50?`${jobowner.description.slice(0,50)}...`
+            :jobowner.description}
             </td>
             <td className="px-6 py-4 hover:text-bold">
             {jobowner.rating}
@@ -189,26 +167,17 @@ return (
             <td className="px-6 py-4">
               {/* <!-- Modal toggle --> */}
               <a
-                href={`/admin/jobownersList/${jobowner.id}`}
-                type="button"
-                data-modal-target="editUserModal"
-                data-modal-show="editUserModal"
-                className="font-medium hover:text-bold text-blue-600 hover:underline hover:font-extrabold"
-              >
-                Check profile
-              </a>
+           href={`/admin/jobownersList/${jobowner.id}`}
+            className="transition ease-in-out delay-150 text-white bg-blue-500 border border-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 inline-flex items-center font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+            Job owner details</a>
             </td>
             <td className="px-6 py-4">
               {/* <!-- Modal toggle --> */}
               <a
-                href="#"
-                type="button"
-                data-modal-target="editUserModal"
-                data-modal-show="editUserModal"
-                className="font-medium hover:text-bold text-red-600 hover:underline hover:font-extrabold text-l"
-              >
-                Delete user
-              </a>
+              href="#"
+              type="button"
+              className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 inline-flex items-center text-red-700 hover:text-white border border-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+              <span className="ml-2">Delete Job owner</span></a>
             </td>
           </tr>
           ))}
