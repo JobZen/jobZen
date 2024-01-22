@@ -1,7 +1,8 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import SideNavBar from '../../sideNavBar/page';
+import { MdKeyboardArrowUp } from 'react-icons/md';
 
 interface Freelancer {
   id: number;
@@ -33,6 +34,9 @@ const Freelancer = ()=> {
       jobtitle:"",
   });
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [rowCount, setRowCount] = useState<number>(0);
+
   useEffect(() => {
         var currentUrl=window.location.href
         var ind=currentUrl.split("/")
@@ -49,6 +53,10 @@ const Freelancer = ()=> {
         fetchFreelancer();
   }, [free.id]);
 
+  const handleScrollUp = () => {
+    setRowCount((prevCount) => prevCount + 1);
+  };
+
   return (
       <div className="p-4 sm:ml-64">
         <SideNavBar />
@@ -58,8 +66,17 @@ const Freelancer = ()=> {
 
         {/* Freelancer details*/}
         <div className=" font-sans">
-          <div className="container mx-auto py-8 px-4 mt-4">
+          <div className="container mx-auto py-8 px-4 mt-4" ref={containerRef}>
               <div className="bg-white p-6 rounded-lg mb-4 shadow-lg">
+              {rowCount >= 10 && (
+                <div
+                className="fixed bottom-4 right-4 w-8 h-8 border-black hover:border-[#267296] hover:bg-white bg-[#267296] active:bg-[#2e667f] rounded-full border-4  text-black flex items-center justify-center transition duration-200"
+                 onClick={() => {
+                 setRowCount(0);
+                 containerRef.current?.scrollIntoView({ behavior: 'smooth' });
+                   }}>
+                 <MdKeyboardArrowUp className="text-black hover:border-[#267296] hover:bg-white hover:text-[#267296] text-2xl" />
+                 </div> )}
                 <img
                   className="w-26 h-22 rounded-full max-w-[25%] mb-6"
                   src={free.image}
