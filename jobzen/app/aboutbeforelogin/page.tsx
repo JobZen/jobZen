@@ -1,9 +1,9 @@
 import Navbar from "../navBar/page";
 import Footer from "../footer/page";
-import Cookies from "js-cookie";
+
 
 const AboutUs = () => {
-
+ 
     return ( 
         <div className="bg-white">
          <Navbar/>

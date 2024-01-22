@@ -1,5 +1,5 @@
-const{ FreelancerMessages, Freelancer, JobOwner }=require('../database/index.js');
-
+const { default: axios } = require('axios');
+const{ FreelancerMessages, Freelancer, JobOwner ,JobOwnerMessages }=require('../database/index.js');
 // CRUD operations
 async function getAllMessages(req, res) {
 try {
@@ -50,20 +50,59 @@ res.status(500).json({ error: error.message });
 }
 
 async function FindMessageBySenderAndRecieverId(req, res) {
-    try {
-    const { sender , reciever } = req.params;
-    const messages = await FreelancerMessages.findAll({ where: { sender:sender , reciever:reciever } });
     
-    if (!messages.length) {
-        return res.status(501).json({ message: 'No Messages to be foundt' });
-    }
+        try {
+            const { sender, reciever } = req.params;
+            const messages = await FreelancerMessages.findAll({
+                where: { sender: sender, reciever: reciever },
+                
+           
+                include: [
+                    { model: JobOwner },
+                    { model: Freelancer,
+                        attributes: {
+                            exclude: ['updatedAt']
+                        } }
+                ]
+            });
     
-    res.status(200).json(messages);
-    } catch (error) {
-    res.status(500).json({ error: error.message });
-    }
-    }
+            res.status(200).json(messages);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }}
+    
+    
 
+    const sortByCreatedAt = (a, b) =>
+    new Date(a.createdAt) - new Date(b.createdAt);
+    
+    async function FindJobwnersBySenderId (req, res) {
+    
+        const { sender  } = req.params;
+         FreelancerMessages.findAll({ where: { sender:sender  } })
+         .then((response) =>  {
+            JobOwnerMessages.findAll({where : {reciever:sender}})
+            .then((ress)=>{
+                const ids = response.map(message => message.dataValues.reciever);
+                const idss= ress.map(message => message.dataValues.sender);
+                const all=[...idss,...ids]
+            const uniqueIds = [...new Set(all)];
+            console.log(uniqueIds,"fklsglfd")
+            const hhh=uniqueIds.map(async(index)=>{
+               const req1 =await axios.get(`http://localhost:3000/freeMS/msg/${sender}/${index}`);
+                const req2 =await axios.get(`http://localhost:3000/jobMS/msg/${index}/${sender}`);
+                return (req1.data).concat(req2.data).sort(sortByCreatedAt)
+
+          
+            })
+            const test=Promise.all(hhh).then((ress)=>{
+                res.json(ress);
+            })
+
+            })
+        })
+        .catch ((error) =>{ res.status(500).send(error) })
+        }
 
 // CRUD operations with Foreign Keys
 
@@ -102,7 +141,9 @@ module.exports = {
   deleteMessageById,
   getAllMessagesWithDetails,
   createMessageWithForeignKey,
-  FindMessageBySenderAndRecieverId
+  FindMessageBySenderAndRecieverId,
+  FindJobwnersBySenderId,
+ 
 };
 
 
