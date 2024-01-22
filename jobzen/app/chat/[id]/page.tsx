@@ -5,6 +5,7 @@ import { Message } from "@mui/icons-material";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import io from "socket.io-client";
+import {useRouter}from 'next/navigation'
 
 interface Message {
   id: number;
@@ -15,6 +16,47 @@ interface Message {
   reciever: number;
   him: boolean;
 }
+interface Person {
+  
+    
+      id:number
+      body: string
+      createdAt : string
+      updatedAt: string
+      sender: number
+      reciever: number
+      jobowner: {
+        id: number
+        name: string
+        email: string
+        adress: string
+        phone: number
+        image: string
+        rating: number
+        description: string,
+        createdAt: string
+        updatedAt:string
+      },
+      freelancer: {
+        id: number
+        name: string
+        email: string
+        adress: string
+        phone: string
+        image: string
+        skill: string,
+        aboutMe: string,
+        experience: string,
+        jobtitle: string,
+        createdAt: string
+        updatedAt: string
+      }
+ 
+
+}
+
+
+
 const socket = io("http://localhost:3000");
 const Chat = () => {
   const role = Cookies.get("role");
@@ -23,9 +65,14 @@ const Chat = () => {
   const [sender, setSender] = useState<Message[] | []>([]);
   const [reciever, setReciever] = useState<Message[] | []>([]);
   const [currentMessage, setCurrentMessage] = useState("");
+  const [myMessage,setMyMessage]= useState<Person[] [] | []>([]);
+  const [index , setIndex] = useState(0)
 
   const sortByCreatedAt = (a: Message, b: Message) =>
     new Date(a.createdAt) - new Date(b.createdAt);
+
+
+const route=useRouter()
 
   const sorted = [...sender, ...reciever].sort(sortByCreatedAt);
 
@@ -49,30 +96,35 @@ const Chat = () => {
     setCurrentMessage("");
   };
 
+
+  useEffect (()=> {
+    const currentUrl = window.location.href;
+    const ind = currentUrl.split("/");
+    setIndex(parseInt(ind[ind.length - 1]))
+  })
+
+
   useEffect(() => {
-    var currentUrl = window.location.href;
-    var ind = currentUrl.split("/");
     let req1;
     let req2;
     let req3;
-    let req4;
-
-    var index = parseInt(ind[ind.length - 1]);
-    if (role === "freelancer") {
+   
+    
+    if ( role === "freelancer") {
       req1 = axios.get(`http://localhost:3000/freeMS/msg/${id}/${index}`);
       req2 = axios.get(`http://localhost:3000/jobMS/msg/${index}/${id}`);
       req3=axios.get(`http://localhost:3000/freeMS/msg/${id}`)
-      req4=axios.get(`http://localhost:3000/freeMS/msg1/${id}`)
      
-    } else {
+    }
+     else {
       req2 = axios.get(`http://localhost:3000/freeMS/msg/${index}/${id}`);
       req1 = axios.get(`http://localhost:3000/jobMS/msg/${id}/${index}`);
-      req3=axios.get(` http://localhost:3000/jobMS/msg/${id}`)
-      req4=axios.get(` http://localhost:3000/jobMS/msg1/${id}`)
+      req3=axios.get(`http://localhost:3000/jobMS/msg/${id}`)
     }
+  
 
     axios
-      .all([req1, req2,req3,req4])
+      .all([req1, req2,req3])
       .then(
         axios.spread((...res) => {
           res[1].data.forEach((element: { him: boolean }) => {
@@ -81,12 +133,36 @@ const Chat = () => {
           console.log(res[1].data);
           setSender(res[0].data);
           setReciever(res[1].data);
+          setMyMessage(res[2].data)
         })
       )
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [index]);
+ 
+  const handleClassName = (freelancerId:number,jobownerId:number) => {
+   
+    const isOn=" items-center border-b-2 border-l-4 border-blue-400"
+    const isOff="px-2 justify-center items-center border-b-2"
+    if (role==="freelancer" &&  jobownerId===index) {
+     return isOn
+    }
+    else if (role!=="freelancer" && freelancerId===index)
+   { return isOn }
+
+   else return isOff
+  }
+
+const handleRoute = (freelancerId:number,jobownerId:number) => {
+  if (role==="freelancer") {
+    route.push(`/chat/${jobownerId}`)
+   }
+ else
+ route.push(`/chat/${freelancerId}`)
+
+}
+
 
   return (
    
@@ -121,8 +197,8 @@ const Chat = () => {
           </div>
         
          <div className="flex flex-col mt-5 overflow-y-auto max-h-[481px]">
-
-          <div className="flex flex-row py-4 px-2 justify-center items-center border-b-2">
+           {myMessage.map((el,i)=>(
+           <div key={i} className={handleClassName(el[el.length-1].freelancer.id,el[el.length-1].jobowner.id)+" flex flex-row py-4 px-2 cursor-pointer"} onClick={()=>{handleRoute(el[el.length-1].freelancer.id,el[el.length-1].jobowner.id)}}>
             <div className="w-1/4">
               <img
                 src="https://source.unsplash.com/_7LbC5J-jw4/600x600"
@@ -131,82 +207,25 @@ const Chat = () => {
               />
             </div>
             <div className="w-full">
-              <div className="text-lg font-semibold">Luis1994</div>
-              <span className="text-gray-500">Pick me at 9:00 Am</span>
+              <div className="text-lg font-semibold">{role==="freelancer"?
+               el[el.length-1].jobowner.name
+               :
+               el[el.length-1].freelancer.name}</div>
+              <span className="text-gray-500">{role==="freelancer"?
+              el[el.length-1].freelancer.updatedAt?
+               "him :"+ el[el.length-1].body
+                :
+               "you :"+ el[el.length-1].body
+               :
+               el[el.length-1].jobowner.updatedAt?
+                "him :"+ el[el.length-1].body
+                :
+                "you :"+ el[el.length-1].body}</span>
             </div>
-          </div>
-          <div className="flex flex-row py-4 px-2 items-center border-b-2">
-            <div className="w-1/4">
-              <img
-                src="https://source.unsplash.com/otT2199XwI8/600x600"
-                className="object-cover h-12 w-12 rounded-full"
-                alt=""
-              />
-            </div>
-            <div className="w-full">
-              <div className="text-lg font-semibold">Everest Trip 2021</div>
-              <span className="text-gray-500">Hi Sam, Welcome</span>
-            </div>
-          </div>
-          <div className="flex flex-row py-4 px-2 items-center border-b-2 border-l-4 border-blue-400">
-            <div className="w-1/4">
-              <img
-                src="https://source.unsplash.com/L2cxSuKWbpo/600x600"
-                className="object-cover h-12 w-12 rounded-full"
-                alt=""
-              />
-            </div>
-            <div className="w-full">
-              <div className="text-lg font-semibold">MERN Stack</div>
-              <span className="text-gray-500">Lusi : Thanks Everyone</span>
-            </div>
-          </div>
-          <div className="flex flex-row py-4 px-2 items-center border-b-2">
-            <div className="w-1/4">
-              <img
-                src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
-                className="object-cover h-12 w-12 rounded-full"
-                alt=""
-              />
-            </div>
-            <div className="w-full">
-              <div className="text-lg font-semibold">Javascript Indonesia</div>
-              <span className="text-gray-500">
-                Evan : some one can fix this
-              </span>
-            </div>
-          </div>
-          <div className="flex flex-row py-4 px-2 items-center border-b-2">
-            <div className="w-1/4">
-              <img
-                src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
-                className="object-cover h-12 w-12 rounded-full"
-                alt=""
-              />
-            </div>
-            <div className="w-full">
-              <div className="text-lg font-semibold">Javascript Indonesia</div>
-              <span className="text-gray-500">
-                Evan : some one can fix this
-              </span>
-            </div>
-          </div>
-
-          <div className="flex flex-row py-4 px-2 items-center border-b-2">
-            <div className="w-1/4">
-              <img
-                src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
-                className="object-cover h-12 w-12 rounded-full"
-                alt=""
-              />
-            </div>
-            <div className="w-full">
-              <div className="text-lg font-semibold">Javascript Indonesia</div>
-              <span className="text-gray-500">
-                Evan : some one can fix this
-              </span>
-            </div>
-          </div>
+            
+          </div>))}
+          
+        
           </div>
        
         </div>
@@ -231,7 +250,9 @@ const Chat = () => {
                 className="object-cover h-8 w-8 rounded-full"
                 alt=""
               />
-            </div>}</div>))}
+            </div>}
+            
+            </div>))}
         
    
          

@@ -1,3 +1,5 @@
+const { default: axios } = require('axios');
+
 const{ JobOwnerMessages, Freelancer, JobOwner ,FreelancerMessages }=require('../database/index.js');
 
 // CRUD operations
@@ -45,18 +47,7 @@ res.status(500).json({ error: error.message });
 }
 }
 
-async function FindMessageBySenderAndRecieverId(req, res) {
-    try {
-    const { sender , reciever } = req.params;
-    const messages = await JobOwnerMessages.findAll({ where: { sender:sender , reciever:reciever } });
-    
-   
-    
-    res.status(200).json(messages);
-    } catch (error) {
-    res.status(500).json({ error: error.message });
-    }
-    }
+
 
 
 // CRUD operations with Foreign Keys
@@ -90,70 +81,57 @@ res.status(500).json({ error: error.message });
 }
 
 
-    async function FindFreelancerBySenderId (req, res) {
-    
-        const { sender  } = req.params;
-         JobOwnerMessages.findAll({ where: { sender:sender  } })
-         .then((response) =>  {
-            const ids = response.map(message => message.dataValues.reciever);
-            
-            const uniqueIds = [...new Set(ids)];
-            const FreeMessages =  uniqueIds.map( async (id)=> {try {
-                return FreelancerMessages.findAll({ where: { sender:id,reciever:sender}
-                    
-                })
-            } catch (error) {
-                res.status(405).send(error)
-            }    })
-            const ttt=  Promise.all(FreeMessages).then((ress)=>{   
-                const ppp = ress.reduce((acc,el)=>(
-                    acc=acc.concat(el[el.length-1])
-                ),[])
-                JobOwner.findAll({ where: { id:uniqueIds} })
-                .then((response) => {
-                     for (let i = 0; i < response.length; i++) {
-                  response[i].dataValues.msg=ppp[i] } 
-                   res.status(200).json(response);console.log(response)})
-                .catch((err)=> {res.status(501).send(err)})
 
-            })
-          
+async function FindMessageBySenderAndRecieverId(req, res) {
+    try {
+    const { sender , reciever } = req.params;
+    const messages = await JobOwnerMessages.findAll({ where: { sender:sender , reciever:reciever },include:[
+        {model:JobOwner,
+            attributes: {
+                exclude: ['updatedAt']
+            }},
+        {model:Freelancer}
+    ] });
+    
+   
+    
+    res.status(200).json(messages);
+    } catch (error) {
+    res.status(500).json({ error: error.message });
+    }
+    }
+
+const sortByCreatedAt = (a, b) =>
+new Date(a.createdAt) - new Date(b.createdAt);
+
+async function FindJobwnersBySenderId (req, res) {
+
+    const { sender  } = req.params;
+     FreelancerMessages.findAll({ where: { reciever:sender  } })
+     .then((response) =>  {
+        JobOwnerMessages.findAll({where : {sender:sender}})
+        .then((ress)=>{
+            const ids = response.map(message => message.dataValues.sender);
+            const idss= ress.map(message => message.dataValues.reciever);
+            const all=[...idss,...ids]
+        const uniqueIds = [...new Set(all)];
+        console.log(uniqueIds,"fklsglfd")
+        const hhh=uniqueIds.map(async(index)=>{
+           const req1 =await axios.get(`http://localhost:3000/freeMS/msg/${index}/${sender}`);
+            const req2 =await axios.get(`http://localhost:3000/jobMS/msg/${sender}/${index}`);
+            return (req1.data).concat(req2.data).sort(sortByCreatedAt)
+
+      
         })
-        .catch ((error) =>{ res.status(500).send(error) })
-        }
+        const test=Promise.all(hhh).then((ress)=>{
+            res.json(ress);
+        })
 
+        })
+    })
+    .catch ((error) =>{ res.status(500).send(error) })
+    }
 
-        async function FindJobwnersBySenderId (req, res) {
-    
-            const { sender  } = req.params;
-             FreelancerMessages.findAll({ where: { sender:sender  } })
-             .then((response) =>  {
-                const ids = response.map(message => message.dataValues.reciever);
-                const uniqueIds = [...new Set(ids)];
-              const JBmessages =  uniqueIds.map( async (id)=> {try {
-                    return JobOwnerMessages.findAll({ where: { sender:sender ,reciever:id},
-                        attributes: {exclude: ['updatedAt']} 
-                     })
-                } catch (error) {
-                    res.status(405).send(error)
-                }    })
-                const ttt=  Promise.all(JBmessages).then((ress)=>{   
-                    const ppp = ress.reduce((acc,el)=>(
-                        acc=acc.concat(el[el.length-1])
-                    ),[])
-                    JobOwner.findAll({ where: { id:uniqueIds} })
-                    .then((response) => {
-                         for (let i = 0; i < response.length; i++) {
-                      response[i].dataValues.msg=ppp[i] } 
-                       res.status(200).json(response);console.log(response)})
-                    .catch((err)=> {res.status(501).send(err)})
-    
-                })
-              
-            })
-            .catch ((error) =>{ res.status(500).send(error) })
-    
-            }
 
 module.exports = {
   getAllMessages,
@@ -164,7 +142,7 @@ module.exports = {
   createMessageWithForeignKey,
   FindMessageBySenderAndRecieverId,
   FindJobwnersBySenderId,
-  FindFreelancerBySenderId
+ 
 };
 
 
