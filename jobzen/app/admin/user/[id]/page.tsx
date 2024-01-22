@@ -67,7 +67,7 @@ const UserInfo = () => {
   
     const fetchUser = async () => {
       try {
-        if (index && !isNaN(index)) {
+        if (index ) {
           const freelancerRes = await axios.get(`http://localhost:3000/freelancer/${index}`);
           
           if (freelancerRes.data.jobtitle !== undefined) {
@@ -104,45 +104,50 @@ const UserInfo = () => {
           <div className="container mx-auto py-8 px-4 ">
             {user && (
               <div className="bg-white p-6 rounded-[25px] shadow-lg">
+                <div className="w-30 h-30 rounded-full max-w-[25%] mb-6">
                 <img
-                  className="w-20 h-20 rounded-full"
+                  className="w-full h-full rounded-full"
                   src={user.image}
                   alt="user image"
-                />
-                <h1 className="text-3xl font-semibold">{user.name}</h1>
+                /></div>
+                <h1 className="text-4xl font-bold">{user.name}</h1>
                 {('jobtitle' in user) && (
                   <>
-                    <p className="text-gray-600">{user.jobtitle}</p>
-                    <hr className="my-4" />
+                    <p className="text-gray-600 text-2xl">{user.jobtitle}</p>
+                    <hr className="my-8" />
 
-                    <h2 className="text-xl font-semibold mb-2">About Freelancer</h2>
-                    <p className="text-gray-700">{user.aboutMe}</p>
+                    <h2 className="text-3xl font-semibold mb-6">About Freelancer</h2>
+                    <p className="text-gray-700 text-2xl">{user.aboutMe}</p>
+                    <hr className="my-8" />
 
-                    <h2 className="text-xl font-semibold mt-4 mb-2">Skills</h2>
-                    <ul className="list-disc list-inside text-gray-700">
+                    <h2 className="text-3xl font-semibold mb-6">Skills</h2>
+                    <ul className="list-disc text-2xl list-inside text-gray-700">
                       {user.skills.split(',').map((skill, index) => (
                         <li key={index}>{skill.trim()}</li>
                       ))}
                     </ul>
-                    <h2 className="text-xl font-semibold mt-4 mb-2">Experience</h2>
+                    <hr className="my-8" />
+
+                    <h2 className="text-3xl font-semibold mb-6">Experience</h2>
                     <div className="mb-4">
-                      <h3 className="text-lg font-semibold">{user.jobtitle}</h3>
-                      <p className="text-gray-700">{user.experience}</p>
+                      <h3 className="text-2xl font-semibold">{user.jobtitle}</h3>
+                      <p className="text-gray-700 text-xl">{user.experience}</p>
+                      <hr className="my-8" />
                     </div>
                   </>
                 )}
                 {('description' in user) && (
                   <>
-                    <h2 className="text-xl font-semibold mb-2">Company Bio</h2>
-                    <p className="text-gray-700">{user.description}</p>
+                    <h2 className="text-3xl font-semibold mb-6">Company Bio</h2>
+                    <p className="text-gray-700 text-xl">{user.description}</p>
 
-                    <h2 className="text-xl font-semibold mb-2">Company Rating</h2>
+                    <h2 className="text-3xl font-semibold mb-6">Company Rating</h2>
                     <StarRating rating={user.rating} />
                   </>
                 )}
 
-                <h2 className="text-xl font-semibold mt-4 mb-2">Contact information</h2>
-                <ul className="list-disc list-inside text-gray-700">
+                <h2 className="text-3xl font-semibold mb-6">Contact information</h2>
+                <ul className="list-disc text-2xl list-inside text-gray-700">
                   <li>Email: {user.email}</li>
                   <li>Phone: {user.phone}</li>
                   <li>Address: {user.adress}</li>

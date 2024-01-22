@@ -159,7 +159,7 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
               <div className="absolute w-[530px] top-[434px] left-[527px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] tracking-[0] leading-[normal]">
                 {jobOwnerData.phone}
               </div>
-              <div className="absolute w-[172px] h-[20px] top-[60px] left-[510px] [font-family:'Jockey_One-Regular',Helvetica] font-normal  text-[#91c6ef] text-[20px] text-center leading-[20px] whitespace-nowrap absolute tracking-[0]">
+              <div className="absolute w-[172px] h-[20px] top-[60px] left-[510px] [font-family:'Jockey_One-Regular',Helvetica] font-normal  text-[#91c6ef] text-[20px] text-center leading-[20px] whitespace-nowrap tracking-[0]">
                 Company Name:
               </div>
               <div className="absolute w-[172px] h-[20px] top-[298px] left-[526px] [font-family:'Jockey_One-Regular',Helvetica] font-normal text-[#91c6ef] text-[20px] tracking-[0] leading-[20px] whitespace-nowrap">

@@ -97,7 +97,7 @@ const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
            <Link href={`/jobDetails/${element.id}`} key={element.id}>
           <div className="w-[12cm] h-60 flex flex-col justify-center gap-4 bg-neutral-50 rounded-lg shadow p-4 hover:scale-110">
           <div className="flex gap-4">
-            <img className="bg-neutral-500 w-32 h-32 shrink-0 rounded-lg" src={element.image} />
+            <img className="bg-neutral-500 w-32 h-32 shrink-0 rounded-lg" alt="" src={element.image} />
             <div className="flex flex-col">
               <p className="text-xl font-bold">{element.jobtitle}</p>
               <span className="font-bold text-neutral-700 italic"></span>

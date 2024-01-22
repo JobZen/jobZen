@@ -157,11 +157,11 @@ const addProduct = (e: React.ChangeEvent<HTMLInputElement>) => {
                     placeholder='describe the needed qualification for this job'
                     onChange={(e)=> setQualification(e.target.value)}></textarea>
                     </div>  
-                          <div>
-            <input type="file" onChange={(e) => addProduct(e)} />
-          </div>
-            </div>  
-              
+                    <div>
+                    <label htmlFor="fileInput">Upload File:</label>
+                   <input type="file" id="fileInput" onChange={(e) => addProduct(e)} />
+                    </div>
+                     </div>  
           </div>
         </div>
       </div>

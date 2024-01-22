@@ -79,11 +79,13 @@ const Jobowner = () => {
         <div className=" font-sans">
           <div className="container mx-auto py-8 px-4 mt-4">
               <div className="bg-white p-6 rounded-xl shadow-lg">
+              <div className="w-30 h-30 rounded-full max-w-[25%] mb-6">
                 <img
-                  className="w-30 h-30 rounded-full mb-6"
+                  className="w-full h-full rounded-full"
                   src={jobowner.image}
                   alt="user image"
                 />
+                </div>
                 <h1 className="text-4xl font-bold">{jobowner.name}</h1>
                     <hr className="my-8" />
 

@@ -77,11 +77,13 @@ const Freelancer = ()=> {
                    }}>
                  <MdKeyboardArrowUp className="text-black hover:border-[#267296] hover:bg-white hover:text-[#267296] text-2xl" />
                  </div> )}
+                 <div className="w-30 h-30 rounded-full max-w-[25%] mb-6">
                 <img
-                  className="w-26 h-22 rounded-full max-w-[25%] mb-6"
+                  className="w-full h-full rounded-full"
                   src={free.image}
                   alt="Freelancer image"
-                />
+                /></div>
+
                 <h1 className="text-4xl font-bold">{free.name}</h1>
                     <p className="text-gray-600 text-2xl">{free.jobtitle}</p>
                     <hr className="my-8" />

@@ -29,13 +29,13 @@ const Contact = () => {
             </div>
             <div>
               <label htmlFor="subject" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600">
-                Subject
+                Your Name
               </label>
               <input
                 type="text"
                 id="subject"
                 className="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border"
-                placeholder="Let us know how we can help you"
+                placeholder="write your full name here"
                 required
               />
             </div>

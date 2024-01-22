@@ -14,6 +14,13 @@ const CategoriesList = () => {
 const [categories, setCategories] = useState<Category[]>([])
 const [categoriesCount,setcategoriesCount]=useState<number | undefined>()
 const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
+const [newCategory,setNewCategory]=useState<Category>({
+  id:0,
+  category:"",
+  image:"",
+})
+
+const [showAddForm, setShowAddForm] = useState(false);
 
 useEffect(()=>{  
 const getAllCategories = async () => {
@@ -134,6 +141,7 @@ return (
               scope="row"
               className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap "
             >
+              
               <img
                 className="w-20 h-20 rounded-full"
                 src={category.image}

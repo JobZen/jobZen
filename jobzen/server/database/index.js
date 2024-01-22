@@ -222,6 +222,29 @@ const ContactFreelancer = sequelize.define('contact_freelancer', {
   }
 });
 
+///contact us without foreign key
+const Contact= sequelize.define("contact",{
+  id:{
+    type:DataTypes.INTEGER,
+    autoIncrement:true,
+    primaryKey:true
+  },
+  name : {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+    
+  email : {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  message : {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  }
+
+})
+
 // Freelancer has many categories //11
 const FreelancerHasCategories = sequelize.define('freelancer_has_manyCategories', {
 });
@@ -306,7 +329,7 @@ JobHasFreelancer.belongsTo(Freelancer, {foreignKey:'freelancerId',allowNull:fals
 
 
 module.exports = {
-  Freelancer,JobOwner,Admin,Job,
+  Freelancer,JobOwner,Admin,Job,Contact,
   JobCategory,FreelancerCategories,
   Review,JobHasFreelancer,ContactJobOwner,
   ContactFreelancer,FreelancerHasCategories,FreelancerMessages,JobOwnerMessages}

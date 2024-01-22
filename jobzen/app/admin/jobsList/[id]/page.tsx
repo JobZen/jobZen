@@ -104,11 +104,13 @@ const JobInfo = () => {
           <div className="container mx-auto py-8 px-4">
             {jobOwners.length > 0 && jobs.length > 0 && jobCategories.length > 0 && (
               <div className="bg-white p-6 rounded-lg shadow-lg">
-                <img
-                  className="w-30 h-30 rounded-full mb-6"
+              <div className="w-30 h-30 rounded-full max-w-[25%] mb-6">
+               <img
+                  className="w-full h-full rounded-full"
                   src={jobOwners[0].image}
                   alt="company image"
                 />
+                </div>
                 <h1 className="text-4xl font-bold">{jobOwners[0].name}</h1>
                 <hr className="my-8" />
                 {jobOwners.length > 0 && jobs.length > 0 && jobCategories.length > 0 && (
