@@ -14,6 +14,7 @@ const jobOwner= require('./routes/jobOwnerRoute.js');
 const messages = require('./routes/messagesRoute.js')
 const contactFreelancer = require('./routes/contactFreelancerRoute.js');
 const contactJobOwner = require('./routes/contactJobOwnerRoute.js');
+const contact = require('./routes/contactRouter.js');
 
 const freelancerCategories = require('./routes/freelancerCategoriesRoute.js');
 const freelancerHasCategories = require('./routes/freelancerHasCategoriesRoute.js');
@@ -50,6 +51,8 @@ app.use('/jobCategory', jobCategory);
 app.use('/jobHasFreelancer', jobHasFreelancer);
 app.use('/review', review);
 app.use('/auth', authenticated);
+app.use('/contactUs', contact);
+
 
 
 const server =  createServer(app);
