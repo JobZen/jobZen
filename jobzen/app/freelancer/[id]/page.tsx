@@ -76,7 +76,9 @@ const Freelancer = () => {
                   <h1 className="text-2xl font-bold text-gray-800">
                     {free.name}
                   </h1>
-                  <p className="text-gray-600 font-sans italic text-xl">{free.jobtitle}</p>
+                  <p className="text-gray-600 font-sans italic text-xl">
+                    {free.jobtitle}
+                  </p>
                   <div className="mt-6 flex flex-wrap gap-4 justify-center">
                     <button
                       className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[white] rounded-full overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#267296] text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[white] items-center justify-center mr-0 py-[8px] transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[#267296] hover:scale-110 relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid "
@@ -109,7 +111,9 @@ const Freelancer = () => {
                 <h2 className="text-xl font-bold text-gray-800 mt-3 ">
                   About Me
                 </h2>
-                <p className="text-gray-700 mt-3 font-sans italic text-xl">{free.aboutMe}</p>
+                <p className="text-gray-700 mt-3 font-sans italic text-xl">
+                  {free.aboutMe}
+                </p>
                 <div>
                   <div>
                     <h2 className="text-xl font-bold text-gray-800 mt-3 ">

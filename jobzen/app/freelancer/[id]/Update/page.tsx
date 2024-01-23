@@ -5,7 +5,7 @@ import Navbar from "../../../navFreelancer/page";
 import Footer from "../../../footer/page";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Popup from "../../../popup/page"
+import Popup from "../../../popup/page";
 
 interface FreelancerProfile {
   id: number;
@@ -26,7 +26,7 @@ const Update = () => {
 
   const [url, setUrl] = useState<string>("");
   console.log(url);
-  const [showPopup, setShowPopup] = useState(false)
+  const [showPopup, setShowPopup] = useState(false);
   const [id, setId] = useState(0);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState(0);
@@ -93,8 +93,7 @@ const Update = () => {
       ); //put ${id} instead of 1
       const data = response.data;
       console.log("Profile updated successfully", data);
-      setShowPopup(true)
-      
+      setShowPopup(true);
     } catch (error) {
       console.log("error updating freelancer profile", error);
       alert("Please try again");
@@ -201,7 +200,7 @@ const Update = () => {
                       />
                     </div>
                     <Link href={`/freelancer/${free?.id || ""}`}>
-                      <button  className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[white] rounded-full overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#267296] text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[white] items-center justify-center mr-0 py-full transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[#267296] hover:scale-110 relative bg-[#267296] rounded-full overflow-hidden border border-solid ">
+                      <button className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[white] rounded-full overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#267296] text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[white] items-center justify-center mr-0 py-full transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[#267296] hover:scale-110 relative bg-[#267296] rounded-full overflow-hidden border border-solid ">
                         Cancel
                       </button>
                     </Link>
@@ -279,6 +278,5 @@ const Update = () => {
       <Footer />
     </div>
   );
-  
 };
 export default Update;
