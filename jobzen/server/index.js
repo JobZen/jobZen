@@ -63,7 +63,7 @@ const server =  createServer(app);
 const io = new Server(server, {cors :
   {
  methods: ['GET', 'POST' ] ,
- origin : 'https://localhost:3001'
+ origin : `https://localhost:${PORT}`
 }});
 
 
@@ -71,7 +71,7 @@ const io = new Server(server, {cors :
   console.log(`socket is connected ${socket.id}`);
   socket.on('send',(message)=>{
     console.log(`Recieced message${message}`)
-    io.emit('recieved', message)
+    io.emit('recieve', message)
    });
   
    socket.on('disconnect',(socket)=> {
