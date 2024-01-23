@@ -66,7 +66,7 @@ function allcompanies() {
   return (
     <div>
         <Nav/>
-      <div className="bg-[#172554] h-[10cm] ">
+      <div className="bg-[#172554]  h-[10cm] ">
         <div className=" ml-[16cm]">
           <h1 className="text-8xl text-[#172554]">.</h1>
           <div className="flex space-x-4">

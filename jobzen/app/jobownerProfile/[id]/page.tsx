@@ -29,13 +29,13 @@ const StarRating = ({ rating }: { rating: number }) => {
   return (
     <div className="flex">
       {[...Array(fullStars)].map((_, index) => (
-        <span key={index} className="text-yellow-500">
+        <span key={index} className="text-yellow-500 text-3xl">
           &#9733;
         </span>
       ))}
-      {halfStar && <span className="text-yellow-500">&#9733;</span>}
+      {halfStar && <span className="text-yellow-500 text-3xl">&#9733;</span>}
       {[...Array(emptyStars)].map((_, index) => (
-        <span key={`empty-${index}`} className="text-gray-500">
+        <span key={`empty-${index}`} className="text-gray-500 text-3xl">
           &#9733;
         </span>
       ))}
@@ -114,30 +114,28 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
                 src={jobOwnerData.image}
                 alt="Company photo or profile"
               />
-              <div className="absolute w-[239px] h-[152px] top-[388px] left-[174px] bg-[#267296] rounded-[15px] overflow-hidden">
+              <div className="absolute w-[475px] h-[562px] top-[0px] left-[1070px] bg-[white] rounded-[42px] overflow-hidden">
                 <JobLocation jobOwnerAddress={jobOwnerData.adress} />
               </div>
 
-              <div className="absolute w-[114px] top-[290px] left-[260px]">
+              <div className="absolute w-[114px] top-[290px] left-[233px]">
                 <div className="flex items-center">
                   <StarRating rating={jobOwnerData.rating} />
                 </div>
               </div>
 
               <button
-                className="flex w-[176px] h-[56px] rounded-full left-[207px] top-[200px] items-center justify-center mr-0 py-[8px] relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid"
+                className="flex w-[176px] h-[56px] rounded-full left-[207px] top-[200px] [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[#267296] items-center justify-center mr-0 py-[8px] transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[white] hover:scale-110 relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid"
                 onClick={handleEditButtonClick}
               >
-                <div className="relative w-fit [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap">
-                  Edit Profile
-                </div>
+                Edit Profile
               </button>
 
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
-                className="absolute w-[17px] h-[17px] mr-8 top-[340px] left-[200px]"
+                className="absolute w-[17px] h-[17px] mr-8 top-[360px] left-[214px]"
               >
                 <path
                   fillRule="evenodd"
@@ -145,8 +143,9 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
                   clipRule="evenodd"
                 />
               </svg>
-              <div className="w-[164px] top-[340px] left-[220px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] leading-[normal] absolute tracking-[0]">
-                Address: {jobOwnerData.adress}
+              <div className="w-[164px] top-[360px] left-[235px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] leading-[normal] absolute tracking-[0]">
+                Address: <br />
+                {jobOwnerData.adress}
               </div>
 
               <div className="absolute w-[5000px] top-[107px] left-[524px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] tracking-[0] leading-[normal]">
@@ -187,10 +186,8 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
             <div className="absolute w-[105px] h-[28px] top-[-20px] left-[1226px]">
               <div className="absolute w-[105px] h-[28px] top-0 left-0"></div>
               <Link href={`/jobDetails/createJobDetails`}>
-                <button className="flex w-[176px] h-[56px] items-center justify-center mt-[500px] ml-[-703px] relative bg-[#267296] rounded-full overflow-hidden border border-solid">
-                  <div className="relative w-fit [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap">
-                    Post a new job
-                  </div>
+                <button className="flex w-[176px] h-[56px] items-center justify-center mt-[500px] ml-[-703px] relative [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[#267296] items-center justify-center mr-0 py-[8px] transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[white] hover:scale-110 relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid rounded-full">
+                  Post a new job
                 </button>
               </Link>
             </div>

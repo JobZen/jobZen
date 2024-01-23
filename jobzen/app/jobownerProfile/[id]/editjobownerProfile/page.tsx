@@ -209,32 +209,24 @@ const EditJobOwnerProfile = (): JSX.Element => {
                 />
               </div>
               <div className="flex w-[408px] h-[66px] items-center gap-[56px] absolute top-[103px] left-[601px]">
-                <div
-                  className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[#267296] rounded-[8px] overflow-hidden cursor-pointer"
+                <button
+                  className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[#267296] rounded-[8px] overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[#267296] items-center justify-center mr-0 py-[8px] transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[white] hover:scale-110 relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid "
                   onClick={() => document.getElementById("photoInput")?.click()}
                 >
-                  <button
-                    className="relative w-fit [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap"
-                    onClick={() => uploadImage}
-                  >
-                    Upload New Photo
-                  </button>
-                  <input
-                    id="photoInput"
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
-                    onChange={(e) => uploadImage(e)}
-                  />
-                </div>
-
+                  Upload New Photo
+                </button>
+                <input
+                  id="photoInput"
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => uploadImage(e)}
+                />
                 <button
-                  className="flex w-[176px] h-[56px] items-center justify-center px-0 py-[8px] relative bg-[#ffffff] rounded-[8px] overflow-hidden border border-solid border-[#267296]"
+                  className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[white] rounded-[8px] overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#267296] text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[white] items-center justify-center mr-0 py-[8px] transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[#267296] hover:scale-110 relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid "
                   onClick={handleUpdate}
                 >
-                  <div className="relative w-fit [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#267296] text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap">
-                    Save Update
-                  </div>
+                  Save Update
                 </button>
               </div>
             </div>

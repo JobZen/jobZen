@@ -101,7 +101,7 @@ function page() {
         <img
           src={ele.image} 
           alt="Freelancer Avatar"
-          className="size-46 z-40 border-4 border-white rounded-full group-hover:border-8 group-hover:transition-all group-hover:duration-300 transition-all duration-300"
+          className="w-[6cm] h-[5cm] border-4 border-white rounded-full group-hover:border-8 group-hover:transition-all group-hover:duration-300 transition-all duration-300"
         />
     
     </div>

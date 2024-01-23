@@ -44,8 +44,9 @@ const JobLocation: React.FC<Props> = ({ jobOwnerAddress }) => {
             customZoomControl.addTo(mapRef.current);
 
             const markerIcon = L.icon({
-              iconUrl: "http://maps.google.com/mapfiles/ms/icons/blue.png",
-              iconSize: [25, 25],
+              iconUrl:
+                "https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-01-512.png",
+              iconSize: [35, 35],
               iconAnchor: [10, 20],
             });
 
