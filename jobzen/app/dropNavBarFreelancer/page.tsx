@@ -3,8 +3,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
+
 const settings = [
-  { name: "Account", href: "/freelancer/1" },
+  { name: "Account", href: "/freelancer/25" },
   { name: "Messages", href: "/jobDetails/messageJobDetails" },
   { name: "Review", href: "/" },
   { name: "Logout", href: "/home" },
