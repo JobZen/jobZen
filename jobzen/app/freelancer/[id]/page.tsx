@@ -6,6 +6,7 @@ import Footer from "../../footer/page";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+
 interface FreelancerProfile {
   id: number;
   name: string;
@@ -60,29 +61,28 @@ const Freelancer = () => {
     router.push(`/freelancer/${free.id}/Update`);
   };
   return (
-    <div>
+    <div className="transition-all duration-500"  >
       <Navbar />
-      <div className="mb-6">
+      <div className="mb-6 ">
         <div className="container mx-auto py-8">
-          <div className="grid grid-cols-4 sm:grid-cols-12 gap-6 px-4">
-            <div className="col-span-4 sm:col-span-3">
-              <div className="bg-white shadow rounded-lg p-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 px-4">
+            <div className="lg:col-span-3">
+              <div className="bg-[#a1e1fd4a] shadow-lg rounded-lg p-6">
                 <div className="flex flex-col items-center">
                   <img
-                    className="w-32 h-32 rounded-full mb-4"
+                    className="w-32 h-32 rounded-full mb-4 object-cover border-4 "
                     src={free.image}
-                    alt=""
+                    alt={free.name}
                   />
-                  <h1 className="text-xl font-bold">{free.name}</h1>
-                  <p className="text-gray-700">{free.jobtitle}</p>
+                  <h1 className="text-2xl font-bold text-gray-800">{free.name}</h1>
+                  <p className="text-gray-600 font-serif">{free.jobtitle}</p>
                   <div className="mt-6 flex flex-wrap gap-4 justify-center">
                     
-
                     <button
-                      className="border-solid border-2 hover:bg-grey-500 font-bold border-[#267296] text-[#267296] hover:font-bold py-2 px-4 rounded"
+                      className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[white] rounded-full overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#267296] text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[white] items-center justify-center mr-0 py-[8px] transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[#267296] hover:scale-110 relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid "
                       onClick={handleEditButtonClick}
                     >
-                      Update profile
+                      Update Profile
                     </button>
                   </div>
                 </div>
@@ -91,9 +91,9 @@ const Freelancer = () => {
                   <span className="text-gray-700 uppercase font-bold tracking-wider mb-2">
                     Skills
                   </span>
-                  <ul>
+                  <ul className="flex flex-wrap">
                     {free.skills.split(",").map((skill, index) => (
-                      <li key={index} className="mb-2">
+                      <li key={index} className=" bg-gradient-to-br from-[#172554] to-[#267296] text-[white] py-1 px-2 rounded-full mr-2 mb-2 font-serif">
                         {skill.trim()}
                       </li>
                     ))}
@@ -101,37 +101,34 @@ const Freelancer = () => {
                 </div>
               </div>
             </div>
-            <div className="col-span-4 sm:col-span-9">
-              <div className="bg-white shadow rounded-lg p-6">
-                <h2 className="text-xl font-bold mb-4">About Me</h2>
-                <p className="text-gray-700">{free.aboutMe}</p>
-                <br />
-                <div className="mb-6">
-                  <div className="flex justify-between flex-wrap gap-2 w-full">
-                    <span className="text-gray-700 font-bold">
-                      Phone number
-                    </span>
-                  </div>
-                  <p className="mt-2">{free.phone}</p>
-                </div>
-                <div className="mb-6">
-                  <div className="flex justify-between flex-wrap gap-2 w-full">
-                    <span className="text-gray-700 font-bold">Email</span>
-                  </div>
-                  <p className="mt-2">{free.email}</p>
-                </div>
-                <div className="mb-6">
-                  <div className="flex justify-between flex-wrap gap-2 w-full">
-                    <span className="text-gray-700 font-bold">Address</span>
-                  </div>
-                  <p className="mt-2">{free.adress}</p>
-                </div>
-                <h3 className="font-semibold text-center mt-3 -mb-2 ml-[500px]">
-                  Find me on
-                </h3>
-                <div className="flex justify-center items-center gap-6 my-6 ml-[500px]">
+            <div className="lg:col-span-9">
+            <div className=" mt-[-3px] rounded-lg p-6">
+  <h2 className="text-xl font-bold text-gray-800 mt-3 ">About Me</h2>
+  <p className="text-gray-700 mt-3 font-serif">{free.aboutMe}</p>
+  <div >
+    <div>
+      
+    <h2 className="text-xl font-bold text-gray-800 mt-3 ">Phone Number</h2>
+  <p className="text-gray-700 mt-3 font-serif">{free.phone}</p>
+    </div>
+    <div>
+    
+    <h2 className="text-xl font-bold text-gray-800 mt-3">Email</h2>
+  <p className="text-gray-700 mt-3 font-serif">{free.email}</p>
+    </div>
+    <div>
+    
+    <h2 className="text-xl font-bold text-gray-800 mt-3">Address</h2>
+  <p className="text-gray-700 mt-3 font-serif">{free.adress}</p>
+    </div>
+  </div>
+  
+  <h2 className="text-xl font-bold text-gray-800 mt-3">Experience</h2>
+  <p className="text-gray-700 mt-3 font-serif">{free.experience}</p>
+  
+  <div className="flex justify-center items-center gap-6 my-6 ml-[500px]">
                   <a
-                    className="text-gray-700 hover:text-orange-600"
+                    className="text-gray-700 hover:text-blue-600"
                     aria-label="Visit TrendyMinds LinkedIn"
                     href=""
                     target="_blank"
@@ -148,7 +145,7 @@ const Freelancer = () => {
                     </svg>
                   </a>
                   <a
-                    className="text-gray-700 hover:text-orange-600"
+                    className="text-gray-700 hover:text-blue-600"
                     aria-label="Visit TrendyMinds YouTube"
                     href=""
                     target="_blank"
@@ -165,7 +162,7 @@ const Freelancer = () => {
                     </svg>
                   </a>
                   <a
-                    className="text-gray-700 hover:text-orange-600"
+                    className="text-gray-700 hover:text-blue-600"
                     aria-label="Visit TrendyMinds Facebook"
                     href=""
                     target="_blank"
@@ -182,7 +179,7 @@ const Freelancer = () => {
                     </svg>
                   </a>
                   <a
-                    className="text-gray-700 hover:text-orange-600"
+                    className="text-gray-700 hover:text-blue-600"
                     aria-label="Visit TrendyMinds Instagram"
                     href=""
                     target="_blank"
@@ -199,7 +196,7 @@ const Freelancer = () => {
                     </svg>
                   </a>
                   <a
-                    className="text-gray-700 hover:text-orange-600"
+                    className="text-gray-700 hover:text-blue-600"
                     aria-label="Visit TrendyMinds Twitter"
                     href=""
                     target="_blank"
@@ -216,14 +213,9 @@ const Freelancer = () => {
                     </svg>
                   </a>
                 </div>
-                <h2 className="text-xl font-bold mt-[-95px] mb-4">
-                  Experience
-                </h2>
-                <div className="mb-6">
-                  <div className="flex justify-between flex-wrap gap-2 w-full"></div>
-                  <p className="mt-[-5px]">{free.experience}</p>
-                </div>
-              </div>
+</div>
+
+
             </div>
           </div>
         </div>
@@ -231,5 +223,6 @@ const Freelancer = () => {
       <Footer />
     </div>
   );
+  
 };
 export default Freelancer;

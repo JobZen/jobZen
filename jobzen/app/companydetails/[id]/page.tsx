@@ -129,7 +129,7 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
-                className="absolute w-[17px] h-[17px] mr-8 top-[340px] left-[200px]"
+                className="absolute w-[17px] h-[17px] mr-8 top-[360px] left-[214px]"
               >
                 <path
                   fillRule="evenodd"
