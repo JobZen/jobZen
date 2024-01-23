@@ -34,7 +34,7 @@ const Signup: FunctionComponent = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+    <div className=" bg-malek min-h-screen flex flex-col items-center justify-center bg-gray-100">
       <div
         className="
         flex flex-col

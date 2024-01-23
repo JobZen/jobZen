@@ -126,8 +126,9 @@ const route=useRouter()
   useEffect (()=> {
     const currentUrl = window.location.href;
     const ind = currentUrl.split("/");
+
     setIndex(parseInt(ind[ind.length - 1]))
-  })
+  },[])
 
 
   useEffect(() => {

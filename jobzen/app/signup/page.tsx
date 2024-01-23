@@ -36,8 +36,8 @@ const Signup: FunctionComponent = () => {
       .catch((error) => console.log("error:", error));
   };
 
-  return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+  return ( 
+    <div className="bg-malek shadow-2xl min-h-screen flex flex-col items-center justify-center bg-gray-100">
       <div
         className="
         flex flex-col
@@ -359,7 +359,7 @@ const Signup: FunctionComponent = () => {
           text-xs text-center
         "
         >
-          <span className="ml-2">
+          <span className="ml-2 text-white">
             You have an account?
             <p className="text-xs ml-2 text-blue-500 font-semibold">
             <Link href={"/login"} >Login here</Link>  

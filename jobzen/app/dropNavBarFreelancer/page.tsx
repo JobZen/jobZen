@@ -1,11 +1,15 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Cookies from "js-cookie";
+import axios from "axios";
 
 
-const id = Cookies.get("id")
+
+const DropNavbar = () => {
+
+  const id = Cookies.get("id")
 
 
 const settings = [
@@ -15,12 +19,17 @@ const settings = [
   { name: "Logout", href: "/home" },
 ];
 
-const DropNavbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
+ const [freelancer,setFreelance] = useState({})
   const handleToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+
+  useEffect(()=> {
+    axios.get( `http://localhost:3000/freelancer/${id}`)
+    .then((response)=> {setFreelance(response.data);console.log('hello')})
+    .catch((err)=> {console.log(err)})
+  })
 
   return (
     <div className="relative inline-flex items-center group ">
@@ -31,7 +40,7 @@ const DropNavbar = () => {
     >
       <img
         className="w-10 h-10 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
-        src="https://tecdn.b-cdn.net/img/new/avatars/2.jpg"
+        src= {freelancer.image}
         // {user.image}
         alt="User dropdown"
       />
