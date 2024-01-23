@@ -87,7 +87,6 @@ async function FindMessageBySenderAndRecieverId(req, res) {
                 const idss= ress.map(message => message.dataValues.sender);
                 const all=[...idss,...ids]
             const uniqueIds = [...new Set(all)];
-            console.log(uniqueIds,"fklsglfd")
             const hhh=uniqueIds.map(async(index)=>{
                const req1 =await axios.get(`http://localhost:3000/freeMS/msg/${sender}/${index}`);
                 const req2 =await axios.get(`http://localhost:3000/jobMS/msg/${index}/${sender}`);

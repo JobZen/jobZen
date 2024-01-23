@@ -74,7 +74,7 @@ function LandinPage() {
       {show1 && (
         <h1 className='text-white brightness-100 text-xl font-jura'>If you are searching for talents</h1>
       )}
-      <Link href={'/signup'}>
+      <Link href={'/signjob'}>
       <button className='bg-transparent text-white rounded border border-white py-2 px-4 mt-4 hover:bg-white hover:text-black transition duration-300'>
         Click here
       </button>

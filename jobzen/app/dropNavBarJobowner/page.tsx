@@ -2,9 +2,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Cookies from "js-cookie";
+
+const id = Cookies.get("id")
 
 const settings = [
-  { name: "Account", href: "/jobownerProfile/1" },
+  { name: "Account", href: `/jobownerProfile/${id}` },
   { name: "Messages", href: "/jobDetails/messageJobDetails" },
   { name: "Logout", href: "/home" },
 ];
