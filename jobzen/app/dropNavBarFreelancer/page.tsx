@@ -2,10 +2,14 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Cookies from "js-cookie";
+
+
+const id = Cookies.get("id")
 
 
 const settings = [
-  { name: "Account", href: "/freelancer/25" },
+  { name: "Account", href: `/freelancer/${id}` },
   { name: "Messages", href: "/jobDetails/messageJobDetails" },
   { name: "Review", href: "/" },
   { name: "Logout", href: "/home" },
