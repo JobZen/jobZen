@@ -1,133 +1,327 @@
-"use client"
+"use client";
 import { FunctionComponent } from "react";
 import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 
 const Signup: FunctionComponent = () => {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
 
+  const handleSignup = () => {
+    if (!name || !password || !email || !address  || !phone) {
+      alert("fill up all the fields");
+      return;
+    }
+    const obj = {
+      name: name,
+      password: password,
+      email: email,
+      adress: address,
+      image:
+        "https://gem.ec-nantes.fr/wp-content/uploads/2019/01/profil-vide.png",
+        phone: phone,
+    };
+    console.log(obj);
 
-  
-const handleSignup = () => {
- console.log("email", email);
- console.log("password", password);
- console.log("name", name);
- axios.post("http://localhost:3000/auth/jobowner/register", { email: email, password:password , name: name})
- .then((response) => console.log(response.data))
- .catch((error) => console.log("error:", error))
-};
-
+    axios
+      .post("http://localhost:3000/auth/jobowner/register", obj)
+      .then((response) => {console.log(response.data);alert("thank you for signing up")})
+      .catch((error) => console.log("error:", error));
+  };
 
   return (
-    <div className="relative bg-[#267296] w-full h-[1020px] overflow-hidden text-left text-11xl text-white font-jura">
-      <section className="absolute top-[0px] left-[0px] bg-steelblue w-[1422px] h-[1020px]" />
-      <div className="absolute top-[219px] left-[121px] w-[460px] h-[582px] overflow-hidden text-smi-8 text-black font-zen-kaku-gothic-antique">
-        <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] bg-gray-100 shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)_inset]" />
-        <div className="absolute top-[23px] left-[40px] w-[204px] h-[83px] flex flex-col items-start justify-start">
-          <div className="relative leading-[22.53px]">
-            LET'S GET YOU STARTED
-          </div>
-          <div className="relative text-[25px] leading-[44px] font-medium">
-            Create an Account
-          </div>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+      <div
+        className="
+        flex flex-col
+        bg-white
+        shadow-md
+        px-4
+        sm:px-6
+        md:px-8
+        lg:px-10
+        py-8
+        rounded-3xl
+        w-50
+        max-w-md
+      "
+      >
+        <div className="font-medium self-center text-xl sm:text-3xl text-gray-800">
+          Join us Now
         </div>
-        <div className="absolute top-[131px] left-[40.5px] flex flex-col items-start justify-start gap-[16px] text-base text-darkslategray">
-          <div className="relative w-[380px] h-[219px]">
-            <div className="absolute h-[30.59%] w-full top-[0%] right-[0%] bottom-[69.41%] left-[0%]">
-            <div className="absolute h-[85.07%] w-[100.26%] top-[15.67%] right-[-0.13%] bottom-[-0.75%] left-[-0.13%] rounded-lg box-border border-[1px] border-solid border-silver" />
-              <input className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] bg-gray-100"
-                onChange={(e)=>setName(e.target.value)}
-              />
-                
-             
-              <div className="absolute h-[34.33%] w-[17.63%] top-[0%] right-[79.43%] bottom-[65.67%] left-[2.94%] overflow-hidden text-center text-smi-8">
-                <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] bg-gray-100" />
-                <div className="absolute top-[0%] left-[5.55px] leading-[22.53px] inline-block w-[58px]">
-                  Name
-                </div>
+        <div className="mt-4 self-center text-xl sm:text-sm text-gray-800">
+          Enter your credentials to get access account
+        </div>
+
+        <div className="mt-10">
+          <div className="flex flex-col mb-5">
+            <label className="mb-1 text-xs tracking-wide text-gray-600">
+              Name:
+            </label>
+
+            <div className="relative">
+              <div
+                className="
+                  inline-flex
+                  items-center
+                  justify-center
+                  absolute
+                  left-0
+                  top-0
+                  h-full
+                  w-10
+                  text-gray-400
+                "
+              >
+                {/* <i className="fas fa-user text-blue-500"></i> */}
               </div>
-            </div>
-            <div className="absolute h-[30.59%] w-full top-[34.7%] right-[0%] bottom-[34.7%] left-[0%] text-darkslategray">
-            <div className="absolute h-[85.07%] w-[100.26%] top-[15.67%] right-[-0.13%] bottom-[-0.75%] left-[-0.13%] rounded-lg box-border border-[1px] border-solid border-silver" />
-              <img
-                className="absolute h-[23.88%] w-[4.21%] top-[46.27%] right-[2.11%] bottom-[29.85%] left-[93.68%] max-w-full overflow-hidden max-h-full object-cover"
-                alt=""
-                src="/exiconeye@2x.png"
+
+              <input
+                className="
+                  text-sm
+                  placeholder-gray-500
+                  pl-10
+                  pr-4
+                  rounded-2xl
+                  border border-gray-400
+                  w-full
+                  py-2
+                  focus:outline-none focus:border-blue-400
+                "
+                placeholder="Enter your name"
+                onChange={(e) => setName(e.target.value)}
               />
-              <input className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] bg-gray-100" 
-                  onChange={(e)=>setEmail(e.target.value)}
-              />
-                
-             
-              <div className="absolute h-[34.33%] w-[17.63%] top-[0%] right-[79.43%] bottom-[65.67%] left-[2.94%] overflow-hidden text-center text-smi-8">
-                <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] bg-gray-100" />
-                <div className="absolute top-[0%] left-[5.55px] leading-[22.53px] inline-block w-[58px]">
-                 Email
-                </div>
-              </div>
-            </div>
-            <div className="absolute h-[30.59%] w-full top-[69.41%] right-[0%] bottom-[0%] left-[0%]">
-              <div className="absolute h-[85.07%] w-[100.26%] top-[15.67%] right-[-0.13%] bottom-[-0.75%] left-[-0.13%] rounded-lg box-border border-[1px] border-solid border-silver" />
-              <img
-                className="absolute h-[23.88%] w-[4.21%] top-[46.27%] right-[2.11%] bottom-[29.85%] left-[93.68%] max-w-full overflow-hidden max-h-full object-cover"
-                alt=""
-                src="/exiconeye@2x.png"
-              />
-              <input className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] bg-gray-100"  type="password" 
-                  onChange={(e)=>setPassword(e.target.value)}
-              />
-                
-             
-              <div className="absolute h-[34.33%] w-[17.63%] top-[0%] right-[79.43%] bottom-[65.67%] left-[2.94%] text-center text-smi-8">
-                <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] bg-gray-100" />
-                <div className="absolute top-[0%] left-[5.55px] leading-[22.53px] inline-block w-[58px]">
-                  Password
-                </div>
-              </div>
             </div>
           </div>
-          <div className="relative bg-[#7c949e]  hover:bg-[#267296] w-[380px] h-14 text-center text-[20px] text-white"
-          onClick={handleSignup}
-          >
-            <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-lg bg-steelblue" 
-            />
-            <button className="absolute h-3/4 w-9/12 top-[12.5%] left-[12.5%] leading-[22.53px] flex items-center justify-center">
-              SIGN UP
+          <div className="flex flex-col mb-5">
+            <label className="mb-1 text-xs tracking-wide text-gray-600">
+              E-Mail :
+            </label>
+
+            <div className="relative">
+              <div
+                className="
+                  inline-flex
+                  items-center
+                  justify-center
+                  absolute
+                  left-0
+                  top-0
+                  h-full
+                  w-10
+                  text-gray-400
+                "
+              >
+                <i className="fas fa-at text-blue-500"></i>
+              </div>
+
+              <input
+                className="
+                  text-sm
+                  placeholder-gray-500
+                  pl-10
+                  pr-4
+                  rounded-2xl
+                  border border-gray-400
+                  w-full
+                  py-2
+                  focus:outline-none focus:border-blue-400
+                "
+                placeholder="Enter your email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col mb-5">
+            <label className="mb-1 text-xs tracking-wide text-gray-600">
+              Address:
+            </label>
+
+            <div className="relative">
+              <div
+                className="
+                  inline-flex
+                  items-center
+                  justify-center
+                  absolute
+                  left-0
+                  top-0
+                  h-full
+                  w-10
+                  text-gray-400
+                "
+              >
+                <i className="fas fa-at text-blue-500"></i>
+              </div>
+
+              <input
+                className="
+                  text-sm
+                  placeholder-gray-500
+                  pl-10
+                  pr-4
+                  rounded-2xl
+                  border border-gray-400
+                  w-full
+                  py-2
+                  focus:outline-none focus:border-blue-400
+                "
+                placeholder="Enter your Address"
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col mb-5">
+            <label className="mb-1 text-xs tracking-wide text-gray-600">
+              Phone number:
+            </label>
+
+            <div className="relative">
+              <div
+                className="
+                  inline-flex
+                  items-center
+                  justify-center
+                  absolute
+                  left-0
+                  top-0
+                  h-full
+                  w-10
+                  text-gray-400
+                "
+              >
+                <i className="fas fa-at text-blue-500"></i>
+              </div>
+
+              <input
+                id="email"
+                type="email"
+                name="email"
+                className="
+                  text-sm
+                  placeholder-gray-500
+                  pl-10
+                  pr-4
+                  rounded-2xl
+                  border border-gray-400
+                  w-full
+                  py-2
+                  focus:outline-none focus:border-blue-400
+                "
+                placeholder="Enter your Phone number"
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </div>
+          </div>
+      
+
+          <div className="flex flex-col mb-6">
+            <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">
+              Password:
+            </label>
+
+            <div className="relative">
+              <div
+                className="
+                  inline-flex
+                  items-center
+                  justify-center
+                  absolute
+                  left-0
+                  top-0
+                  h-full
+                  w-10
+                  text-gray-400
+                "
+              >
+                <span>
+                  <i className="fas fa-lock text-blue-500"></i>
+                </span>
+              </div>
+
+              <input
+                type="password"
+                className="
+                  text-sm
+                  placeholder-gray-500
+                  pl-10
+                  pr-4
+                  rounded-2xl
+                  border border-gray-400
+                  w-full
+                  py-2
+                  focus:outline-none focus:border-blue-400
+                "
+                placeholder="Enter your password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="flex w-full">
+            <button
+              onClick={() => {
+                handleSignup();
+              }}
+              type="submit"
+              className="
+                flex
+                mt-2
+                items-center
+                justify-center
+                focus:outline-none
+                text-white text-sm
+                sm:text-base
+                bg-blue-500
+                hover:bg-blue-600
+                rounded-2xl
+                py-2
+                w-full
+                transition
+                duration-150
+                ease-in
+              "
+            >
+              <span className="mr-2 uppercase">Sign Up</span>
+              <span>
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </span>
             </button>
           </div>
         </div>
-        <div className="absolute h-[2.47%] w-[47.83%] top-[89.45%] left-[23.04%] text-gray-300 text-center inline-block">
-          <span className="font-zen-kaku-gothic-antique">
-            Already have an account?
-          </span>
-          <b>{` `}</b>
-          <b>
-            <span className="[text-decoration:underline]">LOGIN HERE</span>
-          </b>
-        </div>
       </div>
-      <b className="absolute font-Jura cursor: pointer text-3xl top-[51px] left-[98px] leading-[40%] inline-block w-[98px] h-[13px]"
-       
-      >
-       <Link href={"/"} >HOME</Link> 
-      </b>
-      <b className="absolute cursor: pointer font-Jura text-3xl top-[50px] left-[257px] leading-[40%] inline-block w-[163px] h-[11px]">
-      <Link href={"/about"} > ABOUT US</Link> 
-       
-      </b>
-      <b className="absolute cursor: pointer font-Jura text-3xl top-[53px] left-[482px] leading-[40%] inline-block w-[197px] h-[11px]">
-      <Link href={"/contact"} > CONTACT</Link> 
-        
-      </b>
-      <img
-  className="absolute top-0  right-0 bottom-0 rounded-tl-2xl rounded-tr-none rounded-br-none rounded-bl-2xlw- w-[782px] h-[1020px] object-cover"
-        alt=""
-        src="/image-4@2x.png"
-      />
+      <div className="flex justify-center items-center mt-6">
+        <p
+          className="
+          inline-flex
+          items-center
+          text-gray-700
+          font-medium
+          text-xs text-center
+        "
+        >
+          <span className="ml-2">
+            You have an account?
+            <p className="text-xs ml-2 text-blue-500 font-semibold">
+             <Link href={"/logjob"}> Login here</Link>
+            </p>
+          </span>
+        </p>
+      </div>
     </div>
   );
 };
