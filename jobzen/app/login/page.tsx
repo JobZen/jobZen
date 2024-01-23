@@ -26,11 +26,10 @@ const router=useRouter()
         response.data.token
           ? (Cookies.set("token", response.data.token),
             Cookies.set("id", response.data.id),
-            Cookies.set("role",response.data.role),
+            Cookies.set("role",response.data.role), 
             router.push('/mainFreelancer')
-            
             )
-          : (setAlertMsg(response.data),setAlert(true)) ;
+          : (console.log(response.data),setAlert(true)) ;
       })
       .catch((error) => console.log("error:", error));
   };
