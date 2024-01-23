@@ -20,6 +20,21 @@ interface Jobowner {
 const JobOwnersList = () => {
 const [jobowners, setJobOwners] = useState<Jobowner[]>([])
 const [jobownerCount,setJobownerCount]=useState<number | undefined>()
+const [Jobowner, setJobowner] = React.useState<Jobowner[]>([]);
+const [refresh,setRefresh]=useState(false)
+
+
+
+const handleDelete = async (jobOwnerId: number) => {
+  try {
+    await axios.delete(`http://localhost:3000/jobOwner/job-owner/${jobOwnerId}`);
+    setRefresh(!refresh)
+
+  } catch (error) {
+    console.error('Error deleting jobOwner:', error);
+  }
+
+};
 
 useEffect(()=>{
   const getAllJobOwners = async () => {
@@ -33,7 +48,7 @@ useEffect(()=>{
     }
   };
   getAllJobOwners()
-},[])
+},[refresh])
 
 
 return (
@@ -177,7 +192,7 @@ return (
               href="#"
               type="button"
               className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 inline-flex items-center text-red-700 hover:text-white border border-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
-              <span className="ml-2">Delete Job owner</span></a>
+              <span className="ml-2" onClick={() => handleDelete(jobowner.id)}>Delete Job owner</span></a>
             </td>
           </tr>
           ))}

@@ -5,8 +5,10 @@ import Link from 'next/link';
 import SideNavBar from '../sideNavBar/page';
 import { MdKeyboardArrowUp } from 'react-icons/md';
 import Search from '../../search/page'
+// import Freelancer from '@/app/freelancer/[id]/page';
 
-interface Freelancer{
+
+interface Freelancer {
   id:number,
   name:string,
   email:string,
@@ -23,9 +25,25 @@ interface Freelancer{
 const FreelancersList = () => {
 const [freelancers, setFreelancers] = useState<Freelancer[]>([])
 const [freelancerCount,setFreelancerCount]=useState<number | undefined>()
-
+const [refresh,setRefresh]=useState(false)
 const containerRef = useRef<HTMLDivElement>(null);
 const [rowCount, setRowCount] = useState<number>(0);
+
+// const [selectedFreelancer, setSelectedFreelancer] = useState<Freelancer | null>(null);
+const [freelancer, setfreelancer] = React.useState<Freelancer[]>([]);
+
+
+
+const handleDelete = async (freelancerId: number) => {
+  try {
+    await axios.delete(`http://localhost:3000/freelancer/${freelancerId}`);
+    setRefresh(!refresh)
+
+  } catch (error) {
+    console.error('Error deleting freelancer:', error);
+  }
+
+};
 
 useEffect(()=>{  
 const getAllFreelancer = async () => {
@@ -39,7 +57,7 @@ const getAllFreelancer = async () => {
   }
 };
 getAllFreelancer()
-},[])
+},[refresh])
 
 useEffect(() => {
   if (rowCount >= 10 && containerRef.current) {
@@ -51,6 +69,38 @@ useEffect(() => {
 const handleScrollUp = () => {
   setRowCount((prevCount) => prevCount + 1);
 };
+
+
+
+  // const handleDeleteFreelancer = async () => {
+  //   try {
+  //     console.log("Selected Freelancer:", selectedFreelancer);
+  
+  //     if (!selectedFreelancer) {
+  //       console.log("No selected freelancer");
+  //       return;
+  //     }
+  
+  //    await axios.delete(`http://localhost:3000/freelancer/${selectedFreelancer.id}`);
+  //     console.log("Freelancer deleted successfully");
+   
+      
+  
+  //     setFreelancers((prevFreelancers) =>
+  //       prevFreelancers.filter((freelancer) => freelancer.id !== selectedFreelancer.id)
+  //     );
+  
+  //     setSelectedFreelancer(null);
+  //     console.log("After set:", selectedFreelancer);
+  //   } catch (error) {
+  //     console.error("Error deleting freelancer:", error);
+  //   }
+  // };
+  
+
+
+
+
 
 return (
     <>
@@ -191,7 +241,9 @@ return (
               href="#"
               type="button"
               className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 inline-flex items-center text-red-700 hover:text-white border border-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
-              <span className="ml-2">Delete Freelancer</span></a>
+              {/* onClick={handleDeleteFreelancer} */}
+             
+              <span className="ml-2"  onClick={() => handleDelete(freelancer.id)} >Delete Freelancer</span></a>
             </td>
           </tr>
           ))}
