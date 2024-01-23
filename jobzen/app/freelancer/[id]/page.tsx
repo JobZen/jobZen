@@ -77,11 +77,7 @@ const Freelancer = () => {
                   <h1 className="text-2xl font-bold text-gray-800">{free.name}</h1>
                   <p className="text-gray-600 font-serif">{free.jobtitle}</p>
                   <div className="mt-6 flex flex-wrap gap-4 justify-center">
-                    <Link href="">
-                      <button className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[#267296] rounded-full overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[#267296] items-center justify-center mr-0 py-[8px] transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[white] hover:scale-110 relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid ">
-                        Message
-                      </button>
-                    </Link>
+                    
                     <button
                       className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[white] rounded-full overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#267296] text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[white] items-center justify-center mr-0 py-[8px] transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[#267296] hover:scale-110 relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid "
                       onClick={handleEditButtonClick}

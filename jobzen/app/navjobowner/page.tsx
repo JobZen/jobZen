@@ -9,9 +9,9 @@ interface TabPage {
 }
 
 const tabPages: TabPage[] = [
-  { name: 'Home', href: '/mainJobOwner' },
-  { name: 'About us', href: '/aboutafterloginjobowner' },
-  { name: 'Contact', href: '/contactafterloginjobowner' }
+  { name: 'HOME', href: '/mainJobOwner' },
+  { name: 'ABOUT ', href: '/aboutafterloginjobowner' },
+  { name: 'CONTACT', href: '/contactafterloginjobowner' }
 ];
 
 const Navbar = () => {

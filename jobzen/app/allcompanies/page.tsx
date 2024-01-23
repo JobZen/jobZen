@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
-import Nav from '../navjobowner/page';
+import Nav from '../navFreelancer/page';
 import Footer from '../footer/page';
 
 interface JobOwner {

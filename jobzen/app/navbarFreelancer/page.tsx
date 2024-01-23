@@ -27,12 +27,14 @@ const Navbar = () => {
                       <span className="font-jura text-xl text-[#172554]">HOME</span>
                     </Link>
                  
-                    <Link href={"/contactafterloginfreelancer"}>
-                      <span className="font-jura text-xl text-[#172554]">CONTACT</span>
-                    </Link>
+                    
                 
                     <Link href={"/aboutafterloginfreelancer"}>
                       <span className="font-jura text-xl text-[#172554]">ABOUT</span>
+                    </Link>
+
+                    <Link href={"/contactafterloginfreelancer"}>
+                      <span className="font-jura text-xl text-[#172554]">CONTACT</span>
                     </Link>
                     </div>
 
