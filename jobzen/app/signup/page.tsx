@@ -36,10 +36,12 @@ const Signup: FunctionComponent = () => {
       .catch((error) => console.log("error:", error));
   };
 
-  return ( 
-    <div className="bg-malek shadow-2xl min-h-screen flex flex-col items-center justify-center bg-gray-100">
-      <div
-        className="
+  return (
+    <div
+    className="bg-malek min-h-screen flex flex-col items-center justify-center bg-gray-100"
+  >
+    <div
+      className="
         flex flex-col
         bg-white
         shadow-md
@@ -358,15 +360,14 @@ const Signup: FunctionComponent = () => {
           font-medium
           text-xs text-center
         "
-        >
-          <span className="ml-2 text-white">
-            You have an account?
-            <p className="text-xs ml-2 text-blue-500 font-semibold">
-            <Link href={"/login"} >Login here</Link>  
-            </p>
-          </span>
-        </p>
-      </div>
+      >
+        <span className="ml-2"
+          >You have an account?
+          <a
+          className="text-xs ml-2 text-blue-500 font-semibold"
+          >Login here</a></span>
+      </a>
+    </div>
     </div>
     )
 

@@ -12,13 +12,14 @@ const DropNavbar = () => {
   const id = Cookies.get("id")
 
 
-const settings = [
-  { name: "Account", href: `/freelancer/${id}` },
-  { name: "Messages", href: "/jobDetails/messageJobDetails" },
-  { name: "Review", href: "/" },
-  { name: "Logout", href: "/home" },
-];
-
+const DropNavbar = () => {
+  const id = Cookies.get("id")
+  const settings = [
+    { name: "Account", href: `/freelancer/${id}` },
+    { name: "Messages", href: "/jobDetails/messageJobDetails" },
+    { name: "Review", href: "/" },
+    { name: "Logout", href: "/home" },
+  ];
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
  const [freelancer,setFreelance] = useState({})
   const handleToggle = () => {
