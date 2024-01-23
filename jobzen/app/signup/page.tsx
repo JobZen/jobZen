@@ -368,7 +368,8 @@ const Signup: FunctionComponent = () => {
         </p>
       </div>
     </div>
-  );
-};
+    )
 
-export default Signup;
+}
+
+export default Signup

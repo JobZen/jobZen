@@ -24,13 +24,13 @@ function LandinPage() {
   </span>
 
   <span className="ml-40"> 
-    <Link href={"/contact"}>
+    <Link href={"/contactbeforelogin"}>
       <span className="font-jura text-white text-3xl hover:text-white hover:font-semibold hover:underline">CONTACT</span>
     </Link>
   </span>
 
   <span className="ml-40"> 
-    <Link href={"/about"}>
+    <Link href={"/aboutbeforelogin"}>
       <span className="font-jura text-white text-3xl hover:text-white hover:font-semibold hover:underline">ABOUT</span>
     </Link>
   </span>
