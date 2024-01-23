@@ -7,27 +7,32 @@ import axios from "axios";
 
 
 
+
+
+
+
+
 const DropNavbar = () => {
-
   const id = Cookies.get("id")
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [freelancer,setFreelance] = useState({})
 
-
-const DropNavbar = () => {
-  const id = Cookies.get("id")
   const settings = [
     { name: "Account", href: `/freelancer/${id}` },
-    { name: "Messages", href: "/jobDetails/messageJobDetails" },
-    { name: "Review", href: "/" },
+    { name: "Messages", href: `/chat/${id}` },
+    { name: "Review", href: `/` },
     { name: "Logout", href: "/home" },
   ];
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
- const [freelancer,setFreelance] = useState({})
+
+
+  
   const handleToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+
   useEffect(()=> {
-    axios.get( `http://localhost:3000/freelancer/${id}`)
+    axios.get(` http://localhost:3000/freelancer/${id}`)
     .then((response)=> {setFreelance(response.data);console.log('hello')})
     .catch((err)=> {console.log(err)})
   })
@@ -41,7 +46,7 @@ const DropNavbar = () => {
     >
       <img
         className="w-10 h-10 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
-        src= {freelancer.image}
+        src={freelancer.image}
         // {user.image}
         alt="User dropdown"
       />

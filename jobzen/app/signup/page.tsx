@@ -37,11 +37,9 @@ const Signup: FunctionComponent = () => {
   };
 
   return (
-    <div
-    className="bg-malek min-h-screen flex flex-col items-center justify-center bg-gray-100"
-  >
-    <div
-      className="
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+      <div
+        className="
         flex flex-col
         bg-white
         shadow-md
@@ -352,7 +350,6 @@ const Signup: FunctionComponent = () => {
       </div>
       <div className="flex justify-center items-center mt-6">
         <p
-          target="_blank"
           className="
           inline-flex
           items-center
@@ -360,14 +357,15 @@ const Signup: FunctionComponent = () => {
           font-medium
           text-xs text-center
         "
-      >
-        <span className="ml-2"
-          >You have an account?
-          <a
-          className="text-xs ml-2 text-blue-500 font-semibold"
-          >Login here</a></span>
-      </a>
-    </div>
+        >
+          <span className="ml-2">
+            You have an account?
+            <p className="text-xs ml-2 text-blue-500 font-semibold">
+            <Link href={"/login"} >Login here</Link>  
+            </p>
+          </span>
+        </p>
+      </div>
     </div>
     )
 

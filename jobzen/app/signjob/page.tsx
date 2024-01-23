@@ -34,17 +34,27 @@ const Signup: FunctionComponent = () => {
   };
 
   return (
-    <div className="relative bg-[#267296] w-full h-[1020px] overflow-hidden text-left text-11xl text-white font-jura">
-      <section className="absolute top-[0px] left-[0px] bg-steelblue w-[1422px] h-[1020px]" />
-      <div className="absolute top-[219px] left-[121px] w-[460px] h-[582px] overflow-hidden text-smi-8 text-black font-zen-kaku-gothic-antique">
-        <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] bg-gray-100 shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)_inset]" />
-        <div className="absolute top-[23px] left-[40px] w-[204px] h-[83px] flex flex-col items-start justify-start">
-          <div className="relative leading-[22.53px]">
-            LET'S GET YOU STARTED
-          </div>
-          <div className="relative text-[25px] leading-[44px] font-medium">
-            Create an Account
-          </div>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+      <div
+        className="
+        flex flex-col
+        bg-white
+        shadow-md
+        px-4
+        sm:px-6
+        md:px-8
+        lg:px-10
+        py-8
+        rounded-3xl
+        w-50
+        max-w-md
+      "
+      >
+        <div className="font-medium self-center text-xl sm:text-3xl text-gray-800">
+          Join us Now
+        </div>
+        <div className="mt-4 self-center text-xl sm:text-sm text-gray-800">
+          Enter your credentials to get access account
         </div>
 
         <div className="mt-10">
