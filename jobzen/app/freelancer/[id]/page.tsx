@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "../../navFreelancer/page";
 import Footer from "../../footer/page";
-import Link from "next/link";
+
 import { useRouter } from "next/navigation";
 
 interface FreelancerProfile {
@@ -66,7 +66,7 @@ const Freelancer = () => {
         <div className="container mx-auto py-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 px-4">
             <div className="lg:col-span-3">
-              <div className="bg-[#a1e1fd4a] shadow-lg rounded-lg p-6">
+              <div className="bg-[#a1e1fd4a] shadow-xl rounded-[42px] p-6">
                 <div className="flex flex-col items-center">
                   <img
                     className="w-32 h-32 rounded-full mb-4 object-cover border-4 "
@@ -76,13 +76,8 @@ const Freelancer = () => {
                   <h1 className="text-2xl font-bold text-gray-800">
                     {free.name}
                   </h1>
-                  <p className="text-gray-600 font-serif">{free.jobtitle}</p>
+                  <p className="text-gray-600 font-sans italic text-xl">{free.jobtitle}</p>
                   <div className="mt-6 flex flex-wrap gap-4 justify-center">
-                    <Link href="">
-                      <button className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[#267296] rounded-full overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[#267296] items-center justify-center mr-0 py-[8px] transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[white] hover:scale-110 relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid ">
-                        Message
-                      </button>
-                    </Link>
                     <button
                       className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[white] rounded-full overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#267296] text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[white] items-center justify-center mr-0 py-[8px] transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[#267296] hover:scale-110 relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid "
                       onClick={handleEditButtonClick}
@@ -100,7 +95,7 @@ const Freelancer = () => {
                     {free.skills.split(",").map((skill, index) => (
                       <li
                         key={index}
-                        className=" bg-gradient-to-br from-[#172554] to-[#267296] text-[white] py-1 px-2 rounded-full mr-2 mb-2 font-serif"
+                        className=" bg-gradient-to-br from-[#172554] to-[#267296] text-[white] py-1 px-2 rounded-full mr-2 mb-2 font-sans italic text-xl"
                       >
                         {skill.trim()}
                       </li>
@@ -110,17 +105,17 @@ const Freelancer = () => {
               </div>
             </div>
             <div className="lg:col-span-9">
-              <div className=" mt-[-3px] rounded-lg p-6">
+              <div className="bg-white  shadow-xl rounded-[42px] p-6">
                 <h2 className="text-xl font-bold text-gray-800 mt-3 ">
                   About Me
                 </h2>
-                <p className="text-gray-700 mt-3 font-serif">{free.aboutMe}</p>
+                <p className="text-gray-700 mt-3 font-sans italic text-xl">{free.aboutMe}</p>
                 <div>
                   <div>
                     <h2 className="text-xl font-bold text-gray-800 mt-3 ">
                       Phone Number
                     </h2>
-                    <p className="text-gray-700 mt-3 font-serif">
+                    <p className="text-gray-700 mt-3 font-sans italic text-xl">
                       {free.phone}
                     </p>
                   </div>
@@ -128,7 +123,7 @@ const Freelancer = () => {
                     <h2 className="text-xl font-bold text-gray-800 mt-3">
                       Email
                     </h2>
-                    <p className="text-gray-700 mt-3 font-serif">
+                    <p className="text-gray-700 mt-3 font-sans italic text-xl">
                       {free.email}
                     </p>
                   </div>
@@ -136,7 +131,7 @@ const Freelancer = () => {
                     <h2 className="text-xl font-bold text-gray-800 mt-3">
                       Address
                     </h2>
-                    <p className="text-gray-700 mt-3 font-serif">
+                    <p className="text-gray-700 mt-3 font-sans italic text-xl">
                       {free.adress}
                     </p>
                   </div>
@@ -145,7 +140,7 @@ const Freelancer = () => {
                 <h2 className="text-xl font-bold text-gray-800 mt-3">
                   Experience
                 </h2>
-                <p className="text-gray-700 mt-3 font-serif">
+                <p className="text-gray-700 mt-3 font-sans italic text-xl">
                   {free.experience}
                 </p>
 
