@@ -109,7 +109,8 @@ const route=useRouter()
     socket.connect()
     socket.on('recieve',(msg)=>{
       setSorted([...sorted,msg])
-    })
+    },[])
+
 
     return () => {
       socket.disconnect();

@@ -35,7 +35,7 @@ const router=useRouter()
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+    <div className="bg-malek min-h-screen flex flex-col items-center justify-center bg-gray-100">
     <div
       className="
       flex flex-col
@@ -196,7 +196,7 @@ const router=useRouter()
         text-xs text-center
       "
       >
-        <span className="ml-2">
+        <span className="text-white ml-2">
           Create an account?
           <p className="text-xs ml-2 text-blue-500 font-semibold">
         <Link href={"/signup"}>Sign up here</Link>  
