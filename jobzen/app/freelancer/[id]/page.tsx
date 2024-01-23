@@ -6,7 +6,6 @@ import Footer from "../../footer/page";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-
 interface FreelancerProfile {
   id: number;
   name: string;
@@ -61,7 +60,7 @@ const Freelancer = () => {
     router.push(`/freelancer/${free.id}/Update`);
   };
   return (
-    <div className="transition-all duration-500"  >
+    <div className="transition-all duration-500">
       <Navbar />
       <div className="mb-6 ">
         <div className="container mx-auto py-8">
@@ -74,7 +73,9 @@ const Freelancer = () => {
                     src={free.image}
                     alt={free.name}
                   />
-                  <h1 className="text-2xl font-bold text-gray-800">{free.name}</h1>
+                  <h1 className="text-2xl font-bold text-gray-800">
+                    {free.name}
+                  </h1>
                   <p className="text-gray-600 font-serif">{free.jobtitle}</p>
                   <div className="mt-6 flex flex-wrap gap-4 justify-center">
                     <Link href="">
@@ -97,7 +98,10 @@ const Freelancer = () => {
                   </span>
                   <ul className="flex flex-wrap">
                     {free.skills.split(",").map((skill, index) => (
-                      <li key={index} className=" bg-gradient-to-br from-[#172554] to-[#267296] text-[white] py-1 px-2 rounded-full mr-2 mb-2 font-serif">
+                      <li
+                        key={index}
+                        className=" bg-gradient-to-br from-[#172554] to-[#267296] text-[white] py-1 px-2 rounded-full mr-2 mb-2 font-serif"
+                      >
                         {skill.trim()}
                       </li>
                     ))}
@@ -106,31 +110,46 @@ const Freelancer = () => {
               </div>
             </div>
             <div className="lg:col-span-9">
-            <div className=" mt-[-3px] rounded-lg p-6">
-  <h2 className="text-xl font-bold text-gray-800 mt-3 ">About Me</h2>
-  <p className="text-gray-700 mt-3 font-serif">{free.aboutMe}</p>
-  <div >
-    <div>
-      
-    <h2 className="text-xl font-bold text-gray-800 mt-3 ">Phone Number</h2>
-  <p className="text-gray-700 mt-3 font-serif">{free.phone}</p>
-    </div>
-    <div>
-    
-    <h2 className="text-xl font-bold text-gray-800 mt-3">Email</h2>
-  <p className="text-gray-700 mt-3 font-serif">{free.email}</p>
-    </div>
-    <div>
-    
-    <h2 className="text-xl font-bold text-gray-800 mt-3">Address</h2>
-  <p className="text-gray-700 mt-3 font-serif">{free.adress}</p>
-    </div>
-  </div>
-  
-  <h2 className="text-xl font-bold text-gray-800 mt-3">Experience</h2>
-  <p className="text-gray-700 mt-3 font-serif">{free.experience}</p>
-  
-  <div className="flex justify-center items-center gap-6 my-6 ml-[500px]">
+              <div className=" mt-[-3px] rounded-lg p-6">
+                <h2 className="text-xl font-bold text-gray-800 mt-3 ">
+                  About Me
+                </h2>
+                <p className="text-gray-700 mt-3 font-serif">{free.aboutMe}</p>
+                <div>
+                  <div>
+                    <h2 className="text-xl font-bold text-gray-800 mt-3 ">
+                      Phone Number
+                    </h2>
+                    <p className="text-gray-700 mt-3 font-serif">
+                      {free.phone}
+                    </p>
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold text-gray-800 mt-3">
+                      Email
+                    </h2>
+                    <p className="text-gray-700 mt-3 font-serif">
+                      {free.email}
+                    </p>
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold text-gray-800 mt-3">
+                      Address
+                    </h2>
+                    <p className="text-gray-700 mt-3 font-serif">
+                      {free.adress}
+                    </p>
+                  </div>
+                </div>
+
+                <h2 className="text-xl font-bold text-gray-800 mt-3">
+                  Experience
+                </h2>
+                <p className="text-gray-700 mt-3 font-serif">
+                  {free.experience}
+                </p>
+
+                <div className="flex justify-center items-center gap-6 my-6 ml-[500px]">
                   <a
                     className="text-gray-700 hover:text-blue-600"
                     aria-label="Visit TrendyMinds LinkedIn"
@@ -217,9 +236,7 @@ const Freelancer = () => {
                     </svg>
                   </a>
                 </div>
-</div>
-
-
+              </div>
             </div>
           </div>
         </div>
@@ -227,6 +244,5 @@ const Freelancer = () => {
       <Footer />
     </div>
   );
-  
 };
 export default Freelancer;
