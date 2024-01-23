@@ -35,7 +35,7 @@ const handleSignup = () => {
 
   return (
     <div
-    className="min-h-screen flex flex-col items-center justify-center bg-gray-100"
+    className="bg-malek min-h-screen flex flex-col items-center justify-center bg-gray-100"
   >
     <div
       className="
@@ -381,11 +381,8 @@ const handleSignup = () => {
         <span className="ml-2"
           >You have an account?
           <a
-          
-            className="text-xs ml-2 text-blue-500 font-semibold"
-            >Login here</a
-          ></span>
-        
+          className="text-xs ml-2 text-blue-500 font-semibold"
+          >Login here</a></span>
       </a>
     </div>
     </div>

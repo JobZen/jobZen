@@ -17,7 +17,7 @@ const tabPages: TabPage[] = [
 const Navbar = () => {
   return (
     <div className='top-0'>
-      <nav className="bg-gradient-to-br from-[#172554] to-[#267296] w-full px-8 py-4">
+      <nav className="bg-[#172554] w-full px-8 py-4">
       <div className="flex justify-center">
       <div className="w-full px-4 bg-white rounded-[50px] flex items-center justify-between" style={{ maxWidth: '1400px' }}>
         <div className="flex w-full flex-wrap items-center justify-between h-[80px]">
