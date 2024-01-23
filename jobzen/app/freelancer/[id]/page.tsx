@@ -76,12 +76,7 @@ const Freelancer = () => {
                   <h1 className="text-xl font-bold">{free.name}</h1>
                   <p className="text-gray-700">{free.jobtitle}</p>
                   <div className="mt-6 flex flex-wrap gap-4 justify-center">
-                    <Link href="">
-                      <button className="bg-[#267296] font-bold hover:bg-white hover:text-[#267298] text-white py-2 px-4 rounded">
-                        Message
-                      </button>
-                      .
-                    </Link>
+                    
 
                     <button
                       className="border-solid border-2 hover:bg-grey-500 font-bold border-[#267296] text-[#267296] hover:font-bold py-2 px-4 rounded"

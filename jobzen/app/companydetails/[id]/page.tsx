@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Navbar from "../../navBar/page";
+import Navbar from "../../navFreelancer/page";
 import Footer from "../../footer/page";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";

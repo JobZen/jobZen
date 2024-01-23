@@ -1,44 +1,45 @@
-"use client"
+"use client";
 import { FunctionComponent } from "react";
 import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
-import { constants } from "buffer";
-const Signup: FunctionComponent = () => {
 
+
+const Signup: FunctionComponent = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [jobTittle, setJobittle] = useState("");
   const [skills, setSkills] = useState("");
-  const [address,setAddress]=useState('')
+  const [address, setAddress] = useState("");
 
-const handleSignup = () => {
-  if (!name || !password || !email || !address || !jobTittle || !skills ) {alert("fill up all the fields") ; return}
-  const obj = {
-    name:name,
-    password:password,
-    email:email,
-    adress:address,
-    jobtitle:jobTittle,
-    image:"https://gem.ec-nantes.fr/wp-content/uploads/2019/01/profil-vide.png",
-    skills:skills
-  }
-  console.log(obj)
- 
- axios.post("http://localhost:3000/auth/freelancer/register", obj)
- .then((response) => console.log(response.data))
- .catch((error) => console.log("error:", error))
-};
+  const handleSignup = () => {
+    if (!name || !password || !email || !address || !jobTittle || !skills) {
+      alert("fill up all the fields");
+      return;
+    }
+    const obj = {
+      name: name,
+      password: password,
+      email: email,
+      adress: address,
+      jobtitle: jobTittle,
+      image:
+        "https://gem.ec-nantes.fr/wp-content/uploads/2019/01/profil-vide.png",
+      skills: skills,
+    };
+    console.log(obj);
 
-
+    axios
+      .post("http://localhost:3000/auth/freelancer/register", obj)
+      .then((response) => {console.log(response.data);alert("thank you for signing up")})
+      .catch((error) => console.log("error:", error));
+  };
 
   return (
-    <div
-    className="bg-malek min-h-screen flex flex-col items-center justify-center bg-gray-100"
-  >
-    <div
-      className="
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+      <div
+        className="
         flex flex-col
         bg-white
         shadow-md
@@ -51,22 +52,20 @@ const handleSignup = () => {
         w-50
         max-w-md
       "
-    >
-      <div className="font-medium self-center text-xl sm:text-3xl text-gray-800">
-        Join us Now
-      </div>
-      <div className="mt-4 self-center text-xl sm:text-sm text-gray-800">
-        Enter your credentials to get access account
-      </div>
+      >
+        <div className="font-medium self-center text-xl sm:text-3xl text-gray-800">
+          Join us Now
+        </div>
+        <div className="mt-4 self-center text-xl sm:text-sm text-gray-800">
+          Enter your credentials to get access account
+        </div>
 
-      <div className="mt-10">
-        
+        <div className="mt-10">
           <div className="flex flex-col mb-5">
-            <label
-           
-              className="mb-1 text-xs tracking-wide text-gray-600"
-              >Name:</label>
-            
+            <label className="mb-1 text-xs tracking-wide text-gray-600">
+              Name:
+            </label>
+
             <div className="relative">
               <div
                 className="
@@ -81,13 +80,10 @@ const handleSignup = () => {
                   text-gray-400
                 "
               >
-                <i className="fas fa-user text-blue-500"></i>
+                {/* <i className="fas fa-user text-blue-500"></i> */}
               </div>
 
               <input
-            
-             
-                
                 className="
                   text-sm
                   placeholder-gray-500
@@ -100,16 +96,15 @@ const handleSignup = () => {
                   focus:outline-none focus:border-blue-400
                 "
                 placeholder="Enter your name"
-                onChange={(e)=>setName(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
           </div>
           <div className="flex flex-col mb-5">
-            <label
-             
-              className="mb-1 text-xs tracking-wide text-gray-600"
-              >E-Mail :</label>
-            
+            <label className="mb-1 text-xs tracking-wide text-gray-600">
+              E-Mail :
+            </label>
+
             <div className="relative">
               <div
                 className="
@@ -128,7 +123,6 @@ const handleSignup = () => {
               </div>
 
               <input
-           
                 className="
                   text-sm
                   placeholder-gray-500
@@ -141,16 +135,15 @@ const handleSignup = () => {
                   focus:outline-none focus:border-blue-400
                 "
                 placeholder="Enter your email"
-                onChange={(e)=>setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
           </div>
           <div className="flex flex-col mb-5">
-            <label
-             
-              className="mb-1 text-xs tracking-wide text-gray-600"
-              >Address:</label>
-            
+            <label className="mb-1 text-xs tracking-wide text-gray-600">
+              Address:
+            </label>
+
             <div className="relative">
               <div
                 className="
@@ -169,7 +162,6 @@ const handleSignup = () => {
               </div>
 
               <input
-            
                 className="
                   text-sm
                   placeholder-gray-500
@@ -182,16 +174,15 @@ const handleSignup = () => {
                   focus:outline-none focus:border-blue-400
                 "
                 placeholder="Enter your Address"
-                onChange={(e)=>setAddress(e.target.value)}
+                onChange={(e) => setAddress(e.target.value)}
               />
             </div>
           </div>
           <div className="flex flex-col mb-5">
-            <label
-             
-              className="mb-1 text-xs tracking-wide text-gray-600"
-              >Skills:</label>
-            
+            <label className="mb-1 text-xs tracking-wide text-gray-600">
+              Skills:
+            </label>
+
             <div className="relative">
               <div
                 className="
@@ -225,17 +216,15 @@ const handleSignup = () => {
                   focus:outline-none focus:border-blue-400
                 "
                 placeholder="Enter your Skills"
-                onChange={(e)=>setSkills(e.target.value)}
-
+                onChange={(e) => setSkills(e.target.value)}
               />
             </div>
           </div>
           <div className="flex flex-col mb-5">
-            <label
-             
-              className="mb-1 text-xs tracking-wide text-gray-600"
-              >JobTittle:</label>
-            
+            <label className="mb-1 text-xs tracking-wide text-gray-600">
+              JobTittle:
+            </label>
+
             <div className="relative">
               <div
                 className="
@@ -269,18 +258,16 @@ const handleSignup = () => {
                   focus:outline-none focus:border-blue-400
                 "
                 placeholder="Enter your JobTittle"
-                onChange={(e)=>setJobittle(e.target.value)}
-
+                onChange={(e) => setJobittle(e.target.value)}
               />
             </div>
           </div>
-          
+
           <div className="flex flex-col mb-6">
-            <label
-            
-              className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
-              >Password:</label >
-           
+            <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">
+              Password:
+            </label>
+
             <div className="relative">
               <div
                 className="
@@ -301,9 +288,7 @@ const handleSignup = () => {
               </div>
 
               <input
-              
                 type="password"
-                
                 className="
                   text-sm
                   placeholder-gray-500
@@ -316,15 +301,16 @@ const handleSignup = () => {
                   focus:outline-none focus:border-blue-400
                 "
                 placeholder="Enter your password"
-                onChange={(e)=>setPassword(e.target.value)}
-
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
           </div>
 
           <div className="flex w-full">
             <button
-            onClick={()=>{handleSignup()}}
+              onClick={() => {
+                handleSignup();
+              }}
               type="submit"
               className="
                 flex
@@ -344,8 +330,7 @@ const handleSignup = () => {
                 ease-in
               "
             >
-              <span className="mr-2 uppercase"
-                   >Sign Up</span>
+              <span className="mr-2 uppercase">Sign Up</span>
               <span>
                 <svg
                   className="h-6 w-6"
@@ -356,35 +341,32 @@ const handleSignup = () => {
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path
-                    d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
+                  <path d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </span>
             </button>
           </div>
-        
+        </div>
       </div>
-    </div>
-    <div className="flex justify-center items-center mt-6">
-      <a
-   
-        target="_blank"
-        className="
+      <div className="flex justify-center items-center mt-6">
+        <p
+          target="_blank"
+          className="
           inline-flex
           items-center
           text-gray-700
           font-medium
           text-xs text-center
         "
-      >
-        <span className="ml-2"
-          >You have an account?
-          <a
-          className="text-xs ml-2 text-blue-500 font-semibold"
-          >Login here</a></span>
-      </a>
-    </div>
+        >
+          <span className="ml-2">
+            You have an account?
+            <p className="text-xs ml-2 text-blue-500 font-semibold">
+            <Link href={"/login"} >Login here</Link>  
+            </p>
+          </span>
+        </p>
+      </div>
     </div>
     )
 

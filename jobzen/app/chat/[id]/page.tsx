@@ -84,13 +84,12 @@ interface Person {
 
 
 
-const socket = io("http://localhost:3000");
+const socket = io("http://localhost:3004");
 const Chat = () => {
   const role = Cookies.get("role");
   const id = Cookies.get("id");
   const [messages, setMessages] = useState<Message[] | []>([]);
-  const [sender, setSender] = useState<Message[] | []>([]);
-  const [reciever, setReciever] = useState<Message[] | []>([]);
+  const [sorted, setSorted] = useState<Message[] | []>([]);
   const [currentMessage, setCurrentMessage] = useState("");
   const [myMessage,setMyMessage]= useState<Person[] [] | []>([]);
   const [index , setIndex] = useState(0)
@@ -105,25 +104,22 @@ const Chat = () => {
 
 const route=useRouter()
 
-  const sorted = [...sender, ...reciever].sort(sortByCreatedAt);
-
-  useEffect (()=>{
-
-
-  },[])
 
   useEffect(() => {
-    socket.on("message", (message) => {
-      setMessages((prevMessages) => [...prevMessages, message]);
-    });
+    socket.connect()
+    socket.on('recieve',(msg)=>{
+      setSorted([...sorted,msg])
+    },[])
+
 
     return () => {
       socket.disconnect();
     };
   }, []);
 
-  const sendMessage = () => {
-    socket.emit("message", currentMessage);
+  const sendMessage = async(obj:any) => {
+  socket.emit("send", obj);
+  setSorted([...sorted,obj])
     setCurrentMessage("");
   };
 
@@ -132,7 +128,7 @@ const route=useRouter()
     const currentUrl = window.location.href;
     const ind = currentUrl.split("/");
     setIndex(parseInt(ind[ind.length - 1]))
-  })
+  },[])
 
 
   useEffect(() => {
@@ -166,8 +162,8 @@ const route=useRouter()
             element.him = true;
           });
           console.log(res[1].data);
-          setSender(res[0].data);
-          setReciever(res[1].data);
+          setSorted([...res[0].data,...res[1].data].sort(sortByCreatedAt))
+        
           setMyMessage(res[2].data.sort(sortByCreatedAt1))
           setchatOwner(res[3].data)
           setChatReciever(res[4].data)
@@ -255,7 +251,12 @@ const handleSend = () => {
     reciever: index,
     body: currentMessage
   })
-  .then(()=> {console.log("the freelancer sended very cute message")})
+  .then(()=> {console.log("the freelancer sended very cute message")
+  sendMessage({
+    sender: id,
+    reciever: index,
+    body: currentMessage
+  })})
 .catch((err)=>{console.log(err,'')})
 }
   else
@@ -264,7 +265,12 @@ const handleSend = () => {
     reciever: index,
     body: currentMessage
   })
-.then(()=> {console.log("the jobowner sended very cute message")})
+.then(()=> {console.log("the jobowner sended very cute message")
+ sendMessage({
+  sender: id,
+  reciever: index,
+  body: currentMessage
+})})
 .catch((err)=>{console.log(err,'')})
 }
 
