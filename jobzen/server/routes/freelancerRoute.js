@@ -7,6 +7,8 @@ router.get('/', Freelancer.getAllFreelancers);
 //getOne
 router.get('/:id', Freelancer.getFreelancerById);
 
+//getallbycategory
+router.get('/freebycat/:id', Freelancer.getFreelancerBycategory);
 // Create a new freelancer
 router.post('/freelancer', Freelancer.createFreelancer);
 
