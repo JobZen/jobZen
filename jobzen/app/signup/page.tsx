@@ -350,7 +350,6 @@ const Signup: FunctionComponent = () => {
       </div>
       <div className="flex justify-center items-center mt-6">
         <p
-          target="_blank"
           className="
           inline-flex
           items-center
