@@ -5,6 +5,7 @@ import Navbar from "../../../navFreelancer/page";
 import Footer from "../../../footer/page";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Popup from "../../../popup/page";
 
 interface FreelancerProfile {
   id: number;
@@ -25,13 +26,10 @@ const Update = () => {
 
   const [url, setUrl] = useState<string>("");
   console.log(url);
-
+  const [showPopup, setShowPopup] = useState(false);
   const [id, setId] = useState(0);
-
   const [name, setName] = useState("");
   const [phone, setPhone] = useState(0);
-
-  const [job, setJob] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [adress, setAdress] = useState("");
@@ -39,8 +37,6 @@ const Update = () => {
   const [aboutMe, setAboutMe] = useState("");
   const [jobtitle, setJobTitle] = useState("");
   const [experienceTitle, setExperienceTitle] = useState("");
-  const [experiencePeriod, setExperiencePeriod] = useState("");
-  const [experienceDescription, setExperienceDescription] = useState("");
   const [free, setFree] = React.useState<FreelancerProfile>({
     id: 0,
     name: "",
@@ -97,12 +93,16 @@ const Update = () => {
       ); //put ${id} instead of 1
       const data = response.data;
       console.log("Profile updated successfully", data);
-      alert("Profile updated successfully");
-      router.push(`/freelancer/${free.id}`);
+      setShowPopup(true);
     } catch (error) {
       console.log("error updating freelancer profile", error);
       alert("Please try again");
     }
+  };
+  const handleClosePopup = () => {
+    setShowPopup(false);
+    // Assuming you have a route named '/freelancer/:id'
+    router.push(`/freelancer/${free.id}`);
   };
 
   const uploadImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -135,46 +135,50 @@ const Update = () => {
   return (
     <div>
       <Navbar />
-      <div className="">
+      {showPopup && (
+        <Popup onClose={handleClosePopup} onConfirm={handleClosePopup} />
+      )}
+      <div className="bg-white min-h-screen">
         <div className="container mx-auto py-8">
           <div className="grid grid-cols-4 sm:grid-cols-12 gap-6 px-4">
             <div className="col-span-4 sm:col-span-3">
-              <div className="bg-white shadow rounded-lg p-6">
+              <div className="bg-[#a1e1fd4a] shadow-xl rounded-[42px] p-6 h-[827px]">
                 <div className="flex flex-col items-center">
                   {url ? (
                     <img
                       src={url}
-                      className="w-32 h-32 bg-gray-300 rounded-full mb-4"
+                      className="w-32 h-32 rounded-full mb-4 object-cover border-4 "
                       alt="Preview"
                     />
                   ) : (
                     <img
                       src={free.image}
-                      className="w-32 h-32 bg-gray-300 rounded-full mb-4"
+                      className="w-32 h-32 rounded-full mb-4 object-cover border-4 "
                       alt="Profile Photo"
                     />
                   )}
-                  <h1 className="text-xl border-gray-300 rounded-lg font-bold text-align-center">
+                  <h1 className="text-xl font-bold text-center mb-2">
                     <input
                       type="text"
                       placeholder="Your Name"
                       onChange={(e) => setName(e.target.value)}
+                      className="w-full border border-[#a1e1fd4a]-300 p-2 rounded-full mb-4"
                     />
                   </h1>
-                  <br />
-                  <p className="text-gray-700">
+                  <p className="text-gray-700 w-full">
                     <input
                       type="text"
-                      placeholder="Your Job"
+                      placeholder="Enter your Job here"
                       onChange={(e) => setJobTitle(e.target.value)}
+                      className="w-full border border-[#a1e1fd4a]-300 p-2 rounded-full mb-4"
                     />
                   </p>
                   <div className="mt-6 flex flex-wrap gap-4 justify-center">
                     <button
                       onClick={handleUpdate}
-                      className="bg-[#267296] font-bold hover:bg-white hover:text-[#267298] text-white py-2 px-4 rounded"
+                      className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[white] rounded-full overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#267296] text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[white] items-center justify-center mr-0 py-full transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[#267296] hover:scale-110 relative bg-[#267296] rounded-full overflow-hidden border border-[#a1e1fd4a] "
                     >
-                      Save update
+                      Save Updates
                     </button>
                     <div
                       onClick={() =>
@@ -182,7 +186,7 @@ const Update = () => {
                       }
                     >
                       <button
-                        className="bg-[#267296] font-bold hover:bg-white hover:text-[#267298] text-white py-2 px-4 rounded"
+                        className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[#267296] rounded-full overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[#267296] items-center justify-center mr-0 py-full transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[white] hover:scale-110 relative bg-[#267296] rounded-full overflow-hidden border border-[#a1e1fd4a] "
                         onClick={() => uploadImage}
                       >
                         Upload New Image
@@ -196,7 +200,7 @@ const Update = () => {
                       />
                     </div>
                     <Link href={`/freelancer/${free?.id || ""}`}>
-                      <button className="border-solid border-2 hover:bg-grey-500 font-bold border-[#267296] text-[#267296] hover:font-bold py-2 px-4 rounded">
+                      <button className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[white] rounded-full overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#267296] text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[white] items-center justify-center mr-0 py-full transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[#267296] hover:scale-110 relative bg-[#267296] rounded-full overflow-hidden border border-solid ">
                         Cancel
                       </button>
                     </Link>
@@ -209,70 +213,61 @@ const Update = () => {
                   </span>
                   <input
                     type="text"
-                    placeholder="skills"
+                    placeholder="Enter your new skills here..."
                     onChange={(e) => setSkills(e.target.value)}
+                    className="w-full border border-[#a1e1fd4a]-300 p-2 rounded-full mb-4"
                   />
                 </div>
               </div>
             </div>
             <div className="col-span-4 sm:col-span-9">
-              <div className="bg-white shadow rounded-lg p-6">
+              <div className="bg-white  shadow-xl rounded-[42px] p-6">
                 <h2 className="text-xl font-bold mt-6 mb-4">About Me</h2>
                 <input
                   type="text"
-                  placeholder="About Me"
+                  placeholder="Describe yourself"
                   onChange={(e) => setAboutMe(e.target.value)}
-                  className="flex justify-between flex-wrap gap-2 w-full"
+                  className="w-full border border-gray-300 p-2 rounded-full mb-4"
                 />
-                <h2 className="text-xl font-bold mt-6 mb-4">Phone number</h2>
+                <h2 className="text-xl font-bold mt-6 mb-4">Phone Number</h2>
                 <input
                   type="text"
-                  placeholder="phone number"
+                  placeholder="Enter your new phone number here..."
                   onChange={(e) => setPhone(parseInt(e.target.value))}
+                  className="w-full border border-gray-300 p-2 rounded-full mb-4"
                 />
-                <br />
                 <h2 className="text-xl font-bold mt-6 mb-4">Email</h2>
                 <input
                   type="text"
-                  placeholder="Email"
+                  placeholder="Enter your new Email here..."
                   onChange={(e) => setEmail(e.target.value)}
+                  className="w-full border border-gray-300 p-2 rounded-full mb-4"
                 />
-                 <h2 className="text-xl font-bold mt-6 mb-4">Address</h2>
-                
-             
+                <h2 className="text-xl font-bold mt-6 mb-4">Address</h2>
                 <div className="mb-6">
-                
                   <input
                     type="text"
                     placeholder="Enter your new Address here..."
                     onChange={(e) => setAdress(e.target.value)}
-                    style={{ width: "1000px" }}
+                    className="w-full border border-gray-300 p-2 rounded-full mb-4"
                   />
                 </div>
-
                 <h2 className="text-xl font-bold mt-6 mb-4">Password</h2>
-                
-             
                 <div className="mb-6">
-                
                   <input
                     type="text"
                     placeholder="Enter your new password here..."
                     onChange={(e) => setPassword(e.target.value)}
-                    style={{ width: "1000px" }}
+                    className="w-full border border-gray-300 p-2 rounded-full mb-4"
                   />
                 </div>
-
                 <h2 className="text-xl font-bold mt-6 mb-4">Experience</h2>
-                
-             
                 <div className="mb-6">
-                
                   <input
                     type="text"
                     placeholder="Enter your previous experience here..."
                     onChange={(e) => setExperienceTitle(e.target.value)}
-                    style={{ width: "1000px" }}
+                    className="w-full border border-gray-300 p-2 rounded-full mb-4"
                   />
                 </div>
               </div>
