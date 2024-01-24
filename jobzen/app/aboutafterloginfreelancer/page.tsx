@@ -73,7 +73,7 @@ and get hired by over tens of thousands of today’s most innovative brands arou
         </h2>
         <h5 className="mb-4 text-xl font-bold">Projects</h5>
         <p className="text-neutral-500 text-2xl">
-          have been effectively realised betwwen Job owners and Freelancers through JobZen
+          have been effectively realised between Job owners and Freelancers through JobZen
         </p>
       </div>
     </div>
