@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Navbar from "../../navBar/page";
+import Navbar from "../../navjobowner/page";
 import Footer from "../../footer/page";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -44,7 +44,6 @@ const StarRating = ({ rating }: { rating: number }) => {
 };
 
 const JobOwnerProfile: React.FC = (): JSX.Element => {
-  const [id, setId] = useState();
   const [jobOwnerData, setJobOwnerData] = useState<JobOwner>({
     id: 0,
     name: "",

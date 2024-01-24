@@ -109,7 +109,8 @@ const route=useRouter()
     socket.connect()
     socket.on('recieve',(msg)=>{
       setSorted([...sorted,msg])
-    })
+    },[])
+
 
     return () => {
       socket.disconnect();
@@ -127,7 +128,7 @@ const route=useRouter()
     const currentUrl = window.location.href;
     const ind = currentUrl.split("/");
     setIndex(parseInt(ind[ind.length - 1]))
-  })
+  },[])
 
 
   useEffect(() => {

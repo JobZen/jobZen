@@ -26,13 +26,13 @@ const Navbar = () => {
                     <Link href={"/mainJobOwner"}>
                       <span className="font-jura text-xl text-[#172554]">HOME</span>
                     </Link>
-                 
-                    <Link href={"/contactafterloginjobowner"}>
-                      <span className="font-jura text-xl text-[#172554]">CONTACT</span>
-                    </Link>
                 
                     <Link href={"/aboutafterloginjobowner"}>
                       <span className="font-jura text-xl text-[#172554]">ABOUT</span>
+                    </Link>
+                    
+                    <Link href={"/contactafterloginjobowner"}>
+                      <span className="font-jura text-xl text-[#172554]">CONTACT</span>
                     </Link>
                     </div>
 
