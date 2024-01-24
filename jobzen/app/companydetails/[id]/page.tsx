@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Navbar from "../../navBar/page";
+import Navbar from "../../navFreelancer/page";
 import Footer from "../../footer/page";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -129,7 +129,7 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
-                className="absolute w-[17px] h-[17px] mr-8 top-[340px] left-[200px]"
+                className="absolute w-[17px] h-[17px] mr-8 top-[360px] left-[214px]"
               >
                 <path
                   fillRule="evenodd"
