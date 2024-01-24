@@ -4,7 +4,6 @@ import Navbar from "../../../navBar/page";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Footer from "../../../footer/page";
-import Link from "next/link";
 
 interface JobOwner {
   id: number;
