@@ -4,6 +4,9 @@ const Job = require('../controllers/jobController');
 // GET all jobs
 router.get('/job', Job.getAllJobs);
 
+// GET jobs by companyy
+router.get('/jobbycompany/:id', Job.getJobsByCompany);
+
 // GET one job
 router.get('/job/:id', Job.getOneJob);
 

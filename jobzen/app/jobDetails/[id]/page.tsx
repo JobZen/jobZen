@@ -99,9 +99,6 @@ useEffect(()=>{
                       <p className="mt-6 text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">View Company's Profile</p>
                     </Link>
                     <div className="mt-6 flex gap-4">
-                      <Link href={'/jobDetails/messageJobDetails'}>
-                        <button className="bg-[#267296] hover:bg-[#195571] text-white py-2 px-4 rounded">Message</button>
-                      </Link>
                       <Link href={`/jobDetails/${job.id}/updateJobDetails`}>
                         <button className="text-[#267296] hover:font-bold bg-white border-[#267296] py-2 px-4 rounded" >
                           Update details
