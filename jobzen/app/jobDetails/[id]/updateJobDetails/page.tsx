@@ -1,7 +1,7 @@
 'use client'
 import React , {useState,useEffect} from 'react';
 import Link from 'next/link';
-import Navbar from '../../../navBar/page';
+import Navbar from '../../../navjobowner/page';
 import Footer from '../../../footer/page';
 import axios from 'axios';
 interface JobOwner{
@@ -185,9 +185,7 @@ useEffect(() => {
                   <div className="flex flex-col items-center">
                   <img src={jobDetails?.jobowner.image} className="w-32 h-32 rounded-full mb-4 shrink-0" alt="CompanyProfile" />
                   <h1 className="text-xl font-bold">{jobDetails?.jobowner.name}</h1>
-                    <Link href={'/jobownerProfile'}>
-                      <p className="text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">View Company's Profile</p>
-                    </Link>
+                    
                     <div className="mt-6 flex flex-wrap gap-4 justify-center">
                      
                         <button onClick={(e)=>handleUpdatedJob(e)} className="text-white hover:font-bold bg-[#267296] border-white shadow-2xl py-2 px-4 rounded">save Update</button>

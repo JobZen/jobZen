@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import Link from 'next/link';
-import Navbar from '../../navBar/page';
+import Navbar from '../../navjobowner/page';
 import Footer from '../../footer/page';
 
 interface JobOwner{
@@ -86,7 +86,7 @@ useEffect(()=>{
                   <li className="mt-2">{job.qualification}</li>
                 </ul>
               </div>
-              <b className='ml-1 font-jura text-2xl font-bold text-red-500'>Contact us to apply</b>
+             
             </div>
             
             <div className="ml-1 flex items-center p-8">
@@ -95,9 +95,7 @@ useEffect(()=>{
                 <div className="flex flex-col items-center">
                     <img src={job.jobowner.image} className="w-32 h-32 rounded-full mb-4 shrink-0"alt="CompanyProfile"/>
                     <h1 className="text-xl font-bold">{job.jobowner.name}</h1>
-                                      <Link href={'/jobownerProfile'}>
-                      <p className="mt-6 text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">View Company's Profile</p>
-                    </Link>
+                        
                     <div className="mt-6 flex gap-4">
                       <Link href={`/jobDetails/${job.id}/updateJobDetails`}>
                         <button className="text-[#267296] hover:font-bold bg-white border-[#267296] py-2 px-4 rounded" >
@@ -106,9 +104,7 @@ useEffect(()=>{
                           </Link>
                     </div>
                     <div className='mt-6 '>
-                    <Link href={'/jobDetails/review'}>
-                      <p className="font-jura text-[#267296] hover:text-base-[#267296] hover:font-semibold hover:underline">View Company's Review</p>
-                    </Link>
+                
                     </div>
                   </div>
                   <hr className="my-6 border-t border-[#267296]" />
