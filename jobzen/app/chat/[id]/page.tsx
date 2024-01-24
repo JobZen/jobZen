@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import io from "socket.io-client";
 import {useRouter}from 'next/navigation'
 import Navbar from "../../navFreelancer/page";
+import Navbar2 from "@/app/navjobowner/page";
 import Footer from "../../footer/page"
 
 interface Freelancer {
@@ -95,6 +96,7 @@ const Chat = () => {
   const [index , setIndex] = useState(0)
   const [chatOwner,setchatOwner]= useState<Freelancer | Jobowner >()
   const [chatReciever,setChatReciever]= useState<Freelancer | Jobowner >()
+  const [send,setSend]=useState(false)
 
   const sortByCreatedAt = (a: Message, b: Message) =>
     new Date(a.createdAt) - new Date(b.createdAt);
@@ -174,7 +176,7 @@ const route=useRouter()
       .catch((error) => {
         console.log(error);
       });
-  }, [index]);
+  }, [index,send]);
  
   console.log(chatReciever,'dddd')
   const handleClassName = (freelancerId:number,jobownerId:number) => {
@@ -257,7 +259,7 @@ const handleSend = () => {
     sender: id,
     reciever: index,
     body: currentMessage
-  })})
+  });setSend(!send)})
 .catch((err)=>{console.log(err,'')})
 }
   else
@@ -271,7 +273,7 @@ const handleSend = () => {
   sender: id,
   reciever: index,
   body: currentMessage
-})})
+});setSend(!send)})
 .catch((err)=>{console.log(err,'')})
 }
 
@@ -283,7 +285,7 @@ const handleUsersSearch = () =>{
  console.log("owner",chatOwner)
   return (
     <div>
-   <Navbar/>
+    {role==="freelancer"?<Navbar/>:<Navbar2/>}
     <div className="container mx-auto  shadow-lg rounded-lg mt-[3.5cm]">
     
       <div className="px-5 py-5 flex justify-between items-center bg-white border-b-2">
