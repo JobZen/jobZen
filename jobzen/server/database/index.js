@@ -241,7 +241,11 @@ const Contact= sequelize.define("contact",{
   message : {
     type: DataTypes.TEXT,
     allowNull: false,
-  }
+  },
+  reply : {
+    type: DataTypes.TEXT,
+    allowNull: true,
+  },
 
 })
 
@@ -263,19 +267,6 @@ const JobOwnerMessages = sequelize.define("jobownermessages" , {
   }
  })
 
-FreelancerHasCategories.belongsTo(Freelancer, {
-  foreignKey: 'FreeLancerId', 
-  allowNull: false,
-})
-
-
-FreelancerHasCategories.belongsTo(FreelancerCategories, {
-  foreignKey: 'FreeLancerCategoriesId', 
-  allowNull: false,
-})
-
-
-
 Job.belongsTo(JobOwner, {
   foreignKey: 'jobOwnerId',
   allowNull: false,
@@ -286,6 +277,10 @@ Job.belongsTo(JobCategory, {
   allowNull: false,
 });
 
+Freelancer.belongsTo(FreelancerCategories,{
+  foreignKey: 'FreelancerCategoriesId',
+  allowNull: false,
+});
 
 
 FreelancerMessages.belongsTo(Freelancer , {foreignKey : "sender",

@@ -3,8 +3,59 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import SideNavBar from '../sideNavBar/page';
+import Search from '../../search/page'
+
+interface Reclamation {
+  id: number;
+  name: string;
+  email: string;
+  message: string;
+  createdAt: string;
+  reply?: string;
+}
 
 const Messages = () => {
+  const [reclamation, setReclamation] = useState<Reclamation[]>([]);
+  const [selectedMessageId, setSelectedMessageId] = useState<number | null>(null);
+  const [mess, setMess] = useState({ id: 0, name: "", message: "", createdAt: "", reply: "" });
+  const [refresh , setRefresh]= useState (true)
+  const [messCount,setMessCount]=useState<number>(0)
+  const [replyMessage, setReplyMessage] = useState("");
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/contactUs/get")
+      .then((response) => {
+        const Data: [] = response.data;
+        setReclamation(Data);
+        setMessCount(Data.length);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [refresh]);
+
+  const handleReply = async () => {
+    try {
+      setMess((prevMess) => ({ ...prevMess, reply: replyMessage }));
+      setReplyMessage('');
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleDelete = async (id:number) => {
+    try {
+      await axios.delete(`http://localhost:3000/contactUs/delete/${id}`);
+      setRefresh(!refresh);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const Msg = (id: number, name: string, email: string, message: string, createdAt: string) => {
+    setSelectedMessageId(id);
+    setMess((prevMess) => ({ ...prevMess, id, name, message, createdAt, reply: "" }));
+  };
 
 return (
     <>
@@ -13,46 +64,19 @@ return (
 {/* First row with three columns */}
     <div className=" gap-4 mb-10 mt-10">
       <div className="flex flex-col items-center justify-center h-24 rounded">
-        <p className="text-6xl text-black font-black">10</p>
+        <p className="text-6xl text-black font-black">{messCount}</p>
         <p className="text-2xl text-black">Received Messages</p>
       </div>
     </div>
 
 {/* drop navigation Action */}
-    <div className="relative overflow-x-auto">
+<div className="relative overflow-x-auto mt-10 mb-10 mr-10">
       <div className="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 bg-white">
-        <label
-          htmlFor="table-search"
-          className="sr-only"
-        >
+        <label htmlFor="table-search" className="sr-only">
           Search
         </label>
-        <div className="relative">
-          <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-            <svg
-              className="w-4 h-4 text-gray-500"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 20 20"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-              />
-            </svg>
-          </div>
-          <input
-            type="text"
-            id="table-search-users"
-            className="block pt-2 ps-10 text-sm border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Search for users"
-          />
-        </div>
-      </div>
+        <Search/>
+    </div>
 
 {/* messages starts here */}
 <div className="flex-1 container mx-auto border-t-1">
@@ -64,22 +88,7 @@ return (
                   <td className="w-1/3  border-r-2 border-grey-300 p-2 border-b-2 border-l-2 rounded-lg">
                     <div className='flex justify-between items-center'>
                       <p className="font-bold text-s">List of Messages</p>
-                      <button type="button" data-te-ripple-init data-te-ripple-color="light" className="flex rounded-3xl px-6 pb-2 pt-2.5 text-s font-bold leading-normal gap-1 text-black hover:text-[#267296] border-2">
-                        <svg xmlns="http://www.w3.org/2000/svg"viewBox="0 0 20 20"fill="currentColor"className="w-5 h-6">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v2.5h-2.5a.75.75 0 0 0 0 1.5h2.5v2.5a.75.75 0 0 0 1.5 0v-2.5h2.5a.75.75 0 0 0 0-1.5h-2.5v-2.5Z" clipRule="evenodd"/>
-                          </svg>Compose</button></div></td>
-                          
-                  {/* Right Column */}
-                  <td className="w-2/3 bg-grey-50 p-2 border-grey-300 border-b-2 border-r-2">
-                    {/* Row 1 Content */}
-                    <div className="flex justify-between items-center">
-                      {/* {messages.JobOwner.image} */}
-                      <div className="flex items-center">
-                      <img className="w-8 h-8 rounded-full mr-2" src="https://shorturl.at/bkuJT" alt="JobOwner Avatar" />
-                       {/* {messages.JobOwner.name} */}
-                       <p className="font-medium">Flux Outdoor</p>
-                       </div>
-                       <div className="flex gap-2">
+                      <div className="flex gap-2">
                        <a className="text-black hover:text-orange-600"aria-label="archive"href=""target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
                           <path stroke-linecap="round"stroke-linejoin="round"d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"/>
@@ -92,27 +101,33 @@ return (
                           <svg xmlns="http://www.w3.org/2000/svg"fill="none"viewBox="0 0 24 24"stroke-width="1.5"stroke="currentColor"className="w-6 h-6">
                             <path stroke-linecap="round"stroke-linejoin="round"d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636"/>
                             </svg></a>
-                                <a className="text-orange-600 hover:bg-red-600 hover:text-white"
-                                aria-label="messages"
-                                // add function here
-                                // href="/jobDetails/messageJ"
-                                target="_blank">
+                                <a className="text-orange-600 hover:bg-red-600 hover:text-white" aria-label="delete" target="_blank" onClick={() => handleDelete(mess.id)}>
                                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"/>
                                     </svg></a>
                                   </div>
-                                </div>
+                       </div>
+                  </td>
+                          
+                  {/* Right Column */}
+                  <td className="w-2/3 bg-grey-50 p-2 border-grey-300 border-b-2 border-r-2">
+                    {/* Row 1 Content */}
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center">
+                       <p className="font-medium">{mess.name}</p>
+                       </div>
+                        </div>
                         </td>
                       </tr>
 
                 {/* Row 2 */}
-                  {/* {messages.map ((messages)=>( */}
-                  {/* inside tr add: key={messages.id} */}
                   <tr>
                   <td className="w-1/3 bg-grey-50 border-r-2 border-grey-300 p-2 border-b-2 border-l-2">
                     <div className="user-list bg-white">
-                      <div className="flex hover:bg-slate-100 transition px-5 py-3 hover:cursor-pointer md-4">
-                        <div className="pr-4">
+                    {reclamation.map((el=>(
+                      <div key={el.id} className="flex hover:bg-blue-100 transition px-5 py-3 hover:cursor-pointer md-4"
+                      onClick={() => {Msg(el.id, el.email, el.name, el.message,el.createdAt);}}>
+                      <div className="pr-4">
                           <input
                             id="checkbox-1"
                             type="checkbox"
@@ -122,21 +137,21 @@ return (
                             checkbox
                           </label>
                         </div>
-                        {/* User Info with Image */}
                         <div className="flex items-center">
-                          {/* {messages.Freelancer.image} */}
-                          <img src="https://cdn-icons-png.flaticon.com/512/194/194938.png" width="50" alt="User Icon" />
-                          <div className="pl-4">
-                            {/* {messages.Freelancer.map} */}
-                            <h3 className="text-[#267296] tex-md">Lupe Fiasco</h3>
-                            <p className="text-sm text-gray-400 font-light overflow-hidden h-5">
-                            I want to apply to your last job post, I got the needed qualification
-                              {/* {message.body} */}
-                            </p>
-                          </div>
-                        </div>
+                          <div className="pl-4 flex-grow">
+                             <div className="flex items-center justify-between">
+                                <h3 className="text-[#267296] font-semibold tex-md">{el.name}</h3>
+                              <p className="text-xs text-gray-500">
+                              {new Date(el.createdAt).toLocaleDateString([], { year: 'numeric', month: 'numeric', day: 'numeric' })}
+                                   </p>
+                                  </div>
+                                    <p className="text-sm text-gray-400 font-light overflow-hidden h-5">
+                                       {el.message}
+                                       </p>
+                                         </div>
+                              </div>
                       </div>
-                  {/* ))} */}
+                    )))}
                     </div>
                   </td>
 
@@ -144,32 +159,40 @@ return (
                   <td className="w-2/3 bg-grey-50 p-2 border-b-2 border-r-2">
                     {/* Row 2 Content */}
                     {/* Chat messages */}
-                    <div className="flex flex-col mb-4 gap-4 py-4">
-                      <div className="flex justify-start">
-                        <div className="bg-gray-100 rounded-lg px-4 py-2 max-w-[80%]">
-                          <p className="text-gray-900 text-sm">Hey, how are you?</p>
-                        </div>
-                      </div>
+                    {/* message details : shows when we click: */}
+                    {selectedMessageId !== null && (
+                      <div className="flex flex-col mb-4 gap-4 py-4">
+                               <div className="flex justify-between">
+                                  <div className="bg-gray-100 rounded-lg px-4 py-2 max-w-[80%]">
+                                    <div className="flex justify-between">
+                                    <p className="text-gray-900 text-sm">{mess && mess.message}</p>
+                                  </div>
+                                  <p className="flex text-xs text-gray-500 justify-end">
+                                {new Date(mess.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}
+                              </p>
+                          </div>
+                          </div>
+                          {/* reply part here: */}
+                        {mess.reply && (
                       <div className="flex justify-end">
                         <div className="bg-blue-500 rounded-lg px-4 py-2 max-w-[80%]">
-                          <p className="text-white text-sm">I'm good, thanks! How about you?</p>
+                          <p className="text-white text-sm">{mess.reply}</p>
                         </div>
                       </div>
-                      <div className="flex justify-start">
-                        <div className="bg-gray-100 rounded-lg px-4 py-2 max-w-[80%]">
-                          <p className="text-gray-900 text-sm">I'm doing great, thanks for asking!</p>
-                        </div>
-                      </div>
+                      )}
                     </div>
-
+                    )}
                     {/* Chat input */}
                     <div className="flex justify-center items-center w-full h-50">
                       <input
                         type="text"
                         className="border border-gray-300 rounded-lg py-2 px-4 w-full max-w-lg mr-4"
                         placeholder="Type a message..."
+                        value={replyMessage}
+                        onChange={(e) => setReplyMessage(e.target.value)}
                       />
-                      <button className="bg-[#267296] hover:bg-[#1e4253] text-white font-bold py-2 px-4 rounded">Send</button>
+                      <button className="bg-[#267296] hover:bg-[#1e4253] text-white font-bold py-2 px-4 rounded"
+                      onClick={handleReply}>Send</button>
                     </div>
                   </td>
                 </tr>
