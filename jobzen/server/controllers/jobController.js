@@ -10,6 +10,22 @@ try {
 }
 }
 
+// Get jobs by company:
+async function getJobsByCompany(req, res) {
+  const { id } = req.params;
+  try {
+    const job = await Job.findAll({where:{jobOwnerId:id}});
+    if (!job) {
+      return res.status(404).json('Job post is not found');
+    }
+    res.status(200).json(job);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err);
+  }
+}
+
+
 //Get one Job:
 async function getOneJob(req, res) {
   const { id } = req.params;
@@ -145,6 +161,7 @@ module.exports = {
   getOneJob,
   getJobByIdWithDetails,
   getJobsByCategory,
-  getOneJobByCategory};
+  getOneJobByCategory,
+  getJobsByCompany};
 
   

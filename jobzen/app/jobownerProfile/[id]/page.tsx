@@ -44,7 +44,6 @@ const StarRating = ({ rating }: { rating: number }) => {
 };
 
 const JobOwnerProfile: React.FC = (): JSX.Element => {
-  const [id, setId] = useState();
   const [jobOwnerData, setJobOwnerData] = useState<JobOwner>({
     id: 0,
     name: "",
