@@ -6,8 +6,8 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import io from "socket.io-client";
 import {useRouter}from 'next/navigation'
-import Navbar from "../../navjobowner/page";
-import Navbar2 from"../../navFreelancer/page"
+import Navbar2 from "../../navjobowner/page";
+import Navbar from"../../navFreelancer/page"
 import Footer from "../../footer/page"
 
 interface Freelancer {
