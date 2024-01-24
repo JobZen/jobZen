@@ -285,7 +285,7 @@ const handleUsersSearch = () =>{
  console.log("owner",chatOwner)
   return (
     <div>
-    {role==="freelancer"?<Navbar/>:<Navbar2/>}
+    {role==="freelancer"?<Navbar2/>:<Navbar/>}
     <div className="container mx-auto  shadow-lg rounded-lg mt-[3.5cm]">
     
       <div className="px-5 py-5 flex justify-between items-center bg-white border-b-2">
