@@ -6,7 +6,8 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import io from "socket.io-client";
 import {useRouter}from 'next/navigation'
-import Navbar from "../../navFreelancer/page";
+import Navbar from "../../navjobowner/page";
+import Navbar2 from"../../navFreelancer/page"
 import Footer from "../../footer/page"
 
 interface Freelancer {
@@ -282,7 +283,8 @@ const handleUsersSearch = () =>{
  console.log("owner",chatOwner)
   return (
     <div>
-   <Navbar/>
+      {role==="freelancer"?<Navbar/>:<Navbar2/>}
+  
     <div className="container mx-auto  shadow-lg rounded-lg mt-[3.5cm]">
     
       <div className="px-5 py-5 flex justify-between items-center bg-white border-b-2">

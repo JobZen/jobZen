@@ -17,45 +17,75 @@ interface Reclamation {
 const Messages = () => {
   const [reclamation, setReclamation] = useState<Reclamation[]>([]);
   const [selectedMessageId, setSelectedMessageId] = useState<number | null>(null);
-  const [mess, setMess] = useState({ id: 0, name: "", message: "", createdAt: "", reply: "" });
+  const [mess, setMess] = useState({ id: 0, name: "",email:"", message: "", createdAt: "", reply:""});
   const [refresh , setRefresh]= useState (true)
   const [messCount,setMessCount]=useState<number>(0)
-  const [replyMessage, setReplyMessage] = useState("");
+  const [replyMessage, setReplyMessage] = useState<string | undefined>();
+  
+useEffect(() => {
+  axios.get("http://localhost:3000/contactUs/get")
+    .then((response) => {
+      const Data: [] = response.data;
+      setReclamation(Data);
+      setMessCount(Data.length);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}, [refresh]);
 
-  useEffect(() => {
-    axios.get("http://localhost:3000/contactUs/get")
-      .then((response) => {
-        const Data: [] = response.data;
-        setReclamation(Data);
-        setMessCount(Data.length);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [refresh]);
+const handleReply = async (e: any) => {
+  e.preventDefault();
+  try {
+    const replyData: Reclamation = {
+      id: mess.id || 0,
+      name: mess.name,
+      email: mess.email,
+      message: mess.message,
+      createdAt: mess.createdAt,
+      reply: replyMessage,
+    };
+    console.log('Reply data:', replyData);
+    await axios.post<Reclamation>(`http://localhost:3000/contactUs/addReply`, replyData);
+    console.log('Reply sent successfully');
 
-  const handleReply = async () => {
-    try {
-      setMess((prevMess) => ({ ...prevMess, reply: replyMessage }));
-      setReplyMessage('');
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    // Update the mess state with the new reply
+    setMess((prevMess) => ({ ...prevMess, reply: replyMessage || "" }));
 
-  const handleDelete = async (id:number) => {
-    try {
-      await axios.delete(`http://localhost:3000/contactUs/delete/${id}`);
-      setRefresh(!refresh);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    setReplyMessage('');
+    setRefresh(!refresh);
+  } catch (error) {
+    console.error('Error sending reply:', error);
+  }
+};
+  
 
-  const Msg = (id: number, name: string, email: string, message: string, createdAt: string) => {
-    setSelectedMessageId(id);
-    setMess((prevMess) => ({ ...prevMess, id, name, message, createdAt, reply: "" }));
-  };
+const handleDelete = async (id:number) => {
+  try {
+    await axios.delete(`http://localhost:3000/contactUs/delete/${id}`);
+    setRefresh(!refresh);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const Msg = (id: number, name: string, email: string, message: string, createdAt: string) => {
+  setSelectedMessageId(id);
+
+  // Find the message in reclamation array with the given id
+  const selectedMessage = reclamation.find((el) => el.id === id);
+
+  // Update the mess state with the details of the selected message, including the reply
+  setMess((prevMess) => ({
+    ...prevMess,
+    id,
+    name,
+    email,
+    message,
+    createdAt,
+    reply: selectedMessage?.reply || "",
+  }));
+};
 
 return (
     <>
