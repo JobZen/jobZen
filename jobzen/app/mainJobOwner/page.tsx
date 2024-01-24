@@ -71,9 +71,6 @@ function page() {
 </button>
 
 </Link>
- 
-
-
 
         <div className='flex space-x-2 text-8xl ml-[5%] mb-[3cm] mt-[3cm]'>
         <h1 className='font-jockey-one text-bluefateh'>FIND TALENT BY </h1>
@@ -82,11 +79,13 @@ function page() {
         <div className="flex justify-between ml-[10%] mr-[10%]">
         {freelancercategory.map((el, i) => (
           <div key={i} className="relative text-center">
+            <Link href={`/freelancerbycategory/${el.id}`}>
             <h1
               className="text-4xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white z-10 hover:scale-125 "
             >
               {el.category}
             </h1>
+            </Link>
             <img
               src={el.image}
               alt=""

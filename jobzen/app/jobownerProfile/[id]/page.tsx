@@ -184,7 +184,7 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
             </p>
             <div className="absolute w-[105px] h-[28px] top-[-20px] left-[1226px]">
               <div className="absolute w-[105px] h-[28px] top-0 left-0"></div>
-              <Link href={`/jobDetails/createJobDetails`}>
+              <Link href={`/createjoboffer`}>
                 <button className="flex w-[176px] h-[56px] items-center justify-center mt-[500px] ml-[-703px] relative [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[#267296] items-center justify-center mr-0 py-[8px] transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[white] hover:scale-110 relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid rounded-full">
                   Post a new job
                 </button>
