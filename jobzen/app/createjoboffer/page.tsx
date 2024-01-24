@@ -4,6 +4,8 @@ import Link from 'next/link';
 import Navbar from '../navjobowner/page';
 import Footer from '../footer/page';
 import axios from 'axios';
+import Cookies from "js-cookie";
+
 
 interface JobOwner{
   id:number,
@@ -27,6 +29,9 @@ interface Job{
 }
 
 const CreateJobDetails = () => {
+  const id = Cookies.get("id");
+ 
+  
 const [availabe, setAvailable] = useState<boolean>(false)
 const [jobId,setJobId]=useState<number>()
 const [jobtitle,setJobtitle]=useState<string>("")
@@ -40,20 +45,21 @@ const [JobOwnerName,setJobOwnerName]=useState<string>("")
 const [JobOwnerImage,setJobOwnerImage]=useState<string>("")
 const [JobOwnerId,setJobOwnerId]=useState<number>()
 const [JobCategoryId,setJobCategoryId]=useState<string>("")
-const [imgUrl, setImgUrl] = useState<string[]>([]);
+const [url, setUrl] = useState<string>("");
 
 const handleCreateJob = async (event:any) => {
   event.preventDefault()
   const createJob:any = {
     jobtitle: jobtitle,
     location: location,
+    image: url,
     budget: budget,
     role: role,
     description: description,
     qualification: qualification,
     createdAt:createdAt,
     name:JobOwnerName,
-    image:JobOwnerImage
+    jobOwnerId:id
   };
     try {
       const create = await axios.post("http://localhost:3000/job/job", createJob);
@@ -70,32 +76,35 @@ const handleCheckboxChange = () => {
 };
 
 
-const addProduct = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+const uploadImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  try {
+    if (!e.target.files || !e.target.files[0]) return;
+    let url = e.target.files[0];
+    if (!url) return;
 
-    if (file) {
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('upload_preset', 'pa4ezjqw');
+    const formData = new FormData();
+    formData.append("file", url);
+    formData.append("upload_preset", "project");
+    formData.append("cloud_name", "ds3tmq5iw");
 
-      axios
-        .post('http://api.cloudinary.com/v1_1/dfsyqvvim/image/upload', formData)
-        .then((res) => {
-          console.log('secure', res.data.secure_url);
-          setImgUrl([res.data.secure_url]);
-          console.log('url', imgUrl);
-        })
-        .catch((err) => {
-          console.log(formData);
-          console.log(err);
-        });
-    }
-  };
+    const response = await fetch(
+      "https://api.cloudinary.com/v1_1/ds3tmq5iw/image/upload",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    const responseData = await response.json();
+    setUrl(responseData.secure_url);
+    console.log("url", responseData.secure_url);
+  } catch (err) {
+    console.error(err);
+  }
+};
   return (
     <div className='bg-white '>
       <Navbar />
-
-      
       <div className='bg-white flex flex-col justify-center items-center h-screen'>
         <div className="container mx-auto pt-16 pb-0 items-center mr-6 ">
           <div className="grid grid-cols-1 sm:grid-cols-2 px-12 ">
@@ -157,9 +166,34 @@ const addProduct = (e: React.ChangeEvent<HTMLInputElement>) => {
                     placeholder='describe the needed qualification for this job'
                     onChange={(e)=> setQualification(e.target.value)}></textarea>
                     </div>  
-                    <div>
-                    <label htmlFor="fileInput">Upload File:</label>
-                   <input type="file" id="fileInput" onChange={(e) => addProduct(e)} />
+                    <div className="mb-6">
+                <label htmlFor="qualification" className="text-xl font-lato font-semibold mb-4">
+                    Location
+                    </label>
+                    <textarea
+                    id="qualification"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                    placeholder='describe the needed qualification for this job'
+                    onChange={(e)=> setLocation(e.target.value)}></textarea>
+                    </div> 
+                    <div
+                      onClick={() =>
+                        document.getElementById("photoInput")?.click()
+                      }
+                    >
+                      <button
+                        className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[#267296] rounded-full overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[#267296] items-center justify-center mr-0 py-full transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[white] hover:scale-110 relative bg-[#267296] rounded-full overflow-hidden border border-[#a1e1fd4a] "
+                        onClick={() => uploadImage}
+                      >
+                        Upload New Image
+                      </button>
+                      <input
+                        id="photoInput"
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => uploadImage(e)}
+                      />
                     </div>
                      </div>  
           </div>

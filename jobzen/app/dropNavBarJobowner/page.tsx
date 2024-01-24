@@ -35,7 +35,7 @@ const DropNavbar = () => {
   const settings = [
     { name: "Account", href: `/jobownerProfile/${id}` },
     { name: "Messages", href: "/jobDetails/messageJobDetails" },
-    { name: "Job List", href: `/` },
+    { name: "Job List", href: `/listjobbycompany/${id}` },
     { name: "Logout", href: "/home" },
   ];
 

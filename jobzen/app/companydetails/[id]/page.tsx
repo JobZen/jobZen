@@ -114,14 +114,13 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
                 src={jobOwnerData.image}
                 alt="Company photo or profile"
               />
-              <div className="absolute w-[475px] h-[562px] top-[0px] left-[1070px] bg-[white] rounded-[42px] overflow-hidden">
+              <div className="bg-black absolute w-[475px] h-[562px] top-[0px] left-[1070px] bg-[white] rounded-[42px] overflow-hidden">
                 <JobLocation jobOwnerAddress={jobOwnerData.adress} />
               </div>
               <div className="absolute w-[114px] top-[290px] left-[233px]">
                 <div className="flex items-center">
                   <StarRating rating={jobOwnerData.rating} />
                 </div>
-                
               </div>
 
              
@@ -141,11 +140,8 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
               <div className="w-[164px] top-[360px] left-[235px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] leading-[normal] absolute tracking-[0]">
                 Address: <br />
                 {jobOwnerData.adress}
-                <Link href={`/listjobbycompany/${jobOwnerData.id}`}>
-                <button className=" mt-[1cm] select-none rounded-lg bg-blueghamek py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">Job List</button>
-                </Link>
-              </div> 
-              
+              </div>
+
               <div className="absolute w-[5000px] top-[107px] left-[524px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] tracking-[0] leading-[normal]">
                 {jobOwnerData.name}
               </div>
