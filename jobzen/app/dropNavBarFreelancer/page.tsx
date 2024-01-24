@@ -47,17 +47,12 @@ const DropNavbar = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  useEffect(() => {
-    axios
-      .get(` http://localhost:3000/freelancer/${id}`)
-      .then((response) => {
-        setFreelance(response.data);
-        console.log("hello");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+
+  useEffect(()=> {
+    axios.get(` http://localhost:3000/freelancer/${id}`)
+    .then((response)=> {setFreelance(response.data);console.log('hello')})
+    .catch((err)=> {console.log(err)})
+  },[])
 
   return (
     <div className="relative inline-flex items-center group ">
