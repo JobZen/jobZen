@@ -4,7 +4,7 @@ import axios from "axios";
 import Link from "next/link";
 import Navbar from "../../navjobowner/page";
 import Footer from "../../footer/page";
-
+import { useRouter } from "next/navigation";
 interface JobOwner {
   id: number;
   name: string;
@@ -41,6 +41,14 @@ const JobDetails = () => {
       image: "",
     },
   });
+  const [jobOwnerData, setJobOwnerData] = useState<JobOwner>({
+    id: 0,
+    name: "",
+    image: "",
+  });
+  const [availabe, setAvailable] = useState<boolean>(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     var currentUrl = window.location.href;
@@ -60,6 +68,19 @@ const JobDetails = () => {
     getOneJob();
   }, []);
 
+  const handleCheckboxChange = () => {
+    setAvailable(!availabe);
+  };
+
+  const PreviousPage = () => {
+    const jobOwnerID = job.jobowner.id;
+    setJobOwnerData({
+      id: jobOwnerID,
+      name: job.jobowner.name,
+      image: job.jobowner.image,
+    });
+    router.push(`/listjobbycompany/${jobOwnerID}`);
+  };
   return (
     <div className="bg-white ">
       <Navbar />
@@ -67,6 +88,26 @@ const JobDetails = () => {
         <div className="container mx-auto py-16 pt-[5rem] items-center mr-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 px-4 ">
             <div className="bg-white mt-[200px]">
+              <button
+                className="cursor-pointer duration-200 hover:scale-125 active:scale-100"
+                title="Go Back"
+                onClick={PreviousPage}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="50px"
+                  height="50px"
+                  viewBox="0 0 24 24"
+                  className="stroke-blue-300"
+                >
+                  <path
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                    stroke-width="1.5"
+                    d="M11 6L5 12M5 12L11 18M5 12H19"
+                  ></path>
+                </svg>
+              </button>
               <p className="text-Mona text-xl mt-6 mb-4">Job Details</p>
               <hr className="my-2 mr-80 border-r-2 border-gray-900" />
               <br />
@@ -142,6 +183,39 @@ const JobDetails = () => {
                       </li>
                     </ul>
                     <br />
+                    <div className="flex flex-col items-center ml-[-7px]">
+                      <label className="autoSaverSwitch relative inline-flex cursor-pointer select-none items-center">
+                        <input
+                          type="checkbox"
+                          name="autoSaver"
+                          className="sr-only"
+                          checked={availabe}
+                          onChange={handleCheckboxChange}
+                        />
+                        <span
+                          className={`slider mr-3 flex h-[26px] w-[50px] items-center rounded-full p-1 duration-200 ${
+                            availabe ? "bg-[#267296]" : "bg-[#CCCCCC]"
+                          }`}
+                        >
+                          <span
+                            className={`dot h-[18px] w-[18px] rounded-full bg-white duration-200 ${
+                              availabe ? "translate-x-6" : ""
+                            }`}
+                          ></span>
+                        </span>
+                        <span
+                          className={`label flex items-center text-sm font-medium ${
+                            availabe ? "text-[#267296]" : "text-gray-700"
+                          }`}
+                        >
+                          Is it availabe?{" "}
+                          <span className="pl-1">
+                            {" "}
+                            {availabe ? "Yes" : "No"}{" "}
+                          </span>
+                        </span>
+                      </label>
+                    </div>
                   </div>
                 </div>
               </div>

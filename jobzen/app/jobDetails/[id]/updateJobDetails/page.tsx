@@ -28,7 +28,6 @@ interface Job {
 }
 
 const UpdateJobDetails = () => {
-  const [availabe, setAvailable] = useState<boolean>(false);
   const [jobDetails, setJobDetails] = useState<Job | null>(null);
   const [jobId, setJobId] = useState<number>();
   const [jobtitle, setJobtitle] = useState<string>("");
@@ -147,10 +146,6 @@ const UpdateJobDetails = () => {
     } catch (err) {
       console.error(err);
     }
-  };
-
-  const handleCheckboxChange = () => {
-    setAvailable(!availabe);
   };
 
   const handleClosePopup = () => {
@@ -320,7 +315,9 @@ const UpdateJobDetails = () => {
                     </ul>
                     <br />
                     <p className="font-jura text-[#267296] ">Date posted:</p>
-
+                    <p className="font-bold font-lato text-black">
+                      {jobDetails?.createdAt}
+                    </p>
                     <Link href={"/jobDetails/review"}>
                       <p className="mt-4 md-1 text-[#267296] hover:text-base-[#267296] text-l hover:font-semibold font-jura hover:underline">
                         Proceed to payement
@@ -334,36 +331,7 @@ const UpdateJobDetails = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-center">
-        <label className="autoSaverSwitch relative inline-flex cursor-pointer select-none items-center">
-          <input
-            type="checkbox"
-            name="autoSaver"
-            className="sr-only"
-            checked={availabe}
-            onChange={handleCheckboxChange}
-          />
-          <span
-            className={`slider mr-3 flex h-[26px] w-[50px] items-center rounded-full p-1 duration-200 ${
-              availabe ? "bg-[#267296]" : "bg-[#CCCCCC]"
-            }`}
-          >
-            <span
-              className={`dot h-[18px] w-[18px] rounded-full bg-white duration-200 ${
-                availabe ? "translate-x-6" : ""
-              }`}
-            ></span>
-          </span>
-          <span
-            className={`label flex items-center text-sm font-medium ${
-              availabe ? "text-[#267296]" : "text-gray-700"
-            }`}
-          >
-            Is it availabe?{" "}
-            <span className="pl-1"> {availabe ? "Yes" : "No"} </span>
-          </span>
-        </label>
-      </div>
+
       <Footer />
     </div>
   );
