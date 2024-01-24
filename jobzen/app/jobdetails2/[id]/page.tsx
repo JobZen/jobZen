@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import Link from 'next/link';
-import Navbar from '../../navjobowner/page';
+import Navbar from '../../navFreelancer/page';
 import Footer from '../../footer/page';
 
 interface JobOwner{
@@ -45,11 +45,12 @@ const JobDetails = () => {
 
 
 useEffect(()=>{
-  var currentUrl = window.location.href;
-  var ind=currentUrl.split("/")
-  var index=ind[ind.length-1]
+ 
 
   const getOneJob = async () => {
+    var currentUrl = window.location.href;
+    var ind=currentUrl.split("/")
+    var index=ind[ind.length-1]
       try {
         const response = await axios.get(`http://localhost:3000/job/job/${index}`);
         setJob(response.data);
@@ -86,7 +87,7 @@ useEffect(()=>{
                   <li className="mt-2">{job.qualification}</li>
                 </ul>
               </div>
-             
+              <b className='ml-1 font-jura text-2xl font-bold text-red-500'>Contact us to apply</b>
             </div>
             
             <div className="ml-1 flex items-center p-8">
@@ -95,17 +96,16 @@ useEffect(()=>{
                 <div className="flex flex-col items-center">
                     <img src={job.jobowner.image} className="w-32 h-32 rounded-full mb-4 shrink-0"alt="CompanyProfile"/>
                     <h1 className="text-xl font-bold">{job.jobowner.name}</h1>
-                        
+                                      <Link href={`/companydetails/${job.jobowner.id}`}>
+                      <p className="mt-6 text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">View Company's Profile</p>
+                    </Link>
                     <div className="mt-6 flex gap-4">
-                      <Link href={`/jobDetails/${job.id}/updateJobDetails`}>
-                        <button className="text-[#267296] hover:font-bold bg-white border-[#267296] py-2 px-4 rounded" >
-                          Update details
-                          </button>
-                          </Link>
+                      <Link href={`/chat/${job.jobowner.id}`}>
+                        <button className="bg-[#267296] hover:bg-[#195571] text-white py-2 px-4 rounded">Message</button>
+                      </Link>
+                      
                     </div>
-                    <div className='mt-6 '>
-                
-                    </div>
+                   
                   </div>
                   <hr className="my-6 border-t border-[#267296]" />
                   <div className="flex flex-col">

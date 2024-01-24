@@ -37,7 +37,7 @@ const Signup: FunctionComponent = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+    <div className="bg-malek min-h-screen flex flex-col items-center justify-center bg-gray-100">
       <div
         className="
         flex flex-col
@@ -350,7 +350,6 @@ const Signup: FunctionComponent = () => {
       </div>
       <div className="flex justify-center items-center mt-6">
         <p
-          target="_blank"
           className="
           inline-flex
           items-center
@@ -359,7 +358,7 @@ const Signup: FunctionComponent = () => {
           text-xs text-center
         "
         >
-          <span className="ml-2">
+          <span className="text-white ml-2">
             You have an account?
             <p className="text-xs ml-2 text-blue-500 font-semibold">
             <Link href={"/login"} >Login here</Link>  
