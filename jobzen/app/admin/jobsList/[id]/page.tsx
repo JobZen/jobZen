@@ -124,7 +124,7 @@ const JobInfo = () => {
                     <hr className="my-8" />
 
                     <h2 className="text-3xl font-semibold mb-6">Payement</h2>
-                    <p className="text-gray-700 text-2xl font-extrabold">{jobs[0].budget}</p>
+                    <p className="text-gray-700 text-2xl font-extrabold">{jobs[0].budget} TND / Hour (according to negociation)</p>
                     <hr className="my-8" />
 
                     <h2 className="text-3xl font-semibold mb-6">Role</h2>
