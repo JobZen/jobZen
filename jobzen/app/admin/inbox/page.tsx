@@ -71,11 +71,7 @@ const handleDelete = async (id:number) => {
 
 const Msg = (id: number, name: string, email: string, message: string, createdAt: string) => {
   setSelectedMessageId(id);
-
-  // Find the message in reclamation array with the given id
   const selectedMessage = reclamation.find((el) => el.id === id);
-
-  // Update the mess state with the details of the selected message, including the reply
   setMess((prevMess) => ({
     ...prevMess,
     id,
