@@ -9,7 +9,7 @@ import {useRouter}from 'next/navigation'
 import Navbar2 from "../../navjobowner/page";
 import Navbar from"../../navFreelancer/page"
 import Footer from "../../footer/page"
-
+import { useSearchParams } from "next/navigation";
 interface Freelancer {
   id: number
   name: string
@@ -97,6 +97,7 @@ const Chat = () => {
   const [chatOwner,setchatOwner]= useState<Freelancer | Jobowner >()
   const [chatReciever,setChatReciever]= useState<Freelancer | Jobowner >()
   const [send,setSend]=useState(false)
+  const [job,setJob]= useState({})
 
   const sortByCreatedAt = (a: Message, b: Message) =>
     new Date(a.createdAt) - new Date(b.createdAt);
@@ -105,8 +106,9 @@ const Chat = () => {
      new Date(b[b.length-1].createdAt)-new Date(a[a.length-1].createdAt) 
 
 const route=useRouter()
-
-
+const search=useSearchParams()
+const params= new URLSearchParams(search.toString())
+const jobbi=params.get("id")
   useEffect(() => {
     socket.connect()
     socket.on('recieve',(msg)=>{
@@ -147,6 +149,7 @@ const route=useRouter()
       req3=axios.get(`http://localhost:3000/freeMS/msg/${id}`)
       req4 = axios.get(`http://localhost:3000/freelancer/${id}`)
       req5 = axios.get (`http://localhost:3000/jobOwner//job-owner/${index}`)
+  
     }
      else {
       req2 = axios.get(`http://localhost:3000/freeMS/msg/${index}/${id}`);
@@ -177,8 +180,13 @@ const route=useRouter()
         console.log(error);
       });
   }, [index,send]);
+  useEffect(()=> {
+    axios.get('http://localhost:3000/job/jb/'+jobbi)
+    .then((res)=> {setJob(res.data)})
+    .catch((err)=>{console.error(err)})
+  },[jobbi])
  
-  console.log(chatReciever,'dddd')
+  console.log(job,'dddd')
   const handleClassName = (freelancerId:number,jobownerId:number) => {
    
     const isOn=" items-center border-b-2 border-l-4 border-blue-400"
@@ -276,16 +284,11 @@ const handleSend = () => {
 });setSend(!send)})
 .catch((err)=>{console.log(err,'')})
 }
-
-const handleUsersSearch = () =>{
-
 }
-
-}
- console.log("owner",chatOwner)
+console.log(jobbi,'3asabkjjkhjka')
   return (
     <div>
-    {role==="freelancer"?<Navbar/>:<Navbar2/>}
+    {role==="freelancer"?<Navbar />:<Navbar2/>}
     <div className="container mx-auto  shadow-lg rounded-lg mt-[3.5cm]">
     
       <div className="px-5 py-5 flex justify-between items-center bg-white border-b-2">

@@ -11,6 +11,26 @@ res.status(500).json({ error: 'Unable to fetch freelancers' });
 }
 }
 
+
+//get frelancers by category
+async function getFreelancerBycategory(req, res) {
+  const { id} = req.params;
+
+  try {
+    const freelancer = await Freelancer.findAll({where:{FreelancerCategoriesId:id}}); 
+    console.log(freelancer);
+    if (!freelancer) {
+      return res.status(404).json({ error: 'Freelancer not found' });
+      
+    }
+    res.json(freelancer);
+  } catch (error) {
+    res.status(500).json({ error: 'Unable to fetch the freelancer' });
+  
+  }
+  
+}
+
 // get One
 
 async function getFreelancerById(req, res) {
@@ -35,7 +55,7 @@ async function getFreelancerById(req, res) {
 // Create a new freelancer
 async function createFreelancer(req, res) {
 try {
-const { name, email, password ,image,adress,phone,aboutMe,skills,experience,jobtitle} = req.body;
+const { name, email, password ,image,adress,phone,aboutMe,skills,experience,jobtitle,FreelancerCategoriesId} = req.body;
 const newFreelancer = await Freelancer.create({
     name,
     email,
@@ -46,7 +66,8 @@ const newFreelancer = await Freelancer.create({
     aboutMe,
     skills,
     experience,
-    jobtitle
+    jobtitle,
+    FreelancerCategoriesId
 });
 console.log(newFreelancer);
 res.status(201).json(newFreelancer);
@@ -97,5 +118,6 @@ module.exports = {
   createFreelancer,
   updateFreelancer,
   deleteFreelancer,
-  getFreelancerById
+  getFreelancerById,
+  getFreelancerBycategory
 };
