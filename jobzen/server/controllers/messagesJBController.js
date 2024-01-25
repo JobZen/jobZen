@@ -1,6 +1,6 @@
 const { default: axios } = require('axios');
 
-const{ JobOwnerMessages, Freelancer, JobOwner ,FreelancerMessages }=require('../database/index.js');
+const{ JobOwnerMessages, Freelancer, JobOwner ,FreelancerMessages ,Job}=require('../database/index.js');
 
 // CRUD operations
 async function getAllMessages(req, res) {
@@ -84,13 +84,14 @@ res.status(500).json({ error: error.message });
 
 async function FindMessageBySenderAndRecieverId(req, res) {
     try {
-    const { sender , reciever } = req.params;
-    const messages = await JobOwnerMessages.findAll({ where: { sender:sender , reciever:reciever },include:[
+    const { sender , reciever ,job} = req.params;
+    const messages = await JobOwnerMessages.findAll({ where: { sender:sender , reciever:reciever ,idjob:job },include:[
         {model:JobOwner,
             attributes: {
                 exclude: ['updatedAt']
             }},
-        {model:Freelancer}
+        {model:Freelancer},
+        {model :Job}
     ] });
     
    
@@ -106,10 +107,10 @@ new Date(a.createdAt) - new Date(b.createdAt);
 
 async function FindJobwnersBySenderId (req, res) {
 
-    const { sender  } = req.params;
-     FreelancerMessages.findAll({ where: { reciever:sender  } })
+    const { sender ,job } = req.params;
+     FreelancerMessages.findAll({ where: { reciever:sender ,idjob:job } })
      .then((response) =>  {
-        JobOwnerMessages.findAll({where : {sender:sender}})
+        JobOwnerMessages.findAll({where : {sender:sender ,idjob:job}})
         .then((ress)=>{
             const ids = response.map(message => message.dataValues.sender);
             const idss= ress.map(message => message.dataValues.reciever);
@@ -117,8 +118,8 @@ async function FindJobwnersBySenderId (req, res) {
         const uniqueIds = [...new Set(all)];
         console.log(uniqueIds,"fklsglfd")
         const hhh=uniqueIds.map(async(index)=>{
-           const req1 =await axios.get(`http://localhost:3000/freeMS/msg/${index}/${sender}`);
-            const req2 =await axios.get(`http://localhost:3000/jobMS/msg/${sender}/${index}`);
+           const req1 =await axios.get(`http://localhost:3000/freeMS/msg/${index}/${sender}/${job}`);
+            const req2 =await axios.get(`http://localhost:3000/jobMS/msg/${sender}/${index}/${job}`);
             return (req1.data).concat(req2.data).sort(sortByCreatedAt)
 
       
