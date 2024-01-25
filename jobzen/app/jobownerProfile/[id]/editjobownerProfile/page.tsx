@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Navbar from "../../../navBar/page";
+import Navbar from "../../../navjobowner/page";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Footer from "../../../footer/page";
@@ -204,7 +204,7 @@ const EditJobOwnerProfile = (): JSX.Element => {
                 </div>
                 <img
                   className="absolute rounded-3xl w-[127px] h-[134px] top-[-5px] left-[27px] bg-[url(/sdfsdfsdffsdfsdfdsfdsfsdfsdfds-1.png)] bg-cover bg-[50%_50%]"
-                  src={url}
+                  src={url} alt=""
                 />
               </div>
               <div className="flex w-[408px] h-[66px] items-center gap-[56px] absolute top-[103px] left-[601px]">

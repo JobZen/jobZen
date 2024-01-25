@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SideNavBar from '../sideNavBar/page';
 import Search from '../../search/page'
+import Popup from 'reactjs-popup'; 
 
 interface Category{
   id:number,
@@ -10,9 +11,12 @@ interface Category{
   image:string,
 }
 
+
+
 const CategoriesList = () => {
 const [categories, setCategories] = useState<Category[]>([])
 const [categoriesCount,setcategoriesCount]=useState<number | undefined>()
+const [refresh,setRefresh]=useState<boolean>(false)
 const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
 const [newCategory,setNewCategory]=useState<Category>({
   id:0,
@@ -21,6 +25,18 @@ const [newCategory,setNewCategory]=useState<Category>({
 })
 
 const [showAddForm, setShowAddForm] = useState(false);
+
+const handleDelete = async (id: number) => {
+  try {
+    await axios.delete(`http://localhost:3000/jobCategory/jobCategory/${id}`);
+    setRefresh(!refresh)
+
+  } catch (error) {
+    console.error('Error deleting freelancer:', error);
+  }
+
+};
+
 
 useEffect(()=>{  
 const getAllCategories = async () => {
@@ -34,7 +50,7 @@ const getAllCategories = async () => {
   }
 };
 getAllCategories()
-},[])
+},[refresh])
 
 const handleCheckboxChange = (categoryId: number) => {
   setSelectedCategories((prevSelectedCategories) => {
@@ -155,12 +171,51 @@ return (
             </th>
             <td className="px-6 py-4">
               {/* <!-- Modal toggle --> */}
-              <button
-               onClick={handleDeleteCategories}
-               disabled={selectedCategories.length === 0}
-               className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 inline-flex items-center text-red-700 hover:text-white border border-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
-                Delete Selected Categories
-              </button>
+              <Popup
+    trigger={<button className="transition ease-in-out delay-150 text-white bg-red-500 border border-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 inline-flex items-center font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"> Delete category </button>}
+    modal
+    nested
+  >
+      {close => (
+     <div className="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+
+   
+
+  <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+  <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+    <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+      
+       
+      
+      <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+        <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+          <div className="sm:flex sm:items-start">
+            <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+              <svg className="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+              </svg>
+            </div>
+            <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+              <h3 className="text-base font-semibold leading-6 text-gray-900" id="modal-title">Delete account</h3>
+              <div className="mt-2">
+                <p className="text-sm text-gray-500">Are you certain you wish to delete your account? All of your data will be permanently erased. This action is irreversible.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+          <button type="button" className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto" onClick={() => handleDelete(category.id)}>Delete</button>
+          <button type="button" className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto" onClick={() => {
+              console.log('modal closed ');
+              close();
+            }} >Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> )}
+      </Popup>
               <a
             className="transition ease-in-out delay-150 text-white bg-blue-500 border border-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 inline-flex items-center font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
             Update category</a>
