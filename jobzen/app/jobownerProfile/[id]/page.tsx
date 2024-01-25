@@ -113,7 +113,7 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
                 src={jobOwnerData.image}
                 alt="Company photo or profile"
               />
-              <div className="absolute w-[475px] h-[562px] top-[0px] left-[1070px] bg-[white] rounded-[42px] overflow-hidden">
+              <div className="absolute w-[475px] h-[562px] top-[0px] left-[1070px] bg-black rounded-[42px] overflow-hidden">
                 <JobLocation jobOwnerAddress={jobOwnerData.adress} />
               </div>
 

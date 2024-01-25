@@ -46,7 +46,7 @@ const JobDetails = () => {
     name: "",
     image: "",
   });
-  const [availabe, setAvailable] = useState<boolean>(false);
+  const [available, setAvailable] = useState<boolean>(true);
 
   const router = useRouter();
 
@@ -61,6 +61,7 @@ const JobDetails = () => {
           `http://localhost:3000/job/job/${index}`
         );
         setJob(response.data);
+        if (!response.data.available) setAvailable(false);
       } catch (error) {
         console.error("Error fetching job details:", error);
       }
@@ -68,8 +69,16 @@ const JobDetails = () => {
     getOneJob();
   }, []);
 
-  const handleCheckboxChange = () => {
-    setAvailable(!availabe);
+  const handleCheckboxChange = async () => {
+    try {
+      const response = await axios.patch(
+        `http://localhost:3000/job/job/updateAvailability/${job.id}`,
+        { available: !available }
+      );
+      setAvailable(!available);
+    } catch (error) {
+      console.error("Error updating job availability:", error);
+    }
   };
 
   const PreviousPage = () => {
@@ -196,29 +205,29 @@ const JobDetails = () => {
                           type="checkbox"
                           name="autoSaver"
                           className="sr-only"
-                          checked={availabe}
+                          checked={available}
                           onChange={handleCheckboxChange}
                         />
                         <span
                           className={`slider mr-3 flex h-[26px] w-[50px] items-center rounded-full p-1 duration-200 ${
-                            availabe ? "bg-[#267296]" : "bg-[#CCCCCC]"
+                            available ? "bg-[#267296]" : "bg-[#CCCCCC]"
                           }`}
                         >
                           <span
                             className={`dot h-[18px] w-[18px] rounded-full bg-white duration-200 ${
-                              availabe ? "translate-x-6" : ""
+                              available ? "translate-x-6" : ""
                             }`}
                           ></span>
                         </span>
                         <span
                           className={`label flex items-center text-sm font-medium ${
-                            availabe ? "text-[#267296]" : "text-gray-700"
+                            available ? "text-[#267296]" : "text-gray-700"
                           }`}
                         >
-                          Is it availabe?{" "}
+                          Is it available?{" "}
                           <span className="pl-1">
                             {" "}
-                            {availabe ? "Yes" : "No"}{" "}
+                            {available ? "Yes" : "No"}{" "}
                           </span>
                         </span>
                       </label>
