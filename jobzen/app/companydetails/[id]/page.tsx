@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import Navbar from "../../navFreelancer/page";
 import Footer from "../../footer/page";
 import L from "leaflet";
@@ -93,14 +92,6 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
     }
   }, []);
 
-  const router = useRouter();
-
-  // Function to handle edit button click
-  const handleEditButtonClick = () => {
-    // Redirect to the edit page with the job owner's id
-    router.push(`/jobownerProfile/${jobOwnerData.id}/editjobownerProfile`);
-  };
-
   return (
     <div className="bg-white flex flex-col min-h-screen">
       <Navbar />
@@ -117,19 +108,16 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
               <div className="absolute w-[475px] h-[562px] top-[0px] left-[1070px]  bg-[black] rounded-[42px] overflow-hidden">
                 <JobLocation jobOwnerAddress={jobOwnerData.adress} />
               </div>
-                <Link href={`/listjobbycompany/${jobOwnerData.id}`}>
-                <button  className="flex w-[176px] h-[56px] mt-[208px] ml-[208px] items-center justify-center px-[2px] py-[6px] relative bg-[#267296] rounded-full overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[#267296] items-center justify-center mr-0 py-full transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[white] hover:scale-110 relative bg-[#267296] rounded-full overflow-hidden border border-[#a1e1fd4a] ">
+              <Link href={`/listjobbycompany/${jobOwnerData.id}`}>
+                <button className="flex w-[176px] h-[56px] mt-[208px] ml-[208px] items-center justify-center px-[2px] py-[6px] relative bg-[#267296] rounded-full overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[#267296] items-center justify-center mr-0 py-full transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[white] hover:scale-110 relative bg-[#267296] rounded-full overflow-hidden border border-[#a1e1fd4a] ">
                   Job List
-                  </button>
-                </Link>
+                </button>
+              </Link>
               <div className="absolute w-[114px] top-[290px] left-[233px]">
                 <div className="flex items-center">
                   <StarRating rating={jobOwnerData.rating} />
                 </div>
-                
               </div>
-
-             
 
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -146,8 +134,8 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
               <div className="w-[164px] top-[360px] left-[235px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] leading-[normal] absolute tracking-[0]">
                 Address: <br />
                 {jobOwnerData.adress}
-              </div> 
-              
+              </div>
+
               <div className="absolute w-[5000px] top-[107px] left-[524px] [font-family:'Jura-Bold',Helvetica] font-bold text-black text-[16px] tracking-[0] leading-[normal]">
                 {jobOwnerData.name}
               </div>
@@ -185,7 +173,6 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
             </p>
             <div className="absolute w-[105px] h-[28px] top-[-20px] left-[1226px]">
               <div className="absolute w-[105px] h-[28px] top-0 left-0"></div>
-              
             </div>
           </div>
         </div>

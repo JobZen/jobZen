@@ -23,7 +23,7 @@ const popUpBefore: React.FC<PopupProps> = ({ onClose, onConfirm }) => {
           <div className="flex items-center justify-between w-full mb-6">
             <i>
               {" "}
-              <h3 className="text-3xl font-semibold text-white">Confirme</h3>
+              <h3 className="text-3xl font-semibold text-white">Failed</h3>
             </i>
             <button
             
