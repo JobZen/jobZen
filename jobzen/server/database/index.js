@@ -142,9 +142,9 @@ jobtitle: {
   qualification: {
     type: DataTypes.TEXT('long'),
   },
-  available: {
+  available : {
     type: DataTypes.BOOLEAN,
-    defaultValue: true
+    defaultValue:true
   }
 });
 
@@ -291,6 +291,13 @@ FreelancerMessages.belongsTo(Freelancer , {foreignKey : "sender",
 allowNull: false})
 
 FreelancerMessages.belongsTo(JobOwner , {foreignKey : "reciever",
+allowNull: false
+})
+
+FreelancerMessages.belongsTo(Job , {foreignKey : "idjob",
+allowNull: false})
+
+JobOwnerMessages.belongsTo(Job , {foreignKey : "idjob",
 allowNull: false
 })
 ////////////////////////////////////////////////////////////////

@@ -9,7 +9,7 @@ import {useRouter}from 'next/navigation'
 import Navbar2 from "../../navjobowner/page";
 import Navbar from"../../navFreelancer/page"
 import Footer from "../../footer/page"
-
+import { useSearchParams } from "next/navigation";
 interface Freelancer {
   id: number
   name: string
@@ -78,6 +78,21 @@ interface Person {
         jobtitle: string,
         createdAt: string
         updatedAt: string
+      },
+      job: {
+        id: number,
+        jobtitle: string
+        location: string
+        budget: number
+        image: string
+        role: string
+        description: string
+        qualification: string
+        available: boolean
+        createdAt: string
+        updatedAt: string
+        jobOwnerId: number
+        jobCategoryId: number | null
       }
  
 
@@ -97,6 +112,7 @@ const Chat = () => {
   const [chatOwner,setchatOwner]= useState<Freelancer | Jobowner >()
   const [chatReciever,setChatReciever]= useState<Freelancer | Jobowner >()
   const [send,setSend]=useState(false)
+  const [job,setJob]= useState({})
 
   const sortByCreatedAt = (a: Message, b: Message) =>
     new Date(a.createdAt) - new Date(b.createdAt);
@@ -105,8 +121,9 @@ const Chat = () => {
      new Date(b[b.length-1].createdAt)-new Date(a[a.length-1].createdAt) 
 
 const route=useRouter()
-
-
+const search=useSearchParams()
+const params= new URLSearchParams(search.toString())
+const jobbi=params.get("id")
   useEffect(() => {
     socket.connect()
     socket.on('recieve',(msg)=>{
@@ -135,6 +152,7 @@ const route=useRouter()
 
 
   useEffect(() => {
+    console.log("sender :" , id , "reciever :" , index , "jobID :",jobbi)
     let req1;
     let req2;
     let req3;
@@ -142,16 +160,17 @@ const route=useRouter()
     let req5;
     
     if ( role === "freelancer") {
-      req1 = axios.get(`http://localhost:3000/freeMS/msg/${id}/${index}`);
-      req2 = axios.get(`http://localhost:3000/jobMS/msg/${index}/${id}`);
-      req3=axios.get(`http://localhost:3000/freeMS/msg/${id}`)
+      req1 = axios.get(`http://localhost:3000/freeMS/msg/${id}/${index}/${jobbi}`);
+      req2 = axios.get(`http://localhost:3000/jobMS/msg/${index}/${id}/${jobbi}`);
+      req3=axios.get(`http://localhost:3000/freeMS/msg/${id}/${jobbi}`)
       req4 = axios.get(`http://localhost:3000/freelancer/${id}`)
       req5 = axios.get (`http://localhost:3000/jobOwner//job-owner/${index}`)
+  
     }
      else {
-      req2 = axios.get(`http://localhost:3000/freeMS/msg/${index}/${id}`);
-      req1 = axios.get(`http://localhost:3000/jobMS/msg/${id}/${index}`);
-      req3 =axios.get(`http://localhost:3000/jobMS/msg/${id}`)
+      req2 = axios.get(`http://localhost:3000/freeMS/msg/${index}/${id}/${jobbi}`);
+      req1 = axios.get(`http://localhost:3000/jobMS/msg/${id}/${index}/${jobbi}`);
+      req3 =axios.get(`http://localhost:3000/jobMS/msg/${id}/${jobbi}`)
       req5 = axios.get(`http://localhost:3000/freelancer/${index}`)
       req4 = axios.get (`http://localhost:3000/jobOwner//job-owner/${id}`)
     }
@@ -176,9 +195,14 @@ const route=useRouter()
       .catch((error) => {
         console.log(error);
       });
-  }, [index,send]);
+  }, [index,send,jobbi]);
+  useEffect(()=> {
+    axios.get('http://localhost:3000/job/jb/'+jobbi)
+    .then((res)=> {setJob(res.data)})
+    .catch((err)=>{console.error(err)})
+  },[jobbi])
  
-  console.log(chatReciever,'dddd')
+  console.log(job,'dddd')
   const handleClassName = (freelancerId:number,jobownerId:number) => {
    
     const isOn=" items-center border-b-2 border-l-4 border-blue-400"
@@ -252,13 +276,16 @@ const handleSend = () => {
   if(role==="freelancer") {axios.post("http://localhost:3000/freeMS",{
     sender: id,
     reciever: index,
-    body: currentMessage
+    body: currentMessage,
+    idjob: jobbi
   })
   .then(()=> {console.log("the freelancer sended very cute message")
   sendMessage({
     sender: id,
     reciever: index,
-    body: currentMessage
+    body: currentMessage,
+    idjob: jobbi
+
   });setSend(!send)})
 .catch((err)=>{console.log(err,'')})
 }
@@ -266,30 +293,27 @@ const handleSend = () => {
    {axios.post("http://localhost:3000/jobMS",{
     sender: id,
     reciever: index,
-    body: currentMessage
+    body: currentMessage,
+    idjob:jobbi
   })
 .then(()=> {console.log("the jobowner sended very cute message")
  sendMessage({
   sender: id,
   reciever: index,
-  body: currentMessage
+  body: currentMessage,
+  idjob:jobbi
 });setSend(!send)})
 .catch((err)=>{console.log(err,'')})
 }
-
-const handleUsersSearch = () =>{
-
 }
-
-}
- console.log("owner",chatOwner)
+console.log(sorted,'3asabkjjkhjka')
   return (
     <div>
-    {role==="freelancer"?<Navbar/>:<Navbar2/>}
+    {role==="freelancer"?<Navbar />:<Navbar2/>}
     <div className="container mx-auto  shadow-lg rounded-lg mt-[3.5cm]">
     
       <div className="px-5 py-5 flex justify-between items-center bg-white border-b-2">
-        <div className="font-semibold text-2xl">GoingChat</div>
+        <div className="font-semibold text-2xl">WorkShop</div>
         <div className="w-1/2">
           <input
             type="text"
@@ -322,24 +346,24 @@ const handleUsersSearch = () =>{
            <div key={i} className={handleClassName(el[el.length-1].freelancer.id,el[el.length-1].jobowner.id)+" flex flex-row py-4 px-2 cursor-pointer"} onClick={()=>{handleRoute(el[el.length-1].freelancer.id,el[el.length-1].jobowner.id)}}>
             <div className="w-1/4">
               <img
-                src= {role==="freelancer"? el[el.length-1].jobowner.image:el[el.length-1].freelancer.image}
+                src= {role==="freelancer"? el[el.length-1].job.image:el[el.length-1].job.image}
                 className="object-cover h-12 w-12 rounded-full"
                 alt=""
               />
             </div>
             <div className="w-full">
               <div className="text-lg font-semibold">{role==="freelancer"?
-               el[el.length-1].jobowner.name
+               el[el.length-1].job.jobtitle
                :
-               el[el.length-1].freelancer.name}</div>
+               el[el.length-1].job.jobtitle}</div>
               <span className="text-gray-500">{role==="freelancer"?
               el[el.length-1].freelancer.updatedAt?
-                el[el.length-1].body
-                :
+              el[el.length-1].jobowner.name+": "+ el[el.length-1].body
+              :
                "you :"+ el[el.length-1].body
                :
                el[el.length-1].jobowner.updatedAt?
-                 el[el.length-1].body
+               el[el.length-1].freelancer.name+": "+ el[el.length-1].body
                 :
                 "you :"+ el[el.length-1].body}</span>
             </div>
@@ -402,7 +426,7 @@ const handleUsersSearch = () =>{
           <div className="flex flex-col">
             <div className="font-semibold text-xl py-4">You Chating With {chatReciever?.name}</div>
             <img
-              src="https://source.unsplash.com/L2cxSuKWbpo/600x600"
+              src={job.image}
               className="object-cover rounded-xl h-64"
               alt=""
             />
