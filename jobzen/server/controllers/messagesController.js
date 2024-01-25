@@ -1,5 +1,5 @@
 const { default: axios } = require('axios');
-const{ FreelancerMessages, Freelancer, JobOwner ,JobOwnerMessages }=require('../database/index.js');
+const{ FreelancerMessages, Freelancer, JobOwner ,JobOwnerMessages ,Job }=require('../database/index.js');
 // CRUD operations
 async function getAllMessages(req, res) {
 try {
@@ -52,9 +52,9 @@ res.status(500).json({ error: error.message });
 async function FindMessageBySenderAndRecieverId(req, res) {
     
         try {
-            const { sender, reciever } = req.params;
+            const { sender, reciever ,job} = req.params;
             const messages = await FreelancerMessages.findAll({
-                where: { sender: sender, reciever: reciever },
+                where: { sender: sender, reciever: reciever ,idjob:job},
                 
            
                 include: [
@@ -62,7 +62,8 @@ async function FindMessageBySenderAndRecieverId(req, res) {
                     { model: Freelancer,
                         attributes: {
                             exclude: ['updatedAt']
-                        } }
+                        } },
+                        {model :Job}
                 ]
             });
     
@@ -78,18 +79,18 @@ async function FindMessageBySenderAndRecieverId(req, res) {
     
     async function FindJobwnersBySenderId (req, res) {
     
-        const { sender  } = req.params;
-         FreelancerMessages.findAll({ where: { sender:sender  } })
+        const { sender , job } = req.params;
+         FreelancerMessages.findAll({ where: { sender:sender ,idjob:job } })
          .then((response) =>  {
-            JobOwnerMessages.findAll({where : {reciever:sender}})
+            JobOwnerMessages.findAll({where : {reciever:sender ,idjob:job}})
             .then((ress)=>{
                 const ids = response.map(message => message.dataValues.reciever);
                 const idss= ress.map(message => message.dataValues.sender);
                 const all=[...idss,...ids]
             const uniqueIds = [...new Set(all)];
             const hhh=uniqueIds.map(async(index)=>{
-               const req1 =await axios.get(`http://localhost:3000/freeMS/msg/${sender}/${index}`);
-                const req2 =await axios.get(`http://localhost:3000/jobMS/msg/${index}/${sender}`);
+               const req1 =await axios.get(`http://localhost:3000/freeMS/msg/${sender}/${index}/${job}`);
+                const req2 =await axios.get(`http://localhost:3000/jobMS/msg/${index}/${sender}/${job}`);
                 return (req1.data).concat(req2.data).sort(sortByCreatedAt)
 
           

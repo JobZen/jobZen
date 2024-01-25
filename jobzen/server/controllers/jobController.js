@@ -78,10 +78,10 @@ res.status(500).json({ error: error.message });
 async function updateJob(req, res) {
 try {
 const { id } = req.params;
-const { jobtitle, location, budget, image, role, description, qualification, jobOwnerId, jobCategoryId } = req.body;
+const { jobtitle, location, budget, image, role, description, qualification} = req.body;
 await Job.update(
-{ jobtitle, location, budget, image, role, description, qualification, jobOwnerId, jobCategoryId },
-{ where: { id } }
+{ jobtitle, location, budget, image, role, description, qualification},
+{ where: { id:id } }
 );
 res.status(200).json({ message: 'Job updated successfully' });
 } catch (error) {
