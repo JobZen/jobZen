@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Navbar from '../navFreelancer/page';
 import Footer from '../footer/page';
+import Popup from "../popupAfter/page"
+import { useRouter } from "next/navigation";
+
 
 interface Message {
   id: number;
@@ -15,6 +18,25 @@ const Contact = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [showPopup, setShowPopup] = useState(false);
+
+
+
+  const openpopup=()=>{
+    setShowPopup(true);
+
+  }
+  const handle = (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+    openpopup();
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+    // Assuming you have a route named '/freelancer/:id'
+    // router.push(`/home`);
+  };
+
 
 
 const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -32,6 +54,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setName('');
     setEmail('');
     setMessage('');
+
   } catch (error) {
 
     console.error('Error sending message:', error);
@@ -41,6 +64,9 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   return (
     <div className="bg-white">
       <Navbar />
+      {showPopup && (
+        <Popup onClose={handleClosePopup} onConfirm={handleClosePopup} />
+      )}
       <section className="bg-white">
         <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
           <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-black">
@@ -91,6 +117,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
             <button
               type="submit"
               className="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-[#267296] w-[20px] h-[40px] sm:w-fit hover:bg-white hover:text-[#267296] hover:focus:ring-4 focus:outline dark:focus:ring-primary-300 dark:bg-primary-600"
+              onClick={handle}
             >
               Send message
             </button>
