@@ -25,7 +25,22 @@ CREATE TABLE IF NOT EXISTS `jobzen`.`admins` (
   `name` VARCHAR(255) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
-  `image` TEXT NULL DEFAULT NULL,
+  `image` LONGTEXT NULL DEFAULT NULL,
+  `createdAt` DATETIME NOT NULL,
+  `updatedAt` DATETIME NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `jobzen`.`freelacercategories`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `jobzen`.`freelacercategories` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `category` VARCHAR(255) NOT NULL,
+  `image` LONGTEXT NULL DEFAULT NULL,
   `createdAt` DATETIME NOT NULL,
   `updatedAt` DATETIME NOT NULL,
   PRIMARY KEY (`id`))
@@ -42,16 +57,23 @@ CREATE TABLE IF NOT EXISTS `jobzen`.`freelancers` (
   `name` VARCHAR(255) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
-  `adress` VARCHAR(255) NOT NULL,
+  `adress` VARCHAR(255) NULL DEFAULT NULL,
   `phone` INT NULL DEFAULT '0',
-  `image` LONGTEXT NOT NULL,
-  `skills` LONGTEXT NOT NULL,
-  `aboutMe` LONGTEXT NOT NULL,
-  `experience` LONGTEXT NOT NULL,
-  `jobtitle` LONGTEXT NOT NULL,
+  `image` LONGTEXT NULL DEFAULT NULL,
+  `skills` LONGTEXT NULL DEFAULT NULL,
+  `aboutMe` LONGTEXT NULL DEFAULT NULL,
+  `experience` LONGTEXT NULL DEFAULT NULL,
+  `jobtitle` LONGTEXT NULL DEFAULT NULL,
   `createdAt` DATETIME NOT NULL,
   `updatedAt` DATETIME NOT NULL,
-  PRIMARY KEY (`id`))
+  `FreelancerCategoriesId` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `FreelancerCategoriesId` (`FreelancerCategoriesId` ASC) VISIBLE,
+  CONSTRAINT `freelancers_ibfk_1`
+    FOREIGN KEY (`FreelancerCategoriesId`)
+    REFERENCES `jobzen`.`freelacercategories` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -88,11 +110,11 @@ CREATE TABLE IF NOT EXISTS `jobzen`.`jobowners` (
   `name` VARCHAR(255) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
-  `adress` VARCHAR(255) NOT NULL,
+  `adress` VARCHAR(255) NULL DEFAULT NULL,
   `phone` INT NULL DEFAULT '0',
   `image` LONGTEXT NOT NULL,
-  `rating` FLOAT NULL DEFAULT '0',
-  `description` LONGTEXT NOT NULL,
+  `rating` FLOAT NULL DEFAULT '2.5',
+  `description` LONGTEXT NULL DEFAULT NULL,
   `createdAt` DATETIME NOT NULL,
   `updatedAt` DATETIME NOT NULL,
   PRIMARY KEY (`id`))
@@ -125,12 +147,14 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `jobzen`.`freelacercategories`
+-- Table `jobzen`.`contacts`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `jobzen`.`freelacercategories` (
+CREATE TABLE IF NOT EXISTS `jobzen`.`contacts` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `category` VARCHAR(255) NOT NULL,
-  `image` LONGTEXT NULL DEFAULT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `message` TEXT NOT NULL,
+  `reply` TEXT NULL DEFAULT NULL,
   `createdAt` DATETIME NOT NULL,
   `updatedAt` DATETIME NOT NULL,
   PRIMARY KEY (`id`))
@@ -146,19 +170,33 @@ CREATE TABLE IF NOT EXISTS `jobzen`.`freelancer_has_manycategories` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `createdAt` DATETIME NOT NULL,
   `updatedAt` DATETIME NOT NULL,
-  `FreeLancerId` INT NULL DEFAULT NULL,
-  `FreeLancerCategoriesId` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `jobzen`.`freelancermessages`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `jobzen`.`freelancermessages` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `body` LONGTEXT NOT NULL,
+  `createdAt` DATETIME NOT NULL,
+  `updatedAt` DATETIME NOT NULL,
+  `sender` INT NULL DEFAULT NULL,
+  `reciever` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  INDEX `FreeLancerId` (`FreeLancerId` ASC) VISIBLE,
-  INDEX `FreeLancerCategoriesId` (`FreeLancerCategoriesId` ASC) VISIBLE,
-  CONSTRAINT `freelancer_has_manycategories_ibfk_1`
-    FOREIGN KEY (`FreeLancerId`)
+  INDEX `sender` (`sender` ASC) VISIBLE,
+  INDEX `reciever` (`reciever` ASC) VISIBLE,
+  CONSTRAINT `freelancermessages_ibfk_1`
+    FOREIGN KEY (`sender`)
     REFERENCES `jobzen`.`freelancers` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
-  CONSTRAINT `freelancer_has_manycategories_ibfk_2`
-    FOREIGN KEY (`FreeLancerCategoriesId`)
-    REFERENCES `jobzen`.`freelacercategories` (`id`)
+  CONSTRAINT `freelancermessages_ibfk_2`
+    FOREIGN KEY (`reciever`)
+    REFERENCES `jobzen`.`jobowners` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -245,26 +283,26 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `jobzen`.`messages`
+-- Table `jobzen`.`jobownermessages`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `jobzen`.`messages` (
+CREATE TABLE IF NOT EXISTS `jobzen`.`jobownermessages` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `body` LONGTEXT NOT NULL,
   `createdAt` DATETIME NOT NULL,
   `updatedAt` DATETIME NOT NULL,
-  `freelancerId` INT NULL DEFAULT NULL,
-  `jobOwnerId` INT NULL DEFAULT NULL,
+  `sender` INT NULL DEFAULT NULL,
+  `reciever` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  INDEX `freelancerId` (`freelancerId` ASC) VISIBLE,
-  INDEX `jobOwnerId` (`jobOwnerId` ASC) VISIBLE,
-  CONSTRAINT `messages_ibfk_1`
-    FOREIGN KEY (`freelancerId`)
-    REFERENCES `jobzen`.`freelancers` (`id`)
+  INDEX `sender` (`sender` ASC) VISIBLE,
+  INDEX `reciever` (`reciever` ASC) VISIBLE,
+  CONSTRAINT `jobownermessages_ibfk_1`
+    FOREIGN KEY (`sender`)
+    REFERENCES `jobzen`.`jobowners` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
-  CONSTRAINT `messages_ibfk_2`
-    FOREIGN KEY (`jobOwnerId`)
-    REFERENCES `jobzen`.`jobowners` (`id`)
+  CONSTRAINT `jobownermessages_ibfk_2`
+    FOREIGN KEY (`reciever`)
+    REFERENCES `jobzen`.`freelancers` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE)
 ENGINE = InnoDB

@@ -142,6 +142,10 @@ jobtitle: {
   qualification: {
     type: DataTypes.TEXT('long'),
   },
+  available: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
+  }
 });
 
 //table job category: 5

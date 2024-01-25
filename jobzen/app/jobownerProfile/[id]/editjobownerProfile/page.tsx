@@ -4,6 +4,7 @@ import Navbar from "../../../navjobowner/page";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Footer from "../../../footer/page";
+import Popup from "../../../popup/page"
 
 interface JobOwner {
   id: number;
@@ -20,7 +21,7 @@ interface JobOwner {
 const EditJobOwnerProfile = (): JSX.Element => {
   const [url, setUrl] = useState<string>("");
   console.log(url);
-
+  const [showPopup, setShowPopup] = useState(false);
   const [email, setEmail] = useState("");
   const [id, setId] = useState(0);
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -84,11 +85,17 @@ const EditJobOwnerProfile = (): JSX.Element => {
       );
 
       console.log(response);
-
-      router.push(`/jobownerProfile/${jobOwnerData.id}`);
+      setShowPopup(true);
+      
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+    // Assuming you have a route named '/freelancer/:id'
+    router.push(`/jobownerProfile/${jobOwnerData.id}`);
   };
 
   const uploadImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -121,7 +128,10 @@ const EditJobOwnerProfile = (): JSX.Element => {
   return (
     <div className="bg-white flex flex-col min-h-screen">
       <Navbar />
-
+     
+      {showPopup && (
+        <Popup onClose={handleClosePopup} onConfirm={handleClosePopup} />
+      )}
       <div className="bg-[#ffffff] flex flex-row justify-center w-full">
         <div className="bg-[#ffffff] overflow-hidden w-[1440px] h-[1024px] relative">
           <div className="absolute w-[1578px] h-[449px] top-[577px] left-[-69px]">
