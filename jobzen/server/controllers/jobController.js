@@ -76,8 +76,8 @@ res.status(200).json({ message: 'Job updated successfully' });
 res.status(500).json({ error: error.message });
 }
 }
-
 // Update availability
+
 const updateJobAvailability = async (req, res) => {
   const jobId = req.params.id;
   const { available } = req.body;
@@ -98,6 +98,7 @@ const updateJobAvailability = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
 
 // Delete a job by ID
 async function deleteJob(req, res) {
@@ -186,5 +187,7 @@ module.exports = {
   getOneJobByCategory,
   getJobsByCompany,
   updateJobAvailability};
+ 
+  
 
   

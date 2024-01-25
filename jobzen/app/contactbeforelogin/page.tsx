@@ -1,11 +1,39 @@
-import React from "react";
-import Navbar from "../navBar/page";
-import Footer from "../footer/page";
+"use client"
+import React, { useState, useEffect } from "react";
+import Navbar from '../navBar/page';
+import Footer from '../footer/page';
+import Popup from "../popUpBefore/page"
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+
 
 const Contact = () => {
+
+  const router = useRouter();
+  const [showPopup, setShowPopup] = useState(false);
+
+
+  const openpopup=()=>{
+    setShowPopup(true);
+
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+    openpopup();
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+    // Assuming you have a route named '/freelancer/:id'
+    router.push(`/landingPage`);
+  };
   return (
     <div className="bg-white">
       <Navbar />
+      {showPopup && (
+        <Popup onClose={handleClosePopup} onConfirm={handleClosePopup} />
+      )}
       <section className="bg-white">
         <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
           <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-black">
@@ -15,7 +43,7 @@ const Contact = () => {
             Got a technical issue? Want to send feedback about a beta feature?
             Need details about our Business plan? Let us know.
           </p>
-          <form className="space-y-8">
+          <form className="space-y-8"   >
             <div>
               <label
                 htmlFor="name"
@@ -31,20 +59,18 @@ const Contact = () => {
                 required
               />
               <div>
-                <label
-                  htmlFor="email"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600"
-                >
-                  Your email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
-                  placeholder="jobZen@WebSite.com"
-                  required
-                />
-              </div>
+              <label  htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600">
+                Your email
+              </label>
+              <input
+                type="email"
+                id="email"
+                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
+                placeholder="jobZen@WebSite.com"
+              
+                required
+              />
+            </div>
             </div>
             <div className="sm:col-span-2">
               <label
@@ -61,10 +87,14 @@ const Contact = () => {
               ></textarea>
             </div>
             <button
+        
               type="submit"
-              className="flex w-[176px] h-[56px] items-center justify-center mt-[500px] ml-[2px] relative [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[#267296] items-center justify-center mr-0 py-[8px] transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[white] hover:scale-110 relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid rounded-full"
+              className="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-[#267296] w-[20px] h-[40px] sm:w-fit hover:bg-white hover:text-[#267296] hover:focus:ring-4 focus:outline dark:focus:ring-primary-300 dark:bg-primary-600"
+              onClick={handleSubmit}
             >
               Send message
+             
+             
             </button>
           </form>
         </div>

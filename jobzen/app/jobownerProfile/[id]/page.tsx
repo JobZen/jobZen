@@ -9,6 +9,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import JobLocation from "../../map/page";
 
+
 interface JobOwner {
   id: number;
   name: string;
