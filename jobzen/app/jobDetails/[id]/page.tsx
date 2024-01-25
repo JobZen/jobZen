@@ -158,6 +158,13 @@ const JobDetails = () => {
                         </button>
                       </Link>
                     </div>
+                    <div className="mt-6 flex gap-4">
+                      <Link href={`/`}>
+                        <button className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[#267296] rounded-full overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[#267296] items-center justify-center mr-0 py-full transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[white] hover:scale-110 relative bg-[#267296] rounded-full overflow-hidden border border-[#a1e1fd4a] ">
+                          View Recrutement
+                        </button>
+                      </Link>
+                    </div>
                     <div className="mt-6 "></div>
                   </div>
                   <hr className="my-6 border-t border-[#267296]" />
