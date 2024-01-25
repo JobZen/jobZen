@@ -1,8 +1,8 @@
-"use client"
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Navbar from '../navjobowner/page';
-import Footer from '../footer/page';
+"use client";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Navbar from "../navjobowner/page";
+import Footer from "../footer/page";
 
 interface Message {
   id: number;
@@ -12,30 +12,32 @@ interface Message {
 }
 
 const Contact = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
-const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-  try {
-    const formData: Message = {
-      id: 0,
-      name,
-      email,
-      message,
-    };
-    await axios.post<Message>('http://localhost:3000/contactUs/add', formData);
-    console.log('Message sent successfully');
-    setName('');
-    setEmail('');
-    setMessage('');
-  } catch (error) {
-
-    console.error('Error sending message:', error);
-  }
-};
+    try {
+      const formData: Message = {
+        id: 0,
+        name,
+        email,
+        message,
+      };
+      await axios.post<Message>(
+        "http://localhost:3000/contactUs/add",
+        formData
+      );
+      console.log("Message sent successfully");
+      setName("");
+      setEmail("");
+      setMessage("");
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
+  };
 
   return (
     <div className="bg-white">
@@ -46,11 +48,15 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
             Contact Us
           </h2>
           <p className="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">
-            Got a technical issue? Want to send feedback about a beta feature? Need details about our Business plan? Let us know.
+            Got a technical issue? Want to send feedback about a beta feature?
+            Need details about our Business plan? Let us know.
           </p>
           <form onSubmit={handleSubmit} className="space-y-8">
             <div>
-              <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600">
+              <label
+                htmlFor="name"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600"
+              >
                 Your Full Name
               </label>
               <input
@@ -62,21 +68,27 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                 required
               />
               <div>
-              <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600">
-                Your email
-              </label>
-              <input
-                type="email"
-                id="email"
-                onChange={(e) => setEmail(e.target.value)}
-                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
-                placeholder="jobZen@WebSite.com"
-                required
-              />
-            </div>
+                <label
+                  htmlFor="email"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600"
+                >
+                  Your email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
+                  placeholder="jobZen@WebSite.com"
+                  required
+                />
+              </div>
             </div>
             <div className="sm:col-span-2">
-              <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600">
+              <label
+                htmlFor="message"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600"
+              >
                 Your message
               </label>
               <textarea
@@ -89,7 +101,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
             </div>
             <button
               type="submit"
-              className="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-[#267296] w-[20px] h-[40px] sm:w-fit hover:bg-white hover:text-[#267296] hover:focus:ring-4 focus:outline dark:focus:ring-primary-300 dark:bg-primary-600"
+              className="flex w-[176px] h-[56px] items-center justify-center mt-[500px] ml-[2px] relative [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[#267296] items-center justify-center mr-0 py-[8px] transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[white] hover:scale-110 relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid rounded-full"
             >
               Send message
             </button>

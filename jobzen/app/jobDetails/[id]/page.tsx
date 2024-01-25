@@ -1,129 +1,228 @@
-'use client'
-import React, { useEffect, useState } from 'react';
-import axios from 'axios'
-import Link from 'next/link';
-import Navbar from '../../navjobowner/page';
-import Footer from '../../footer/page';
-
-interface JobOwner{
-  id:number,
-  name:string,
-  image:string
+"use client";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Link from "next/link";
+import Navbar from "../../navjobowner/page";
+import Footer from "../../footer/page";
+import { useRouter } from "next/navigation";
+interface JobOwner {
+  id: number;
+  name: string;
+  image: string;
 }
 
-interface Job{
-  id:number,
-  jobtitle:string,
-  location:string,
-  budget:number,
-  image:string,
-  role:string,
-  description:string,
-  qualification:string,
-  createdAt:string,
-  jobowner:JobOwner
+interface Job {
+  id: number;
+  jobtitle: string;
+  location: string;
+  budget: number;
+  image: string;
+  role: string;
+  description: string;
+  qualification: string;
+  createdAt: string;
+  jobowner: JobOwner;
 }
-
 
 const JobDetails = () => {
   const [job, setJob] = useState<Job>({
     id: 0,
-    jobtitle: '',
-    location: '',
+    jobtitle: "",
+    location: "",
     budget: 0,
-    image: '',
-    role: '',
-    description: '',
-    qualification: '',
-    createdAt: '',
+    image: "",
+    role: "",
+    description: "",
+    qualification: "",
+    createdAt: "",
     jobowner: {
       id: 0,
-      name: '',
-      image: '',
+      name: "",
+      image: "",
     },
   });
+  const [jobOwnerData, setJobOwnerData] = useState<JobOwner>({
+    id: 0,
+    name: "",
+    image: "",
+  });
+  const [availabe, setAvailable] = useState<boolean>(false);
 
+  const router = useRouter();
 
-useEffect(()=>{
-  var currentUrl = window.location.href;
-  var ind=currentUrl.split("/")
-  var index=ind[ind.length-1]
+  useEffect(() => {
+    var currentUrl = window.location.href;
+    var ind = currentUrl.split("/");
+    var index = ind[ind.length - 1];
 
-  const getOneJob = async () => {
+    const getOneJob = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/job/job/${index}`);
+        const response = await axios.get(
+          `http://localhost:3000/job/job/${index}`
+        );
         setJob(response.data);
       } catch (error) {
-        console.error('Error fetching job details:', error);
+        console.error("Error fetching job details:", error);
       }
     };
-    getOneJob()
-  },[])
+    getOneJob();
+  }, []);
 
- 
+  const handleCheckboxChange = () => {
+    setAvailable(!availabe);
+  };
 
+  const PreviousPage = () => {
+    const jobOwnerID = job.jobowner.id;
+    setJobOwnerData({
+      id: jobOwnerID,
+      name: job.jobowner.name,
+      image: job.jobowner.image,
+    });
+    router.push(`/listjobbycompany/${jobOwnerID}`);
+  };
   return (
-    <div className='bg-white '>
+    <div className="bg-white ">
       <Navbar />
-      <div className='bg-white flex flex-col justify-center items-center h-screen'>
+      <div className="bg-white flex flex-col justify-center items-center h-screen">
         <div className="container mx-auto py-16 pt-[5rem] items-center mr-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 px-4 ">
-            <div className="bg-white">
-                    <br/>
-              <p className='text-Mona'>Job Details</p>
-              <h2 className="text-4xl font-lato font-semibold mb-4">{job.jobtitle}</h2>
+            <div className="bg-white mt-[200px]">
+              <button
+                className="cursor-pointer duration-200 hover:scale-125 active:scale-100"
+                title="Go Back"
+                onClick={PreviousPage}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="50px"
+                  height="50px"
+                  viewBox="0 0 24 24"
+                  className="stroke-blue-300"
+                >
+                  <path
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                    stroke-width="1.5"
+                    d="M11 6L5 12M5 12L11 18M5 12H19"
+                  ></path>
+                </svg>
+              </button>
+              <p className="text-Mona text-xl mt-6 mb-4">Job Details</p>
+              <hr className="my-2 mr-80 border-r-2 border-gray-900" />
+              <br />
+              <img
+                src={job.image}
+                className="w-32 h-32 rounded-full mb-4 shrink-0"
+                alt="Job Image"
+              />
+              <br />
+              <h2 className="text-4xl font-lato font-semibold mb-4">
+                {job.jobtitle}
+              </h2>
               <h2 className="text-xl font-bold mt-6 mb-4">Payement</h2>
-              <p className="text-[#959595] text-xl">{job.budget} TND / Hour (negociation accord to experience)</p>
+              <p className="text-[#959595] text-xl">
+                {job.budget} TND / Hour (negociation accord to experience)
+              </p>
               <h2 className="text-xl font-bold mt-6 mb-4">About the project</h2>
               <p className="text-gray-700">{job.description}</p>
               <h2 className="text-xl font-bold mt-6 mb-4">Your Role</h2>
               <div className="mb-6">
                 <p className="mt-2">{job.role}</p>
               </div>
-              <h2 className="text-xl font-bold mt-6 mb-4">Skills & Qualifications:</h2>
+              <h2 className="text-xl font-bold mt-6 mb-4">
+                Skills & Qualifications:
+              </h2>
               <div className="mb-6 pl-6">
-                <ul className="list-disc">
-                  <li className="mt-2">{job.qualification}</li>
-                </ul>
+                <div className="mb-6">
+                  <p className="mt-2 ml-[-19px]">{job.qualification}</p>
+                </div>
               </div>
-             
             </div>
-            
+
             <div className="ml-1 flex items-center p-8">
               <div className="flex p-12 ">
                 <div className="bg-[#D3E8F8] shadow rounded-lg p-6">
-                <div className="flex flex-col items-center">
-                    <img src={job.jobowner.image} className="w-32 h-32 rounded-full mb-4 shrink-0"alt="CompanyProfile"/>
+                  <div className="flex flex-col items-center">
+                    <img
+                      src={job.jobowner.image}
+                      className="w-32 h-32 rounded-full mb-4 shrink-0"
+                      alt="CompanyProfile"
+                    />
                     <h1 className="text-xl font-bold">{job.jobowner.name}</h1>
-                        
+
                     <div className="mt-6 flex gap-4">
                       <Link href={`/jobDetails/${job.id}/updateJobDetails`}>
-                        <button className="text-[#267296] hover:font-bold bg-white border-[#267296] py-2 px-4 rounded" >
+                        <button className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[white] rounded-full overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#267296] text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[white] items-center justify-center mr-0 py-full transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[#267296] hover:scale-110 relative bg-[#267296] rounded-full overflow-hidden border border-[#a1e1fd4a] ">
                           Update details
-                          </button>
-                          </Link>
+                        </button>
+                      </Link>
                     </div>
-                    <div className='mt-6 '>
-                
+                    <div className="mt-6 flex gap-4">
+                      <Link href={`/`}>
+                        <button className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[#267296] rounded-full overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[#267296] items-center justify-center mr-0 py-full transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[white] hover:scale-110 relative bg-[#267296] rounded-full overflow-hidden border border-[#a1e1fd4a] ">
+                          View Recrutement
+                        </button>
+                      </Link>
                     </div>
+                    <div className="mt-6 "></div>
                   </div>
                   <hr className="my-6 border-t border-[#267296]" />
                   <div className="flex flex-col">
-                  <p className="font-jura text-[#267296]">Job title:</p>
+                    <p className="font-jura text-[#267296]">Job title:</p>
                     <ul>
-                      <li className="mb-2 font-bold font-lato">{job.jobtitle}</li>
+                      <li className="mb-2 font-bold font-lato">
+                        {job.jobtitle}
+                      </li>
                     </ul>
-                    <br/>
+                    <br />
                     <p className="font-jura text-[#267296] ">Location:</p>
                     <ul>
-                      <li className="mb-2 font-bold font-lato">{job.location}</li>
+                      <li className="mb-2 font-bold font-lato">
+                        {job.location}
+                      </li>
                     </ul>
-                    <br/>
+                    <br />
                     <p className="font-jura text-[#267296] ">Date posted:</p>
                     <ul>
-                      <li className="mb-2 font-bold font-lato">{job.createdAt}</li>
+                      <li className="mb-2 font-bold font-lato">
+                        {job.createdAt}
+                      </li>
                     </ul>
-                    <br/>
+                    <br />
+                    <div className="flex flex-col items-center ml-[-7px]">
+                      <label className="autoSaverSwitch relative inline-flex cursor-pointer select-none items-center">
+                        <input
+                          type="checkbox"
+                          name="autoSaver"
+                          className="sr-only"
+                          checked={availabe}
+                          onChange={handleCheckboxChange}
+                        />
+                        <span
+                          className={`slider mr-3 flex h-[26px] w-[50px] items-center rounded-full p-1 duration-200 ${
+                            availabe ? "bg-[#267296]" : "bg-[#CCCCCC]"
+                          }`}
+                        >
+                          <span
+                            className={`dot h-[18px] w-[18px] rounded-full bg-white duration-200 ${
+                              availabe ? "translate-x-6" : ""
+                            }`}
+                          ></span>
+                        </span>
+                        <span
+                          className={`label flex items-center text-sm font-medium ${
+                            availabe ? "text-[#267296]" : "text-gray-700"
+                          }`}
+                        >
+                          Is it availabe?{" "}
+                          <span className="pl-1">
+                            {" "}
+                            {availabe ? "Yes" : "No"}{" "}
+                          </span>
+                        </span>
+                      </label>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -131,7 +230,7 @@ useEffect(()=>{
           </div>
         </div>
       </div>
-     
+      <Footer />
     </div>
   );
 };
