@@ -8,7 +8,7 @@ router.get('/review', Review.getAllReviews);
 router.post('/review', Review.createReview);
 
 // Get a review by ID
-router.get('/review/:id', Review.getReviewById);
+router.get('/job/review/:id', Review.getReviewById);
 
 // Update a review by ID
 router.put('/review/:id', Review.updateReview);

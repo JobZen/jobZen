@@ -1,5 +1,5 @@
 "use client";
-
+import Link from "next/link"
 import Cookies from "js-cookie";
 import { Message } from "@mui/icons-material";
 import axios from "axios";
@@ -434,6 +434,13 @@ console.log(sorted,'3asabkjjkhjka')
             <div className="font-light mb-[20px]">
            {role==="freelancer"? `Welcome ${chatOwner?.name}! We're thrilled to have you join our community of talented freelancers. Here, you'll find a wide range of exciting job opportunities that match your skills and expertise.`:` We're thrilled to have you on board ${chatOwner?.name}! Your journey to finding the perfect freelancers begins here.
             Our platform is designed to connect you with skilled professionals who can bring your projects to life.`}
+             <div>
+              { role==="freelancer"?"":   <Link href={`/createReview/${chatReciever?.id}?id=${chatOwner?.id}`}>
+                <button type="button" data-te-ripple-init data-te-ripple-color="light" className="mb-4  mt-4 flex rounded-3xl px-6 pb-2 pt-2.5 text-s font-bold leading-normal gap-1 text-black hover:text-[#267296] border-2">
+                <svg xmlns="http://www.w3.org/2000/svg"viewBox="0 0 20 20"fill="currentColor"className="w-5 h-6">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v2.5h-2.5a.75.75 0 0 0 0 1.5h2.5v2.5a.75.75 0 0 0 1.5 0v-2.5h2.5a.75.75 0 0 0 0-1.5h-2.5v-2.5Z" clipRule="evenodd"/>
+                  </svg>Add A review For {`${chatReciever?.name}`}</button></Link>}
+           </div>
             </div>
           </div>
         </div>
