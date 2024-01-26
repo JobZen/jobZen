@@ -90,6 +90,7 @@ const CreateJobDetails = () => {
         "http://localhost:3000/job/job",
         createJob
       );
+      console.log(createJob)
       console.log("Job Post created successfully", create.data);
       setShowPopup(true);
     } catch (error) {

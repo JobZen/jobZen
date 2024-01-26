@@ -25,6 +25,17 @@ async function getJobsByCompany(req, res) {
   }
 }
 
+const getChokri = async (req,res) => {
+  const { id } = req.params;
+  try {
+    const job = await Job.findOne({where:{id:id}});
+ 
+    res.status(200).json(job);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err);
+  }
+}
 
 //Get one Job:
 async function getOneJob(req, res) {
@@ -34,18 +45,6 @@ async function getOneJob(req, res) {
     if (!job) {
       return res.status(404).json('Job post is not found');
     }
-    res.status(200).json(job);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send(err);
-  }
-}
-
-const getChokri = async (req,res) => {
-  const { id } = req.params;
-  try {
-    const job = await Job.findOne({where:{id:id}});
- 
     res.status(200).json(job);
   } catch (err) {
     console.error(err);
