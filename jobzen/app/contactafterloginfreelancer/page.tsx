@@ -1,8 +1,11 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import Navbar from "../navFreelancer/page";
-import Footer from "../footer/page";
+"use client"
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import Navbar from '../navFreelancer/page';
+import Footer from '../footer/page';
+import Popup from "../popupAfter/page"
+import { useRouter } from "next/navigation";
+
 
 interface Message {
   id: number;
@@ -12,36 +15,58 @@ interface Message {
 }
 
 const Contact = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [showPopup, setShowPopup] = useState(false);
+
+
+
+  const openpopup=()=>{
+    setShowPopup(true);
+
+  }
+  const handle = (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+    openpopup();
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+    // Assuming you have a route named '/freelancer/:id'
+    // router.push(`/home`);
+  };
+
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    try {
-      const formData: Message = {
-        id: 0,
-        name,
-        email,
-        message,
-      };
-      await axios.post<Message>(
-        "http://localhost:3000/contactUs/add",
-        formData
-      );
-      console.log("Message sent successfully");
-      setName("");
-      setEmail("");
-      setMessage("");
-    } catch (error) {
-      console.error("Error sending message:", error);
-    }
-  };
+  try {
+    const formData: Message = {
+      id: 0,
+      name,
+      email,
+      message,
+    };
+    await axios.post<Message>('http://localhost:3000/contactUs/add', formData);
+    console.log('Message sent successfully');
+    setName('');
+    setEmail('');
+    setMessage('');
+
+  } catch (error) {
+
+    console.error('Error sending message:', error);
+  }
+};
 
   return (
     <div className="bg-white">
       <Navbar />
+      {showPopup && (
+        <Popup onClose={handleClosePopup} onConfirm={handleClosePopup} />
+      )}
       <section className="bg-white">
         <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
           <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-black">
@@ -100,7 +125,9 @@ const Contact = () => {
               ></textarea>
             </div>
             <button
-              className="flex w-[176px] h-[56px] items-center justify-center mt-[500px] ml-[2px] relative [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[#267296] items-center justify-center mr-0 py-[8px] transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[white] hover:scale-110 relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid rounded-full"
+              type="submit"
+              className="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-[#267296] w-[20px] h-[40px] sm:w-fit hover:bg-white hover:text-[#267296] hover:focus:ring-4 focus:outline dark:focus:ring-primary-300 dark:bg-primary-600"
+              onClick={handle}
             >
               Send message
             </button>

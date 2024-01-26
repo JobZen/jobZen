@@ -5,37 +5,105 @@ import axios from "axios";
 import Link from "next/link";
 import {useRouter}from 'next/navigation'
 import Cookies from "js-cookie";
+import Popup from "../popupLogin/page"
+
+
 
 const Login: FunctionComponent = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alert, setAlert] = useState(false)
   const  [alertMsg, setAlertMsg] = useState("")
+  const [showPopup, setShowPopup] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+
+
 const router=useRouter()
-  const handleLogin = () => {
+
+
+const handleClosePopup = () => {
+  setShowPopup(false);
+  router.push(`/mainFreelancer`);
+};
+
+
+  // const handleLogin = () => {
+  //   console.log("Email:", email);
+  //   console.log("Password:", password);
+  //   axios
+  //     .post("http://localhost:3000/auth/freelancer/login", {
+  //       email: email,
+  //       password: password,
+  //     })
+  //     .then((response) => {
+  //       console.log(response.data);
+        
+  //       response.data.token
+  //         ? (Cookies.set("token", response.data.token),
+  //           Cookies.set("id", response.data.id),
+  //           Cookies.set("role",response.data.role), 
+  //           router.push('/mainFreelancer')
+  //           )
+  //         : (console.log(response.data),setAlert(true)) ;
+  //         setShowPopup(true)
+  //     })
+  //     .catch((error) => console.log("error:", error));
+  // };
+  const handleLogin = async () => {
     console.log("Email:", email);
     console.log("Password:", password);
-    axios
-      .post("http://localhost:3000/auth/freelancer/login", {
+
+    try {
+      const response = await axios.post("http://localhost:3000/auth/freelancer/login", {
         email: email,
         password: password,
-      })
-      .then((response) => {
+      });
+
+      console.log(response.data);
+
+      if (response.data.token) {
+        // Successful login
+        Cookies.set("token", response.data.token);
+        Cookies.set("id", response.data.id);
+        Cookies.set("role", response.data.role);
+        setShowPopup(true); // Show success popup
+
+        // Redirect after a delay (customize delay as needed)
+        setTimeout(() => {
+          router.push('/mainFreelancer');
+        }, 2000); // Example: Navigate after 2 seconds
+      } else {
+        // Unsuccessful login
         console.log(response.data);
-        
-        response.data.token
-          ? (Cookies.set("token", response.data.token),
-            Cookies.set("id", response.data.id),
-            Cookies.set("role",response.data.role), 
-            router.push('/mainFreelancer')
-            )
-          : (console.log(response.data),setAlert(true)) ;
-      })
-      .catch((error) => console.log("error:", error));
+        setAlert(true);
+        setAlertMsg("Invalid email or password");
+        setErrorMessage("Incorrect email or password"); // Set error message
+        // Don't show the popup for unsuccessful login
+        // Remove the following line
+        // setShowPopup(true);
+      }
+    } catch (error) {
+      console.log("error:", error);
+      setAlert(true);
+      setAlertMsg("Error occurred during login");
+      // Don't show the popup for errors
+      // Remove the following line
+      // setShowPopup(true);
+    }
   };
+  
+  
+  
+  
+  
+  
 
   return (
     <div className="bg-malek min-h-screen flex flex-col items-center justify-center bg-gray-100">
+       {showPopup && (
+        <Popup onClose={handleClosePopup} onConfirm={handleClosePopup} />
+      )}
     <div
       className="
       flex flex-col
@@ -182,6 +250,9 @@ const router=useRouter()
               </svg>
             </span>
           </button>
+          {errorMessage && (
+  <div className="text-red-500 mt-2">{errorMessage}</div>
+)}
         </div>
       </div>
     </div>
