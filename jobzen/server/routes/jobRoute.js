@@ -10,6 +10,8 @@ router.get('/jobbycompany/:id', Job.getJobsByCompany);
 // GET one job
 router.get('/job/:id', Job.getOneJob);
 
+router.get('/jb/:id',Job.getChokri)
+
 // GET all jobs by category
 router.get('/jobbycategory/:jobCategoryId',Job.getJobsByCategory)
 
@@ -18,9 +20,6 @@ router.get('/jobsWithDetails',Job.getAllJobsWithDetails)
 
 // Create a new job
 router.post('/job', Job.createJob);
-
-// Updating job availability
-router.patch('/job/updateAvailability/:id', Job.updateJobAvailability);
 
 // Update a job by ID
 router.put('/job/:id', Job.updateJob);

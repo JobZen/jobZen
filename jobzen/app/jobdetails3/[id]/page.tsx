@@ -2,10 +2,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
-import Navbar from "../../navjobowner/page";
+import Navbar from "../../navFreelancer/page";
 import Footer from "../../footer/page";
 import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
 interface JobOwner {
   id: number;
   name: string;
@@ -26,10 +25,6 @@ interface Job {
 }
 
 const JobDetails = () => {
-  const id = Cookies.get("id");
-  const [chat, setChat] = useState<any[][]>([]);
-  const [index, setIndex] = useState(0);
-
   const [job, setJob] = useState<Job>({
     id: 0,
     jobtitle: "",
@@ -56,58 +51,34 @@ const JobDetails = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const currentUrl = window.location.href;
-    const ind = currentUrl.split("/");
+    var currentUrl = window.location.href;
+    var ind = currentUrl.split("/");
+    var index = ind[ind.length - 1];
 
-    setIndex(parseInt(ind[ind.length - 1]));
-  }, []);
-
-  useEffect(() => {
-    const getOnechat = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:3000/jobMS/jj/${id}/${index}`
-        );
-        if (response.data[0].reciever) setChat(response.data[0].reciever);
-        else setChat(response.data[0].sender);
-      } catch (error) {
-        console.error("Error fetching job details:", error);
-      }
-    };
     const getOneJob = async () => {
       try {
         const response = await axios.get(
           `http://localhost:3000/job/job/${index}`
         );
         setJob(response.data);
+        if (!response.data.available) setAvailable(false);
       } catch (error) {
         console.error("Error fetching job details:", error);
       }
     };
     getOneJob();
-    getOnechat();
-  }, [index]);
+  }, []);
 
-  const handleCheckboxChange = async () => {
-    try {
-      const response = await axios.patch(
-        `http://localhost:3000/job/job/updateAvailability/${job.id}`,
-        { available: !available }
-      );
-      setAvailable(!available);
-    } catch (error) {
-      console.error("Error updating job availability:", error);
-    }
-  };
+  
 
   const PreviousPage = () => {
-    const jobOwnerID = job.jobowner.id;
-    setJobOwnerData({
-      id: jobOwnerID,
-      name: job.jobowner.name,
-      image: job.jobowner.image,
-    });
-    router.push(`/listjobbycompany/${jobOwnerID}`);
+    // const jobOwnerID = job.jobowner.id;
+    // setJobOwnerData({
+    //   id: jobOwnerID,
+    //   name: job.jobowner.name,
+    //   image: job.jobowner.image,
+    // });
+    router.push('/alljobsoffers/');
   };
   return (
     <div className="bg-white ">
@@ -179,26 +150,15 @@ const JobDetails = () => {
                     />
                     <h1 className="text-xl font-bold">{job.jobowner.name}</h1>
 
+                  
+                                      <Link href={`/companydetails/${job.jobowner.id}`}>
+                      <p className="mt-6 text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">View Company's Profile</p>
+                    </Link>
                     <div className="mt-6 flex gap-4">
-                      <Link href={`/jobDetails/${job.id}/updateJobDetails`}>
-                        <button className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[white] rounded-full overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-[#267296] text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[white] items-center justify-center mr-0 py-full transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[#267296] hover:scale-110 relative bg-[#267296] rounded-full overflow-hidden border border-[#a1e1fd4a] ">
-                          Update details
-                        </button>
+                      <Link href={`/chat/${job.jobowner.id}`}>
+                        <button  className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[#267296] rounded-full overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[#267296] items-center justify-center mr-0 py-full transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[white] hover:scale-110 relative bg-[#267296] rounded-full overflow-hidden border border-[#a1e1fd4a] ">Message</button>
                       </Link>
-                    </div>
-                    <div className="mt-6 flex gap-4">
-                      <Link
-                        href={{
-                          pathname: `/chat/${chat}`,
-                          query: {
-                            id: index,
-                          },
-                        }}
-                      >
-                        <button className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[#267296] rounded-full overflow-hidden cursor-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[#267296] items-center justify-center mr-0 py-full transition ease-in-out delay-150-pointer [font-family:'Montserrat-Bold',Helvetica] font hover:-translate-y-1 hover:bg-[white] hover:scale-110 relative bg-[#267296] rounded-full overflow-hidden border border-[#a1e1fd4a] ">
-                          View Recrutement
-                        </button>
-                      </Link>
+                      
                     </div>
                     <div className="mt-6 "></div>
                   </div>
@@ -225,39 +185,7 @@ const JobDetails = () => {
                       </li>
                     </ul>
                     <br />
-                    <div className="flex flex-col items-center ml-[-7px]">
-                      <label className="autoSaverSwitch relative inline-flex cursor-pointer select-none items-center">
-                        <input
-                          type="checkbox"
-                          name="autoSaver"
-                          className="sr-only"
-                          checked={available}
-                          onChange={handleCheckboxChange}
-                        />
-                        <span
-                          className={`slider mr-3 flex h-[26px] w-[50px] items-center rounded-full p-1 duration-200 ${
-                            available ? "bg-[#267296]" : "bg-[#CCCCCC]"
-                          }`}
-                        >
-                          <span
-                            className={`dot h-[18px] w-[18px] rounded-full bg-white duration-200 ${
-                              available ? "translate-x-6" : ""
-                            }`}
-                          ></span>
-                        </span>
-                        <span
-                          className={`label flex items-center text-sm font-medium ${
-                            available ? "text-[#267296]" : "text-gray-700"
-                          }`}
-                        >
-                          Is it available?{" "}
-                          <span className="pl-1">
-                            {" "}
-                            {available ? "Yes" : "No"}{" "}
-                          </span>
-                        </span>
-                      </label>
-                    </div>
+                   
                   </div>
                 </div>
               </div>
