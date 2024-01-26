@@ -4,6 +4,9 @@ import axios from 'axios';
 import SideNavBar from '../../sideNavBar/page';
 import { MdChevronLeft} from 'react-icons/md';
 import Link from 'next/link'
+import Popup from 'reactjs-popup'; 
+import { useRouter } from "next/navigation";
+
 
 
 interface Category {
@@ -16,6 +19,7 @@ const CreateCategory = () => {
   const [url, setUrl] = useState<string>("");
   const [catId,setCatId]=useState<Number>()
   const [category, setCategory] = useState<string>("");
+  const router = useRouter();
   
 
 const handleCreateCategory = async (event: any) => {
@@ -31,6 +35,8 @@ const handleCreateCategory = async (event: any) => {
     );
     const data = create.data;
     console.log("Category created successfully", data);
+    router.push(`/admin/categoriesList`);
+
   } catch (error) {
     console.error("Error creating new Category:", error);
   }
@@ -192,10 +198,71 @@ return (
           <td className="px-6 py-4">
             {/* <!-- Modal toggle --> */}
            
-            <button
+            {/* <button
           className="transition ease-in-out delay-150 text-green-500 bg-transparent border border-green-400 hover:-translate-y-1 hover:scale-110 hover:bg-green-500 hover:font-bold hover:text-white duration-300 inline-flex items-center font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
           onClick={(e)=>handleCreateCategory(e)}>
-          Add to list</button>
+          Add to list</button> */}
+          <Popup
+    trigger={<button  className="transition ease-in-out delay-150 text-green-500 bg-transparent border border-green-400 hover:-translate-y-1 hover:scale-110 hover:bg-green-500 hover:font-bold hover:text-white duration-300 inline-flex items-center font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">  Add to list </button>}
+    modal
+    nested
+  >
+    {close => (
+<div className="fixed z-10 inset-0 overflow-y-auto">
+    <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+        <div className="fixed inset-0 transition-opacity">
+            <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+        </div>
+        <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+        <div
+            className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+            <div className="sm:flex sm:items-start">
+                <div
+                    className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+                    <svg className="h-6 w-6 text-green-600" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                    <h3 className="text-lg leading-6 font-medium text-gray-900">
+                        Modal Title
+                    </h3>
+                    <div className="mt-2">
+                        <p className="text-sm leading-5 text-gray-500">
+                           Confirme your add on category
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+            <Link href="/admin/categoriesList"  >
+                <span className="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+                    
+                      <button  onClick={(e)=>handleCreateCategory(e)}  type="button"
+                        className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5"  >
+                        Accept
+                    </button>
+                 
+                </span>
+                </Link>
+                <span className="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
+                    <button   onClick={() => {
+              console.log('modal closed ');
+              close();
+            }}
+             type="button"
+                   
+                        className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                        Cancel
+                        
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>)}
+
+      </Popup>
          
           </td>
         </tr>

@@ -3,6 +3,8 @@ import { FunctionComponent } from "react";
 import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+import Popup from "../popupSignup/page"
+import {useRouter}from 'next/navigation'
 
 const Signup: FunctionComponent = () => {
   const [email, setEmail] = useState("");
@@ -10,10 +12,19 @@ const Signup: FunctionComponent = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+
+  const router=useRouter()
+
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+    router.push(`/login`);
+  };
 
   const handleSignup = () => {
     if (!name || !password || !email || !address  || !phone) {
-      alert("fill up all the fields");
+      // alert("fill up all the fields");
       return;
     }
     const obj = {
@@ -29,12 +40,24 @@ const Signup: FunctionComponent = () => {
 
     axios
       .post("http://localhost:3000/auth/jobowner/register", obj)
-      .then((response) => {console.log(response.data);alert("thank you for signing up")})
+      .then((response) => {
+        console.log(response.data);
+        // alert("thank you for signing up")
+        setShowPopup(true);
+        setTimeout(() => {
+          router.push('/logjob');
+        }, 2000); 
+      })
+
+
       .catch((error) => console.log("error:", error));
   };
 
   return (
     <div className="bg-malek min-h-screen flex flex-col items-center justify-center bg-gray-100">
+        {showPopup && (
+        <Popup onClose={handleClosePopup} onConfirm={handleClosePopup} />
+      )}
       <div
         className="
         flex flex-col
