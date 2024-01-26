@@ -13,15 +13,16 @@ interface Category {
 }
 
 const CreateCategory = () => {
+  const [url, setUrl] = useState<string>("");
   const [catId,setCatId]=useState<Number>()
   const [category, setCategory] = useState<string>("");
-  const [categoryImage,setcategoryImage]=useState<string>("")
+  
 
 const handleCreateCategory = async (event: any) => {
   event.preventDefault();
   const createCat: any = {
     category: category,
-    image: categoryImage,
+    image: url,
   };
   try {
     const create = await axios.post(
@@ -34,6 +35,36 @@ const handleCreateCategory = async (event: any) => {
     console.error("Error creating new Category:", error);
   }
 };
+
+const uploadImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  try {
+    if (!e.target.files || !e.target.files[0]) return;
+    let url = e.target.files[0];setUrl
+    if (!url) return;
+
+    const formData = new FormData();
+    formData.append("file", url);
+    formData.append("upload_preset", "project");
+    formData.append("cloud_name", "ds3tmq5iw");
+
+    const response = await fetch(
+      "https://api.cloudinary.com/v1_1/ds3tmq5iw/image/upload",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    const responseData = await response.json();
+    setUrl(responseData.secure_url);
+    console.log("url", responseData.secure_url);
+    
+    
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 
 return (
 <>
@@ -117,10 +148,29 @@ return (
             className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap "
           >
             <img
-              className="w-20 h-20 rounded-full"
-              src={category.image}
-              alt="category image"
+              className="w-20 h-20 border-gray-900 rounded-full"
+              src={url}
+              alt=""
             />
+             <div
+                      onClick={() =>
+                        document.getElementById("photoInput")?.click()
+                      }
+                      >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6"
+             onClick={() => uploadImage}
+            >
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
+  <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
+</svg>
+<input
+                        id="photoInput"
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => uploadImage(e)}
+                      />
+      </div>
             <div className="ps-3">
             <div className="mb-6">
             <label htmlFor="New category's name" className="text-gray-700 text-sm font-semibold">
@@ -135,15 +185,18 @@ return (
                 />
                 </div>
               </div>
+              
               <div className="mb-6">
             </div>
           </th>
           <td className="px-6 py-4">
             {/* <!-- Modal toggle --> */}
+           
             <button
           className="transition ease-in-out delay-150 text-green-500 bg-transparent border border-green-400 hover:-translate-y-1 hover:scale-110 hover:bg-green-500 hover:font-bold hover:text-white duration-300 inline-flex items-center font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
           onClick={(e)=>handleCreateCategory(e)}>
           Add to list</button>
+         
           </td>
         </tr>
       </tbody>

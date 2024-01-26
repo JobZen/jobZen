@@ -118,7 +118,7 @@ freelancers and job owners.
         <div
           className="ripple relative overflow-hidden rounded-lg bg-cover bg-[50%] bg-no-repeat shadow-lg space-y-10"
           data-te-ripple-init data-te-ripple-color="light">
-          <img src="https://shorturl.at/fsH08" className="w-full" alt="Louvre" />
+          <img src="https://cdn.dribbble.com/users/293579/screenshots/2280928/earth.gif" className="w-full" alt="Louvre" />
             <div
               className="absolute top-0 right-0 bottom-0 left-0 h-full w-full overflow-hidden bg-[hsl(0,0%,98.4%,0.2)] bg-fixed opacity-0 transition duration-300 ease-in-out hover:opacity-100">
             </div>

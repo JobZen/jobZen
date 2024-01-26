@@ -2,10 +2,10 @@
 "use client"
 import React, { useState } from "react";
 import axios from 'axios';  
-import Navbar from "../../navBar/page";
+import Navbar from "../aboutafterloginjobowner/page";
 import Link from 'next/link';
 
-const CreateReview: React.FC = () => {
+const CreateReview= () => {
   const [rating, setRating] = useState<number | null>(null);
   const [comment, setComment] = useState<string>("");
   const [name, setName] = useState<string>("");
