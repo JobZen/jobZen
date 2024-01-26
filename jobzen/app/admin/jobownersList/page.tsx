@@ -182,8 +182,8 @@ return (
               </div>
             </th>
             <td className="px-6 py-4 hover:text-bold">
-            {jobowner.description.length>50?`${jobowner.description.slice(0,50)}...`
-            :jobowner.description}
+            {jobowner.description && jobowner.description.length > 50 ? `${jobowner.description.slice(0, 50)}...` : jobowner.description}
+
             </td>
             <td className="px-6 py-4 hover:text-bold">
             {jobowner.rating}

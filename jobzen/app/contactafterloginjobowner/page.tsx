@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../navjobowner/page";
 import Footer from "../footer/page";
+import Popup from "../popupAfter/page"
 
 interface Message {
   id: number;
@@ -15,6 +16,23 @@ const Contact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+
+
+  const openpopup=()=>{
+    setShowPopup(true);
+
+  }
+  const handle = (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+    openpopup();
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+    // Assuming you have a route named '/freelancer/:id'
+    // router.push(`/home`);
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,6 +60,9 @@ const Contact = () => {
   return (
     <div className="bg-white">
       <Navbar />
+      {showPopup && (
+        <Popup onClose={handleClosePopup} onConfirm={handleClosePopup} />
+      )}
       <section className="bg-white">
         <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
           <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-black">
@@ -102,6 +123,7 @@ const Contact = () => {
             <button
               type="submit"
               className="flex w-[176px] h-[56px] items-center justify-center mt-[500px] ml-[2px] relative [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[#267296] items-center justify-center mr-0 py-[8px] transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[white] hover:scale-110 relative bg-[#267296] rounded-[8px] overflow-hidden border border-solid rounded-full"
+              onClick={handle}
             >
               Send message
             </button>
