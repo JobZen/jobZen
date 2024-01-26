@@ -132,11 +132,11 @@ function page() {
         <h1 className='font-jockey-one text-[#172554]'>CATEGORY</h1>
       </div>
       
-      <div className="flex justify-between ml-[10%] mr-[10%]">
+      <div className="bg- malek flex justify-between ml-[10%] mr-[10%] gap-3">
         {jobcategory.map((el, i) => (
           
           <div key={i} className="relative text-center ">
-            <Link href={`/jobsbycategory/${el.id}`}>
+            <Link href={`/landingPage`}>
             <h1
               className="text-4xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white z-10 hover:scale-125 "
             >

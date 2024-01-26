@@ -24,6 +24,9 @@ router.post('/job', Job.createJob);
 // Update a job by ID
 router.put('/job/:id', Job.updateJob);
 
+// Update job availability 
+router.patch('/job/updateAvailability/:id', Job.updateJobAvailability);
+
 // Delete a job by ID
 router.delete('/job/:id', Job.deleteJob);
 
