@@ -41,18 +41,6 @@ async function getOneJob(req, res) {
   }
 }
 
-const getChokri = async (req,res) => {
-  const { id } = req.params;
-  try {
-    const job = await Job.findOne({where:{id:id}});
- 
-    res.status(200).json(job);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send(err);
-  }
-}
-
 // Create a new job
 async function createJob(req, res) {
 try {
@@ -88,6 +76,29 @@ res.status(200).json({ message: 'Job updated successfully' });
 res.status(500).json({ error: error.message });
 }
 }
+// Update availability
+
+const updateJobAvailability = async (req, res) => {
+  const jobId = req.params.id;
+  const { available } = req.body;
+
+  try {
+    const job = await Job.findByPk(jobId);
+
+    if (!job) {
+      return res.status(404).json({ error: 'Job not found' });
+    }
+
+    job.available = available;
+    await job.save();
+
+    res.status(200).json({ message: 'Job availability updated successfully' });
+  } catch (error) {
+    console.error('Error updating job availability:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
 
 // Delete a job by ID
 async function deleteJob(req, res) {
@@ -175,6 +186,8 @@ module.exports = {
   getJobsByCategory,
   getOneJobByCategory,
   getJobsByCompany,
-  getChokri};
+  updateJobAvailability};
+ 
+  
 
   

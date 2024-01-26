@@ -3,6 +3,9 @@ import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import SideNavBar from '../../sideNavBar/page';
 import { MdKeyboardArrowUp } from 'react-icons/md';
+import { MdChevronLeft} from 'react-icons/md';
+import Link from 'next/link'
+
 
 interface Freelancer {
   id: number;
@@ -62,6 +65,17 @@ const Freelancer = ()=> {
         <SideNavBar />
         {/* First row with three columns */}
         <div className="grid grid-cols-3 gap-4 mb-10 mt-10">
+        </div>
+          <div className="">
+            <div className="flex gap-4 mt-4 md:space-y-0 py-4 bg-white">
+            <Link href="/admin/freelancersList">  
+          <button
+          className="flex transition ease-in-out delay-150 text-gray-700 bg-gray-200 border rounded-full border-gray-700  hover:scale-110 hover:bg-gray-300 hover:font-bold hover:text-black font-medium rounded-l text-sm px-5 py-2.5 me-2 mb-2 ml-6"
+          >
+          <MdChevronLeft className="transition ease-in-out delay-100 text-2xl mr-8 text-gray-700 bg-gray-200 border-gray-700  hover:scale-110 hover:bg-gray-300 hover:font-bold hover:text-black font-bold"/>
+          Back to freelancers list
+          </button></Link>
+          </div>
         </div>
 
         {/* Freelancer details*/}
