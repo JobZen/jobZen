@@ -54,7 +54,7 @@ if (!jobCategoryToUpdate) {
 
 await JobCategory.update(
     { category, image },
-    { where: { id } }
+    { where: { id:id } }
 );
 res.status(200).json({ message: 'Job category updated successfully' });
 } catch (error) {

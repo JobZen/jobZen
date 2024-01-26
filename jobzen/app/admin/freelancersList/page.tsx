@@ -260,7 +260,7 @@ return (
             <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
               <h3 className="text-base font-semibold leading-6 text-gray-900" id="modal-title">Delete account</h3>
               <div className="mt-2">
-                <p className="text-sm text-gray-500">Are you certain you wish to delete your account? All of your data will be permanently erased. This action is irreversible.</p>
+                <p className="text-sm text-gray-500">Are you certain you wish to delete this account? All of this data's account will be permanently erased. This action is irreversible.</p>
               </div>
             </div>
           </div>

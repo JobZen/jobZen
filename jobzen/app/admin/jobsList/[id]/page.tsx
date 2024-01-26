@@ -106,25 +106,21 @@ const JobInfo = () => {
               <div className="bg-white p-6 rounded-lg shadow-lg">
               <div className="w-30 h-30 rounded-full max-w-[25%] mb-6">
                <img
-                  className="w-full h-full rounded-full"
-                  src={jobOwners[0].image}
+                  className="w-full h-full"
+                  src={jobs[0].image}
                   alt="company image"
                 />
                 </div>
-                <h1 className="text-4xl font-bold">{jobOwners[0].name}</h1>
+                <h1 className="text-4xl font-bold">{jobs[0].jobtitle}</h1>
                 <hr className="my-8" />
                 {jobOwners.length > 0 && jobs.length > 0 && jobCategories.length > 0 && (
                   <>
-                    <h2 className="text-3xl font-semibold mb-6">Mission:</h2>
-                    <p className="text-gray-600 text-2xl">{jobs[0].jobtitle}</p>
-                    <hr className="my-8" />
-
                     <h2 className="text-3xl font-semibold mb-6">Working location:</h2>
                     <p className="text-gray-600 text-2xl">{jobs[0].location}</p>
                     <hr className="my-8" />
 
                     <h2 className="text-3xl font-semibold mb-6">Payement</h2>
-                    <p className="text-gray-700 text-2xl font-extrabold">{jobs[0].budget}</p>
+                    <p className="text-gray-700 text-2xl font-extrabold">{jobs[0].budget} TND / Hour (according to negociation)</p>
                     <hr className="my-8" />
 
                     <h2 className="text-3xl font-semibold mb-6">Role</h2>
@@ -144,17 +140,7 @@ const JobInfo = () => {
                     <hr className="my-8" />
                   </>
                 )}
-                {jobOwners.length > 0 && jobs.length > 0 && jobCategories.length > 0 && (
-                  <>
-                    <h2 className="text-3xl font-semibold mb-6">Company Bio</h2>
-                    <p className="text-gray-700 text-2xl">{jobOwners[0].description}</p>
-                    <hr className="my-8" />
-                    <h2 className="text-3xl font-semibold mb-6">Company Rating</h2>
-                    <StarRating rating={jobOwners[0].rating}/>
-                    <hr className="my-8" />
-                  </>
-                )}
-
+                
                 {jobOwners.length > 0 && jobs.length > 0 && jobCategories.length > 0 && (
                   <>
                   <h2 className="text-3xl font-semibold mb-6">Category information</h2>
@@ -169,9 +155,26 @@ const JobInfo = () => {
                 <hr className="my-8" />
                   </>
                 )}
+
                 {jobOwners.length > 0 && jobs.length > 0 && jobCategories.length > 0 && (
                   <>
-                <h2 className="text-3xl font-semibold mt-4 mb-2">Company Contact information</h2>
+                              <h2 className="text-3xl font-semibold mb-6">Company information</h2>
+                  <div className="flex items-center mb-2 space-x-4">
+                    <img
+                  className="w-20 h-20 rounded-full"
+                  src={jobOwners[0].image}
+                  alt="user image"
+                />
+                <h1 className="text-2xl font-semibold">{jobOwners[0].name}</h1>
+                </div>
+                <hr className="my-8" />
+                    <h2 className="text-3xl font-semibold mb-6"> Bio</h2>
+                    <p className="text-gray-700 text-2xl">{jobOwners[0].description}</p>
+                    <hr className="my-8" />
+                    <h2 className="text-3xl font-semibold mb-6">Rating</h2>
+                    <StarRating rating={jobOwners[0].rating}/>
+                    <hr className="my-8" />
+                <h2 className="text-3xl font-semibold mt-4 mb-2">Contact information</h2>
                 <ul className="list-disc text-2xl list-inside text-gray-700">
                   <li>Email: {jobOwners[0].email}</li>
                   <li>Phone: {jobOwners[0].phone}</li>
