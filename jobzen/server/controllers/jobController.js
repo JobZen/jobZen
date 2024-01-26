@@ -41,6 +41,18 @@ async function getOneJob(req, res) {
   }
 }
 
+const getChokri = async (req,res) => {
+  const { id } = req.params;
+  try {
+    const job = await Job.findOne({where:{id:id}});
+ 
+    res.status(200).json(job);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err);
+  }
+}
+
 // Create a new job
 async function createJob(req, res) {
 try {
@@ -66,10 +78,10 @@ res.status(500).json({ error: error.message });
 async function updateJob(req, res) {
 try {
 const { id } = req.params;
-const { jobtitle, location, budget, image, role, description, qualification, jobOwnerId, jobCategoryId } = req.body;
+const { jobtitle, location, budget, image, role, description, qualification} = req.body;
 await Job.update(
-{ jobtitle, location, budget, image, role, description, qualification, jobOwnerId, jobCategoryId },
-{ where: { id } }
+{ jobtitle, location, budget, image, role, description, qualification},
+{ where: { id:id } }
 );
 res.status(200).json({ message: 'Job updated successfully' });
 } catch (error) {
@@ -162,6 +174,7 @@ module.exports = {
   getJobByIdWithDetails,
   getJobsByCategory,
   getOneJobByCategory,
-  getJobsByCompany};
+  getJobsByCompany,
+  getChokri};
 
   

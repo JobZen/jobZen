@@ -19,7 +19,7 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
           "malek":'url("https://static.vecteezy.com/ti/vetor-gratis/p3/2062629-abstract-background-with-technology-circuit-board-texture-electronic-motherboard-illustration-communication-and-engineering-concept-vector-illustration-vetor.jpg")',
-          "aloui":'url("https://theriskofyou.com/wp-content/uploads/2022/09/technology-risk-transformation-service-card.jpg")'
+          "aloui":'url("https://scontent.ftun10-2.fna.fbcdn.net/v/t1.15752-9/418595269_237198476096033_8534854468575086641_n.png?stp=dst-png_s2048x2048&_nc_cat=108&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=0MRq6DqQd4kAX8GmYO8&_nc_ht=scontent.ftun10-2.fna&oh=03_AdSU-b1TfkRPQB47RbZPW3YpzuoPOSQDzMnmof5v-Vux3A&oe=65DA27E3")'
       },
       colors:{
         'grisss':'#737373',

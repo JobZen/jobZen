@@ -38,7 +38,7 @@ const DropNavbar = () => {
 
   const settings = [
     { name: "Account", href: `/freelancer/${id}` },
-    { name: "Messages", href: `/chat/${id}` },
+    { name: "Messages", href: `/chat/1` },
     { name: "Review", href: `/` },
     { name: "Logout", href: "/home" },
   ];
