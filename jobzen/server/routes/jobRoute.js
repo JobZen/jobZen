@@ -10,6 +10,8 @@ router.get('/jobbycompany/:id', Job.getJobsByCompany);
 // GET one job
 router.get('/job/:id', Job.getOneJob);
 
+router.get('/jb/:id',Job.getChokri)
+
 // GET all jobs by category
 router.get('/jobbycategory/:jobCategoryId',Job.getJobsByCategory)
 

@@ -306,7 +306,7 @@ const handleSend = () => {
 .catch((err)=>{console.log(err,'')})
 }
 }
-console.log(sorted,'3asabkjjkhjka')
+console.log(job,'3asabkjjkhjka')
   return (
     <div>
     {role==="freelancer"?<Navbar />:<Navbar2/>}
@@ -426,7 +426,7 @@ console.log(sorted,'3asabkjjkhjka')
           <div className="flex flex-col">
             <div className="font-semibold text-xl py-4">You Chating With {chatReciever?.name}</div>
             <img
-              src={job.image}
+              src={chatReciever?.image}
               className="object-cover rounded-xl h-64"
               alt=""
             />
