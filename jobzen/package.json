@@ -22,6 +22,7 @@
     "js-cookie": "^3.0.5",
     "js-cookies": "^1.0.4",
     "leaflet": "^1.9.4",
+    "mdb-react-ui-kit": "^7.1.0",
     "next": "14.0.4",
     "next-themes": "^0.2.1",
     "react": "^18",

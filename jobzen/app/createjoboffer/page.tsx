@@ -5,7 +5,8 @@ import Navbar from "../navjobowner/page";
 import Footer from "../footer/page";
 import axios from "axios";
 import Cookies from "js-cookie";
-
+import { useRouter } from "next/navigation";
+import Popup from "../popupCreatejob/page";
 interface JobOwner {
   id: number;
   name: string;
@@ -24,7 +25,7 @@ interface Job {
   createdAt: string;
   jobOwnerId: number;
   jobCategoryId: number;
-  jobOwner: JobOwner;
+  jobowner: JobOwner;
 }
 
 const CreateJobDetails = () => {
@@ -44,6 +45,31 @@ const CreateJobDetails = () => {
   const [JobOwnerId, setJobOwnerId] = useState<number>();
   const [JobCategoryId, setJobCategoryId] = useState<string>("");
   const [url, setUrl] = useState<string>("");
+  const [showPopup, setShowPopup] = useState(false);
+  const [jobOwnerData, setJobOwnerData] = useState<JobOwner>({
+    id: 0,
+    name: "",
+    image: "",
+  });
+  const [job, setJob] = useState<Job>({
+    id: 0,
+    jobtitle: "",
+    location: "",
+    budget: 0,
+    image: "",
+    role: "",
+    description: "",
+    qualification: "",
+    createdAt: "",
+    jobOwnerId: 0,
+    jobCategoryId: 0,
+    jobowner: {
+      id: 0,
+      name: "",
+      image: "",
+    },
+  });
+  const router = useRouter();
 
   const handleCreateJob = async (event: any) => {
     event.preventDefault();
@@ -66,16 +92,14 @@ const CreateJobDetails = () => {
       );
       console.log(createJob)
       console.log("Job Post created successfully", create.data);
-      alert("Job Post created successfully");
+      setShowPopup(true);
     } catch (error) {
       console.error("Error creating job post:", error);
       alert("Please try again.");
     }
   };
 
-  const handleCheckboxChange = () => {
-    setAvailable(!availabe);
-  };
+
 
   const uploadImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     try {
@@ -103,18 +127,30 @@ const CreateJobDetails = () => {
       console.error(err);
     }
   };
+const handleClosePopup = () => {
+    setShowPopup(false);
+    router.push(`/listjobbycompany/${id}`);
+  };
+ 
   return (
-    <div className="bg-white ">
+    <div className="bg-white">
       <Navbar />
+      {showPopup && (
+        <Popup onClose={handleClosePopup} onConfirm={handleClosePopup} />
+      )}
       <div className="bg-white flex flex-col justify-center items-center h-screen">
         <div className="container mx-auto pt-16 pb-0 items-center mr-6 ">
           <div className="grid grid-cols-1 sm:grid-cols-2 px-12 ">
-            <div className="bg-white">
+            <div className="bg-white mt-[20px]">
+           
               <br />
               <p className="text-Mona text-xl mt-6 mb-4">Create Job Details</p>
               <hr className="my-2 mr-80 border-r-2 border-gray-900" />
               <br />
               <div className="mb-6">
+                <img className="w-32 h-32 rounded-full mb-4 object-cover border-4 "
+                src={url}
+                 alt="" />
                 <label
                   htmlFor="jobtitle"
                   className="text-xl font-lato font-semibold mb-4"
@@ -224,35 +260,8 @@ const CreateJobDetails = () => {
       </div>
 
       <div className="flex flex-col items-center">
-        <label className="autoSaverSwitch relative inline-flex cursor-pointer select-none items-center">
-          <input
-            type="checkbox"
-            name="autoSaver"
-            className="sr-only"
-            checked={availabe}
-            onChange={handleCheckboxChange}
-          />
-          <span
-            className={`slider mr-3 flex h-[26px] w-[50px] items-center rounded-full p-1 duration-200 ${
-              availabe ? "bg-[#267296]" : "bg-[#CCCCCC]"
-            }`}
-          >
-            <span
-              className={`dot h-[18px] w-[18px] rounded-full bg-white duration-200 ${
-                availabe ? "translate-x-6" : ""
-              }`}
-            ></span>
-          </span>
-          <span
-            className={`label flex items-center text-sm font-medium ${
-              availabe ? "text-[#267296]" : "text-gray-700"
-            }`}
-          >
-            Is it availabe?{" "}
-            <span className="pl-1"> {availabe ? "Yes" : "No"} </span>
-          </span>
-        </label>
-        <div className="mt-6 flex flex-wrap gap-4 justify-center">
+        
+        <div className="mt-6 flex flex-wrap gap-4 justify-center ml-[140px]">
           <Link href={"/"}>
             <button
               className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[#267296] rounded-full overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[#267296] items-center justify-center mr-0 py-full transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[white] hover:scale-110 relative bg-[#267296] rounded-full overflow-hidden border border-[#a1e1fd4a] "

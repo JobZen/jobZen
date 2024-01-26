@@ -5,6 +5,8 @@ import SideNavBar from '../../../sideNavBar/page';
 import { useRouter } from "next/navigation";
 import { MdChevronLeft} from 'react-icons/md';
 import Link from 'next/link'
+import Popup from 'reactjs-popup'; 
+
 
 interface Category {
   id: number;
@@ -17,6 +19,10 @@ const UpdateCategory = () => {
   const [catId,setCatId]=useState<Number>()
   const [category, setCategory] = useState<string>("");
   const [url, setUrl] = useState<string>("");
+
+  const [basicModal, setBasicModal] = useState(false);
+
+  const toggleShow = () => setBasicModal(!basicModal);
 
   useEffect(() => {
     var currentUrl = window.location.href;
@@ -49,6 +55,7 @@ const handleUpdatedCat = async (event: any) => {
   };
   console.log(updateCat);
 
+
   try {
     
     const update = await axios.put(
@@ -57,6 +64,7 @@ const handleUpdatedCat = async (event: any) => {
     );
     const data = update.data;
     console.log("Category updated successfully", data);
+    router.push(`/admin/categoriesList`);
   } catch (error) {
     console.error("Error updating existing Category:", error);
   }
@@ -221,10 +229,115 @@ return (
           </th>
           <td className="px-6 py-4">
             {/* <!-- Modal toggle --> */}
-            <button
+            {/* <button
           className="transition ease-in-out delay-150 text-green-500 bg-transparent border border-green-400 hover:-translate-y-1 hover:scale-110 hover:bg-green-500 hover:font-bold hover:text-white duration-300 inline-flex items-center font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
-          onClick={handleUpdatedCat}>
-          save the updates</button>
+          onClick={handleUpdatedCat}
+          >
+          save the updates</button> */}
+                 <Popup
+    trigger={<button className="transition ease-in-out delay-150 text-green-500 bg-transparent border border-green-400 hover:-translate-y-1 hover:scale-110 hover:bg-green-500 hover:font-bold hover:text-white duration-300 inline-flex items-center font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"> save the updates </button>}
+    modal
+    nested
+  >
+      {/* {close => (
+     <div className="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+
+   
+
+  <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+  <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+    <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+      
+       
+      
+      <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+        <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+          <div className="sm:flex sm:items-start">
+            <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+              <svg className="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+              </svg>
+            </div>
+            <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+              <h3 className="text-base font-semibold leading-6 text-gray-900" id="modal-title">Delete account</h3>
+              <div className="mt-2">
+                <p className="text-sm text-gray-500">Are you certain you wish to delete this account? All of this data's account will be permanently erased. This action is irreversible.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+          <button type="button" className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto" onClick={() => handleDelete(freelancer.id)}>Delete</button>
+          <button type="button" className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto" onClick={() => {
+              console.log('modal closed ');
+              close();
+            }} >Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> )} */}
+
+{close => (
+
+<div className="fixed z-10 inset-0 overflow-y-auto">
+    <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+        <div className="fixed inset-0 transition-opacity">
+            <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+        </div>
+        <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+        <div
+            className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+            <div className="sm:flex sm:items-start">
+                <div
+                    className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+                    <svg className="h-6 w-6 text-green-600" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                    <h3 className="text-lg leading-6 font-medium text-gray-900">
+                        Modal Title
+                    </h3>
+                    <div className="mt-2">
+                        <p className="text-sm leading-5 text-gray-500">
+                           Confirme your update on category
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+            <Link href="/admin/categoriesList"  >
+                <span className="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+                    
+                      <button  onClick={handleUpdatedCat} type="button"
+                        className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5"  >
+                        Accept
+                    </button>
+                 
+                </span>
+                </Link>
+                <span className="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
+                    <button  
+                     onClick={() => {
+                      console.log('modal closed ');
+                      close();
+                    }}
+                    type="button"
+                   
+                        className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                        Cancel
+                        
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+)}
+
+      </Popup>
           </td>
         </tr>
       </tbody>

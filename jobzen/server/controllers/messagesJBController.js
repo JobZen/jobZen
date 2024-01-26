@@ -101,6 +101,22 @@ async function FindMessageBySenderAndRecieverId(req, res) {
     res.status(500).json({ error: error.message });
     }
     }
+    async function FindMessageBySenderAndRecieverId1(req, res) {
+        try {
+        const { sender ,job } = req.params;
+        const jobowner = await JobOwnerMessages.findAll({ where: { sender:sender  ,idjob:job},attributes:["reciever"] });
+        const freelancer = await FreelancerMessages.findAll({
+            where: { reciever: sender  ,idjob:job },
+        attributes: ["sender"]       
+    
+        });
+       
+        
+        res.status(200).send([...jobowner,...freelancer]);
+        } catch (error) {
+        res.status(500).json({ error: error.message });
+        }
+        }
 
 const sortByCreatedAt = (a, b) =>
 new Date(a.createdAt) - new Date(b.createdAt);
@@ -143,7 +159,7 @@ module.exports = {
   createMessageWithForeignKey,
   FindMessageBySenderAndRecieverId,
   FindJobwnersBySenderId,
- 
+  FindMessageBySenderAndRecieverId1
 };
 
 

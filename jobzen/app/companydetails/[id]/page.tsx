@@ -108,7 +108,7 @@ const JobOwnerProfile: React.FC = (): JSX.Element => {
               <div className="absolute w-[475px] h-[562px] top-[0px] left-[1070px]  bg-[black] rounded-[42px] overflow-hidden">
                 <JobLocation jobOwnerAddress={jobOwnerData.adress} />
               </div>
-              <Link href={`/listjobbycompany/${jobOwnerData.id}`}>
+              <Link href={`/listjobbycompany2/${jobOwnerData.id}`}>
                 <button className="flex w-[176px] h-[56px] mt-[208px] ml-[208px] items-center justify-center px-[2px] py-[6px] relative bg-[#267296] rounded-full overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[#267296] items-center justify-center mr-0 py-full transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[white] hover:scale-110 relative bg-[#267296] rounded-full overflow-hidden border border-[#a1e1fd4a] ">
                   Job List
                 </button>

@@ -218,10 +218,10 @@ const jobbi=params.get("id")
 
 const handleRoute = (freelancerId:number,jobownerId:number) => {
   if (role==="freelancer") {
-    route.push(`/chat/${jobownerId}`)
+    route.push(`/chat/${jobownerId}?id=${jobbi}`)
    }
  else
- route.push(`/chat/${freelancerId}`)
+ route.push(`/chat/${freelancerId}?id=${jobbi}`)
 
 }
 
@@ -346,16 +346,16 @@ console.log(sorted,'3asabkjjkhjka')
            <div key={i} className={handleClassName(el[el.length-1].freelancer.id,el[el.length-1].jobowner.id)+" flex flex-row py-4 px-2 cursor-pointer"} onClick={()=>{handleRoute(el[el.length-1].freelancer.id,el[el.length-1].jobowner.id)}}>
             <div className="w-1/4">
               <img
-                src= {role==="freelancer"? el[el.length-1].job.image:el[el.length-1].job.image}
+                src= {role==="freelancer"? el[el.length-1].jobowner.image:el[el.length-1].freelancer.image}
                 className="object-cover h-12 w-12 rounded-full"
                 alt=""
               />
             </div>
             <div className="w-full">
               <div className="text-lg font-semibold">{role==="freelancer"?
-               el[el.length-1].job.jobtitle
+               el[el.length-1].jobowner.name
                :
-               el[el.length-1].job.jobtitle}</div>
+               el[el.length-1].freelancer.name}</div>
               <span className="text-gray-500">{role==="freelancer"?
               el[el.length-1].freelancer.updatedAt?
               el[el.length-1].jobowner.name+": "+ el[el.length-1].body
@@ -424,9 +424,9 @@ console.log(sorted,'3asabkjjkhjka')
         {/* <!-- end message --> */}
         <div className="w-2/5 border-l-2 px-5">
           <div className="flex flex-col">
-            <div className="font-semibold text-xl py-4">You Chating With {chatReciever?.name}</div>
+            <div className="font-semibold text-xl py-4">{job?.jobtitle}</div>
             <img
-              src={job.image}
+              src={job?.image}
               className="object-cover rounded-xl h-64"
               alt=""
             />

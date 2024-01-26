@@ -25,6 +25,17 @@ async function getJobsByCompany(req, res) {
   }
 }
 
+const getChokri = async (req,res) => {
+  const { id } = req.params;
+  try {
+    const job = await Job.findOne({where:{id:id}});
+ 
+    res.status(200).json(job);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err);
+  }
+}
 
 //Get one Job:
 async function getOneJob(req, res) {
@@ -186,7 +197,9 @@ module.exports = {
   getJobsByCategory,
   getOneJobByCategory,
   getJobsByCompany,
-  updateJobAvailability};
+  updateJobAvailability,
+  getChokri
+};
  
   
 
