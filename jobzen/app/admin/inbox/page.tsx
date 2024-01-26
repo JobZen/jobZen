@@ -4,6 +4,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import SideNavBar from '../sideNavBar/page';
 import Search from '../../search/page'
+import { MdChevronLeft} from 'react-icons/md';
 
 interface Reclamation {
   id: number;
@@ -97,6 +98,15 @@ return (
 
 {/* drop navigation Action */}
 <div className="relative overflow-x-auto mt-10 mb-10 mr-10">
+<div className="flex gap-4 mt-4 md:space-y-0 py-4 bg-white">
+            <Link href="/admin">  
+          <button
+          className="flex transition ease-in-out delay-150 text-gray-700 bg-gray-200 border rounded-full border-gray-700  hover:scale-110 hover:bg-gray-300 hover:font-bold hover:text-black font-medium rounded-l text-sm px-5 py-2.5 me-2 mb-2 ml-6"
+          >
+          <MdChevronLeft className="transition ease-in-out delay-100 text-2xl mr-8 text-gray-700 bg-gray-200 border-gray-700  hover:scale-110 hover:bg-gray-300 hover:font-bold hover:text-black font-bold"/>
+          Back to Dashboard
+          </button></Link>
+          </div>
       <div className="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 bg-white">
         <label htmlFor="table-search" className="sr-only">
           Search
