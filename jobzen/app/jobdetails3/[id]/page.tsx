@@ -72,13 +72,13 @@ const JobDetails = () => {
   
 
   const PreviousPage = () => {
-    const jobOwnerID = job.jobowner.id;
-    setJobOwnerData({
-      id: jobOwnerID,
-      name: job.jobowner.name,
-      image: job.jobowner.image,
-    });
-    router.push(`/listjobbycompany2/${jobOwnerID}`);
+    // const jobOwnerID = job.jobowner.id;
+    // setJobOwnerData({
+    //   id: jobOwnerID,
+    //   name: job.jobowner.name,
+    //   image: job.jobowner.image,
+    // });
+    router.push('/alljobsoffers/');
   };
   return (
     <div className="bg-white ">
