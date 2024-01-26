@@ -229,7 +229,7 @@ return (
                     </h3>
                     <div className="mt-2">
                         <p className="text-sm leading-5 text-gray-500">
-                           Confirme your update on category
+                           Confirme your add on category
                         </p>
                     </div>
                 </div>
