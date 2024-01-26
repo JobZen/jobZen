@@ -173,13 +173,13 @@ const FreelancerCategories = sequelize.define('freelacerCategory', {
 
 //table review: 7
 const Review = sequelize.define('review', {
- name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
+
+
   description: {
     type: DataTypes.TEXT('long'),
-  }
+    allowNull: false
+  } ,
+
 });
 
  // table of accepted freelancer to do the job: 8
@@ -287,6 +287,13 @@ Freelancer.belongsTo(FreelancerCategories,{
 });
 
 
+Review.belongsTo(Freelancer,{foreignKey : "freelancerId",
+allowNull: false})
+
+Review.belongsTo(JobOwner,{foreignKey : "ownerId",
+allowNull: false})
+
+
 FreelancerMessages.belongsTo(Freelancer , {foreignKey : "sender",
 allowNull: false})
 
@@ -308,8 +315,6 @@ allowNull: false
 })
 
 
-Review.belongsTo(JobHasFreelancer , {foreignKey : 'jobHasFreelancerId' ,
-allowNull: false})
 
 
 ContactFreelancer.belongsTo(Freelancer)
