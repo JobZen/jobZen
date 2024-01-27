@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import Footer from "../../footer/page";
-import Navbar2 from "../../navjobowner/page";
+import Navbar from "../../navFreelancer/page";
 import Cookies from "js-cookie";
 
 interface Job {
@@ -70,7 +70,7 @@ function Page() {
 
   return (
     <div>
-     <Navbar2 />
+      <Navbar/>
       <center>
         <div className="flex justify-center gap-x-4">
           <button
@@ -103,8 +103,12 @@ function Page() {
       </center>
       <div className="grid grid-cols-2 gap-[3cm] mt-[1cm] mb-[1cm] ml-[15%] mr-[10%]">
         {filteredJobs.map((element, i) => (
-          <Link href={`/jobDetails/${element.id}`} key={element.id}>
-            <div className="w-[12cm] h-60 flex flex-col justify-center gap-4 bg-neutral-50 rounded-lg shadow p-4 hover:scale-110">
+          <Link href={`/jobdetails2/${element.id}`} key={element.id}>
+            <div
+              className={`w-[12cm] h-60 flex flex-col justify-center gap-4 bg-neutral-50 rounded-lg shadow p-4 hover:scale-110 ${
+                !element.available ? "opacity-40" : ""
+              }`}
+            >
               <div className="flex gap-4">
                 <img
                   className="bg-neutral-500 w-32 h-32 shrink-0 rounded-lg"
