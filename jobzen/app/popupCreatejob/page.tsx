@@ -34,7 +34,7 @@ const Popup: React.FC<PopupProps> = ({ onClose, onConfirm }) => {
           <div className="text-center">
             <i>
               {" "}
-              <p className="text-white mb-6">Job Created successfully !</p>
+              <p className="text-white mb-6">Created successfully !</p>
             </i>
           </div>
           {/* Footer */}
