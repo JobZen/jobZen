@@ -13,11 +13,11 @@ try {
 //Create a new review:
 async function createReview(req, res) {
 try {
-    const { name, description, jobHasFreelancerId } = req.body;
+    const {ownerId , description,freelancerId  } = req.body;
     const newReview = await Review.create({
-    name,
     description,
-    jobHasFreelancerId
+    ownerId,
+    freelancerId
     });
     res.status(201).json(newReview);
 } catch (error) {
@@ -29,10 +29,8 @@ try {
 async function getReviewById(req, res) {
 try {
     const { id } = req.params;
-    const review = await Review.findByPk(id);
-    if (!review) {
-    return res.status(404).json({ message: 'Review not found' });
-    }
+    const review = await Review.findAll({where:{ownerId:id}});
+
     res.json(review);
 } catch (error) {
     res.status(500).json({ error: error.message });

@@ -1,24 +1,52 @@
 
 "use client"
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import axios from 'axios';  
-import Navbar from "../aboutafterloginjobowner/page";
+import Navbar from "../../navjobowner/page";
+import Footer from "../../footer/page";
 import Link from 'next/link';
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const CreateReview= () => {
   const [rating, setRating] = useState<number | null>(null);
   const [comment, setComment] = useState<string>("");
   const [name, setName] = useState<string>("");
+  const [index , setIndex] = useState(0)
+  const [freelancer, setFreelancer]=useState({})
+
+
+  const route=useRouter()
+const search=useSearchParams()
+const params= new URLSearchParams(search.toString())
+
+
+const jobbi=params.get("id")
+  useEffect (()=> {
+    const currentUrl = window.location.href;
+    const ind = currentUrl.split("/");
+
+    setIndex(parseInt(ind[ind.length - 1]))
+  },[])
+
+
+  useEffect (()=> {
+    axios.get(`http://localhost:3000/freelancer/${index}`)
+.then((res)=> {
+  setFreelancer(res.data)
+})
+.catch((err)=> {console.error(err)})
+
+  },[index])
 
 
   
   const saveReview = async () => {
     try {
       const response = await axios.post('http://localhost:3000/review/review', {
-        // freelancerId: "1",
-        // ownerId: "1",
-        rating,
-        name:name,
+        freelancerId: index,
+        ownerId: parseInt(jobbi),
+      
         description: comment,  
       });
       console.log(response);
@@ -30,6 +58,7 @@ const CreateReview= () => {
     }
   };
   
+
 
   return (
     <div>
@@ -43,16 +72,16 @@ const CreateReview= () => {
                   <div className="relative z-[1] block rounded-lg bg-[hsla(0,0%,100%,0.55)] px-6 py-12 shadow-[0_5px_20px_-1px_rgba(0,0,0,0.07),0_12px_20px_-2px_rgba(0,0,0,0.04)] backdrop-blur-[25px]">
                     <div className="md:mb-12 lg:mb-0 mt-4 flex items-center justify-center">
                       <img
-                        src="https://shorturl.at/bkuJT"
-                        className="w-32 rounded-lg shadow-lg dark:shadow-black/20"
+                        src={freelancer?.image}
+                        className="w-[200px] h-[200px] rounded-full shadow-lg dark:shadow-black/20"
                         alt="image"
                       />
                     </div>
                     <h2 className="mt-4 mb-1 text-3xl font-bold text-primary">
-                      Flux Outdoor
+                    Review on {freelancer?.name}
                     </h2>
                     <p className="mb-4 font-semibold text-[#267296]">
-                      Data · Media and Streaming · Marketing and Advertising
+                     {freelancer?.jobtitle}
                     </p>
                     <textarea
                       value={comment}
@@ -60,25 +89,7 @@ const CreateReview= () => {
                       placeholder="Write your review on Freelancer works here..."
                       className="mb-6 h-32 p-2 border border-gray-300 rounded-md w-full"
                     />
-                    {/* Star rating input */}
-                    <div className="flex items-center mb-6 justify-center">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <svg
-                          key={star}
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 96 960 960"
-                          className={`w-5 h-5 text-primary ${
-                            star <= (rating || 0) ? "text-yellow-500" : "text-gray-300"
-                          } cursor-pointer`}
-                          onClick={() => setRating(star)}
-                        >
-                          <path
-                            fill="currentColor"
-                            d="m233 976 65-281L80 506l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z"
-                          />
-                        </svg>
-                      ))}
-                    </div>
+                    
                     <div className="md:mb-12 lg:mb-0 mt-8 gap-4 space-x-4">
                       <button onClick={saveReview} className="bg-[#267296] hover:bg-[#195571] text-white py-2 px-4 rounded">
                         Save Review
@@ -94,6 +105,7 @@ const CreateReview= () => {
           </div>
         </section>
       </div>
+      <Footer/>
     </div>
   );
 };

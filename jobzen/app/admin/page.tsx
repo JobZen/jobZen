@@ -211,12 +211,12 @@ return (
             </th>
             <td className="px-6 py-4 hover:text-bold">
             {isFreelancer(user)
-                    ? user.jobtitle
-                    : isJobOwner(user)
-                    ? user.description.length > 50  // Change the limit as needed
-                      ? `${user.description.slice(0, 50)}...`
-                      : user.description
-                    : ''}
+  ? user.jobtitle
+  : isJobOwner(user)
+  ? user.description && user.description.length > 50 // Add null check here
+    ? `${user.description.slice(0, 50)}...`
+    : user.description // Return user.description if it exists
+  : ''}
             </td>
             <td className="px-6 py-4 hover:text-bold">
             {user.phone}

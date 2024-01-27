@@ -3,6 +3,9 @@ import { FunctionComponent } from "react";
 import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+import Popup from "../popupSignup/page"
+import {useRouter}from 'next/navigation'
+
 
 
 const Signup: FunctionComponent = () => {
@@ -12,32 +15,98 @@ const Signup: FunctionComponent = () => {
   const [jobTittle, setJobittle] = useState("");
   const [skills, setSkills] = useState("");
   const [address, setAddress] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSignup = () => {
-    if (!name || !password || !email || !address || !jobTittle || !skills) {
-      alert("fill up all the fields");
-      return;
-    }
-    const obj = {
-      name: name,
-      password: password,
-      email: email,
-      adress: address,
-      jobtitle: jobTittle,
-      image:
-        "https://gem.ec-nantes.fr/wp-content/uploads/2019/01/profil-vide.png",
-      skills: skills,
-    };
-    console.log(obj);
+  const router=useRouter()
 
-    axios
-      .post("http://localhost:3000/auth/freelancer/register", obj)
-      .then((response) => {console.log(response.data);alert("thank you for signing up")})
-      .catch((error) => console.log("error:", error));
+  const handleClosePopup = () => {
+    setShowPopup(false);
+    router.push(`/login`);
   };
+
+//   const handleSignup = () => {
+//     // if (!name || !password || !email || !address || !jobTittle || !skills) {
+      
+//     //   return setErrorMessage("Incorrect email or password"); 
+//     // }
+//     const obj = {
+//       name: name,
+//       password: password,
+//       email: email,
+//       adress: address,
+//       jobtitle: jobTittle,
+//       image:
+//         "https://gem.ec-nantes.fr/wp-content/uploads/2019/01/profil-vide.png",
+//       skills: skills,
+//     };
+//     console.log(obj);
+
+//     axios
+//       .post("http://localhost:3000/auth/freelancer/register", obj)
+//       .then((response) => {
+//       if  (response.data){
+//         // alert("thank you for signing up")
+//         setShowPopup(true); // Show success popup
+
+//         // Redirect after a delay (customize delay as needed)
+//         setTimeout(() => {
+//           router.push('/login');
+//         }, 2000);
+//       }
+// else{
+//   setErrorMessage("Incorrect email or password"); 
+
+// }
+
+//       })
+      
+//       .catch((error) => console.log("error:", error));
+//   };
+
+
+  const handleSignup = async () => {
+    const obj = {
+            name: name,
+            password: password,
+            email: email,
+            adress: address,
+            jobtitle: jobTittle,
+            image:
+              "https://gem.ec-nantes.fr/wp-content/uploads/2019/01/profil-vide.png",
+            skills: skills,
+          };
+          console.log(obj);
+    try {
+      const response = await axios.post("http://localhost:3000/auth/freelancer/register", obj)
+      console.log(response.data);
+
+      if (response.data) {
+      
+        setShowPopup(true); // Show success popup
+
+        // Redirect after a delay (customize delay as needed)
+        setTimeout(() => {
+          router.push('/login');
+        }, 2000); // Example: Navigate after 2 seconds
+      } else {
+        setErrorMessage("Incorrect email or password"); 
+      }
+    } catch (error) {
+      console.log("error:", error);
+    }
+  };
+
+
+  
 
   return (
     <div className="bg-malek min-h-screen flex flex-col items-center justify-center bg-gray-100">
+          {showPopup && (
+        <Popup onClose={handleClosePopup} onConfirm={handleClosePopup} />
+      )}
+              
+  
       <div
         className="
         flex flex-col
@@ -308,9 +377,8 @@ const Signup: FunctionComponent = () => {
 
           <div className="flex w-full">
             <button
-              onClick={() => {
-                handleSignup();
-              }}
+            
+             
               type="submit"
               className="
                 flex
@@ -330,7 +398,10 @@ const Signup: FunctionComponent = () => {
                 ease-in
               "
             >
-              <span className="mr-2 uppercase">Sign Up</span>
+              <span className="mr-2 uppercase"  onClick={() => {
+                handleSignup();
+              }}>Sign Up</span>
+  
               <span>
                 <svg
                   className="h-6 w-6"
@@ -345,6 +416,9 @@ const Signup: FunctionComponent = () => {
                 </svg>
               </span>
             </button>
+            {errorMessage && (
+  <div className="text-red-500 mt-2">{errorMessage}</div>
+)}
           </div>
         </div>
       </div>
