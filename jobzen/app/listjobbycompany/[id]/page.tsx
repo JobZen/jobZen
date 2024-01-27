@@ -102,9 +102,13 @@ function Page() {
         </div>
       </center>
       <div className="grid grid-cols-2 gap-[3cm] mt-[1cm] mb-[1cm] ml-[15%] mr-[10%]">
-        {filteredJobs.map((element, i) => (
+      {filteredJobs.map((element, i) => (
           <Link href={`/jobDetails/${element.id}`} key={element.id}>
-            <div className="w-[12cm] h-60 flex flex-col justify-center gap-4 bg-neutral-50 rounded-lg shadow p-4 hover:scale-110">
+            <div
+              className={`w-[12cm] h-60 flex flex-col justify-center gap-4 bg-neutral-50 rounded-lg shadow p-4 hover:scale-110 ${
+                !element.available ? "opacity-40" : ""
+              }`}
+            >
               <div className="flex gap-4">
                 <img
                   className="bg-neutral-500 w-32 h-32 shrink-0 rounded-lg"

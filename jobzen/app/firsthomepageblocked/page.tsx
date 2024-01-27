@@ -132,7 +132,7 @@ JOIN US NOW
         <h1 className='font-jockey-one text-[#172554]'>CATEGORY</h1>
       </div>
       
-      <div className="bg- malek flex justify-between ml-[10%] mr-[10%]">
+      <div className="bg- malek flex justify-between ml-[10%] mr-[10%] gap-3">
         {jobcategory.map((el, i) => (
           
           <div key={i} className="relative text-center ">
