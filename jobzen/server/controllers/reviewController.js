@@ -1,4 +1,4 @@
-const{Review,JobHasFreelancer}=require('../database/index.js');
+const{Review,JobHasFreelancer, JobOwner, Freelancer}=require('../database/index.js');
 
 //Get All reviews:
 async function getAllReviews(req, res) {
@@ -27,15 +27,22 @@ try {
 
 //Get One Review by ID:
 async function getReviewById(req, res) {
-try {
+  try {
     const { id } = req.params;
-    const review = await Review.findAll({where:{ownerId:id}});
+    const review = await Review.findAll({
+      where: { freelancerId: id },
+      include: [
+        { model: JobOwner },
+        { model: Freelancer }
+      ]
+    });
 
     res.json(review);
-} catch (error) {
+  } catch (error) {
     res.status(500).json({ error: error.message });
+  }
 }
-}
+
 
 //Edit review by ID:
 async function updateReview(req, res) {
