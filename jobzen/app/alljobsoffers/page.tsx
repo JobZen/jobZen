@@ -109,7 +109,7 @@ const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
             </div>
           </div>
           <button className=" hover:bg-indigo-700 bg-indigo-500 font-bold text-neutral-50 rounded p-2">
-            APPLY
+            Show Details
           </button>
         </div>
 

@@ -38,8 +38,7 @@ const DropNavbar = () => {
 
   const settings = [
     { name: "Account", href: `/freelancer/${id}` },
-    { name: "Messages", href: `/chat/1` },
-    { name: "Review", href: `/` },
+    { name: "Review", href: `/review` },
     { name: "Logout", href: "/home" },
   ];
 
@@ -75,7 +74,7 @@ const DropNavbar = () => {
           scaleY: isDropdownOpen ? 1 : 0,
         }}
         transition={{ duration: 0.3 }}
-        className="absolute origin-top-right z-10 w-[160px] h-[160px] left-[-77px] mt-[203px] -mr-[80px] bg-gradient-to-br from-[#172554] to-[#267296] divide-y divide-gray-200 rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hover:bg-transparent active:scale-95 transition-all duration-150 ease-linear"
+        className="absolute origin-top-right z-10 w-[160px] h-[120px] left-[-77px] mt-[220px] -mr-[80px] bg-gradient-to-br from-[#172554] to-[#267296] divide-y divide-gray-200 rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hover:bg-transparent active:scale-95 transition-all duration-150 ease-linear"
         aria-labelledby="options-menu"
       >
         {settings.map((setting, index) => (
@@ -104,23 +103,8 @@ const DropNavbar = () => {
                   />
                 </svg>
               )}
+             
               {index === 1 && (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z"
-                  />
-                </svg>
-              )}
-              {index === 2 && (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -136,7 +120,7 @@ const DropNavbar = () => {
                   />
                 </svg>
               )}
-              {index === 3 && (
+              {index === 2 && (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

@@ -79,6 +79,8 @@ const handleClosePopup = () => {
         setAlert(true);
         setAlertMsg("Invalid email or password");
         setErrorMessage("Incorrect email or password"); // Set error message
+        setEmail("")
+        setPassword("")
         // Don't show the popup for unsuccessful login
         // Remove the following line
         // setShowPopup(true);
@@ -161,6 +163,7 @@ const handleClosePopup = () => {
                 py-2
                 focus:outline-none focus:border-blue-400
               "
+              value={email}
               placeholder="Enter your email"
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -205,9 +208,13 @@ const handleClosePopup = () => {
                 py-2
                 focus:outline-none focus:border-blue-400
               "
+              value={password}
               placeholder="Enter your password"
               onChange={(e) => setPassword(e.target.value)}
             />
+              {errorMessage && (
+  <div className="text-red-500 mt-2">{errorMessage}</div>
+)}
           </div>
         </div>
 
@@ -250,9 +257,7 @@ const handleClosePopup = () => {
               </svg>
             </span>
           </button>
-          {errorMessage && (
-  <div className="text-red-500 mt-2">{errorMessage}</div>
-)}
+        
         </div>
       </div>
     </div>

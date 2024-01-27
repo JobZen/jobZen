@@ -1,68 +1,68 @@
-
-"use client"
-import React, { useState , useEffect} from "react";
-import axios from 'axios';  
+"use client";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Navbar from "../../navjobowner/page";
 import Footer from "../../footer/page";
-import Link from 'next/link';
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import Popup from "../../popupCreatejob/page";
 
-const CreateReview= () => {
-  const [rating, setRating] = useState<number | null>(null);
+const CreateReview = () => {
   const [comment, setComment] = useState<string>("");
-  const [name, setName] = useState<string>("");
-  const [index , setIndex] = useState(0)
-  const [freelancer, setFreelancer]=useState({})
+  const [index, setIndex] = useState(0);
+  const [freelancer, setFreelancer] = useState({});
+  const [showPopup, setShowPopup] = useState(false);
 
+  const route = useRouter();
+  const search = useSearchParams();
+  const params = new URLSearchParams(search.toString());
 
-  const route=useRouter()
-const search=useSearchParams()
-const params= new URLSearchParams(search.toString())
-
-
-const jobbi=params.get("id")
-  useEffect (()=> {
+  const jobbi = params.get("id");
+  useEffect(() => {
     const currentUrl = window.location.href;
     const ind = currentUrl.split("/");
 
-    setIndex(parseInt(ind[ind.length - 1]))
-  },[])
+    setIndex(parseInt(ind[ind.length - 1]));
+  }, []);
 
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/freelancer/${index}`)
+      .then((res) => {
+        setFreelancer(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [index]);
 
-  useEffect (()=> {
-    axios.get(`http://localhost:3000/freelancer/${index}`)
-.then((res)=> {
-  setFreelancer(res.data)
-})
-.catch((err)=> {console.error(err)})
-
-  },[index])
-
-
-  
   const saveReview = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/review/review', {
+      const response = await axios.post("http://localhost:3000/review/review", {
         freelancerId: index,
         ownerId: parseInt(jobbi),
-      
-        description: comment,  
+
+        description: comment,
       });
       console.log(response);
-      
-  
+      setComment("");
+      setShowPopup(true);
       console.log("Review saved successfully:", response.data);
     } catch (error) {
       console.error("Error saving review:", error);
     }
   };
-  
-
+  const handleClosePopup = () => {
+    setShowPopup(false);
+  };
 
   return (
     <div>
       <Navbar />
+      {showPopup && (
+        <Popup onClose={handleClosePopup} onConfirm={handleClosePopup} />
+      )}
       <div className="container my-20 mx-auto md:px-6 flex items-center justify-center">
         <section className="mb-32 text-center flex items-center justify-centert">
           <div className="py-12 md:px-12 ">
@@ -78,10 +78,10 @@ const jobbi=params.get("id")
                       />
                     </div>
                     <h2 className="mt-4 mb-1 text-3xl font-bold text-primary">
-                    Review on {freelancer?.name}
+                      Review on {freelancer?.name}
                     </h2>
                     <p className="mb-4 font-semibold text-[#267296]">
-                     {freelancer?.jobtitle}
+                      {freelancer?.jobtitle}
                     </p>
                     <textarea
                       value={comment}
@@ -89,14 +89,19 @@ const jobbi=params.get("id")
                       placeholder="Write your review on Freelancer works here..."
                       className="mb-6 h-32 p-2 border border-gray-300 rounded-md w-full"
                     />
-                    
+
                     <div className="md:mb-12 lg:mb-0 mt-8 gap-4 space-x-4">
-                      <button onClick={saveReview} className="bg-[#267296] hover:bg-[#195571] text-white py-2 px-4 rounded">
+                      <button
+                        onClick={saveReview}
+                        className="bg-[#267296] hover:bg-[#195571] text-white py-2 px-4 rounded"
+                      >
                         Save Review
                       </button>
-                      <button className="text-[#267296] hover:font-bold bg-white border border-[#267296] py-2 px-4 rounded">
-                        Cancel
-                      </button>
+                      <Link href={`/listjobbycompany/${jobbi}`}>
+                        <button className="text-[#267296] hover:font-bold bg-white border border-[#267296] py-2 px-4 rounded">
+                          Cancel
+                        </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -105,7 +110,7 @@ const jobbi=params.get("id")
           </div>
         </section>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
