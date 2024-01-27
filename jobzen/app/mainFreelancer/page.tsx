@@ -136,7 +136,7 @@ function page() {
         {jobcategory.map((el, i) => (
           
           <div key={i} className="relative text-center ">
-            <Link href={`/landingPage`}>
+            <Link href={`/jobsbycategory/${el.id}`}>
             <h1
               className="text-4xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white z-10 hover:scale-125 "
             >
