@@ -69,16 +69,8 @@ const JobDetails = () => {
     getOneJob();
   }, []);
 
-  
-
   const PreviousPage = () => {
-    // const jobOwnerID = job.jobowner.id;
-    // setJobOwnerData({
-    //   id: jobOwnerID,
-    //   name: job.jobowner.name,
-    //   image: job.jobowner.image,
-    // });
-    router.push('/alljobsoffers/');
+    router.push("/alljobsoffers/");
   };
   return (
     <div className="bg-white ">
@@ -150,15 +142,24 @@ const JobDetails = () => {
                     />
                     <h1 className="text-xl font-bold">{job.jobowner.name}</h1>
 
-                  
-                                      <Link href={`/companydetails/${job.jobowner.id}`}>
-                      <p className="mt-6 text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">View Company's Profile</p>
+                    <Link href={`/companydetails/${job.jobowner.id}`}>
+                      <p className="mt-6 text-[#267296] hover:text-base-[#267296] hover:font-semibold font-jura hover:underline">
+                        View Company's Profile
+                      </p>
                     </Link>
                     <div className="mt-6 flex gap-4">
-                      <Link href={`/chat/${job.jobowner.id}`}>
-                        <button  className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[#267296] rounded-full overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[#267296] items-center justify-center mr-0 py-full transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[white] hover:scale-110 relative bg-[#267296] rounded-full overflow-hidden border border-[#a1e1fd4a] ">Message</button>
+                      <Link
+                        href={{
+                          pathname: `/chat/${job.jobowner.id}`,
+                          query: {
+                            id: job.id,
+                          },
+                        }}
+                      >
+                        <button className="flex w-[176px] h-[56px] items-center justify-center px-[2px] py-[6px] relative bg-[#267296] rounded-full overflow-hidden cursor-pointer [font-family:'Montserrat-Bold',Helvetica] font-bold text-white text-[14px] text-center tracking-[0] leading-[21px] whitespace-nowrap hover:text-[#267296] items-center justify-center mr-0 py-full transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-[white] hover:scale-110 relative bg-[#267296] rounded-full overflow-hidden border border-[#a1e1fd4a] ">
+                          Message
+                        </button>
                       </Link>
-                      
                     </div>
                     <div className="mt-6 "></div>
                   </div>
@@ -185,7 +186,6 @@ const JobDetails = () => {
                       </li>
                     </ul>
                     <br />
-                   
                   </div>
                 </div>
               </div>

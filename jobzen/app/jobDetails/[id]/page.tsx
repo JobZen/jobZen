@@ -80,6 +80,7 @@ const JobDetails = () => {
           `http://localhost:3000/job/job/${index}`
         );
         setJob(response.data);
+        if (!response.data.available) setAvailable(false);
       } catch (error) {
         console.error("Error fetching job details:", error);
       }
