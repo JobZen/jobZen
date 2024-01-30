@@ -2,8 +2,8 @@
 import React from 'react'
 import { useState,useEffect } from 'react';
 import axios from 'axios';
-import Nav from '@/app/navFreelancer/page';
-import Footer from '@/app/footer/page';
+import Nav from '../../navFreelancer/page';
+import Footer from '../../footer/page';
 
 interface Job {
     id:number,

@@ -84,7 +84,7 @@ function page() {
         <h1 className='font-jockey-one text-bluefateh'>FIND TALENT BY </h1>
         <h1 className='font-jockey-one text-[#172554]'>SKILLS</h1>
         </div>
-        <div className="flex justify-between ml-[10%] mr-[10%]">
+        <div className="flex justify-between ml-[10%] mr-[10%] gap-3">
         {freelancercategory.map((el, i) => (
           <div key={i} className="relative text-center">
             <Link href={`/freelancerbycategory/${el.id}`}>
