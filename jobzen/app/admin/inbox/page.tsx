@@ -163,16 +163,6 @@ return (
                     {reclamation.map((el=>(
                       <div key={el.id} className="flex hover:bg-blue-100 transition px-5 py-3 hover:cursor-pointer md-4"
                       onClick={() => {Msg(el.id, el.email, el.name, el.message,el.createdAt);}}>
-                      <div className="pr-4">
-                          <input
-                            id="checkbox-1"
-                            type="checkbox"
-                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
-                          />
-                          <label htmlFor="checkbox-1" className="sr-only">
-                            checkbox
-                          </label>
-                        </div>
                         <div className="flex items-center">
                           <div className="pl-4 flex-grow">
                              <div className="flex items-center justify-between">

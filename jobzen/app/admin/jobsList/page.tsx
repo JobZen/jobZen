@@ -56,17 +56,16 @@ const StarRating = ({ rating }: { rating: number }) => {
 };
 
 const JobsList = () => {
-  const [jobCount, setJobCount] = useState<number>(0);
-  const [jobs, setJobs] = useState<Job[]>([]);
-  const [jobCategories, setJobCategories] = useState<JobCategory[]>([]);
-  const [jobOwners, setJobOwners] = useState<JobOwner[]>([]);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [rowCount, setRowCount] = useState<number>(0);
-  const [Job, setJob] = React.useState<Job[]>([]);
+const [jobCount, setJobCount] = useState<number>(0);
+const [jobs, setJobs] = useState<Job[]>([]);
+const [jobCategories, setJobCategories] = useState<JobCategory[]>([]);
+const [jobOwners, setJobOwners] = useState<JobOwner[]>([]);
+const containerRef = useRef<HTMLDivElement>(null);
+const [rowCount, setRowCount] = useState<number>(0);
+const [Job, setJob] = React.useState<Job[]>([]);
 const [refresh,setRefresh]=useState(false)
 const [open, setOpen] = useState(false);
 const closeModal = () => setOpen(false);
-
 
 
 const handleDelete = async (jobId: number) => {
@@ -77,20 +76,12 @@ const handleDelete = async (jobId: number) => {
   } catch (error) {
     console.error('Error deleting jobOwner:', error);
   }
-
 };
-
 
 const closePopup = () => {
   // Close the popup using the close method provided by the library
   close();
 };
-
-
-
-
-
-
 
   useEffect(() => {
     const fetchJobCategories = async () => {
@@ -168,20 +159,6 @@ return (
       <table className="w-full text-sm text-left rtl:text-right  border-[#267296] border-b-4 border-4 bg-[#267296] ">
         <thead className="text-xs text-white border-[#267296] uppercase border-b-4">
           <tr>
-            <th scope="col"className="p-4 bg-">
-              <div className="flex items-center ">
-                <input
-                  id="checkbox-all-search"
-                  type="checkbox"
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                />
-                <label
-                  htmlFor="checkbox-all-search"
-                  className="sr-only ">
-                  checkbox
-                </label>
-              </div>
-            </th>
             <th
               scope="col"
               className="px-6 py-3 bg-grey-500">
@@ -241,21 +218,6 @@ return (
           <tr key={job.id} 
             className="bg-white border-gray-400 hover:bg-[#91C7EF] group transition duration-200 "
           >
-            <td className="w-4 p-4">
-              <div className="flex items-center">
-                <input
-                  id="checkbox-table-search-1"
-                  type="checkbox"
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                />
-                <label
-                  htmlFor="checkbox-table-search-1"
-                  className="sr-only"
-                >
-                  checkbox
-                </label>
-              </div>
-            </td>
             <div
             className="flex items-center px-6 py-4 text-gray-900 "
           >

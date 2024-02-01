@@ -71,6 +71,7 @@ function Page() {
   return (
     <div>
      <Navbar2 />
+     
       <center>
         <div className="flex justify-center gap-x-4">
           <button
