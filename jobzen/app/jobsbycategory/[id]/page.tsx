@@ -2,8 +2,8 @@
 import React from 'react'
 import { useState,useEffect } from 'react';
 import axios from 'axios';
-import Nav from '@/app/navFreelancer/page';
-import Footer from '@/app/footer/page';
+import Nav from '../../navFreelancer/page';
+import Footer from '../../footer/page';
 
 interface Job {
     id:number,
@@ -56,7 +56,7 @@ function page() {
             </div>
           </div>
           <button className=" hover:bg-indigo-700 bg-indigo-500 font-bold text-neutral-50 rounded p-2">
-            APPLY
+            Show Details
           </button>
         </div>
         

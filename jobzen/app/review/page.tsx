@@ -28,18 +28,19 @@ const ReviewFreelancer = () => {
         <section className="mb-32 text-center lg:text-left">
           <div className="py-12 md:px-12">
             <div className="container mx-auto xl:px-32">
-              <div className="flex items-center lg:grid-cols-2">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-80 ">
+            <div className="flex items-center lg:grid-cols-3"> 
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-80 ">
                   {reviews.map((review, i) => (
                     <div
                       key={i}
-                      className="relative z-7 bg-[#a1e1fd4a] block rounded-[42px] bg-opacity-80 backdrop-blur-md px-6 py-12 shadow-xl mt-[-8cm]"
+                      className="relative w-[350px] z-9 bg-[#a1e1fd4a] ml-[-100px] block rounded-[42px] bg-opacity-80 backdrop-blur-md px-6 py-12 shadow-xl mt-[-8cm]"
                       style={{ overflow: "auto" }}
                     >
-                      <div className="md:mb-8 lg:mb-0 mt-4">
+                      <div className="md:mb-8 lg:mb-0 mt-4 w-[100%]">
+                        
                         <img
                           src={review.jobowner.image}
-                          className="w-32 h-32 rounded-full object-cover shadow-lg dark:shadow-black/20"
+                          className="w-40 h-40 rounded-[35px] object-cover shadow-lg dark:shadow-black/20"
                           alt="image"
                         />
                       </div>
